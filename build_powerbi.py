@@ -1,27 +1,41 @@
 # -*- coding: utf-8 -*-
 # Build Power BI DataModel & Dashboard 2026
-# Tự động quét và tổng hợp dữ liệu toàn bộ Folder với tên nhân sự ẩn danh (Nhân sự A, B, C...)
-# 1. 260401_CL_MT_SDTC-MTCV-KPI - BP BIM_TK.xlsx (Chiến lược, Nhân sự, RACI, KPI, SLA, 115 Tài liệu chuẩn hóa)
-# 2. [BSV] - Báo cáo công việc.xlsx (214 Công việc thực tế, 7 Dự án thi công, Tiến độ & Rủi ro)
+# Tự động quét và tổng hợp dữ liệu toàn bộ Folder:
+# - Đã xóa toàn bộ tên công ty (BSV, Bông Sen Vàng -> Doanh nghiệp / Công ty / Nội bộ)
+# - Đã ẩn danh danh tính nhân sự (Nhân sự A, B, C...)
+# - Đã loại bỏ các file không tải được (PDF không dùng)
 
 import os
+import re
 import json
 import base64
 import webbrowser
 import pandas as pd
 import openpyxl
 
+def clean_text(val):
+    if val is None:
+        return ""
+    text = str(val).strip()
+    text = re.sub(r'BÔNG\s*SEN\s*VÀNG|Bông\s*Sen\s*Vàng', 'Công ty', text, flags=re.IGNORECASE)
+    text = re.sub(r'\bBSV\b', 'Công ty', text)
+    text = re.sub(r'\[BSV\]\s*-?\s*', '', text)
+    return text
+
 SRC_FILE_STRATEGY = "260401_CL_MT_SDTC-MTCV-KPI - BP BIM_TK.xlsx"
-SRC_FILE_TASKS = "[BSV] - Báo cáo công việc.xlsx"
-OUT_XLSX = "BSV_BIM_TK_PowerBI_DataModel_2026.xlsx"
-OUT_HTML = "BSV_BIM_TK_PowerBI_Dashboard_2026.html"
+SRC_FILE_TASKS = "Báo cáo công việc.xlsx"
+if not os.path.exists(SRC_FILE_TASKS):
+    SRC_FILE_TASKS = "[BSV] - Báo cáo công việc.xlsx"
+
+OUT_XLSX = "BIM_TK_PowerBI_DataModel_2026.xlsx"
+OUT_HTML = "BIM_TK_PowerBI_Dashboard_2026.html"
 
 if not os.path.exists(SRC_FILE_STRATEGY):
     raise FileNotFoundError(f"Vui lòng đặt file '{SRC_FILE_STRATEGY}' cùng thư mục với script này!")
 
 wb_src = openpyxl.load_workbook(SRC_FILE_STRATEGY, data_only=True)
 
-# 1. Bảng Định biên Nhân sự (02_Fact_NhanSu) - Tên nhân sự đổi thành Nhân sự A, B, C...
+# 1. Bảng Định biên Nhân sự (02_Fact_NhanSu)
 nhan_su_nhom = [
     ("GRP_MGT", "Quản lý chung", "TBP BIM - Thiết kế", "Nhân sự A", "Quản lý", 1, 1, 0, "Đang làm việc"),
     ("GRP_BIM_XD", "BIM Xây dựng (KT - KC)", "Trưởng nhóm BIM XD", "Nhân sự B", "Leader", 1, 1, 0, "Đang làm việc"),
@@ -46,7 +60,7 @@ df_hr["NhanSuConLai"] = df_hr["NhanSuHienTai_T04_2026"] - df_hr["NghiViec_T04_20
 df_hr["ThieuHutDinhBien"] = df_hr["DinhBienKeHoach"] - df_hr["NhanSuConLai"]
 df_hr["TiLeLapDay"] = (df_hr["NhanSuConLai"] / df_hr["DinhBienKeHoach"]).round(4)
 
-# 2. Bảng Ma trận RACI Unpivot (03_Fact_RACI) - Ẩn danh tên nhân sự
+# 2. Bảng Ma trận RACI Unpivot (03_Fact_RACI)
 ws_raci = wb_src['Ma Tran BP BIM']
 people_cols = {
     4: ("Nhân sự A", "TBP BIM-TK", "Quản lý"),
@@ -63,7 +77,7 @@ raci_rows, current_cat_id, current_cat_name = [], "", ""
 for r in range(4, 44):
     code, task = ws_raci.cell(r, 2).value, ws_raci.cell(r, 3).value
     if code is not None and task is not None:
-        code_str, task_str = str(code).strip(), str(task).strip()
+        code_str, task_str = str(code).strip(), clean_text(task)
         if "." not in code_str:
             current_cat_id, current_cat_name = code_str, task_str
         else:
@@ -85,7 +99,7 @@ df_raci = pd.DataFrame(raci_rows, columns=[
     "HoTenNhanSu", "BoMon", "CapBac", "VaiTro_RACI", "MoTaVaiTro"
 ])
 
-# 3. Bảng 115 Tài liệu Chuẩn hóa Thiết kế (05_Fact_TaiLieuTK) - Chủ trì đổi thành Nhân sự D, E, F, G
+# 3. Bảng 115 Tài liệu Chuẩn hóa Thiết kế (05_Fact_TaiLieuTK)
 ht_sheets = {
     "HT_ThietKe_KC": ("KC", "Thiết kế Kết cấu", "Nhân sự D"),
     "HT_ThietKe_KT": ("KT", "Thiết kế Kiến trúc", "Nhân sự E"),
@@ -100,12 +114,11 @@ for sh_name, (bm_code, bm_name, chu_tri) in ht_sheets.items():
     for r in range(2, ws.max_row + 1):
         stt, doc_name, req, purpose = ws.cell(r, 1).value, ws.cell(r, 2).value, ws.cell(r, 3).value, ws.cell(r, 4).value
         if stt is not None and doc_name is not None:
-            stt_int, doc_str = int(float(stt)), str(doc_name).strip()
+            stt_int, doc_str = int(float(stt)), clean_text(doc_name)
             audit_note = "Lưu ý: Bản gốc ghi nhầm 'HVAC', cần đổi thành 'Kết cấu'" if (bm_code == "KC" and "HVAC" in doc_str) else "Bình thường"
-            req_str = str(req).strip() if req is not None else "Theo tiêu chuẩn chung BSV"
-            # Làm sạch tên người khỏi mô tả yêu cầu nếu có
+            req_str = clean_text(req) if req is not None else "Theo tiêu chuẩn chung nội bộ"
             req_str_clean = req_str.replace("Lam sẽ gửi", "Nhân sự A sẽ gửi").replace("Lam", "Nhân sự A")
-            purp_str = str(purpose).strip() if purpose is not None else "Đồng bộ và tối ưu hóa hệ thống thiết kế - thi công"
+            purp_str = clean_text(purpose) if purpose is not None else "Đồng bộ và tối ưu hóa hệ thống thiết kế - thi công"
             status, pct = ("Đã có dự thảo (Cần tinh chỉnh)", 0.70) if "Đã làm" in req_str else (
                           ("Giai đoạn 2 (Sau dự án mẫu)", 0.10) if ("Sẽ viết sau" in req_str or "làm sau" in req_str) else (
                           ("Đang tổng hợp tài liệu nguồn", 0.40) if ("Nhân sự A sẽ gửi" in req_str_clean or "tham khảo" in req_str.lower() or "Lam" in req_str) else
@@ -167,16 +180,16 @@ kpi_rows = []
 for sh_name, pos_code, pos_name, level in kpi_sheets:
     ws = wb_src[sh_name]
     for idx, r in enumerate([18, 21, 24, 27], 1):
-        crit = str(ws.cell(r, 1).value).strip()
+        crit = clean_text(ws.cell(r, 1).value)
         w_orig = float(ws.cell(r, 27).value or 0.25)
         kpi_rows.append((f"{pos_code}_P1_{idx}", pos_code, pos_name, level, "Phần I - Tinh thần thái độ", idx, crit,
-                         "Tuân thủ 100% quy định & văn hóa BSV", w_orig, w_orig,
+                         "Tuân thủ 100% quy định & văn hóa nội bộ doanh nghiệp", w_orig, w_orig,
                          float(ws.cell(r, 37).value or 0), float(ws.cell(r, 39).value or 0),
                          float(ws.cell(r, 41).value or 0), float(ws.cell(r, 43).value or 0)))
     for idx, r in enumerate(range(38, 47), 1):
-        crit = str(ws.cell(r, 2).value).strip()
+        crit = clean_text(ws.cell(r, 2).value)
         out_req = ws.cell(r, 14).value
-        out_str = str(out_req).strip() if out_req is not None else "Hoàn thành đúng tiến độ & chất lượng cam kết"
+        out_str = clean_text(out_req) if out_req is not None else "Hoàn thành đúng tiến độ & chất lượng cam kết"
         w_prop = weights_tbp[idx-1] if pos_code == "POS_TBP" else weights_eng[idx-1]
         kpi_rows.append((f"{pos_code}_P2_{idx}", pos_code, pos_name, level, "Phần II - Kết quả công việc (KPI)", idx, crit,
                          out_str, float(ws.cell(r, 27).value or 0.0), w_prop,
@@ -193,18 +206,18 @@ df_kpi["DiemQuyDoi_Q4_CapTren"] = (df_kpi["Diem_Q4_CapTren"] / 5.0 * df_kpi["Tro
 
 # 6. Bảng Chiến lược & Mục tiêu (01_Fact_ChienLuoc)
 cl_rows = [
-    ("CL_01", "Định hướng chiến lược", "Ngắn & Dài hạn", "Xây dựng lợi thế cạnh tranh tuyệt đối bằng hệ thống đóng kín, đồng bộ chuỗi giá trị (MKT - Thiết kế/Pháp lý - Đấu thầu - Thi công - Vận hành)", "Tỷ lệ đồng bộ chuỗi giá trị", 1.0, "100%", "Toàn công ty BSV"),
+    ("CL_01", "Định hướng chiến lược", "Ngắn & Dài hạn", "Xây dựng lợi thế cạnh tranh tuyệt đối bằng hệ thống đóng kín, đồng bộ chuỗi giá trị (MKT - Thiết kế/Pháp lý - Đấu thầu - Thi công - Vận hành)", "Tỷ lệ đồng bộ chuỗi giá trị", 1.0, "100%", "Toàn doanh nghiệp"),
     ("CL_02", "Định hướng chiến lược", "Ngắn & Dài hạn", "Nâng cao năng lực lõi cho cán bộ văn phòng (tư duy thiết kế, 6 hóa), hướng tới đa nhiệm, tối ưu, dễ thích nghi", "Tỷ lệ nhân sự đạt chuẩn đa nhiệm & 6 hóa", 1.0, "100%", "Khu vực văn phòng"),
-    ("CL_03", "Định hướng chiến lược", "Dài hạn", "Đặt nền tảng thu thập, tổ chức, lưu trữ, khai thác dữ liệu trên toàn chuỗi hoạt động xây dựng", "Mức độ làm chủ CSDL (Big Data)", 1.0, "100%", "Toàn công ty BSV"),
+    ("CL_03", "Định hướng chiến lược", "Dài hạn", "Đặt nền tảng thu thập, tổ chức, lưu trữ, khai thác dữ liệu trên toàn chuỗi hoạt động xây dựng", "Mức độ làm chủ CSDL (Big Data)", 1.0, "100%", "Toàn doanh nghiệp"),
     ("MT_01A", "Mục tiêu", "Ngắn hạn (1 năm)", "Tự chủ toàn bộ thiết kế nội bộ (Số lượng dự án/năm)", "Số dự án tự thiết kế/năm", 4.0, "Dự án", "BP Thiết kế - BIM"),
     ("MT_01B", "Mục tiêu", "Ngắn hạn (1 năm)", "Tổng giá trị xây lắp các dự án tự thiết kế trong năm", "Tổng giá trị dự án", 1200.0, "Tỷ VNĐ", "BP Thiết kế - BIM"),
     ("MT_01C", "Mục tiêu", "Ngắn hạn (1 năm)", "Doanh thu thiết kế quy đổi ước tính trong ngắn hạn (1 năm)", "Doanh thu thiết kế ước tính", 10.0, "Tỷ VNĐ", "BP Thiết kế - BIM"),
     ("MT_02A", "Mục tiêu", "Dài hạn (>1 năm)", "Chuẩn hóa, tự động hóa nhiệm vụ trọng yếu; tỷ lệ chuyển hóa dự án tự thiết kế sang thắng thầu tối thiểu", "Tỷ lệ thắng thầu tối thiểu (Min Target)", 0.60, "60%", "BP Thiết kế - Đấu thầu"),
     ("MT_02B", "Mục tiêu", "Dài hạn (>1 năm)", "Hướng đến mục tiêu tối đa dự án tự thiết kế thắng thầu và chuyển sang thi công", "Tỷ lệ thắng thầu mục tiêu (Stretch Target)", 0.90, "90%", "BP Thiết kế - Đấu thầu"),
     ("MT_03", "Mục tiêu", "Dài hạn (>1 năm)", "Đưa Thiết kế từng bước trở thành bộ phận trực tiếp mang thêm lợi nhuận qua hợp đồng Thiết kế - BIM thương mại", "Chuyển đổi sang Profit Center", 1.0, "Có lợi nhuận độc lập", "BP Thiết kế - BIM"),
-    ("NV_01", "Nhiệm vụ trọng yếu", "Thường xuyên", "Tư vấn, định hướng khách hàng theo phương án thiết kế chiến lược BSV có ưu thế khi đấu thầu, thi công", "Tỷ lệ dự án định hướng theo chuẩn BSV", 1.0, "100%", "Chủ trì Thiết kế & TBP"),
-    ("NV_02", "Nhiệm vụ trọng yếu", "Thường xuyên", "Tự thiết kế tối ưu các dự án D&B, Thiết kế - Đấu thầu - Thi công trên góc nhìn mang lại lợi thế cho BSV", "Tối ưu hóa chi phí & BPTC", 1.0, "100%", "BP Thiết kế - BIM"),
-    ("NV_03", "Nhiệm vụ trọng yếu", "Thường xuyên", "Quản lý thiết kế các dự án thuê ngoài chuẩn hóa theo yêu cầu của BSV", "Tỷ lệ dự án thuê ngoài tuân thủ chuẩn BSV", 1.0, "100%", "Chủ trì Thiết kế"),
+    ("NV_01", "Nhiệm vụ trọng yếu", "Thường xuyên", "Tư vấn, định hướng khách hàng theo phương án thiết kế chiến lược có ưu thế khi đấu thầu, thi công", "Tỷ lệ dự án định hướng theo chuẩn nội bộ", 1.0, "100%", "Chủ trì Thiết kế & TBP"),
+    ("NV_02", "Nhiệm vụ trọng yếu", "Thường xuyên", "Tự thiết kế tối ưu các dự án D&B, Thiết kế - Đấu thầu - Thi công trên góc nhìn mang lại lợi thế cho doanh nghiệp", "Tối ưu hóa chi phí & BPTC", 1.0, "100%", "BP Thiết kế - BIM"),
+    ("NV_03", "Nhiệm vụ trọng yếu", "Thường xuyên", "Quản lý thiết kế các dự án thuê ngoài chuẩn hóa theo yêu cầu nội bộ", "Tỷ lệ dự án thuê ngoài tuân thủ chuẩn nội bộ", 1.0, "100%", "Chủ trì Thiết kế"),
     ("NV_04", "Nhiệm vụ trọng yếu", "Thường xuyên", "Thiết kế, tư vấn hỗ trợ kỹ thuật cho toàn bộ dự án đang thi công (100% dự án tự TK & các vấn đề trọng yếu dự án ngoài)", "Tỷ lệ xử lý vướng mắc dự án tự thiết kế", 1.0, "100%", "BP Thiết kế - BIM"),
     ("NV_05", "Nhiệm vụ trọng yếu", "Ngắn & Trung hạn", "Chuẩn hóa thiết kế tối ưu cho công ty (chi tiết 2D, 3D, tiêu chuẩn, quy định, số liệu) gồm 118 danh mục tài liệu", "Số lượng tài liệu chuẩn hóa hoàn thành", 118.0, "Tài liệu", "6 Bộ môn Thiết kế"),
     ("NV_06", "Nhiệm vụ trọng yếu", "Ngắn & Trung hạn", "Kết hợp BIM - Thiết kế tối ưu nguồn lực bóc khối lượng, Shop, Combine (vẽ BIM từ đầu để tái sử dụng dữ liệu giai đoạn thi công)", "Tỷ lệ tiết kiệm nguồn lực / tái sử dụng dữ liệu", 0.70, "70%", "Liên quân BIM - Thiết kế"),
@@ -215,7 +228,7 @@ df_cl = pd.DataFrame(cl_rows, columns=[
     "TenChiSoDoLuong", "GiaTriMucTieu", "DonViTinh", "DonViPhuTrach"
 ])
 
-# 7. Bảng Báo cáo Công việc Thực tế từ [BSV] - Báo cáo công việc.xlsx (07_Fact_BaoCaoCongViec)
+# 7. Bảng Báo cáo Công việc Thực tế (07_Fact_BaoCaoCongViec)
 task_rows = []
 if os.path.exists(SRC_FILE_TASKS):
     wb_tasks = openpyxl.load_workbook(SRC_FILE_TASKS, data_only=True)
@@ -226,18 +239,18 @@ if os.path.exists(SRC_FILE_TASKS):
             hm = ws_t.cell(r, 2).value
             cv = ws_t.cell(r, 3).value
             if hm and str(hm).strip():
-                cur_project = str(hm).strip()
+                cur_project = clean_text(hm)
             if cv and str(cv).strip():
-                pic = str(ws_t.cell(r, 1).value or "P. BIM").strip()
+                pic = clean_text(ws_t.cell(r, 1).value or "P. BIM")
                 st = str(ws_t.cell(r, 4).value or "Chưa thực hiện").strip()
                 d_start = ws_t.cell(r, 5).value
                 d_end = ws_t.cell(r, 6).value
                 d_due = ws_t.cell(r, 7).value
-                progress = str(ws_t.cell(r, 8).value or "").strip()
-                quality = str(ws_t.cell(r, 9).value or "").strip()
-                risk = str(ws_t.cell(r, 10).value or "").strip()
-                opt = str(ws_t.cell(r, 11).value or "").strip()
-                note = str(ws_t.cell(r, 13).value or "").strip()
+                progress = clean_text(ws_t.cell(r, 8).value)
+                quality = clean_text(ws_t.cell(r, 9).value)
+                risk = clean_text(ws_t.cell(r, 10).value)
+                opt = clean_text(ws_t.cell(r, 11).value)
+                note = clean_text(ws_t.cell(r, 13).value)
 
                 if cur_project.startswith("Dự án"):
                     group_type = "Dự án Thi công"
@@ -250,7 +263,7 @@ if os.path.exists(SRC_FILE_TASKS):
                     "MaCongViec": f"TSK_{len(task_rows)+1:03d}",
                     "NhomCongViec": group_type,
                     "HangMuc_DuAn": cur_project,
-                    "NoiDungCongViec": str(cv).strip(),
+                    "NoiDungCongViec": clean_text(cv),
                     "TinhTrang": st,
                     "PIC": pic,
                     "NgayBatDau": str(d_start)[:10] if d_start else "",
@@ -303,7 +316,7 @@ html_content = f"""<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Power BI Executive Dashboard - BP BIM & Thiết Kế (BSV)</title>
+<title>Power BI Executive Dashboard - BP BIM & Thiết Kế</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
   :root {{
@@ -316,7 +329,7 @@ html_content = f"""<!DOCTYPE html>
   body {{ background-color: var(--bg-main); color: var(--text-primary); display: flex; min-height: 100vh; overflow-x: hidden; }}
   .sidebar {{ width: 260px; background: #0f172a; border-right: 1px solid var(--border-color); display: flex; flex-direction: column; flex-shrink: 0; }}
   .brand {{ padding: 18px 20px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; gap: 12px; }}
-  .brand-icon {{ width: 34px; height: 34px; border-radius: 8px; background: linear-gradient(135deg, #f59e0b, #eab308); display: flex; align-items: center; justify-content: center; font-weight: 800; color: #0f172a; font-size: 16px; }}
+  .brand-icon {{ width: 34px; height: 34px; border-radius: 8px; background: linear-gradient(135deg, #06b6d4, #3b82f6); display: flex; align-items: center; justify-content: center; font-weight: 800; color: #ffffff; font-size: 15px; }}
   .brand-text h1 {{ font-size: 14px; font-weight: 700; color: #f8fafc; }}
   .brand-text p {{ font-size: 11px; color: var(--text-secondary); }}
   .nav-menu {{ padding: 14px 10px; display: flex; flex-direction: column; gap: 6px; flex: 1; }}
@@ -375,8 +388,8 @@ html_content = f"""<!DOCTYPE html>
 <body>
 <aside class="sidebar">
   <div class="brand">
-    <div class="brand-icon">PBI</div>
-    <div class="brand-text"><h1>BÔNG SEN VÀNG</h1><p>BIM & Thiết Kế Analytics</p></div>
+    <div class="brand-icon">BIM</div>
+    <div class="brand-text"><h1>BAN BIM - THIẾT KẾ</h1><p>BIM & Design Analytics</p></div>
   </div>
   <div class="nav-menu">
     <button class="nav-btn active" onclick="switchTab('tab-exec', this)">📊 1. Chiến lược & Tổ chức</button>
@@ -429,10 +442,10 @@ html_content = f"""<!DOCTYPE html>
   <div class="topbar">
     <div class="topbar-title">
       <h2>Power BI Executive Dashboard — Chiến lược, Tổ chức & Tiến độ Dự án BP BIM - TK</h2>
-      <span>Dữ liệu chuẩn hóa 2026 | Danh tính nhân sự đã được mã hóa bảo mật (Nhân sự A, B, C...)</span>
+      <span>Dữ liệu chuẩn hóa 2026 | Danh tính nhân sự & doanh nghiệp đã được bảo mật</span>
     </div>
     <div class="badge-bar">
-      <a class="btn-dl" download="BSV_BIM_TK_PowerBI_DataModel_2026.xlsx" href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64_xlsx}">📥 Tải File Excel 8 Sheet Chuẩn Power BI (.xlsx)</a>
+      <a class="btn-dl" download="BIM_TK_PowerBI_DataModel_2026.xlsx" href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64_xlsx}">📥 Tải File Excel 8 Sheet Chuẩn Power BI (.xlsx)</a>
       <span class="badge">✔ Star Schema 8 Bảng</span>
       <span class="badge info">🔒 Tên nhân sự A, B, C</span>
       <span class="badge warn">⚡ Đã Fix #DIV/0! KPI</span>
