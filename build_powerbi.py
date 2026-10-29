@@ -42,7 +42,7 @@ nhan_su_nhom = [
     ("GRP_BIM_XD", "BIM Xây dựng (KT - KC)", "Kỹ sư BIM KT - KC", "Nhân sự H, Nhân sự I, Nhân sự J, Nhân sự K...", "Nhân viên", 14, 11, 1, "Biến động T04/2026 & Cần tuyển thêm"),
     ("GRP_BIM_MEPF", "BIM MEPF", "Trưởng nhóm BIM MEPF", "Nhân sự C", "Leader", 1, 1, 0, "Đang làm việc"),
     ("GRP_BIM_MEPF", "BIM MEPF", "Kỹ sư BIM MEPF", "Nhân sự L & KS BIM MEPF", "Nhân viên", 2, 2, 0, "Đang làm việc"),
-    ("GRP_BIM_HT", "BIM Hạ tầng", "Kỹ sư BIM Hạ tầng", "Vị trí chờ tuyển (BIM Hạ tầng)", "Nhân viên", 2, 1, 1, "Khuyết nhân sự chủ chốt"),
+    ("GRP_BIM_HT", "BIM Hạ tầng", "Kỹ sư BIM Hạ tầng", "Nhân sự M", "Nhân viên", 2, 1, 1, "Đang làm việc"),
     ("GRP_TK_KT", "Thiết kế Kiến trúc", "Chủ trì TK Kiến trúc", "Nhân sự E", "Chủ trì", 1, 1, 0, "Đã đủ chủ trì"),
     ("GRP_TK_KT", "Thiết kế Kiến trúc", "Kiến trúc sư triển khai", "KTS Triển khai", "Nhân viên", 1, 1, 0, "Đang làm việc"),
     ("GRP_TK_KC", "Thiết kế Kết cấu", "Chủ trì TK Kết cấu", "Nhân sự D", "Chủ trì", 1, 1, 0, "Đã đủ chủ trì"),
@@ -50,7 +50,7 @@ nhan_su_nhom = [
     ("GRP_TK_ME", "Thiết kế Điện - Cơ (CTN, PCCC)", "Chủ trì TK Điện - Cơ", "Nhân sự F", "Chủ trì", 1, 1, 0, "Đã đủ chủ trì"),
     ("GRP_TK_ME", "Thiết kế Điện - Cơ (CTN, PCCC)", "Kỹ sư TK Cơ - Điện", "KS Triển khai Cơ - Điện", "Nhân viên", 1, 1, 0, "Đang làm việc"),
     ("GRP_TK_HVAC", "Thiết kế HVAC", "Chủ trì TK HVAC", "Nhân sự G", "Chủ trì", 1, 1, 0, "Đã đủ chủ trì"),
-    ("GRP_TK_HVAC", "Thiết kế HVAC", "Kỹ sư TK HVAC", "Chưa tuyển đủ", "Nhân viên", 1, 1, 0, "Đang làm việc"),
+    ("GRP_TK_HVAC", "Thiết kế HVAC", "Kỹ sư TK HVAC", "KS Triển khai HVAC", "Nhân viên", 1, 1, 0, "Đang làm việc"),
 ]
 df_hr = pd.DataFrame(nhan_su_nhom, columns=[
     "MaNhom", "TenNhom", "ViTri", "NhanSuChuChot", "CapBac",
@@ -71,7 +71,7 @@ people_cols = {
     9: ("Nhân sự K", "BIM Kết Cấu", "Nhân viên"),
     10: ("Nhân sự C", "BIM MEPF", "Leader"),
     11: ("Nhân sự L", "BIM MEPF", "Nhân viên"),
-    12: ("Vị trí chờ tuyển (Hạ tầng)", "BIM Hạ Tầng", "Nhân viên"),
+    12: ("Nhân sự M", "BIM Hạ Tầng", "Nhân viên"),
 }
 raci_rows, current_cat_id, current_cat_name = [], "", ""
 for r in range(4, 44):
@@ -418,7 +418,7 @@ html_content = f"""<!DOCTYPE html>
         <option value="Nhân sự J">Nhân sự J (BIM Kết Cấu)</option>
         <option value="Nhân sự K">Nhân sự K (BIM Kết Cấu)</option>
         <option value="Nhân sự L">Nhân sự L (BIM MEPF)</option>
-        <option value="Vị trí chờ tuyển (Hạ tầng)">Vị trí chờ tuyển (Hạ tầng)</option>
+        <option value="Nhân sự M">Nhân sự M (BIM Hạ Tầng)</option>
       </select>
     </div>
 
