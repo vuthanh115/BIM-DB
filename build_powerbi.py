@@ -3,7 +3,7 @@
 # Tự động quét và tổng hợp dữ liệu toàn bộ Folder:
 # - Đã xóa toàn bộ tên công ty (BSV, Bông Sen Vàng -> Doanh nghiệp / Công ty / Nội bộ)
 # - Đã ẩn danh danh tính nhân sự (Nhân sự A, B, C...)
-# - Đã loại bỏ các file không tải được (PDF không dùng)
+# - Bộ lọc tương tác đa chiều đồng bộ biểu đồ + bảng + tự động chuyển tab hiển thị
 
 import os
 import re
@@ -327,7 +327,7 @@ html_content = f"""<!DOCTYPE html>
   }}
   * {{ box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }}
   body {{ background-color: var(--bg-main); color: var(--text-primary); display: flex; min-height: 100vh; overflow-x: hidden; }}
-  .sidebar {{ width: 260px; background: #0f172a; border-right: 1px solid var(--border-color); display: flex; flex-direction: column; flex-shrink: 0; }}
+  .sidebar {{ width: 270px; background: #0f172a; border-right: 1px solid var(--border-color); display: flex; flex-direction: column; flex-shrink: 0; }}
   .brand {{ padding: 18px 20px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; gap: 12px; }}
   .brand-icon {{ width: 34px; height: 34px; border-radius: 8px; background: linear-gradient(135deg, #06b6d4, #3b82f6); display: flex; align-items: center; justify-content: center; font-weight: 800; color: #ffffff; font-size: 15px; }}
   .brand-text h1 {{ font-size: 14px; font-weight: 700; color: #f8fafc; }}
@@ -336,10 +336,10 @@ html_content = f"""<!DOCTYPE html>
   .nav-btn {{ background: transparent; border: none; color: var(--text-secondary); padding: 11px 14px; border-radius: 8px; text-align: left; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.2s; }}
   .nav-btn:hover {{ background: rgba(255,255,255,0.05); color: #fff; }}
   .nav-btn.active {{ background: rgba(6, 182, 212, 0.15); color: var(--accent-cyan); border-left: 3px solid var(--accent-cyan); }}
-  .slicer-box {{ padding: 14px; margin: 10px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; }}
-  .slicer-box label {{ display: block; font-size: 11px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 6px; font-weight: 700; }}
-  .slicer-select {{ width: 100%; background: #0b0f19; color: #f8fafc; border: 1px solid #334155; padding: 7px 10px; border-radius: 6px; font-size: 12px; margin-bottom: 10px; outline: none; }}
-  .main {{ flex: 1; display: flex; flex-direction: column; padding: 20px 24px; gap: 18px; max-width: calc(100vw - 260px); }}
+  .slicer-box {{ padding: 14px; margin: 10px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; display: flex; flex-direction: column; gap: 8px; }}
+  .slicer-box label {{ display: block; font-size: 11px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 4px; font-weight: 700; }}
+  .slicer-select {{ width: 100%; background: #0b0f19; color: #f8fafc; border: 1px solid #334155; padding: 7px 10px; border-radius: 6px; font-size: 12px; outline: none; }}
+  .main {{ flex: 1; display: flex; flex-direction: column; padding: 20px 24px; gap: 18px; max-width: calc(100vw - 270px); }}
   .topbar {{ display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 14px; flex-wrap: wrap; gap: 12px; }}
   .topbar-title h2 {{ font-size: 20px; font-weight: 700; color: #f8fafc; }}
   .topbar-title span {{ font-size: 12px; color: var(--text-secondary); }}
@@ -392,49 +392,62 @@ html_content = f"""<!DOCTYPE html>
     <div class="brand-text"><h1>BAN BIM - THIẾT KẾ</h1><p>BIM & Design Analytics</p></div>
   </div>
   <div class="nav-menu">
-    <button class="nav-btn active" onclick="switchTab('tab-exec', this)">📊 1. Chiến lược & Tổ chức</button>
-    <button class="nav-btn" onclick="switchTab('tab-raci', this)">🎯 2. Ma trận RACI & SLA</button>
-    <button class="nav-btn" onclick="switchTab('tab-docs', this)">📁 3. Hệ thống 115 Tài liệu</button>
-    <button class="nav-btn" onclick="switchTab('tab-kpi', this)">🏆 4. Đánh giá KPI (Đã Fix)</button>
-    <button class="nav-btn" onclick="switchTab('tab-tasks', this)">🚀 5. Tiến độ Dự án Thực tế</button>
+    <button id="btnNavExec" class="nav-btn active" onclick="switchTab('tab-exec', this)">📊 1. Chiến lược & Tổ chức</button>
+    <button id="btnNavRaci" class="nav-btn" onclick="switchTab('tab-raci', this)">🎯 2. Ma trận RACI & SLA</button>
+    <button id="btnNavDocs" class="nav-btn" onclick="switchTab('tab-docs', this)">📁 3. Hệ thống 115 Tài liệu</button>
+    <button id="btnNavKpi" class="nav-btn" onclick="switchTab('tab-kpi', this)">🏆 4. Đánh giá KPI (Đã Fix)</button>
+    <button id="btnNavTasks" class="nav-btn" onclick="switchTab('tab-tasks', this)">🚀 5. Tiến độ Dự án Thực tế</button>
   </div>
   <div class="slicer-box">
-    <label>Bộ lọc Nhân sự RACI</label>
-    <select id="slicerPerson" class="slicer-select" onchange="updateRaciFilter()">
-      <option value="ALL">-- Tất cả Nhân sự --</option>
-      <option value="Nhân sự A">Nhân sự A (TBP BIM-TK)</option>
-      <option value="Nhân sự B">Nhân sự B (Leader BIM XD)</option>
-      <option value="Nhân sự C">Nhân sự C (Leader BIM MEPF)</option>
-      <option value="Nhân sự H">Nhân sự H (BIM Kiến Trúc)</option>
-      <option value="Nhân sự I">Nhân sự I (BIM Kiến Trúc)</option>
-      <option value="Nhân sự J">Nhân sự J (BIM Kết Cấu)</option>
-      <option value="Nhân sự K">Nhân sự K (BIM Kết Cấu)</option>
-      <option value="Nhân sự L">Nhân sự L (BIM MEPF)</option>
-      <option value="Vị trí chờ tuyển (Hạ tầng)">Vị trí chờ tuyển (Hạ tầng)</option>
-    </select>
-    <label>Bộ lọc Dự án Thực tế</label>
-    <select id="slicerTaskProject" class="slicer-select" onchange="updateTasksFilter()">
-      <option value="ALL">-- Tất cả Dự án (214 Việc) --</option>
-      <option value="Dự án Mega">Dự án Mega (24)</option>
-      <option value="Dự án Kim Tín giai đoạn 3">Dự án Kim Tín GĐ3 (18)</option>
-      <option value="Dự án APF">Dự án APF (15)</option>
-      <option value="Dự án CasaFlora2">Dự án CasaFlora2 (12)</option>
-      <option value="Dự án Suncasa">Dự án Suncasa (9)</option>
-      <option value="Dự án các trạm Phú Quốc">Dự án các trạm Phú Quốc (7)</option>
-      <option value="Dự án BB052">Dự án BB052 (2)</option>
-      <option value="Chuẩn hóa Bộ môn Thiết kế">Chuẩn hóa 6 Bộ môn (115)</option>
-      <option value="Quản trị & Tổ chức">Quản trị & Văn hóa (12)</option>
-    </select>
-    <label>Bộ lọc Bộ môn 115 Tài liệu</label>
-    <select id="slicerBoMon" class="slicer-select" onchange="updateDocsFilter()">
-      <option value="ALL">-- Tất cả 6 Bộ môn (115) --</option>
-      <option value="KC">Thiết kế Kết cấu (23)</option>
-      <option value="KT">Thiết kế Kiến trúc (20)</option>
-      <option value="DIEN">Thiết kế Điện (18)</option>
-      <option value="HVAC">Thiết kế HVAC (18)</option>
-      <option value="CTN">Thiết kế Cấp thoát nước (18)</option>
-      <option value="PCCC">Thiết kế PCCC (18)</option>
-    </select>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+      <span style="font-size:11px; text-transform:uppercase; font-weight:800; color:var(--accent-cyan);">⚡ Bộ lọc Tương tác</span>
+      <button onclick="resetAllFilters()" style="background:rgba(255,255,255,0.08); border:1px solid #334155; color:#94a3b8; font-size:10.5px; padding:2px 8px; border-radius:4px; cursor:pointer;" title="Khôi phục toàn bộ">Đặt lại</button>
+    </div>
+    
+    <div>
+      <label>🎯 Lọc Nhân sự (Tab 2: RACI)</label>
+      <select id="slicerPerson" class="slicer-select" onchange="updateRaciFilter(true)">
+        <option value="ALL">-- Tất cả Nhân sự --</option>
+        <option value="Nhân sự A">Nhân sự A (TBP BIM-TK)</option>
+        <option value="Nhân sự B">Nhân sự B (Leader BIM XD)</option>
+        <option value="Nhân sự C">Nhân sự C (Leader BIM MEPF)</option>
+        <option value="Nhân sự H">Nhân sự H (BIM Kiến Trúc)</option>
+        <option value="Nhân sự I">Nhân sự I (BIM Kiến Trúc)</option>
+        <option value="Nhân sự J">Nhân sự J (BIM Kết Cấu)</option>
+        <option value="Nhân sự K">Nhân sự K (BIM Kết Cấu)</option>
+        <option value="Nhân sự L">Nhân sự L (BIM MEPF)</option>
+        <option value="Vị trí chờ tuyển (Hạ tầng)">Vị trí chờ tuyển (Hạ tầng)</option>
+      </select>
+    </div>
+
+    <div>
+      <label>🚀 Lọc Dự án (Tab 5: Tiến độ)</label>
+      <select id="slicerTaskProject" class="slicer-select" onchange="updateTasksFilter(true)">
+        <option value="ALL">-- Tất cả Dự án (214 Việc) --</option>
+        <option value="Dự án Mega">Dự án Mega (24)</option>
+        <option value="Dự án Kim Tín giai đoạn 3">Dự án Kim Tín GĐ3 (18)</option>
+        <option value="Dự án APF">Dự án APF (15)</option>
+        <option value="Dự án CasaFlora2">Dự án CasaFlora2 (12)</option>
+        <option value="Dự án Suncasa">Dự án Suncasa (9)</option>
+        <option value="Dự án các trạm Phú Quốc">Dự án các trạm Phú Quốc (7)</option>
+        <option value="Dự án BB052">Dự án BB052 (2)</option>
+        <option value="Chuẩn hóa Bộ môn Thiết kế">Chuẩn hóa 6 Bộ môn (115)</option>
+        <option value="Quản trị & Tổ chức">Quản trị & Văn hóa (12)</option>
+      </select>
+    </div>
+
+    <div>
+      <label>📁 Lọc Bộ môn (Tab 3: Tài liệu)</label>
+      <select id="slicerBoMon" class="slicer-select" onchange="updateDocsFilter(true)">
+        <option value="ALL">-- Tất cả 6 Bộ môn (115) --</option>
+        <option value="KC">Thiết kế Kết cấu (23)</option>
+        <option value="KT">Thiết kế Kiến trúc (20)</option>
+        <option value="DIEN">Thiết kế Điện (18)</option>
+        <option value="HVAC">Thiết kế HVAC (18)</option>
+        <option value="CTN">Thiết kế Cấp thoát nước (18)</option>
+        <option value="PCCC">Thiết kế PCCC (18)</option>
+      </select>
+    </div>
   </div>
 </aside>
 
@@ -482,7 +495,7 @@ html_content = f"""<!DOCTYPE html>
   <section id="tab-raci" class="tab-page">
     <div class="chart-grid-equal">
       <div class="panel">
-        <div class="panel-header"><h3>Phân tích Tải Công việc theo Ma trận RACI</h3><span>Số lượng đầu việc theo vai trò R, A, S, I (34 nhiệm vụ)</span></div>
+        <div class="panel-header"><h3>Phân tích Tải Công việc theo Ma trận RACI</h3><span id="raciChartTitle">Số lượng đầu việc theo vai trò R, A, S, I</span></div>
         <div class="chart-container"><canvas id="chartRACI"></canvas></div>
       </div>
       <div class="panel">
@@ -491,7 +504,7 @@ html_content = f"""<!DOCTYPE html>
       </div>
     </div>
     <div class="panel">
-      <div class="panel-header"><h3>Chi tiết Ma trận Phân công Trách nhiệm RACI</h3><span id="raciCountLabel"></span></div>
+      <div class="panel-header"><h3>Chi tiết Ma trận Phân công Trách nhiệm RACI</h3><span id="raciCountLabel" style="color:var(--accent-cyan); font-weight:700;"></span></div>
       <div class="table-wrap"><table><thead><tr><th>Nhóm Nhiệm vụ</th><th>Mã</th><th>Tên Nhiệm vụ</th><th>Họ tên Nhân sự</th><th>Bộ môn</th><th>Vai trò RACI</th><th>Diễn giải</th></tr></thead><tbody id="tblRACIBody"></tbody></table></div>
     </div>
   </section>
@@ -509,7 +522,7 @@ html_content = f"""<!DOCTYPE html>
       </div>
     </div>
     <div class="panel">
-      <div class="panel-header"><h3>Danh mục Hệ thống Tài liệu Thiết kế</h3><span id="docsCountLabel"></span></div>
+      <div class="panel-header"><h3>Danh mục Hệ thống Tài liệu Thiết kế</h3><span id="docsCountLabel" style="color:var(--accent-cyan); font-weight:700;"></span></div>
       <div class="table-wrap"><table><thead><tr><th>Mã</th><th>Bộ môn</th><th>Chủ trì Phụ trách</th><th>Tên Tài liệu Chuẩn hóa</th><th>Phân nhóm</th><th>Ưu tiên</th><th>Trạng thái</th><th>Ghi chú Rà soát</th></tr></thead><tbody id="tblDocsBody"></tbody></table></div>
     </div>
   </section>
@@ -532,16 +545,16 @@ html_content = f"""<!DOCTYPE html>
   <section id="tab-tasks" class="tab-page">
     <div class="chart-grid-equal">
       <div class="panel">
-        <div class="panel-header"><h3>Tiến độ Thực hiện tại 7 Dự án Trọng điểm</h3><span>So sánh Tỷ lệ Hoàn thành vs Đang thực hiện</span></div>
+        <div class="panel-header"><h3>Tiến độ Thực hiện theo Dự án Đang Chọn</h3><span id="projChartSubtitle">So sánh Tỷ lệ Hoàn thành vs Đang thực hiện</span></div>
         <div class="chart-container"><canvas id="chartProjects"></canvas></div>
       </div>
       <div class="panel">
-        <div class="panel-header"><h3>Cơ cấu Trạng thái Toàn bộ 214 Nhiệm vụ</h3><span>Tỷ lệ Đã hoàn thành, Đang triển khai, Quá hạn</span></div>
+        <div class="panel-header"><h3>Cơ cấu Trạng thái Công việc</h3><span>Tỷ lệ Đã hoàn thành, Đang triển khai, Quá hạn</span></div>
         <div class="chart-container"><canvas id="chartTaskStatus"></canvas></div>
       </div>
     </div>
     <div class="panel">
-      <div class="panel-header"><h3>Chi tiết Tiến độ 214 Công việc Phòng BIM (Dự án & Hệ thống)</h3><span id="tasksCountLabel"></span></div>
+      <div class="panel-header"><h3>Chi tiết Tiến độ Công việc Phòng BIM (Dự án & Hệ thống)</h3><span id="tasksCountLabel" style="color:var(--accent-cyan); font-weight:700;"></span></div>
       <div class="table-wrap"><table><thead><tr><th>Mã</th><th>Nhóm</th><th>Dự án / Hạng mục</th><th>Nội dung Công việc</th><th>Tình trạng</th><th>Bắt đầu</th><th>Kết thúc</th><th>Hạn</th><th>Tiến độ & Kết quả</th><th>Rủi ro / Ghi chú</th></tr></thead><tbody id="tblTasksBody"></tbody></table></div>
     </div>
   </section>
@@ -559,11 +572,21 @@ const taskData = {json.dumps(df_tasks.to_dict(orient="records"), ensure_ascii=Fa
 Chart.defaults.color = '#94a3b8';
 Chart.defaults.borderColor = 'rgba(255,255,255,0.06)';
 
+let chartHRInstance = null;
+let chartRACIInstance = null;
+let chartSLAInstance = null;
+let chartDocsDeptInstance = null;
+let chartDocsTypeInstance = null;
+let chartKPIInstance = null;
+let chartProjectsInstance = null;
+let chartTaskStatusInstance = null;
+
 function switchTab(tabId, btn) {{
   document.querySelectorAll('.tab-page').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
-  document.getElementById(tabId).classList.add('active');
-  btn.classList.add('active');
+  const target = document.getElementById(tabId);
+  if (target) target.classList.add('active');
+  if (btn) btn.classList.add('active');
 }}
 
 function initTables() {{
@@ -591,15 +614,25 @@ function initTables() {{
     </tr>
   `).join('');
 
-  updateDocsFilter();
-  updateRaciFilter();
-  updateTasksFilter();
+  updateDocsFilter(false);
+  updateRaciFilter(false);
+  updateTasksFilter(false);
 }}
 
-function updateDocsFilter() {{
+function updateDocsFilter(autoSwitch = false) {{
   const bm = document.getElementById('slicerBoMon').value;
+  if (autoSwitch && bm !== 'ALL') {{
+    switchTab('tab-docs', document.getElementById('btnNavDocs'));
+  }}
   const filtered = bm === 'ALL' ? docsData : docsData.filter(d => d.MaBoMon === bm);
-  document.getElementById('docsCountLabel').innerText = `Đang hiển thị: ${{filtered.length}} tài liệu`;
+  const leadMap = {{ KC: 'Nhân sự D', KT: 'Nhân sự E', DIEN: 'Nhân sự F', HVAC: 'Nhân sự G', CTN: 'Nhân sự F', PCCC: 'Nhân sự F' }};
+  const labelEl = document.getElementById('docsCountLabel');
+  if (labelEl) {{
+    labelEl.innerText = bm === 'ALL'
+      ? `Đang hiển thị toàn bộ 115 tài liệu chuẩn hóa 6 bộ môn`
+      : `Đang lọc Bộ môn: ${{bm}} (${{filtered.length}} tài liệu) | Chủ trì phụ trách: ${{leadMap[bm] || 'Chưa định danh'}}`;
+  }}
+
   document.getElementById('tblDocsBody').innerHTML = filtered.map(r => `
     <tr>
       <td><b>${{r.MaTaiLieu}}</b></td><td>${{r.TenBoMon}}</td><td><b>${{r.ChuTriPhuTrach}}</b></td><td>${{r.TenTaiLieu}}</td>
@@ -607,12 +640,28 @@ function updateDocsFilter() {{
       <td>${{r.TrangThaiTrienKhai}}</td><td style="color:${{r.GhiChuRasoát.includes('Lưu ý')?'#fbbf24':'#94a3b8'}}">${{r.GhiChuRasoát}}</td>
     </tr>
   `).join('');
+
+  if (chartDocsTypeInstance) {{
+    const types = [...new Set(filtered.map(d => d.NhomTaiLieu))];
+    chartDocsTypeInstance.data.labels = types;
+    chartDocsTypeInstance.data.datasets[0].data = types.map(t => filtered.filter(d => d.NhomTaiLieu === t).length);
+    chartDocsTypeInstance.update();
+  }}
 }}
 
-function updateRaciFilter() {{
+function updateRaciFilter(autoSwitch = false) {{
   const p = document.getElementById('slicerPerson').value;
+  if (autoSwitch && p !== 'ALL') {{
+    switchTab('tab-raci', document.getElementById('btnNavRaci'));
+  }}
   const filtered = p === 'ALL' ? raciData : raciData.filter(d => d.HoTenNhanSu === p);
-  document.getElementById('raciCountLabel').innerText = `Đang hiển thị: ${{filtered.length}} phân công nhiệm vụ`;
+  const labelEl = document.getElementById('raciCountLabel');
+  if (labelEl) {{
+    labelEl.innerText = p === 'ALL'
+      ? `Đang hiển thị toàn bộ 9 nhân sự (${{raciData.length}} lượt phân công)`
+      : `Đang lọc: ${{p}} (${{filtered.length}} nhiệm vụ được giao trên ma trận RACI)`;
+  }}
+
   document.getElementById('tblRACIBody').innerHTML = filtered.map(r => `
     <tr>
       <td>${{r.NhomNhiemVu}}</td><td><b>${{r.MaNhiemVu}}</b></td><td>${{r.TenNhiemVu}}</td><td><b>${{r.HoTenNhanSu}}</b></td>
@@ -620,10 +669,24 @@ function updateRaciFilter() {{
       <td>${{r.MoTaVaiTro}}</td>
     </tr>
   `).join('');
+
+  if (chartRACIInstance) {{
+    const people = p === 'ALL' ? [...new Set(raciData.map(r => r.HoTenNhanSu))] : [p];
+    const countRole = (pers, role) => raciData.filter(r => r.HoTenNhanSu === pers && r.VaiTro_RACI === role).length;
+    chartRACIInstance.data.labels = people;
+    chartRACIInstance.data.datasets[0].data = people.map(pers => countRole(pers, 'R'));
+    chartRACIInstance.data.datasets[1].data = people.map(pers => countRole(pers, 'A'));
+    chartRACIInstance.data.datasets[2].data = people.map(pers => countRole(pers, 'S'));
+    chartRACIInstance.data.datasets[3].data = people.map(pers => countRole(pers, 'I'));
+    chartRACIInstance.update();
+  }}
 }}
 
-function updateTasksFilter() {{
+function updateTasksFilter(autoSwitch = false) {{
   const proj = document.getElementById('slicerTaskProject').value;
+  if (autoSwitch && proj !== 'ALL') {{
+    switchTab('tab-tasks', document.getElementById('btnNavTasks'));
+  }}
   let filtered = taskData;
   if (proj !== 'ALL') {{
     if (proj === 'Chuẩn hóa Bộ môn Thiết kế' || proj === 'Quản trị & Tổ chức') {{
@@ -632,7 +695,20 @@ function updateTasksFilter() {{
       filtered = filtered.filter(t => t.HangMuc_DuAn === proj);
     }}
   }}
-  document.getElementById('tasksCountLabel').innerText = `Đang hiển thị: ${{filtered.length}} / 214 công việc`;
+
+  const doneCount = filtered.filter(t => t.TinhTrang === 'Đã hoàn thành').length;
+  const inProgCount = filtered.filter(t => t.TinhTrang === 'Đang thực hiện').length;
+  const overdueCount = filtered.filter(t => t.TinhTrang === 'Quá hạn').length;
+  const pendingCount = filtered.filter(t => t.TinhTrang === 'Chưa thực hiện').length;
+  const pct = filtered.length > 0 ? ((doneCount / filtered.length) * 100).toFixed(1) : 0;
+
+  const labelEl = document.getElementById('tasksCountLabel');
+  if (labelEl) {{
+    labelEl.innerHTML = proj === 'ALL'
+      ? `Đang hiển thị toàn bộ 214 công việc (Hoàn thành: ${{doneCount}} | Đang làm: ${{inProgCount}} | Quá hạn: ${{overdueCount}})`
+      : `<b style="color:var(--accent-cyan); font-size:13px;">${{proj}}</b>: ${{filtered.length}} việc | Hoàn thành: <b style="color:#34d399">${{doneCount}} (${{pct}}%)</b> | Đang làm: ${{inProgCount}}${{overdueCount > 0 ? ` | Quá hạn: <b style="color:#f87171">${{overdueCount}}</b>` : ''}}`;
+  }}
+
   document.getElementById('tblTasksBody').innerHTML = filtered.map(r => {{
     let pillClass = 'pill-progress';
     if (r.TinhTrang === 'Đã hoàn thành') pillClass = 'pill-done';
@@ -653,11 +729,38 @@ function updateTasksFilter() {{
       </tr>
     `;
   }}).join('');
+
+  if (chartProjectsInstance) {{
+    if (proj === 'ALL') {{
+      const projNames = ['Dự án Mega', 'Kim Tín GĐ3', 'Dự án APF', 'CasaFlora2', 'Dự án Suncasa', 'Trạm Phú Quốc', 'Dự án BB052'];
+      const projKeys = ['Dự án Mega', 'Dự án Kim Tín giai đoạn 3', 'Dự án APF', 'Dự án CasaFlora2', 'Dự án Suncasa', 'Dự án các trạm Phú Quốc', 'Dự án BB052'];
+      chartProjectsInstance.data.labels = projNames;
+      chartProjectsInstance.data.datasets[0].data = projKeys.map(k => taskData.filter(t => t.HangMuc_DuAn === k && t.TinhTrang === 'Đã hoàn thành').length);
+      chartProjectsInstance.data.datasets[1].data = projKeys.map(k => taskData.filter(t => t.HangMuc_DuAn === k && (t.TinhTrang === 'Đang thực hiện' || t.TinhTrang === 'Quá hạn' || t.TinhTrang === 'Chưa thực hiện')).length);
+    }} else {{
+      chartProjectsInstance.data.labels = [proj];
+      chartProjectsInstance.data.datasets[0].data = [doneCount];
+      chartProjectsInstance.data.datasets[1].data = [inProgCount + overdueCount + pendingCount];
+    }}
+    chartProjectsInstance.update();
+  }}
+
+  if (chartTaskStatusInstance) {{
+    chartTaskStatusInstance.data.datasets[0].data = [doneCount, inProgCount, overdueCount, pendingCount];
+    chartTaskStatusInstance.update();
+  }}
+}}
+
+function resetAllFilters() {{
+  document.getElementById('slicerPerson').value = 'ALL';
+  document.getElementById('slicerTaskProject').value = 'ALL';
+  document.getElementById('slicerBoMon').value = 'ALL';
+  updateRaciFilter(false);
+  updateTasksFilter(false);
+  updateDocsFilter(false);
 }}
 
 window.addEventListener('DOMContentLoaded', () => {{
-  initTables();
-
   // 1. Chart HR
   const hrGroups = {{}};
   hrData.forEach(r => {{
@@ -666,7 +769,7 @@ window.addEventListener('DOMContentLoaded', () => {{
     hrGroups[r.TenNhom].rem += r.NhanSuConLai;
   }});
   const hrLabels = Object.keys(hrGroups);
-  new Chart(document.getElementById('chartHR'), {{
+  chartHRInstance = new Chart(document.getElementById('chartHR'), {{
     type: 'bar',
     data: {{
       labels: hrLabels,
@@ -678,10 +781,10 @@ window.addEventListener('DOMContentLoaded', () => {{
     options: {{ responsive: true, maintainAspectRatio: false }}
   }});
 
-  // 2. Chart RACI (Xếp theo Nhân sự A, B, C...)
+  // 2. Chart RACI
   const people = [...new Set(raciData.map(r => r.HoTenNhanSu))];
   const countRole = (p, role) => raciData.filter(r => r.HoTenNhanSu === p && r.VaiTro_RACI === role).length;
-  new Chart(document.getElementById('chartRACI'), {{
+  chartRACIInstance = new Chart(document.getElementById('chartRACI'), {{
     type: 'bar',
     data: {{
       labels: people,
@@ -696,7 +799,7 @@ window.addEventListener('DOMContentLoaded', () => {{
   }});
 
   // 3. Chart SLA
-  new Chart(document.getElementById('chartSLA'), {{
+  chartSLAInstance = new Chart(document.getElementById('chartSLA'), {{
     type: 'bar',
     data: {{
       labels: ['1. Chuẩn bị', '2. Hoạch định', '3. KH Chi tiết', '4. Thực thi', '5. Kiểm soát CL', '6. Phát hành', '7. Kết thúc'],
@@ -711,7 +814,7 @@ window.addEventListener('DOMContentLoaded', () => {{
 
   // 4. Chart Docs Dept
   const depts = ['Thiết kế Kết cấu', 'Thiết kế Kiến trúc', 'Thiết kế Điện', 'Thiết kế HVAC', 'Thiết kế Cấp thoát nước', 'Thiết kế PCCC'];
-  new Chart(document.getElementById('chartDocsDept'), {{
+  chartDocsDeptInstance = new Chart(document.getElementById('chartDocsDept'), {{
     type: 'bar',
     data: {{
       labels: depts,
@@ -722,7 +825,7 @@ window.addEventListener('DOMContentLoaded', () => {{
 
   // 5. Chart Docs Type
   const types = [...new Set(docsData.map(d => d.NhomTaiLieu))];
-  new Chart(document.getElementById('chartDocsType'), {{
+  chartDocsTypeInstance = new Chart(document.getElementById('chartDocsType'), {{
     type: 'doughnut',
     data: {{
       labels: types,
@@ -731,8 +834,8 @@ window.addEventListener('DOMContentLoaded', () => {{
     options: {{ responsive: true, maintainAspectRatio: false, plugins: {{ legend: {{ position: 'right' }} }} }}
   }});
 
-  // 6. Chart KPI (Cấp trên đánh giá là Nhân sự A)
-  new Chart(document.getElementById('chartKPI'), {{
+  // 6. Chart KPI
+  chartKPIInstance = new Chart(document.getElementById('chartKPI'), {{
     type: 'bar',
     data: {{
       labels: ['Phần I: Tinh thần Thái độ (Thang 5)', 'Phần II: Kết quả Công việc KPI (Thang 5)', 'Tổng Điểm Xếp Hạng Năm (Hệ 1.0)'],
@@ -747,16 +850,13 @@ window.addEventListener('DOMContentLoaded', () => {{
   // 7. Chart Projects
   const projNames = ['Dự án Mega', 'Kim Tín GĐ3', 'Dự án APF', 'CasaFlora2', 'Dự án Suncasa', 'Trạm Phú Quốc', 'Dự án BB052'];
   const projKeys = ['Dự án Mega', 'Dự án Kim Tín giai đoạn 3', 'Dự án APF', 'Dự án CasaFlora2', 'Dự án Suncasa', 'Dự án các trạm Phú Quốc', 'Dự án BB052'];
-  const doneCounts = projKeys.map(k => taskData.filter(t => t.HangMuc_DuAn === k && t.TinhTrang === 'Đã hoàn thành').length);
-  const progCounts = projKeys.map(k => taskData.filter(t => t.HangMuc_DuAn === k && (t.TinhTrang === 'Đang thực hiện' || t.TinhTrang === 'Quá hạn')).length);
-
-  new Chart(document.getElementById('chartProjects'), {{
+  chartProjectsInstance = new Chart(document.getElementById('chartProjects'), {{
     type: 'bar',
     data: {{
       labels: projNames,
       datasets: [
-        {{ label: 'Đã hoàn thành', data: doneCounts, backgroundColor: '#10b981', borderRadius: 4 }},
-        {{ label: 'Đang triển khai / Quá hạn', data: progCounts, backgroundColor: '#3b82f6', borderRadius: 4 }}
+        {{ label: 'Đã hoàn thành', data: projKeys.map(k => taskData.filter(t => t.HangMuc_DuAn === k && t.TinhTrang === 'Đã hoàn thành').length), backgroundColor: '#10b981', borderRadius: 4 }},
+        {{ label: 'Đang triển khai / Quá hạn', data: projKeys.map(k => taskData.filter(t => t.HangMuc_DuAn === k && (t.TinhTrang === 'Đang thực hiện' || t.TinhTrang === 'Quá hạn' || t.TinhTrang === 'Chưa thực hiện')).length), backgroundColor: '#3b82f6', borderRadius: 4 }}
       ]
     }},
     options: {{
@@ -767,24 +867,23 @@ window.addEventListener('DOMContentLoaded', () => {{
 
   // 8. Chart Task Status
   const stLabels = ['Đã hoàn thành', 'Đang thực hiện', 'Quá hạn', 'Chưa thực hiện'];
-  const stCounts = stLabels.map(s => taskData.filter(t => t.TinhTrang === s).length);
-  new Chart(document.getElementById('chartTaskStatus'), {{
+  chartTaskStatusInstance = new Chart(document.getElementById('chartTaskStatus'), {{
     type: 'doughnut',
     data: {{
       labels: stLabels,
       datasets: [{{
-        data: stCounts,
+        data: stLabels.map(s => taskData.filter(t => t.TinhTrang === s).length),
         backgroundColor: ['#10b981', '#3b82f6', '#f43f5e', '#64748b'],
         borderWidth: 0
       }}]
     }},
     options: {{
       responsive: true, maintainAspectRatio: false,
-      plugins: {{
-        legend: {{ position: 'right' }}
-      }}
+      plugins: {{ legend: {{ position: 'right' }} }}
     }}
   }});
+
+  initTables();
 }});
 </script>
 </body>
