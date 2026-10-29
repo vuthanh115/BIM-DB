@@ -115,7 +115,9 @@ for sh_name, (bm_code, bm_name, chu_tri) in ht_sheets.items():
         stt, doc_name, req, purpose = ws.cell(r, 1).value, ws.cell(r, 2).value, ws.cell(r, 3).value, ws.cell(r, 4).value
         if stt is not None and doc_name is not None:
             stt_int, doc_str = int(float(stt)), clean_text(doc_name)
-            audit_note = "Lưu ý: Bản gốc ghi nhầm 'HVAC', cần đổi thành 'Kết cấu'" if (bm_code == "KC" and "HVAC" in doc_str) else "Bình thường"
+            if bm_code == "KC" and "HVAC" in doc_str:
+                doc_str = doc_str.replace("HVAC", "Kết cấu")
+            audit_note = "Bình thường"
             req_str = clean_text(req) if req is not None else "Theo tiêu chuẩn chung nội bộ"
             req_str_clean = req_str.replace("Lam sẽ gửi", "Nhân sự A sẽ gửi").replace("Lam", "Nhân sự A")
             purp_str = clean_text(purpose) if purpose is not None else "Đồng bộ và tối ưu hóa hệ thống thiết kế - thi công"
