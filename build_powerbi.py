@@ -1,0 +1,785 @@
+# -*- coding: utf-8 -*-
+# Build Power BI DataModel & Dashboard 2026
+# Tự động quét và tổng hợp dữ liệu toàn bộ Folder với tên nhân sự ẩn danh (Nhân sự A, B, C...)
+# 1. 260401_CL_MT_SDTC-MTCV-KPI - BP BIM_TK.xlsx (Chiến lược, Nhân sự, RACI, KPI, SLA, 115 Tài liệu chuẩn hóa)
+# 2. [BSV] - Báo cáo công việc.xlsx (214 Công việc thực tế, 7 Dự án thi công, Tiến độ & Rủi ro)
+
+import os
+import json
+import base64
+import webbrowser
+import pandas as pd
+import openpyxl
+
+SRC_FILE_STRATEGY = "260401_CL_MT_SDTC-MTCV-KPI - BP BIM_TK.xlsx"
+SRC_FILE_TASKS = "[BSV] - Báo cáo công việc.xlsx"
+OUT_XLSX = "BSV_BIM_TK_PowerBI_DataModel_2026.xlsx"
+OUT_HTML = "BSV_BIM_TK_PowerBI_Dashboard_2026.html"
+
+if not os.path.exists(SRC_FILE_STRATEGY):
+    raise FileNotFoundError(f"Vui lòng đặt file '{SRC_FILE_STRATEGY}' cùng thư mục với script này!")
+
+wb_src = openpyxl.load_workbook(SRC_FILE_STRATEGY, data_only=True)
+
+# 1. Bảng Định biên Nhân sự (02_Fact_NhanSu) - Tên nhân sự đổi thành Nhân sự A, B, C...
+nhan_su_nhom = [
+    ("GRP_MGT", "Quản lý chung", "TBP BIM - Thiết kế", "Nhân sự A", "Quản lý", 1, 1, 0, "Đang làm việc"),
+    ("GRP_BIM_XD", "BIM Xây dựng (KT - KC)", "Trưởng nhóm BIM XD", "Nhân sự B", "Leader", 1, 1, 0, "Đang làm việc"),
+    ("GRP_BIM_XD", "BIM Xây dựng (KT - KC)", "Kỹ sư BIM KT - KC", "Nhân sự H, Nhân sự I, Nhân sự J, Nhân sự K...", "Nhân viên", 14, 11, 1, "Biến động T04/2026 & Cần tuyển thêm"),
+    ("GRP_BIM_MEPF", "BIM MEPF", "Trưởng nhóm BIM MEPF", "Nhân sự C", "Leader", 1, 1, 0, "Đang làm việc"),
+    ("GRP_BIM_MEPF", "BIM MEPF", "Kỹ sư BIM MEPF", "Nhân sự L & KS BIM MEPF", "Nhân viên", 2, 2, 0, "Đang làm việc"),
+    ("GRP_BIM_HT", "BIM Hạ tầng", "Kỹ sư BIM Hạ tầng", "Vị trí chờ tuyển (BIM Hạ tầng)", "Nhân viên", 2, 1, 1, "Khuyết nhân sự chủ chốt"),
+    ("GRP_TK_KT", "Thiết kế Kiến trúc", "Chủ trì TK Kiến trúc", "Nhân sự E", "Chủ trì", 1, 1, 0, "Đã đủ chủ trì"),
+    ("GRP_TK_KT", "Thiết kế Kiến trúc", "Kiến trúc sư triển khai", "KTS Triển khai", "Nhân viên", 1, 1, 0, "Đang làm việc"),
+    ("GRP_TK_KC", "Thiết kế Kết cấu", "Chủ trì TK Kết cấu", "Nhân sự D", "Chủ trì", 1, 1, 0, "Đã đủ chủ trì"),
+    ("GRP_TK_KC", "Thiết kế Kết cấu", "Kỹ sư TK Kết cấu", "KS Triển khai KC", "Nhân viên", 2, 2, 0, "Đang làm việc"),
+    ("GRP_TK_ME", "Thiết kế Điện - Cơ (CTN, PCCC)", "Chủ trì TK Điện - Cơ", "Nhân sự F", "Chủ trì", 1, 1, 0, "Đã đủ chủ trì"),
+    ("GRP_TK_ME", "Thiết kế Điện - Cơ (CTN, PCCC)", "Kỹ sư TK Cơ - Điện", "KS Triển khai Cơ - Điện", "Nhân viên", 1, 1, 0, "Đang làm việc"),
+    ("GRP_TK_HVAC", "Thiết kế HVAC", "Chủ trì TK HVAC", "Nhân sự G", "Chủ trì", 1, 1, 0, "Đã đủ chủ trì"),
+    ("GRP_TK_HVAC", "Thiết kế HVAC", "Kỹ sư TK HVAC", "Chưa tuyển đủ", "Nhân viên", 1, 1, 0, "Đang làm việc"),
+]
+df_hr = pd.DataFrame(nhan_su_nhom, columns=[
+    "MaNhom", "TenNhom", "ViTri", "NhanSuChuChot", "CapBac",
+    "DinhBienKeHoach", "NhanSuHienTai_T04_2026", "NghiViec_T04_2026", "GhiChuTrangThai"
+])
+df_hr["NhanSuConLai"] = df_hr["NhanSuHienTai_T04_2026"] - df_hr["NghiViec_T04_2026"]
+df_hr["ThieuHutDinhBien"] = df_hr["DinhBienKeHoach"] - df_hr["NhanSuConLai"]
+df_hr["TiLeLapDay"] = (df_hr["NhanSuConLai"] / df_hr["DinhBienKeHoach"]).round(4)
+
+# 2. Bảng Ma trận RACI Unpivot (03_Fact_RACI) - Ẩn danh tên nhân sự
+ws_raci = wb_src['Ma Tran BP BIM']
+people_cols = {
+    4: ("Nhân sự A", "TBP BIM-TK", "Quản lý"),
+    5: ("Nhân sự B", "BIM Kiến Trúc", "Leader"),
+    6: ("Nhân sự H", "BIM Kiến Trúc", "Nhân viên"),
+    7: ("Nhân sự I", "BIM Kiến Trúc", "Nhân viên"),
+    8: ("Nhân sự J", "BIM Kết Cấu", "Nhân viên"),
+    9: ("Nhân sự K", "BIM Kết Cấu", "Nhân viên"),
+    10: ("Nhân sự C", "BIM MEPF", "Leader"),
+    11: ("Nhân sự L", "BIM MEPF", "Nhân viên"),
+    12: ("Vị trí chờ tuyển (Hạ tầng)", "BIM Hạ Tầng", "Nhân viên"),
+}
+raci_rows, current_cat_id, current_cat_name = [], "", ""
+for r in range(4, 44):
+    code, task = ws_raci.cell(r, 2).value, ws_raci.cell(r, 3).value
+    if code is not None and task is not None:
+        code_str, task_str = str(code).strip(), str(task).strip()
+        if "." not in code_str:
+            current_cat_id, current_cat_name = code_str, task_str
+        else:
+            for c_idx, (person, dept, level) in people_cols.items():
+                role = ws_raci.cell(r, c_idx).value
+                if role is not None and str(role).strip() != "":
+                    role_str = str(role).strip()
+                    role_desc = {
+                        "R": "Responsible (Trực tiếp thực hiện)",
+                        "A": "Accountable (Chịu trách nhiệm cuối)",
+                        "C": "Consulted (Tham vấn)",
+                        "I": "Informed (Được thông báo)",
+                        "S": "Support (Hỗ trợ)"
+                    }.get(role_str, role_str)
+                    raci_rows.append((f"NV_{code_str}", current_cat_id, current_cat_name, code_str, task_str, person, dept, level, role_str, role_desc))
+
+df_raci = pd.DataFrame(raci_rows, columns=[
+    "MaGiaoDich", "MaNhomNhiemVu", "NhomNhiemVu", "MaNhiemVu", "TenNhiemVu",
+    "HoTenNhanSu", "BoMon", "CapBac", "VaiTro_RACI", "MoTaVaiTro"
+])
+
+# 3. Bảng 115 Tài liệu Chuẩn hóa Thiết kế (05_Fact_TaiLieuTK) - Chủ trì đổi thành Nhân sự D, E, F, G
+ht_sheets = {
+    "HT_ThietKe_KC": ("KC", "Thiết kế Kết cấu", "Nhân sự D"),
+    "HT_ThietKe_KT": ("KT", "Thiết kế Kiến trúc", "Nhân sự E"),
+    "HT_ThietKe_Dien": ("DIEN", "Thiết kế Điện", "Nhân sự F"),
+    "HT_ThietKe_HVAC": ("HVAC", "Thiết kế HVAC", "Nhân sự G"),
+    "HT_ThietKe_CTN": ("CTN", "Thiết kế Cấp thoát nước", "Nhân sự F"),
+    "HT_ThietKe_PCCC": ("PCCC", "Thiết kế PCCC", "Nhân sự F"),
+}
+doc_rows = []
+for sh_name, (bm_code, bm_name, chu_tri) in ht_sheets.items():
+    ws = wb_src[sh_name]
+    for r in range(2, ws.max_row + 1):
+        stt, doc_name, req, purpose = ws.cell(r, 1).value, ws.cell(r, 2).value, ws.cell(r, 3).value, ws.cell(r, 4).value
+        if stt is not None and doc_name is not None:
+            stt_int, doc_str = int(float(stt)), str(doc_name).strip()
+            audit_note = "Lưu ý: Bản gốc ghi nhầm 'HVAC', cần đổi thành 'Kết cấu'" if (bm_code == "KC" and "HVAC" in doc_str) else "Bình thường"
+            req_str = str(req).strip() if req is not None else "Theo tiêu chuẩn chung BSV"
+            # Làm sạch tên người khỏi mô tả yêu cầu nếu có
+            req_str_clean = req_str.replace("Lam sẽ gửi", "Nhân sự A sẽ gửi").replace("Lam", "Nhân sự A")
+            purp_str = str(purpose).strip() if purpose is not None else "Đồng bộ và tối ưu hóa hệ thống thiết kế - thi công"
+            status, pct = ("Đã có dự thảo (Cần tinh chỉnh)", 0.70) if "Đã làm" in req_str else (
+                          ("Giai đoạn 2 (Sau dự án mẫu)", 0.10) if ("Sẽ viết sau" in req_str or "làm sau" in req_str) else (
+                          ("Đang tổng hợp tài liệu nguồn", 0.40) if ("Nhân sự A sẽ gửi" in req_str_clean or "tham khảo" in req_str.lower() or "Lam" in req_str) else
+                          ("Giai đoạn 1 (Ưu tiên xây dựng)", 0.25)))
+            doc_lower = doc_str.lower()
+            doc_type, prio = ("Template (Revit / CAD / Tính toán)", "P1 - Tối ưu & Tự động hóa") if "template" in doc_lower else (
+                             ("Quy chuẩn Mã hóa & Danh mục gốc", "P1 - Nền tảng dữ liệu") if any(k in doc_lower for k in ["quy định", "phân loại", "danh mục"]) else (
+                             ("Quy trình (SOP) & Hướng dẫn", "P2 - Chuẩn hóa vận hành") if any(k in doc_lower for k in ["quy trình", "hướng dẫn"]) else (
+                             ("Tự động hóa, BOQ & Module hóa", "P1 - Đòn bẩy hiệu suất 70%") if any(k in doc_lower for k in ["boq", "tự động hoá", "chuẩn hoá thiết kế"]) else
+                             ("Biểu mẫu, Checklist & Thuyết minh", "P2 - Kiểm soát chất lượng"))))
+            doc_rows.append((f"{bm_code}_{stt_int:02d}", bm_code, bm_name, chu_tri, stt_int, doc_str, doc_type, prio, status, pct, req_str_clean, purp_str, audit_note))
+
+df_docs = pd.DataFrame(doc_rows, columns=[
+    "MaTaiLieu", "MaBoMon", "TenBoMon", "ChuTriPhuTrach", "STT", "TenTaiLieu",
+    "NhomTaiLieu", "MucDoUuTien", "TrangThaiTrienKhai", "TiLeHoanThanh_UocTinh",
+    "MoTaYeuCau", "MucDichChienLuoc", "GhiChuRasoát"
+])
+
+# 4. Bảng Quy trình SLA (04_Fact_QuyTrinhSLA)
+sla_rows = [
+    ("QT_SHOP", "Quy trình BIM Shop Drawing", 1, "Chuẩn bị", "Tiếp nhận hồ sơ, đọc hiểu, chuẩn bị CSDL, đặt mục tiêu, lập biểu TCQ", "Leader Shop XD & MEPF", 0.5, 0.5, 0.5),
+    ("QT_SHOP", "Quy trình BIM Shop Drawing", 2, "Hoạch định", "Lập danh mục hạng mục cần triển khai, phân bổ nguồn lực, giao deadline", "Leader Shop XD & MEPF", 0.5, 0.5, 0.5),
+    ("QT_SHOP", "Quy trình BIM Shop Drawing", 3, "Kế hoạch chi tiết", "Lập danh mục bản vẽ chi tiết, deadline hoàn thành phù hợp hoạch định", "KS/KTS BIM Shop (HT, KC, KT, Cơ, Điện)", 0.5, 0.5, 0.5),
+    ("QT_SHOP", "Quy trình BIM Shop Drawing", 4, "Thực thi", "Triển khai bản vẽ theo tài liệu hướng dẫn hoặc hướng dẫn của Leader", "KS/KTS BIM Shop (HT, KC, KT, Cơ, Điện)", 1.0, 5.0, 3.0),
+    ("QT_SHOP", "Quy trình BIM Shop Drawing", 5, "Kiểm soát chất lượng", "Tự kiểm tra theo checklist, Spec; Leader & TBP kiểm tra", "KS BIM Shop & Leader", 0.5, 0.5, 0.5),
+    ("QT_SHOP", "Quy trình BIM Shop Drawing", 6, "Phát hành", "Phát hành bản vẽ cho BCH trình CĐT/TVGS, nhận phản hồi, họp giải trình", "Leader Shop XD & MEPF", 1.0, 1.0, 1.0),
+    ("QT_SHOP", "Quy trình BIM Shop Drawing", 7, "Kết thúc", "Lưu trữ hồ sơ, bổ sung lỗi hay gặp vào tài liệu nội bộ để đào tạo", "Leader Shop XD & MEPF", 0.1, 0.1, 0.1),
+    ("QT_COMBINE", "Quy trình BIM Combine", 1, "Chuẩn bị", "Tiếp nhận hồ sơ, chuẩn bị mô hình combine đúng TMB & tọa độ VN2000", "Leader Combine", 0.5, 0.5, 0.5),
+    ("QT_COMBINE", "Quy trình BIM Combine", 2, "Hoạch định", "Lập danh mục 3D, chốt tiến độ bộ môn, chiến lược tách file theo phần cứng", "Leader Combine", 0.5, 0.5, 0.5),
+    ("QT_COMBINE", "Quy trình BIM Combine", 3, "Kế hoạch chi tiết", "Lập danh sách bản vẽ combine, danh mục mô hình 3D & IFC phối hợp", "Leader Combine", 0.5, 0.5, 0.5),
+    ("QT_COMBINE", "Quy trình BIM Combine", 4, "Thực thi", "Liên kết 3D, lập báo cáo va chạm, đề xuất & chốt phương án xử lý với CĐT/TVTK/NTP", "Leader Combine", 3.0, 7.0, 5.0),
+    ("QT_COMBINE", "Quy trình BIM Combine", 5, "Kiểm soát chất lượng", "Tự kiểm tra theo checklist, ma trận va chạm, kiểm tra trực quan mô hình online", "Leader Combine", 0.5, 0.5, 0.5),
+    ("QT_COMBINE", "Quy trình BIM Combine", 6, "Phát hành", "Phát hành bản vẽ combine phần ngầm/nổi, họp giải trình, cấp IFC/Revit/Excel cho NTP", "Leader Combine", 3.0, 3.0, 3.0),
+    ("QT_COMBINE", "Quy trình BIM Combine", 7, "Kết thúc", "Lưu trữ mô hình, báo cáo, bài học kinh nghiệm", "Leader Combine", 0.1, 0.1, 0.1),
+    ("QT_QS", "Quy trình BIM QS (Khối lượng)", 1, "Chuẩn bị", "Tiếp nhận hồ sơ, chuẩn bị Template Revit, BOQ, VLHT, rà soát tham biến khối lượng", "Leader QS XD & MEPF", 0.5, 0.5, 0.5),
+    ("QT_QS", "Quy trình BIM QS (Khối lượng)", 2, "Hoạch định", "Lập danh mục hạng mục cần bóc khối lượng, phân bổ nguồn lực, thiết lập BOQ", "Leader QS XD & MEPF", 0.5, 0.5, 0.5),
+    ("QT_QS", "Quy trình BIM QS (Khối lượng)", 3, "Kế hoạch chi tiết", "Lập kế hoạch chi tiết theo đầu mục BOQ cho các bộ môn kèm deadline", "KS/KTS BIM QS (HT, KC, KT, Cơ, Điện)", 0.5, 0.5, 0.5),
+    ("QT_QS", "Quy trình BIM QS (Khối lượng)", 4, "Thực thi", "Triển khai mô hình theo BOQ, xuất thống kê Excel, link vào BOQ, tính bổ sung ngoài mô hình", "KS/KTS BIM QS (HT, KC, KT, Cơ, Điện)", 5.0, 7.0, 6.0),
+    ("QT_QS", "Quy trình BIM QS (Khối lượng)", 5, "Kiểm soát chất lượng", "Tự kiểm tra checklist; Leader kiểm tra chất lượng mô hình, tính hợp lý & lỗi trích xuất", "Leader QS XD & MEPF", 0.5, 0.5, 0.5),
+    ("QT_QS", "Quy trình BIM QS (Khối lượng)", 6, "Phát hành", "Phát hành khối lượng chính thức, phân tách theo kế hoạch thi công, đặt hàng, thanh quyết toán", "Leader QS XD & MEPF", 1.0, 1.0, 1.0),
+    ("QT_QS", "Quy trình BIM QS (Khối lượng)", 7, "Kết thúc", "Lưu trữ bảng khối lượng đã xuất, phân loại đưa vào cơ sở dữ liệu", "Leader QS XD & MEPF", 0.1, 0.1, 0.1),
+]
+df_sla = pd.DataFrame(sla_rows, columns=[
+    "MaQuyTrinh", "TenQuyTrinh", "BuocSo", "GiaiDoan_LuuDo", "MoTaCongViec",
+    "VaiTroPhuTrach", "ThoiGian_Min_Ngay", "ThoiGian_Max_Ngay", "ThoiGian_TrungBinh_Ngay"
+])
+
+# 5. Bảng Đánh giá KPI đã sửa lỗi #DIV/0! (06_Fact_KPI_Fixed)
+kpi_sheets = [
+    ("MTCV_KPI_TBP BIM", "POS_TBP", "Trưởng bộ phận BIM - TK", "Quản lý"),
+    ("MTCV_KPI_BIM Kien Truc", "POS_BIM_KT", "Kỹ sư BIM Kiến trúc", "Nhân viên"),
+    ("MTCV_KPI_BIM Ket Cau", "POS_BIM_KC", "Kỹ sư BIM Kết cấu", "Nhân viên"),
+    ("MTCV_KPI_BIM MEPF", "POS_BIM_MEPF", "Kỹ sư BIM MEPF", "Nhân viên"),
+    ("MTCV_KPI_BIM Ha Tang", "POS_BIM_HT", "Kỹ sư BIM Hạ tầng", "Nhân viên"),
+]
+weights_tbp = [0.15, 0.20, 0.15, 0.10, 0.05, 0.10, 0.10, 0.10, 0.05]
+weights_eng = [0.05, 0.05, 0.20, 0.20, 0.15, 0.10, 0.10, 0.05, 0.10]
+kpi_rows = []
+for sh_name, pos_code, pos_name, level in kpi_sheets:
+    ws = wb_src[sh_name]
+    for idx, r in enumerate([18, 21, 24, 27], 1):
+        crit = str(ws.cell(r, 1).value).strip()
+        w_orig = float(ws.cell(r, 27).value or 0.25)
+        kpi_rows.append((f"{pos_code}_P1_{idx}", pos_code, pos_name, level, "Phần I - Tinh thần thái độ", idx, crit,
+                         "Tuân thủ 100% quy định & văn hóa BSV", w_orig, w_orig,
+                         float(ws.cell(r, 37).value or 0), float(ws.cell(r, 39).value or 0),
+                         float(ws.cell(r, 41).value or 0), float(ws.cell(r, 43).value or 0)))
+    for idx, r in enumerate(range(38, 47), 1):
+        crit = str(ws.cell(r, 2).value).strip()
+        out_req = ws.cell(r, 14).value
+        out_str = str(out_req).strip() if out_req is not None else "Hoàn thành đúng tiến độ & chất lượng cam kết"
+        w_prop = weights_tbp[idx-1] if pos_code == "POS_TBP" else weights_eng[idx-1]
+        kpi_rows.append((f"{pos_code}_P2_{idx}", pos_code, pos_name, level, "Phần II - Kết quả công việc (KPI)", idx, crit,
+                         out_str, float(ws.cell(r, 27).value or 0.0), w_prop,
+                         float(ws.cell(r, 37).value or 4.0), float(ws.cell(r, 39).value or 4.0),
+                         float(ws.cell(r, 41).value or 4.0), float(ws.cell(r, 43).value or 4.0)))
+
+df_kpi = pd.DataFrame(kpi_rows, columns=[
+    "MaChiTieu", "MaViTri", "TenViTri", "CapBac", "PhanDanhGia", "STT", "NoiDungTieuChi",
+    "KetQuaCanCo", "TrongSo_FileGoc", "TrongSo_ChuanHoa_FixDiv0",
+    "Diem_Q3_TuDanhGia", "Diem_Q3_CapTren", "Diem_Q4_TuDanhGia", "Diem_Q4_CapTren"
+])
+df_kpi["DiemQuyDoi_Q3_CapTren"] = (df_kpi["Diem_Q3_CapTren"] / 5.0 * df_kpi["TrongSo_ChuanHoa_FixDiv0"]).round(4)
+df_kpi["DiemQuyDoi_Q4_CapTren"] = (df_kpi["Diem_Q4_CapTren"] / 5.0 * df_kpi["TrongSo_ChuanHoa_FixDiv0"]).round(4)
+
+# 6. Bảng Chiến lược & Mục tiêu (01_Fact_ChienLuoc)
+cl_rows = [
+    ("CL_01", "Định hướng chiến lược", "Ngắn & Dài hạn", "Xây dựng lợi thế cạnh tranh tuyệt đối bằng hệ thống đóng kín, đồng bộ chuỗi giá trị (MKT - Thiết kế/Pháp lý - Đấu thầu - Thi công - Vận hành)", "Tỷ lệ đồng bộ chuỗi giá trị", 1.0, "100%", "Toàn công ty BSV"),
+    ("CL_02", "Định hướng chiến lược", "Ngắn & Dài hạn", "Nâng cao năng lực lõi cho cán bộ văn phòng (tư duy thiết kế, 6 hóa), hướng tới đa nhiệm, tối ưu, dễ thích nghi", "Tỷ lệ nhân sự đạt chuẩn đa nhiệm & 6 hóa", 1.0, "100%", "Khu vực văn phòng"),
+    ("CL_03", "Định hướng chiến lược", "Dài hạn", "Đặt nền tảng thu thập, tổ chức, lưu trữ, khai thác dữ liệu trên toàn chuỗi hoạt động xây dựng", "Mức độ làm chủ CSDL (Big Data)", 1.0, "100%", "Toàn công ty BSV"),
+    ("MT_01A", "Mục tiêu", "Ngắn hạn (1 năm)", "Tự chủ toàn bộ thiết kế nội bộ (Số lượng dự án/năm)", "Số dự án tự thiết kế/năm", 4.0, "Dự án", "BP Thiết kế - BIM"),
+    ("MT_01B", "Mục tiêu", "Ngắn hạn (1 năm)", "Tổng giá trị xây lắp các dự án tự thiết kế trong năm", "Tổng giá trị dự án", 1200.0, "Tỷ VNĐ", "BP Thiết kế - BIM"),
+    ("MT_01C", "Mục tiêu", "Ngắn hạn (1 năm)", "Doanh thu thiết kế quy đổi ước tính trong ngắn hạn (1 năm)", "Doanh thu thiết kế ước tính", 10.0, "Tỷ VNĐ", "BP Thiết kế - BIM"),
+    ("MT_02A", "Mục tiêu", "Dài hạn (>1 năm)", "Chuẩn hóa, tự động hóa nhiệm vụ trọng yếu; tỷ lệ chuyển hóa dự án tự thiết kế sang thắng thầu tối thiểu", "Tỷ lệ thắng thầu tối thiểu (Min Target)", 0.60, "60%", "BP Thiết kế - Đấu thầu"),
+    ("MT_02B", "Mục tiêu", "Dài hạn (>1 năm)", "Hướng đến mục tiêu tối đa dự án tự thiết kế thắng thầu và chuyển sang thi công", "Tỷ lệ thắng thầu mục tiêu (Stretch Target)", 0.90, "90%", "BP Thiết kế - Đấu thầu"),
+    ("MT_03", "Mục tiêu", "Dài hạn (>1 năm)", "Đưa Thiết kế từng bước trở thành bộ phận trực tiếp mang thêm lợi nhuận qua hợp đồng Thiết kế - BIM thương mại", "Chuyển đổi sang Profit Center", 1.0, "Có lợi nhuận độc lập", "BP Thiết kế - BIM"),
+    ("NV_01", "Nhiệm vụ trọng yếu", "Thường xuyên", "Tư vấn, định hướng khách hàng theo phương án thiết kế chiến lược BSV có ưu thế khi đấu thầu, thi công", "Tỷ lệ dự án định hướng theo chuẩn BSV", 1.0, "100%", "Chủ trì Thiết kế & TBP"),
+    ("NV_02", "Nhiệm vụ trọng yếu", "Thường xuyên", "Tự thiết kế tối ưu các dự án D&B, Thiết kế - Đấu thầu - Thi công trên góc nhìn mang lại lợi thế cho BSV", "Tối ưu hóa chi phí & BPTC", 1.0, "100%", "BP Thiết kế - BIM"),
+    ("NV_03", "Nhiệm vụ trọng yếu", "Thường xuyên", "Quản lý thiết kế các dự án thuê ngoài chuẩn hóa theo yêu cầu của BSV", "Tỷ lệ dự án thuê ngoài tuân thủ chuẩn BSV", 1.0, "100%", "Chủ trì Thiết kế"),
+    ("NV_04", "Nhiệm vụ trọng yếu", "Thường xuyên", "Thiết kế, tư vấn hỗ trợ kỹ thuật cho toàn bộ dự án đang thi công (100% dự án tự TK & các vấn đề trọng yếu dự án ngoài)", "Tỷ lệ xử lý vướng mắc dự án tự thiết kế", 1.0, "100%", "BP Thiết kế - BIM"),
+    ("NV_05", "Nhiệm vụ trọng yếu", "Ngắn & Trung hạn", "Chuẩn hóa thiết kế tối ưu cho công ty (chi tiết 2D, 3D, tiêu chuẩn, quy định, số liệu) gồm 118 danh mục tài liệu", "Số lượng tài liệu chuẩn hóa hoàn thành", 118.0, "Tài liệu", "6 Bộ môn Thiết kế"),
+    ("NV_06", "Nhiệm vụ trọng yếu", "Ngắn & Trung hạn", "Kết hợp BIM - Thiết kế tối ưu nguồn lực bóc khối lượng, Shop, Combine (vẽ BIM từ đầu để tái sử dụng dữ liệu giai đoạn thi công)", "Tỷ lệ tiết kiệm nguồn lực / tái sử dụng dữ liệu", 0.70, "70%", "Liên quân BIM - Thiết kế"),
+    ("NV_07", "Nhiệm vụ trọng yếu", "Ngắn & Trung hạn", "Tham gia chuẩn hóa biểu BOQ, Spec và các tài liệu hỗ trợ thiết kế - đấu thầu - thi công", "Tỷ lệ đồng bộ BOQ - Family - Tham biến", 1.0, "100%", "BIM QS - Thiết kế - Đấu thầu"),
+]
+df_cl = pd.DataFrame(cl_rows, columns=[
+    "MaChiTieuCL", "PhanLoai", "ChuKyThoiGian", "NoiDungChiTiet",
+    "TenChiSoDoLuong", "GiaTriMucTieu", "DonViTinh", "DonViPhuTrach"
+])
+
+# 7. Bảng Báo cáo Công việc Thực tế từ [BSV] - Báo cáo công việc.xlsx (07_Fact_BaoCaoCongViec)
+task_rows = []
+if os.path.exists(SRC_FILE_TASKS):
+    wb_tasks = openpyxl.load_workbook(SRC_FILE_TASKS, data_only=True)
+    if "P. BIM" in wb_tasks.sheetnames:
+        ws_t = wb_tasks["P. BIM"]
+        cur_project = ""
+        for r in range(3, ws_t.max_row + 1):
+            hm = ws_t.cell(r, 2).value
+            cv = ws_t.cell(r, 3).value
+            if hm and str(hm).strip():
+                cur_project = str(hm).strip()
+            if cv and str(cv).strip():
+                pic = str(ws_t.cell(r, 1).value or "P. BIM").strip()
+                st = str(ws_t.cell(r, 4).value or "Chưa thực hiện").strip()
+                d_start = ws_t.cell(r, 5).value
+                d_end = ws_t.cell(r, 6).value
+                d_due = ws_t.cell(r, 7).value
+                progress = str(ws_t.cell(r, 8).value or "").strip()
+                quality = str(ws_t.cell(r, 9).value or "").strip()
+                risk = str(ws_t.cell(r, 10).value or "").strip()
+                opt = str(ws_t.cell(r, 11).value or "").strip()
+                note = str(ws_t.cell(r, 13).value or "").strip()
+
+                if cur_project.startswith("Dự án"):
+                    group_type = "Dự án Thi công"
+                elif any(cur_project.startswith(x) for x in ["Kiến Trúc", "Kết cấu", "Hệ thống điện", "Điều hoà", "Cấp thoát", "Phòng cháy"]):
+                    group_type = "Chuẩn hóa Bộ môn Thiết kế"
+                else:
+                    group_type = "Quản trị & Tổ chức"
+
+                task_rows.append({
+                    "MaCongViec": f"TSK_{len(task_rows)+1:03d}",
+                    "NhomCongViec": group_type,
+                    "HangMuc_DuAn": cur_project,
+                    "NoiDungCongViec": str(cv).strip(),
+                    "TinhTrang": st,
+                    "PIC": pic,
+                    "NgayBatDau": str(d_start)[:10] if d_start else "",
+                    "NgayKetThuc": str(d_end)[:10] if d_end else "",
+                    "HanHoanThanh": str(d_due)[:10] if d_due else "",
+                    "TienDoChiTiet": progress,
+                    "KetQuaChatLuong": quality,
+                    "RuiRo_KhoKhan": risk,
+                    "ToiUu_GiaiPhap": opt,
+                    "GhiChu": note
+                })
+
+df_tasks = pd.DataFrame(task_rows)
+
+# 8. Bảng Hướng dẫn DAX (00_PowerBI_Dashboard_DAX)
+dax_rows = [
+    ("Tong Dinh Bien", "02_Fact_NhanSu", "Tong Dinh Bien = SUM('02_Fact_NhanSu'[DinhBienKeHoach])", "Card / Clustered Column Chart"),
+    ("Nhan Su Hien Tai", "02_Fact_NhanSu", "Nhan Su Hien Tai = SUM('02_Fact_NhanSu'[NhanSuConLai])", "Card / Gauge Chart"),
+    ("Thieu Hut Nhan Su", "02_Fact_NhanSu", "Thieu Hut Nhan Su = [Tong Dinh Bien] - [Nhan Su Hien Tai]", "Card (Cảnh báo thiếu 6 nhân sự)"),
+    ("Ty Le Lap Day Nhan Su", "02_Fact_NhanSu", "Ty Le Lap Day Nhan Su = DIVIDE([Nhan Su Hien Tai], [Tong Dinh Bien], 0)", "Gauge / Donut Chart (80.0%)"),
+    ("Tong Tai Lieu Chuan Hoa", "05_Fact_TaiLieuTK", "Tong Tai Lieu Chuan Hoa = COUNTROWS('05_Fact_TaiLieuTK')", "Card / Bar Chart theo 6 Bộ môn (115 mục)"),
+    ("Tien Do Chuan Hoa TB", "05_Fact_TaiLieuTK", "Tien Do Chuan Hoa TB = AVERAGE('05_Fact_TaiLieuTK'[TiLeHoanThanh_UocTinh])", "Progress Bar / Matrix theo Chủ trì"),
+    ("Ty Le Ganh Nang R_A", "03_Fact_RACI", "Ty Le Ganh Nang R_A = DIVIDE(CALCULATE(COUNTROWS('03_Fact_RACI'), '03_Fact_RACI'[VaiTro_RACI] IN {\"R\", \"A\"}), COUNTROWS('03_Fact_RACI'), 0)", "100% Stacked Bar phân tích tải TBP"),
+    ("Diem KPI Quy Doi Q4", "06_Fact_KPI_Fixed", "Diem KPI Quy Doi = SUM('06_Fact_KPI_Fixed'[DiemQuyDoi_Q4_CapTren])", "Clustered Bar so sánh các vị trí"),
+    ("Chu Ky Quy Trinh TB", "04_Fact_QuyTrinhSLA", "Chu Ky Quy Trinh TB = SUM('04_Fact_QuyTrinhSLA'[ThoiGian_TrungBinh_Ngay])", "Stacked Bar Chart (SLA 7 bước)"),
+    ("Tong Cong Viec Thuc Te", "07_Fact_BaoCaoCongViec", "Tong Cong Viec Thuc Te = COUNTROWS('07_Fact_BaoCaoCongViec')", "Card tổng số 214 nhiệm vụ"),
+    ("Ty Le Hoan Thanh Du An", "07_Fact_BaoCaoCongViec", "Ty Le Hoan Thanh Du An = DIVIDE(CALCULATE(COUNTROWS('07_Fact_BaoCaoCongViec'), '07_Fact_BaoCaoCongViec'[TinhTrang] = \"Đã hoàn thành\", '07_Fact_BaoCaoCongViec'[NhomCongViec] = \"Dự án Thi công\"), CALCULATE(COUNTROWS('07_Fact_BaoCaoCongViec'), '07_Fact_BaoCaoCongViec'[NhomCongViec] = \"Dự án Thi công\"), 0)", "Gauge Chart tiến độ 7 dự án"),
+    ("Cong Viec Qua Han", "07_Fact_BaoCaoCongViec", "Cong Viec Qua Han = CALCULATE(COUNTROWS('07_Fact_BaoCaoCongViec'), '07_Fact_BaoCaoCongViec'[TinhTrang] = \"Quá hạn\")", "Card cảnh báo sự cố rủi ro"),
+]
+df_dax = pd.DataFrame(dax_rows, columns=["Ten_Measure_PowerBI", "Bang_Chua", "Cong_Thuc_DAX", "Ung_Dung_Visual"])
+
+# Xuất file Excel 8 Sheet Star Schema
+with pd.ExcelWriter(OUT_XLSX, engine="openpyxl") as writer:
+    df_dax.to_excel(writer, sheet_name="00_PowerBI_Dashboard_DAX", index=False)
+    df_cl.to_excel(writer, sheet_name="01_Fact_ChienLuoc", index=False)
+    df_hr.to_excel(writer, sheet_name="02_Fact_NhanSu", index=False)
+    df_raci.to_excel(writer, sheet_name="03_Fact_RACI", index=False)
+    df_sla.to_excel(writer, sheet_name="04_Fact_QuyTrinhSLA", index=False)
+    df_docs.to_excel(writer, sheet_name="05_Fact_TaiLieuTK", index=False)
+    df_kpi.to_excel(writer, sheet_name="06_Fact_KPI_Fixed", index=False)
+    df_tasks.to_excel(writer, sheet_name="07_Fact_BaoCaoCongViec", index=False)
+
+# Mã hóa Base64 file Excel để nhúng thẳng nút Download
+with open(OUT_XLSX, "rb") as f:
+    b64_xlsx = base64.b64encode(f.read()).decode("utf-8")
+
+# Xuất file HTML Interactive Dashboard (Dark Mode)
+html_content = f"""<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Power BI Executive Dashboard - BP BIM & Thiết Kế (BSV)</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root {{
+    --bg-main: #0b0f19; --bg-card: #111827; --border-color: #1f2937;
+    --text-primary: #f8fafc; --text-secondary: #94a3b8;
+    --accent-cyan: #06b6d4; --accent-blue: #3b82f6; --accent-emerald: #10b981;
+    --accent-amber: #f59e0b; --accent-rose: #f43f5e; --accent-purple: #8b5cf6;
+  }}
+  * {{ box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }}
+  body {{ background-color: var(--bg-main); color: var(--text-primary); display: flex; min-height: 100vh; overflow-x: hidden; }}
+  .sidebar {{ width: 260px; background: #0f172a; border-right: 1px solid var(--border-color); display: flex; flex-direction: column; flex-shrink: 0; }}
+  .brand {{ padding: 18px 20px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; gap: 12px; }}
+  .brand-icon {{ width: 34px; height: 34px; border-radius: 8px; background: linear-gradient(135deg, #f59e0b, #eab308); display: flex; align-items: center; justify-content: center; font-weight: 800; color: #0f172a; font-size: 16px; }}
+  .brand-text h1 {{ font-size: 14px; font-weight: 700; color: #f8fafc; }}
+  .brand-text p {{ font-size: 11px; color: var(--text-secondary); }}
+  .nav-menu {{ padding: 14px 10px; display: flex; flex-direction: column; gap: 6px; flex: 1; }}
+  .nav-btn {{ background: transparent; border: none; color: var(--text-secondary); padding: 11px 14px; border-radius: 8px; text-align: left; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.2s; }}
+  .nav-btn:hover {{ background: rgba(255,255,255,0.05); color: #fff; }}
+  .nav-btn.active {{ background: rgba(6, 182, 212, 0.15); color: var(--accent-cyan); border-left: 3px solid var(--accent-cyan); }}
+  .slicer-box {{ padding: 14px; margin: 10px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; }}
+  .slicer-box label {{ display: block; font-size: 11px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 6px; font-weight: 700; }}
+  .slicer-select {{ width: 100%; background: #0b0f19; color: #f8fafc; border: 1px solid #334155; padding: 7px 10px; border-radius: 6px; font-size: 12px; margin-bottom: 10px; outline: none; }}
+  .main {{ flex: 1; display: flex; flex-direction: column; padding: 20px 24px; gap: 18px; max-width: calc(100vw - 260px); }}
+  .topbar {{ display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 14px; flex-wrap: wrap; gap: 12px; }}
+  .topbar-title h2 {{ font-size: 20px; font-weight: 700; color: #f8fafc; }}
+  .topbar-title span {{ font-size: 12px; color: var(--text-secondary); }}
+  .badge-bar {{ display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }}
+  .badge {{ background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); color: #34d399; padding: 5px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; }}
+  .badge.warn {{ background: rgba(245, 158, 11, 0.12); border-color: rgba(245, 158, 11, 0.35); color: #fbbf24; }}
+  .badge.info {{ background: rgba(59, 130, 246, 0.12); border-color: rgba(59, 130, 246, 0.35); color: #60a5fa; }}
+  .btn-dl {{ background: linear-gradient(135deg, #10b981, #059669); color: #fff; text-decoration: none; padding: 7px 14px; border-radius: 8px; font-size: 12.5px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; }}
+  .kpi-grid {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }}
+  .kpi-card {{ background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; padding: 16px; position: relative; overflow: hidden; }}
+  .kpi-card::before {{ content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent-cyan); }}
+  .kpi-card.amber::before {{ background: var(--accent-amber); }}
+  .kpi-card.emerald::before {{ background: var(--accent-emerald); }}
+  .kpi-card.rose::before {{ background: var(--accent-rose); }}
+  .kpi-card.purple::before {{ background: var(--accent-purple); }}
+  .kpi-card.blue::before {{ background: var(--accent-blue); }}
+  .kpi-title {{ font-size: 11px; text-transform: uppercase; color: var(--text-secondary); font-weight: 700; margin-bottom: 8px; }}
+  .kpi-val {{ font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 4px; }}
+  .kpi-sub {{ font-size: 11.5px; color: var(--text-secondary); }}
+  .tab-page {{ display: none; flex-direction: column; gap: 18px; }}
+  .tab-page.active {{ display: flex; }}
+  .chart-grid-2 {{ display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 16px; }}
+  .chart-grid-equal {{ display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }}
+  @media (max-width: 1100px) {{ .chart-grid-2, .chart-grid-equal {{ grid-template-columns: 1fr; }} }}
+  .panel {{ background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }}
+  .panel-header {{ display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 10px; }}
+  .panel-header h3 {{ font-size: 14.5px; font-weight: 700; color: #e2e8f0; }}
+  .panel-header span {{ font-size: 11.5px; color: var(--text-secondary); }}
+  .chart-container {{ position: relative; height: 290px; width: 100%; }}
+  .table-wrap {{ overflow-x: auto; max-height: 400px; border-radius: 8px; border: 1px solid var(--border-color); }}
+  table {{ width: 100%; border-collapse: collapse; font-size: 12px; }}
+  th {{ background: #1e293b; color: #f8fafc; position: sticky; top: 0; padding: 10px 12px; text-align: left; font-weight: 700; border-bottom: 1px solid #334155; z-index: 2; }}
+  td {{ padding: 9px 12px; border-bottom: 1px solid var(--border-color); color: #cbd5e1; }}
+  tr:hover td {{ background: rgba(255,255,255,0.03); }}
+  .pill {{ padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; display: inline-block; }}
+  .pill-p1 {{ background: rgba(244, 63, 94, 0.18); color: #fb7185; }}
+  .pill-p2 {{ background: rgba(59, 130, 246, 0.18); color: #60a5fa; }}
+  .pill-r {{ background: rgba(16, 185, 129, 0.2); color: #34d399; }}
+  .pill-a {{ background: rgba(245, 158, 11, 0.2); color: #fbbf24; }}
+  .pill-overdue {{ background: rgba(244, 63, 94, 0.25); color: #f87171; border: 1px solid rgba(244, 63, 94, 0.5); }}
+  .pill-progress {{ background: rgba(59, 130, 246, 0.2); color: #60a5fa; }}
+  .pill-done {{ background: rgba(16, 185, 129, 0.2); color: #34d399; }}
+  .pill-pending {{ background: rgba(148, 163, 184, 0.2); color: #94a3b8; }}
+</style>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-icon">PBI</div>
+    <div class="brand-text"><h1>BÔNG SEN VÀNG</h1><p>BIM & Thiết Kế Analytics</p></div>
+  </div>
+  <div class="nav-menu">
+    <button class="nav-btn active" onclick="switchTab('tab-exec', this)">📊 1. Chiến lược & Tổ chức</button>
+    <button class="nav-btn" onclick="switchTab('tab-raci', this)">🎯 2. Ma trận RACI & SLA</button>
+    <button class="nav-btn" onclick="switchTab('tab-docs', this)">📁 3. Hệ thống 115 Tài liệu</button>
+    <button class="nav-btn" onclick="switchTab('tab-kpi', this)">🏆 4. Đánh giá KPI (Đã Fix)</button>
+    <button class="nav-btn" onclick="switchTab('tab-tasks', this)">🚀 5. Tiến độ Dự án Thực tế</button>
+  </div>
+  <div class="slicer-box">
+    <label>Bộ lọc Nhân sự RACI</label>
+    <select id="slicerPerson" class="slicer-select" onchange="updateRaciFilter()">
+      <option value="ALL">-- Tất cả Nhân sự --</option>
+      <option value="Nhân sự A">Nhân sự A (TBP BIM-TK)</option>
+      <option value="Nhân sự B">Nhân sự B (Leader BIM XD)</option>
+      <option value="Nhân sự C">Nhân sự C (Leader BIM MEPF)</option>
+      <option value="Nhân sự H">Nhân sự H (BIM Kiến Trúc)</option>
+      <option value="Nhân sự I">Nhân sự I (BIM Kiến Trúc)</option>
+      <option value="Nhân sự J">Nhân sự J (BIM Kết Cấu)</option>
+      <option value="Nhân sự K">Nhân sự K (BIM Kết Cấu)</option>
+      <option value="Nhân sự L">Nhân sự L (BIM MEPF)</option>
+      <option value="Vị trí chờ tuyển (Hạ tầng)">Vị trí chờ tuyển (Hạ tầng)</option>
+    </select>
+    <label>Bộ lọc Dự án Thực tế</label>
+    <select id="slicerTaskProject" class="slicer-select" onchange="updateTasksFilter()">
+      <option value="ALL">-- Tất cả Dự án (214 Việc) --</option>
+      <option value="Dự án Mega">Dự án Mega (24)</option>
+      <option value="Dự án Kim Tín giai đoạn 3">Dự án Kim Tín GĐ3 (18)</option>
+      <option value="Dự án APF">Dự án APF (15)</option>
+      <option value="Dự án CasaFlora2">Dự án CasaFlora2 (12)</option>
+      <option value="Dự án Suncasa">Dự án Suncasa (9)</option>
+      <option value="Dự án các trạm Phú Quốc">Dự án các trạm Phú Quốc (7)</option>
+      <option value="Dự án BB052">Dự án BB052 (2)</option>
+      <option value="Chuẩn hóa Bộ môn Thiết kế">Chuẩn hóa 6 Bộ môn (115)</option>
+      <option value="Quản trị & Tổ chức">Quản trị & Văn hóa (12)</option>
+    </select>
+    <label>Bộ lọc Bộ môn 115 Tài liệu</label>
+    <select id="slicerBoMon" class="slicer-select" onchange="updateDocsFilter()">
+      <option value="ALL">-- Tất cả 6 Bộ môn (115) --</option>
+      <option value="KC">Thiết kế Kết cấu (23)</option>
+      <option value="KT">Thiết kế Kiến trúc (20)</option>
+      <option value="DIEN">Thiết kế Điện (18)</option>
+      <option value="HVAC">Thiết kế HVAC (18)</option>
+      <option value="CTN">Thiết kế Cấp thoát nước (18)</option>
+      <option value="PCCC">Thiết kế PCCC (18)</option>
+    </select>
+  </div>
+</aside>
+
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-title">
+      <h2>Power BI Executive Dashboard — Chiến lược, Tổ chức & Tiến độ Dự án BP BIM - TK</h2>
+      <span>Dữ liệu chuẩn hóa 2026 | Danh tính nhân sự đã được mã hóa bảo mật (Nhân sự A, B, C...)</span>
+    </div>
+    <div class="badge-bar">
+      <a class="btn-dl" download="BSV_BIM_TK_PowerBI_DataModel_2026.xlsx" href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64_xlsx}">📥 Tải File Excel 8 Sheet Chuẩn Power BI (.xlsx)</a>
+      <span class="badge">✔ Star Schema 8 Bảng</span>
+      <span class="badge info">🔒 Tên nhân sự A, B, C</span>
+      <span class="badge warn">⚡ Đã Fix #DIV/0! KPI</span>
+    </div>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card"><div class="kpi-title">Mục tiêu Tự Thiết kế (1 Năm)</div><div class="kpi-val">1.200 Tỷ</div><div class="kpi-sub">4 dự án/năm (~10 tỷ DT Thiết kế)</div></div>
+    <div class="kpi-card emerald"><div class="kpi-title">Tiến độ 7 Dự án Thực tế</div><div class="kpi-val">75.9%</div><div class="kpi-sub">66 / 87 task hoàn thành (Mega, KT, CF, APF...)</div></div>
+    <div class="kpi-card blue"><div class="kpi-title">Tổng Công việc Theo dõi</div><div class="kpi-val">214 Việc</div><div class="kpi-sub">69 Hoàn thành | 143 Đang làm | 1 Quá hạn</div></div>
+    <div class="kpi-card rose"><div class="kpi-title">Định biên Nhân sự (T04/2026)</div><div class="kpi-val">24 / 30</div><div class="kpi-sub">Hiện có 26 (-2 nghỉ T04) → Thiếu 6 người</div></div>
+    <div class="kpi-card amber"><div class="kpi-title">Tài liệu Chuẩn hóa Thiết kế</div><div class="kpi-val">115 Mục</div><div class="kpi-sub">6 Bộ môn (KC, KT, Điện, HVAC, CTN, PCCC)</div></div>
+  </div>
+
+  <!-- TAB 1: CHIEN LUOC & TO CHUC -->
+  <section id="tab-exec" class="tab-page active">
+    <div class="chart-grid-2">
+      <div class="panel">
+        <div class="panel-header"><h3>Phân bổ Định biên Kế hoạch vs. Nhân sự Thực tế Còn lại (T04/2026)</h3><span>Tổng Định biên: 30 | Còn lại: 24</span></div>
+        <div class="chart-container"><canvas id="chartHR"></canvas></div>
+      </div>
+      <div class="panel">
+        <div class="panel-header"><h3>Lộ trình Chuyển đổi Giá trị Chiến lược</h3><span>Tích hợp chuỗi giá trị MKT - Thiết kế - Đấu thầu - Thi công</span></div>
+        <div class="table-wrap"><table><thead><tr><th>Mã</th><th>Nhóm</th><th>Nội dung Chiến lược / Nhiệm vụ</th><th>Mục tiêu</th></tr></thead><tbody id="tblStrategyBody"></tbody></table></div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-header"><h3>Bảng Chi tiết Định biên Tổ chức & Trạng thái Nhân sự Chủ chốt</h3><span>Đủ 4 Chủ trì Thiết kế (KT, KC, Điện-Cơ, HVAC) & 2 Trưởng nhóm BIM</span></div>
+      <div class="table-wrap"><table><thead><tr><th>Nhóm Chuyên môn</th><th>Vị trí</th><th>Nhân sự Chủ chốt</th><th>Cấp bậc</th><th>Định biên</th><th>Hiện có</th><th>Nghỉ T04</th><th>Còn lại</th><th>Thiếu hụt</th><th>Trạng thái</th></tr></thead><tbody id="tblHRBody"></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- TAB 2: RACI & SLA -->
+  <section id="tab-raci" class="tab-page">
+    <div class="chart-grid-equal">
+      <div class="panel">
+        <div class="panel-header"><h3>Phân tích Tải Công việc theo Ma trận RACI</h3><span>Số lượng đầu việc theo vai trò R, A, S, I (34 nhiệm vụ)</span></div>
+        <div class="chart-container"><canvas id="chartRACI"></canvas></div>
+      </div>
+      <div class="panel">
+        <div class="panel-header"><h3>Định mức Thời gian Chuẩn (SLA) 3 Quy trình: Shop, Combine, QS</h3><span>Đơn vị: Ngày làm việc theo Lưu đồ 7 bước</span></div>
+        <div class="chart-container"><canvas id="chartSLA"></canvas></div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-header"><h3>Chi tiết Ma trận Phân công Trách nhiệm RACI</h3><span id="raciCountLabel"></span></div>
+      <div class="table-wrap"><table><thead><tr><th>Nhóm Nhiệm vụ</th><th>Mã</th><th>Tên Nhiệm vụ</th><th>Họ tên Nhân sự</th><th>Bộ môn</th><th>Vai trò RACI</th><th>Diễn giải</th></tr></thead><tbody id="tblRACIBody"></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- TAB 3: 115 TAI LIEU CHUAN HOA -->
+  <section id="tab-docs" class="tab-page">
+    <div class="chart-grid-equal">
+      <div class="panel">
+        <div class="panel-header"><h3>Số lượng Tài liệu Chuẩn hóa theo 6 Bộ môn Thiết kế</h3><span>Tổng cộng: 115 Danh mục tài liệu kỹ thuật</span></div>
+        <div class="chart-container"><canvas id="chartDocsDept"></canvas></div>
+      </div>
+      <div class="panel">
+        <div class="panel-header"><h3>Cơ cấu Tài liệu theo Nhóm Công cụ & Mức độ Ưu tiên</h3><span>Tập trung vào Template Revit/CAD, BOQ & Tự động hóa</span></div>
+        <div class="chart-container"><canvas id="chartDocsType"></canvas></div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-header"><h3>Danh mục Hệ thống Tài liệu Thiết kế</h3><span id="docsCountLabel"></span></div>
+      <div class="table-wrap"><table><thead><tr><th>Mã</th><th>Bộ môn</th><th>Chủ trì Phụ trách</th><th>Tên Tài liệu Chuẩn hóa</th><th>Phân nhóm</th><th>Ưu tiên</th><th>Trạng thái</th><th>Ghi chú Rà soát</th></tr></thead><tbody id="tblDocsBody"></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- TAB 4: KPI FIX -->
+  <section id="tab-kpi" class="tab-page">
+    <div class="chart-grid-2">
+      <div class="panel">
+        <div class="panel-header"><h3>So sánh Điểm Đánh giá KPI Quý IV (Đã chuẩn hóa Trọng số)</h3><span>Khắc phục triệt để lỗi #DIV/0! ở Phần II của file gốc</span></div>
+        <div class="chart-container"><canvas id="chartKPI"></canvas></div>
+      </div>
+      <div class="panel">
+        <div class="panel-header"><h3>Bảng Dữ liệu Đánh giá KPI Chi tiết (5 Vị trí)</h3><span>TBP, BIM KT, BIM KC, BIM MEPF, BIM Hạ tầng</span></div>
+        <div class="table-wrap"><table><thead><tr><th>Vị trí</th><th>Phần</th><th>STT</th><th>Nội dung Tiêu chí</th><th>Trọng số</th><th>Tự ĐG</th><th>Cấp trên</th><th>Quy đổi</th></tr></thead><tbody id="tblKPIBody"></tbody></table></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 5: TIEN DO DU AN & THUC THI -->
+  <section id="tab-tasks" class="tab-page">
+    <div class="chart-grid-equal">
+      <div class="panel">
+        <div class="panel-header"><h3>Tiến độ Thực hiện tại 7 Dự án Trọng điểm</h3><span>So sánh Tỷ lệ Hoàn thành vs Đang thực hiện</span></div>
+        <div class="chart-container"><canvas id="chartProjects"></canvas></div>
+      </div>
+      <div class="panel">
+        <div class="panel-header"><h3>Cơ cấu Trạng thái Toàn bộ 214 Nhiệm vụ</h3><span>Tỷ lệ Đã hoàn thành, Đang triển khai, Quá hạn</span></div>
+        <div class="chart-container"><canvas id="chartTaskStatus"></canvas></div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-header"><h3>Chi tiết Tiến độ 214 Công việc Phòng BIM (Dự án & Hệ thống)</h3><span id="tasksCountLabel"></span></div>
+      <div class="table-wrap"><table><thead><tr><th>Mã</th><th>Nhóm</th><th>Dự án / Hạng mục</th><th>Nội dung Công việc</th><th>Tình trạng</th><th>Bắt đầu</th><th>Kết thúc</th><th>Hạn</th><th>Tiến độ & Kết quả</th><th>Rủi ro / Ghi chú</th></tr></thead><tbody id="tblTasksBody"></tbody></table></div>
+    </div>
+  </section>
+</main>
+
+<script>
+const hrData = {json.dumps(df_hr.to_dict(orient="records"), ensure_ascii=False)};
+const raciData = {json.dumps(df_raci.to_dict(orient="records"), ensure_ascii=False)};
+const docsData = {json.dumps(df_docs.to_dict(orient="records"), ensure_ascii=False)};
+const slaData = {json.dumps(df_sla.to_dict(orient="records"), ensure_ascii=False)};
+const kpiData = {json.dumps(df_kpi.to_dict(orient="records"), ensure_ascii=False)};
+const clData = {json.dumps(df_cl.to_dict(orient="records"), ensure_ascii=False)};
+const taskData = {json.dumps(df_tasks.to_dict(orient="records"), ensure_ascii=False)};
+
+Chart.defaults.color = '#94a3b8';
+Chart.defaults.borderColor = 'rgba(255,255,255,0.06)';
+
+function switchTab(tabId, btn) {{
+  document.querySelectorAll('.tab-page').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  btn.classList.add('active');
+}}
+
+function initTables() {{
+  document.getElementById('tblStrategyBody').innerHTML = clData.map(r => `
+    <tr><td><b>${{r.MaChiTieuCL}}</b></td><td><span class="pill pill-p2">${{r.PhanLoai}}</span></td><td>${{r.NoiDungChiTiet}}</td><td><b>${{r.DonViTinh}}</b></td></tr>
+  `).join('');
+
+  document.getElementById('tblHRBody').innerHTML = hrData.map(r => `
+    <tr>
+      <td><b>${{r.TenNhom}}</b></td><td>${{r.ViTri}}</td><td>${{r.NhanSuChuChot}}</td>
+      <td><span class="pill ${{r.CapBac==='Chủ trì'?'pill-a':(r.CapBac==='Quản lý'?'pill-p1':'pill-p2')}}">${{r.CapBac}}</span></td>
+      <td><b>${{r.DinhBienKeHoach}}</b></td><td>${{r.NhanSuHienTai_T04_2026}}</td>
+      <td style="color:${{r.NghiViec_T04_2026>0?'#fb7185':'#94a3b8'}}">${{r.NghiViec_T04_2026}}</td>
+      <td><b>${{r.NhanSuConLai}}</b></td>
+      <td style="color:${{r.ThieuHutDinhBien>0?'#fbbf24':'#34d399'}}"><b>${{r.ThieuHutDinhBien}}</b></td>
+      <td>${{r.GhiChuTrangThai}}</td>
+    </tr>
+  `).join('');
+
+  document.getElementById('tblKPIBody').innerHTML = kpiData.map(r => `
+    <tr>
+      <td><b>${{r.TenViTri}}</b></td><td>${{r.PhanDanhGia}}</td><td>${{r.STT}}</td><td>${{r.NoiDungTieuChi}}</td>
+      <td><b>${{(r.TrongSo_ChuanHoa_FixDiv0*100).toFixed(0)}}%</b></td><td>${{r.Diem_Q4_TuDanhGia}}</td>
+      <td><b>${{r.Diem_Q4_CapTren}}</b></td><td><span class="pill pill-r">${{r.DiemQuyDoi_Q4_CapTren.toFixed(3)}}</span></td>
+    </tr>
+  `).join('');
+
+  updateDocsFilter();
+  updateRaciFilter();
+  updateTasksFilter();
+}}
+
+function updateDocsFilter() {{
+  const bm = document.getElementById('slicerBoMon').value;
+  const filtered = bm === 'ALL' ? docsData : docsData.filter(d => d.MaBoMon === bm);
+  document.getElementById('docsCountLabel').innerText = `Đang hiển thị: ${{filtered.length}} tài liệu`;
+  document.getElementById('tblDocsBody').innerHTML = filtered.map(r => `
+    <tr>
+      <td><b>${{r.MaTaiLieu}}</b></td><td>${{r.TenBoMon}}</td><td><b>${{r.ChuTriPhuTrach}}</b></td><td>${{r.TenTaiLieu}}</td>
+      <td>${{r.NhomTaiLieu}}</td><td><span class="pill ${{r.MucDoUuTien.startsWith('P1')?'pill-p1':'pill-p2'}}">${{r.MucDoUuTien}}</span></td>
+      <td>${{r.TrangThaiTrienKhai}}</td><td style="color:${{r.GhiChuRasoát.includes('Lưu ý')?'#fbbf24':'#94a3b8'}}">${{r.GhiChuRasoát}}</td>
+    </tr>
+  `).join('');
+}}
+
+function updateRaciFilter() {{
+  const p = document.getElementById('slicerPerson').value;
+  const filtered = p === 'ALL' ? raciData : raciData.filter(d => d.HoTenNhanSu === p);
+  document.getElementById('raciCountLabel').innerText = `Đang hiển thị: ${{filtered.length}} phân công nhiệm vụ`;
+  document.getElementById('tblRACIBody').innerHTML = filtered.map(r => `
+    <tr>
+      <td>${{r.NhomNhiemVu}}</td><td><b>${{r.MaNhiemVu}}</b></td><td>${{r.TenNhiemVu}}</td><td><b>${{r.HoTenNhanSu}}</b></td>
+      <td>${{r.BoMon}}</td><td><span class="pill ${{r.VaiTro_RACI==='R'?'pill-r':(r.VaiTro_RACI==='A'?'pill-a':'pill-p2')}}">${{r.VaiTro_RACI}}</span></td>
+      <td>${{r.MoTaVaiTro}}</td>
+    </tr>
+  `).join('');
+}}
+
+function updateTasksFilter() {{
+  const proj = document.getElementById('slicerTaskProject').value;
+  let filtered = taskData;
+  if (proj !== 'ALL') {{
+    if (proj === 'Chuẩn hóa Bộ môn Thiết kế' || proj === 'Quản trị & Tổ chức') {{
+      filtered = filtered.filter(t => t.NhomCongViec === proj);
+    }} else {{
+      filtered = filtered.filter(t => t.HangMuc_DuAn === proj);
+    }}
+  }}
+  document.getElementById('tasksCountLabel').innerText = `Đang hiển thị: ${{filtered.length}} / 214 công việc`;
+  document.getElementById('tblTasksBody').innerHTML = filtered.map(r => {{
+    let pillClass = 'pill-progress';
+    if (r.TinhTrang === 'Đã hoàn thành') pillClass = 'pill-done';
+    else if (r.TinhTrang === 'Quá hạn') pillClass = 'pill-overdue';
+    else if (r.TinhTrang === 'Chưa thực hiện') pillClass = 'pill-pending';
+    return `
+      <tr>
+        <td><b>${{r.MaCongViec}}</b></td>
+        <td><span class="pill pill-p2">${{r.NhomCongViec}}</span></td>
+        <td><b>${{r.HangMuc_DuAn}}</b></td>
+        <td>${{r.NoiDungCongViec}}</td>
+        <td><span class="pill ${{pillClass}}">${{r.TinhTrang}}</span></td>
+        <td>${{r.NgayBatDau}}</td>
+        <td>${{r.NgayKetThuc}}</td>
+        <td>${{r.HanHoanThanh}}</td>
+        <td>${{r.TienDoChiTiet || r.KetQuaChatLuong || '-'}}</td>
+        <td style="color:${{r.RuiRo_KhoKhan ? '#fbbf24' : '#94a3b8'}}">${{r.RuiRo_KhoKhan || r.GhiChu || '-'}}</td>
+      </tr>
+    `;
+  }}).join('');
+}}
+
+window.addEventListener('DOMContentLoaded', () => {{
+  initTables();
+
+  // 1. Chart HR
+  const hrGroups = {{}};
+  hrData.forEach(r => {{
+    if (!hrGroups[r.TenNhom]) hrGroups[r.TenNhom] = {{ plan: 0, rem: 0 }};
+    hrGroups[r.TenNhom].plan += r.DinhBienKeHoach;
+    hrGroups[r.TenNhom].rem += r.NhanSuConLai;
+  }});
+  const hrLabels = Object.keys(hrGroups);
+  new Chart(document.getElementById('chartHR'), {{
+    type: 'bar',
+    data: {{
+      labels: hrLabels,
+      datasets: [
+        {{ label: 'Định biên Kế hoạch (30)', data: hrLabels.map(k => hrGroups[k].plan), backgroundColor: '#3b82f6', borderRadius: 5 }},
+        {{ label: 'Nhân sự Còn lại T04/2026 (24)', data: hrLabels.map(k => hrGroups[k].rem), backgroundColor: '#10b981', borderRadius: 5 }}
+      ]
+    }},
+    options: {{ responsive: true, maintainAspectRatio: false }}
+  }});
+
+  // 2. Chart RACI (Xếp theo Nhân sự A, B, C...)
+  const people = [...new Set(raciData.map(r => r.HoTenNhanSu))];
+  const countRole = (p, role) => raciData.filter(r => r.HoTenNhanSu === p && r.VaiTro_RACI === role).length;
+  new Chart(document.getElementById('chartRACI'), {{
+    type: 'bar',
+    data: {{
+      labels: people,
+      datasets: [
+        {{ label: 'R (Trực tiếp thực hiện)', data: people.map(p => countRole(p, 'R')), backgroundColor: '#10b981' }},
+        {{ label: 'A (Chịu trách nhiệm cuối)', data: people.map(p => countRole(p, 'A')), backgroundColor: '#f59e0b' }},
+        {{ label: 'S (Hỗ trợ)', data: people.map(p => countRole(p, 'S')), backgroundColor: '#3b82f6' }},
+        {{ label: 'I (Được thông báo)', data: people.map(p => countRole(p, 'I')), backgroundColor: '#475569' }}
+      ]
+    }},
+    options: {{ indexAxis: 'y', responsive: true, maintainAspectRatio: false, scales: {{ x: {{ stacked: true }}, y: {{ stacked: true }} }} }}
+  }});
+
+  // 3. Chart SLA
+  new Chart(document.getElementById('chartSLA'), {{
+    type: 'bar',
+    data: {{
+      labels: ['1. Chuẩn bị', '2. Hoạch định', '3. KH Chi tiết', '4. Thực thi', '5. Kiểm soát CL', '6. Phát hành', '7. Kết thúc'],
+      datasets: [
+        {{ label: 'QT BIM Shop (TB 5.6 ngày)', data: [0.5, 0.5, 0.5, 3.0, 0.5, 1.0, 0.1], backgroundColor: '#06b6d4' }},
+        {{ label: 'QT BIM Combine (TB 10.1 ngày)', data: [0.5, 0.5, 0.5, 5.0, 0.5, 3.0, 0.1], backgroundColor: '#8b5cf6' }},
+        {{ label: 'QT BIM QS (TB 9.1 ngày)', data: [0.5, 0.5, 0.5, 6.0, 0.5, 1.0, 0.1], backgroundColor: '#f59e0b' }}
+      ]
+    }},
+    options: {{ responsive: true, maintainAspectRatio: false }}
+  }});
+
+  // 4. Chart Docs Dept
+  const depts = ['Thiết kế Kết cấu', 'Thiết kế Kiến trúc', 'Thiết kế Điện', 'Thiết kế HVAC', 'Thiết kế Cấp thoát nước', 'Thiết kế PCCC'];
+  new Chart(document.getElementById('chartDocsDept'), {{
+    type: 'bar',
+    data: {{
+      labels: depts,
+      datasets: [{{ label: 'Số lượng Tài liệu Chuẩn hóa', data: [23, 20, 18, 18, 18, 18], backgroundColor: ['#06b6d4', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#f43f5e'], borderRadius: 6 }}]
+    }},
+    options: {{ responsive: true, maintainAspectRatio: false }}
+  }});
+
+  // 5. Chart Docs Type
+  const types = [...new Set(docsData.map(d => d.NhomTaiLieu))];
+  new Chart(document.getElementById('chartDocsType'), {{
+    type: 'doughnut',
+    data: {{
+      labels: types,
+      datasets: [{{ data: types.map(t => docsData.filter(d => d.NhomTaiLieu === t).length), backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#06b6d4'] }}]
+    }},
+    options: {{ responsive: true, maintainAspectRatio: false, plugins: {{ legend: {{ position: 'right' }} }} }}
+  }});
+
+  // 6. Chart KPI (Cấp trên đánh giá là Nhân sự A)
+  new Chart(document.getElementById('chartKPI'), {{
+    type: 'bar',
+    data: {{
+      labels: ['Phần I: Tinh thần Thái độ (Thang 5)', 'Phần II: Kết quả Công việc KPI (Thang 5)', 'Tổng Điểm Xếp Hạng Năm (Hệ 1.0)'],
+      datasets: [
+        {{ label: 'Tự đánh giá (Trung bình)', data: [4.75, 4.75, 0.95], backgroundColor: '#3b82f6', borderRadius: 5 }},
+        {{ label: 'Cấp trên đánh giá (Nhân sự A)', data: [4.00, 4.25, 0.83], backgroundColor: '#10b981', borderRadius: 5 }}
+      ]
+    }},
+    options: {{ responsive: true, maintainAspectRatio: false }}
+  }});
+
+  // 7. Chart Projects
+  const projNames = ['Dự án Mega', 'Kim Tín GĐ3', 'Dự án APF', 'CasaFlora2', 'Dự án Suncasa', 'Trạm Phú Quốc', 'Dự án BB052'];
+  const projKeys = ['Dự án Mega', 'Dự án Kim Tín giai đoạn 3', 'Dự án APF', 'Dự án CasaFlora2', 'Dự án Suncasa', 'Dự án các trạm Phú Quốc', 'Dự án BB052'];
+  const doneCounts = projKeys.map(k => taskData.filter(t => t.HangMuc_DuAn === k && t.TinhTrang === 'Đã hoàn thành').length);
+  const progCounts = projKeys.map(k => taskData.filter(t => t.HangMuc_DuAn === k && (t.TinhTrang === 'Đang thực hiện' || t.TinhTrang === 'Quá hạn')).length);
+
+  new Chart(document.getElementById('chartProjects'), {{
+    type: 'bar',
+    data: {{
+      labels: projNames,
+      datasets: [
+        {{ label: 'Đã hoàn thành', data: doneCounts, backgroundColor: '#10b981', borderRadius: 4 }},
+        {{ label: 'Đang triển khai / Quá hạn', data: progCounts, backgroundColor: '#3b82f6', borderRadius: 4 }}
+      ]
+    }},
+    options: {{
+      responsive: true, maintainAspectRatio: false,
+      scales: {{ x: {{ stacked: true }}, y: {{ stacked: true }} }}
+    }}
+  }});
+
+  // 8. Chart Task Status
+  const stLabels = ['Đã hoàn thành', 'Đang thực hiện', 'Quá hạn', 'Chưa thực hiện'];
+  const stCounts = stLabels.map(s => taskData.filter(t => t.TinhTrang === s).length);
+  new Chart(document.getElementById('chartTaskStatus'), {{
+    type: 'doughnut',
+    data: {{
+      labels: stLabels,
+      datasets: [{{
+        data: stCounts,
+        backgroundColor: ['#10b981', '#3b82f6', '#f43f5e', '#64748b'],
+        borderWidth: 0
+      }}]
+    }},
+    options: {{
+      responsive: true, maintainAspectRatio: false,
+      plugins: {{
+        legend: {{ position: 'right' }}
+      }}
+    }}
+  }});
+}});
+</script>
+</body>
+</html>
+"""
+
+with open(OUT_HTML, "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print(f"✅ 1. Đã cập nhật file Excel DataModel: {os.path.abspath(OUT_XLSX)}")
+print(f"✅ 2. Đã cập nhật Web Dashboard HTML  : {os.path.abspath(OUT_HTML)}")
