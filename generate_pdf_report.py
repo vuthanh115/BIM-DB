@@ -645,7 +645,7 @@ html_content = """<!DOCTYPE html>
   <div class="box-highlight blue">
     <div class="box-title"><svg class="box-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14l-2-7V4h1V2H6v2h1v6z"/></svg> Ý Nghĩa Của Chuẩn RACI: Xóa Bỏ Điểm Nghẽn & Đùn Đẩy Trách Nhiệm</div>
     <div class="box-desc">
-      Ma trận phân công trách nhiệm RACI xác định rõ vai trò của từng cá nhân đối với <b>34 nhiệm vụ trọng yếu</b> của phòng BIM. Nguyên tắc cốt lõi: <i>"Mỗi nhiệm vụ chỉ có DUY NHẤT 1 người chịu trách nhiệm cuối cùng (A), và người trực tiếp thực thi (R) được trao toàn quyền hành động."</i>
+      Ma trận phân công trách nhiệm RACI xác định rõ vai trò của từng cá nhân đối với <b>34 nhiệm vụ trọng yếu</b> của phòng BIM. Nguyên tắc cốt lõi: <i>"Người trực tiếp thực thi (R) được trao quyền hành động tự chủ, và mỗi nhiệm vụ có DUY NHẤT 1 người chịu trách nhiệm phê duyệt cuối cùng (A)."</i>
     </div>
   </div>
 
@@ -659,14 +659,14 @@ html_content = """<!DOCTYPE html>
     </thead>
     <tbody>
       <tr>
-        <td><span class="pill pill-a">A (Accountable)</span><br/><b>Chịu trách nhiệm cuối</b></td>
-        <td><b>Trưởng bộ phận (Nhân sự A)</b></td>
-        <td>Chịu trách nhiệm toàn diện trước Ban Giám Đốc về tiến độ, ngân sách, nhân sự và chất lượng hồ sơ thầu. Không trực tiếp vẽ mô hình để tập trung vào quản trị chiến lược.</td>
-      </tr>
-      <tr>
         <td><span class="pill pill-r">R (Responsible)</span><br/><b>Trực tiếp thực hiện</b></td>
         <td><b>Các Lead Bộ Môn (B, C, D, E, F, G, M) & Kỹ sư</b></td>
         <td>Trực tiếp giải quyết kỹ thuật, điều phối va chạm đa bộ môn, kiểm soát mô hình, hoàn thiện hồ sơ Shop Drawing và bàn giao đúng hạn SLA cam kết.</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-a">A (Accountable)</span><br/><b>Chịu trách nhiệm cuối</b></td>
+        <td><b>Trưởng bộ phận (Nhân sự A)</b></td>
+        <td>Chịu trách nhiệm toàn diện trước Ban Giám Đốc về tiến độ, ngân sách, nhân sự và chất lượng hồ sơ thầu. Duyệt phát hành hồ sơ và quản trị chiến lược.</td>
       </tr>
       <tr>
         <td><span class="pill pill-c">C (Consulted)</span><br/><b>Tham vấn chuyên môn</b></td>
