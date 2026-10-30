@@ -28,7 +28,8 @@ if not os.path.exists(SRC_FILE_TASKS):
     SRC_FILE_TASKS = "[BSV] - Báo cáo công việc.xlsx"
 
 OUT_XLSX = "BIM_TK_PowerBI_DataModel_2026.xlsx"
-OUT_HTML = "BIM_TK_PowerBI_Dashboard_2026.html"
+OUT_HTML = "index.html"
+OUT_HTML_DASHBOARD = "BIM_TK_PowerBI_Dashboard_2026.html"
 
 if not os.path.exists(SRC_FILE_STRATEGY):
     raise FileNotFoundError(f"Vui lòng đặt file '{SRC_FILE_STRATEGY}' cùng thư mục với script này!")
@@ -488,13 +489,76 @@ html_content = f"""<!DOCTYPE html>
       </div>
     </div>
     <div class="panel">
-      <div class="panel-header"><h3>Bảng Chi tiết Định biên Tổ chức & Trạng thái Nhân sự Chủ chốt</h3><span>Đủ 4 Chủ trì Thiết kế (KT, KC, Điện-Cơ, HVAC) & 2 Trưởng nhóm BIM</span></div>
+      <div class="panel-header"><h3>Bảng Chi tiết Định biên Tổ chức & Trạng thái Nhân sự Chủ chốt (Tham chiếu Cty A)</h3><span>Đủ 4 Chủ trì Thiết kế (KT, KC, Điện-Cơ, HVAC) & 2 Trưởng nhóm BIM</span></div>
       <div class="table-wrap"><table><thead><tr><th>Nhóm Chuyên môn</th><th>Vị trí</th><th>Nhân sự Chủ chốt</th><th>Cấp bậc</th><th>Định biên</th><th>Hiện có</th><th>Nghỉ T04</th><th>Còn lại</th><th>Thiếu hụt</th><th>Trạng thái</th></tr></thead><tbody id="tblHRBody"></tbody></table></div>
+    </div>
+    
+    <!-- KHUNG ĐỊNH BIÊN TINH GỌN MỚI CHO DOANH NGHIỆP (LEAN 12 - 14 NS) -->
+    <div class="panel" style="border: 1px solid rgba(6, 182, 212, 0.4); background: linear-gradient(180deg, #111827, #0f172a);">
+      <div class="panel-header">
+        <div>
+          <h3 style="color:var(--accent-cyan);">🚀 Hoạch định Cơ cấu Nhân sự Tinh gọn cho Doanh nghiệp Mới (Mô hình Lean 12 - 14 Người)</h3>
+          <span style="color:#94a3b8;">Tối ưu hóa từ mô hình 30 người cồng kềnh của Cty A ➔ Cắt giảm 50% quỹ lương (~5.5 tỷ/năm) nhờ Đòn bẩy Tự động hóa & Kỹ sư Đa nhiệm</span>
+        </div>
+        <span class="badge" style="background:rgba(6,182,212,0.15); color:var(--accent-cyan); border-color:var(--accent-cyan);">Khuyến nghị Chiến lược Mới</span>
+      </div>
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:12px; margin-top:8px;">
+        <div style="background:rgba(255,255,255,0.03); border:1px solid #1f2937; border-radius:8px; padding:12px;">
+          <div style="font-size:11px; text-transform:uppercase; color:var(--accent-amber); font-weight:700; margin-bottom:4px;">Tầng 1: Quản trị & Chiến lược (1 Người)</div>
+          <div style="font-size:13px; font-weight:700; color:#fff;">Trưởng phòng BIM (BIM Manager)</div>
+          <div style="font-size:11.5px; color:#94a3b8; margin-top:4px;">• Lập Kế hoạch BEP/EIR, quản trị CDE<br/>• Làm việc với Ban Giám đốc & CĐT<br/>• Thẩm định giá trị thầu, kiểm soát ngân sách</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.03); border:1px solid #1f2937; border-radius:8px; padding:12px;">
+          <div style="font-size:11px; text-transform:uppercase; color:var(--accent-cyan); font-weight:700; margin-bottom:4px;">Tầng 2: Điều phối & Công nghệ (3 Người)</div>
+          <div style="font-size:13px; font-weight:700; color:#fff;">2 Coordinator + 1 R&D Specialist</div>
+          <div style="font-size:11.5px; color:#94a3b8; margin-top:4px;">• 1 Coord Xây dựng (KT-KC, Shop, BPTC)<br/>• 1 Coord Cơ điện (MEPF, Clash Detection)<br/>• 1 Specialist R&D (Tool Dynamo, Family chuẩn)</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.03); border:1px solid #1f2937; border-radius:8px; padding:12px;">
+          <div style="font-size:11px; text-transform:uppercase; color:var(--accent-emerald); font-weight:700; margin-bottom:4px;">Tầng 3: Sản xuất Thực chiến (8 - 10 Người)</div>
+          <div style="font-size:13px; font-weight:700; color:#fff;">Đội ngũ Kỹ sư T-Shaped Đa nhiệm</div>
+          <div style="font-size:11.5px; color:#94a3b8; margin-top:4px;">• 2-3 KS Kết cấu (Model + Shop cốt thép)<br/>• 2 KS Kiến trúc (Model + Diễn họa 3D/4D)<br/>• 2-3 KS Cơ điện (Model + Combine M&E)<br/>• 1-2 KS QS & Hạ tầng (Civil 3D + BOQ)</div>
+        </div>
+        <div style="background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.3); border-radius:8px; padding:12px;">
+          <div style="font-size:11px; text-transform:uppercase; color:#34d399; font-weight:700; margin-bottom:4px;">Hiệu quả Kinh tế So với Cty A</div>
+          <div style="font-size:20px; font-weight:800; color:#34d399; margin:4px 0;">Tiết kiệm ~5.5 Tỷ/Năm</div>
+          <div style="font-size:11.5px; color:#cbd5e1;">• Giảm quân số: từ 30 ➔ 12-14 nhân sự<br/>• Quỹ lương: từ ~10.5 tỷ ➔ ~4.8 tỷ/năm<br/>• Năng lực: Gánh trọn vẹn 4 - 6 dự án D&B</div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- TAB 2: RACI & SLA -->
   <section id="tab-raci" class="tab-page">
+    <!-- CẨM NANG CHUẨN HÓA VẬN HÀNH RACI & SLA -->
+    <div class="panel" style="border: 1px solid rgba(139, 92, 246, 0.35); background: linear-gradient(180deg, #111827, #0f172a);">
+      <div class="panel-header">
+        <div>
+          <h3 style="color:#a78bfa;">📘 Cẩm nang Chuẩn hóa Vận hành: Khung Ma trận RACI & Cam kết Dịch vụ SLA</h3>
+          <span style="color:#94a3b8;">Xóa bỏ tình trạng đùn đẩy trách nhiệm và làm việc tùy hứng giữa Phòng BIM, Ban Đấu thầu và Công trường</span>
+        </div>
+        <span class="badge info">Chuẩn ISO / Vận hành Quốc tế</span>
+      </div>
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:16px;">
+        <div style="background:rgba(255,255,255,0.02); border:1px solid #1f2937; border-radius:8px; padding:12px;">
+          <div style="font-size:12px; font-weight:700; color:#e2e8f0; margin-bottom:8px;">🎯 Ý NGHĨA 4 VAI TRÒ TRONG MA TRẬN RACI</div>
+          <div style="font-size:11.5px; line-height:1.6; color:#cbd5e1;">
+            • <b style="color:#34d399;">R (Responsible - Trực tiếp làm):</b> Người trực tiếp mở Revit/Navisworks dựng mô hình, xuất bản vẽ.<br/>
+            • <b style="color:#fbbf24;">A (Accountable - Duyệt cuối):</b> Người duy nhất ký duyệt và chịu trách nhiệm tối cao trước Lãnh đạo.<br/>
+            • <b style="color:#60a5fa;">S (Support - Hỗ trợ):</b> Đội ngũ kỹ sư phối hợp, hỗ trợ chia việc cùng người giữ vai trò R.<br/>
+            • <b style="color:#94a3b8;">I (Informed - Nhận tin):</b> Các bên liên quan (BCH, CĐT) nhận kết quả sau khi duyệt.
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,0.02); border:1px solid #1f2937; border-radius:8px; padding:12px;">
+          <div style="font-size:12px; font-weight:700; color:#e2e8f0; margin-bottom:8px;">⏱️ Ý NGHĨA CAM KẾT MỨC DỊCH VỤ SLA 7 BƯỚC</div>
+          <div style="font-size:11.5px; line-height:1.6; color:#cbd5e1;">
+            • <b>SLA (Service Level Agreement):</b> Hợp đồng cam kết tiến độ và chất lượng nghiệm thu giữa Phòng BIM với Công trường.<br/>
+            • <b>Quy trình Shop Drawing (5.6 Ngày):</b> Chuẩn bị (0.5d) ➔ Lập KH (0.5d) ➔ Dựng Model & Shop (3.0d) ➔ QC (0.5d) ➔ Phát hành (1.0d).<br/>
+            • <b>Quy trình Combine (10.1 Ngày):</b> Liên kết 3D ➔ Báo cáo va chạm ➔ Họp chốt phương án ➔ Phát hành hồ sơ phối hợp.<br/>
+            • <b>Quy trình QS (9.1 Ngày):</b> Link tham biến BOQ ➔ Trích xuất khối lượng dầm, cột, thép, bê tông chuẩn xác.
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="chart-grid-equal">
       <div class="panel">
         <div class="panel-header"><h3>Phân tích Tải Công việc theo Ma trận RACI</h3><span id="raciChartTitle">Số lượng đầu việc theo vai trò R, A, S, I</span></div>
@@ -895,5 +959,9 @@ window.addEventListener('DOMContentLoaded', () => {{
 with open(OUT_HTML, "w", encoding="utf-8") as f:
     f.write(html_content)
 
+with open(OUT_HTML_DASHBOARD, "w", encoding="utf-8") as f:
+    f.write(html_content)
+
 print(f"✅ 1. Đã cập nhật file Excel DataModel: {os.path.abspath(OUT_XLSX)}")
 print(f"✅ 2. Đã cập nhật Web Dashboard HTML  : {os.path.abspath(OUT_HTML)}")
+print(f"✅ 3. Đã tạo bản sao index.html        : {os.path.abspath(OUT_HTML_DASHBOARD)}")
