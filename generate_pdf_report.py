@@ -23,8 +23,6 @@ html_content = """<!DOCTYPE html>
 <meta charset="UTF-8">
 <title>Báo cáo Phương Án Kiện Toàn Tổ Chức & Tối Ưu Hóa Vận Hành Phòng BIM (2027)</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
   @page {
     size: A4 portrait;
     margin: 0;
@@ -32,7 +30,7 @@ html_content = """<!DOCTYPE html>
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
     color: #1e293b;
     background: #fff;
     font-size: 9pt;
@@ -191,7 +189,10 @@ html_content = """<!DOCTYPE html>
   }
 
   /* HEADINGS */
-  h1.sec-title {
+  .title-icon { width: 14pt; height: 14pt; vertical-align: -2px; margin-right: 6px; display: inline-block; }
+  .box-icon { width: 11pt; height: 11pt; vertical-align: -1.5px; margin-right: 6px; display: inline-block; }
+  .sub-icon { width: 11pt; height: 11pt; vertical-align: -1.5px; margin-right: 6px; display: inline-block; }
+  .sec-title {
     font-size: 13.5pt;
     font-weight: 800;
     color: #0f172a;
@@ -384,10 +385,10 @@ html_content = """<!DOCTYPE html>
     <div class="page-header-meta">Trang 2 / 7</div>
   </div>
 
-  <h1 class="sec-title">🎯 1. Tóm tắt Dành cho Ban Lãnh Đạo (Executive Summary)</h1>
+  <h1 class="sec-title"><svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> 1. Tóm tắt Dành cho Ban Lãnh Đạo (Executive Summary)</h1>
 
   <div class="box-highlight">
-    <div class="box-title">💡 Thông Điệp Then Chốt Gửi Ban Lãnh Đạo</div>
+    <div class="box-title"><svg class="box-icon" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6m-4 3h2m-5-8.5a6 6 0 1 1 8 0c-1 1-1.5 2-1.5 3.5h-5c0-1.5-.5-2.5-1.5-3.5z"/></svg> Thông Điệp Then Chốt Gửi Ban Lãnh Đạo</div>
     <div class="box-desc">
       Phòng BIM không phải là một "bộ phận vẽ 3D tiêu tốn chi phí" (Cost Center), mà đang được hoạch định trở thành <b>Đòn bẩy Chiến lược (Strategic Value Driver)</b> giúp Doanh nghiệp nâng cao chất lượng hồ sơ, tối ưu hóa tiến độ thi công, tiết kiệm <b>70% nguồn lực nhờ tái sử dụng dữ liệu</b>, và loại bỏ triệt để các xung đột công trường gây lãng phí hàng tỷ đồng vật tư và nhân công sửa sai.
     </div>
@@ -417,7 +418,7 @@ html_content = """<!DOCTYPE html>
     </div>
   </div>
 
-  <h2 class="sub-title">📌 3 Trụ Cột Giá Trị Cốt Lõi Mang Lại Cho Doanh Nghiệp</h2>
+  <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14l-2-7V4h1V2H6v2h1v6z"/></svg> 3 Trụ Cột Giá Trị Cốt Lõi Mang Lại Cho Doanh Nghiệp</h2>
   <table class="data-table">
     <thead>
       <tr>
@@ -446,7 +447,7 @@ html_content = """<!DOCTYPE html>
   </table>
 
   <div class="box-highlight blue">
-    <div class="box-title">📜 Tính Pháp Lý & Xu Hướng Bắt Buộc Của Ngành Xây Dựng</div>
+    <div class="box-title"><svg class="box-icon" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v1m2 13a2 2 0 0 1-2-2V7m2 13a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"/></svg> Tính Pháp Lý & Xu Hướng Bắt Buộc Của Ngành Xây Dựng</div>
     <div class="box-desc">
       Theo <b>Nghị định 15/2021/NĐ-CP</b> và <b>Quyết định số 258/QĐ-TTg của Thủ tướng Chính phủ</b> phê duyệt Lộ trình áp dụng BIM tại Việt Nam, từ năm 2024–2026, BIM là yêu cầu bắt buộc đối với các công trình cấp I, cấp đặc biệt và các dự án đầu tư công. Việc Doanh nghiệp chủ động xây dựng phòng BIM bài bản ngay hôm nay là bước đi chiến lược bắt buộc để bảo toàn và mở rộng thị phần.
     </div>
@@ -460,16 +461,16 @@ html_content = """<!DOCTYPE html>
     <div class="page-header-meta">Trang 3 / 7</div>
   </div>
 
-  <h1 class="sec-title">👥 2. Cơ cấu Tổ chức: Hiện trạng & Setup Vận hành Khoa học</h1>
+  <h1 class="sec-title"><svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> 2. Cơ cấu Tổ chức: Hiện trạng & Setup Vận hành Khoa học</h1>
 
   <div class="box-highlight blue">
-    <div class="box-title">📌 Định Hướng Setup: Tối Ưu Hóa Nguồn Lực Hiện Hữu</div>
+    <div class="box-title"><svg class="box-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14l-2-7V4h1V2H6v2h1v6z"/></svg> Định Hướng Setup: Tối Ưu Hóa Nguồn Lực Hiện Hữu</div>
     <div class="box-desc">
       Giữ vững cấu trúc định biên hiện tại của phòng, <b>không gây xáo trộn nhân sự</b>. Mục tiêu trọng tâm là <b>sắp xếp lại cách thức phối hợp</b>: phân định rõ quyền hạn, giải phóng áp lực ôm đồm cho Trưởng phòng, phát huy quyền tự chủ chuyên môn cho các Leader và ràng buộc trách nhiệm bằng chỉ số tiến độ SLA.
     </div>
   </div>
 
-  <h2 class="sub-title">📊 Bảng Hiện Trạng Định Biên & Bố Trí Nhân Sự Hiện Tại (24 Đang làm việc)</h2>
+  <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> Bảng Hiện Trạng Định Biên & Bố Trí Nhân Sự Hiện Tại (24 Đang làm việc)</h2>
   <table class="data-table">
     <thead>
       <tr>
@@ -533,7 +534,7 @@ html_content = """<!DOCTYPE html>
     </tbody>
   </table>
 
-  <h2 class="sub-title">🚀 3 Trục Cải Tiến Khi Setup Lại Cơ Chế Vận Hành</h2>
+  <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg> 3 Trục Cải Tiến Khi Setup Lại Cơ Chế Vận Hành</h2>
   
   <div class="grid-3">
     <div class="stat-card blue">
@@ -564,16 +565,16 @@ html_content = """<!DOCTYPE html>
     <div class="page-header-meta">Trang 4 / 7</div>
   </div>
 
-  <h1 class="sec-title">🔄 3. Cơ chế Phối hợp: 4 Cụm Chuyên môn Do Leader Chỉ huy</h1>
+  <h1 class="sec-title"><svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg> 3. Cơ chế Phối hợp: 4 Cụm Chuyên môn Do Leader Chỉ huy</h1>
 
   <div class="box-highlight blue">
-    <div class="box-title">🎯 Nguyên Tắc Phối Hợp: Trao Quyền Tự Chủ Cho Các Leader</div>
+    <div class="box-title"><svg class="box-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Nguyên Tắc Phối Hợp: Trao Quyền Tự Chủ Cho Các Leader</div>
     <div class="box-desc">
       Tổ chức toàn bộ nhân sự hiện hữu thành <b>4 Cụm Phối Hợp Chuyên Môn (Discipline Squads)</b> do các Leader và Chủ trì từng bộ môn trực tiếp chỉ huy. Mỗi Leader bộ môn được trao quyền tự chủ kỹ thuật, chịu trách nhiệm về chất lượng đầu ra và cam kết tiến độ phục vụ công trường theo chuẩn SLA.
     </div>
   </div>
 
-  <h2 class="sub-title">🛡️ Cơ Cấu 4 Cụm Phối Hợp Chuyên Môn</h2>
+  <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Cơ Cấu 4 Cụm Phối Hợp Chuyên Môn</h2>
   
   <table class="data-table">
     <thead>
@@ -612,7 +613,7 @@ html_content = """<!DOCTYPE html>
     </tbody>
   </table>
 
-  <h2 class="sub-title">⚡ Cơ Chế Điều Phối Linh Hoạt (Agile Swarming & Cross-Support)</h2>
+  <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Cơ Chế Điều Phối Linh Hoạt (Agile Swarming & Cross-Support)</h2>
   
   <div class="grid-2">
     <div class="stat-card emerald">
@@ -630,7 +631,7 @@ html_content = """<!DOCTYPE html>
   </div>
 
   <div class="box-highlight">
-    <div class="box-title">✅ Lợi Ích Của Phương Án Setup Này Cho Doanh Nghiệp</div>
+    <div class="box-title"><svg class="box-icon" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Lợi Ích Của Phương Án Setup Này Cho Doanh Nghiệp</div>
     <div class="box-desc">
       • <b>Phát huy năng lực thực sự của các Leader</b>: Trao quyền đi đôi với trách nhiệm rõ ràng, khích lệ tinh thần làm chủ công việc.<br/>
       • <b>Đảm bảo tiến độ công trường không bao giờ bị trễ</b> nhờ cơ chế xoay vòng nguồn lực kịp thời lúc cao điểm.<br/>
@@ -646,10 +647,10 @@ html_content = """<!DOCTYPE html>
     <div class="page-header-meta">Trang 5 / 7</div>
   </div>
 
-  <h1 class="sec-title">📋 4. Khung Vận Hành Chuẩn: Ma trận RACI & Cam kết SLA</h1>
+  <h1 class="sec-title"><svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg> 4. Khung Vận Hành Chuẩn: Ma trận RACI & Cam kết SLA</h1>
 
   <div class="box-highlight blue">
-    <div class="box-title">📌 Ý Nghĩa Của Chuẩn RACI: Xóa Bỏ Điểm Nghẽn & Đùn Đẩy Trách Nhiệm</div>
+    <div class="box-title"><svg class="box-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14l-2-7V4h1V2H6v2h1v6z"/></svg> Ý Nghĩa Của Chuẩn RACI: Xóa Bỏ Điểm Nghẽn & Đùn Đẩy Trách Nhiệm</div>
     <div class="box-desc">
       Ma trận phân công trách nhiệm RACI xác định rõ vai trò của từng cá nhân đối với <b>34 nhiệm vụ trọng yếu</b> của phòng BIM. Nguyên tắc cốt lõi: <i>"Mỗi nhiệm vụ chỉ có DUY NHẤT 1 người chịu trách nhiệm cuối cùng (A), và người trực tiếp thực thi (R) được trao toàn quyền hành động."</i>
     </div>
@@ -687,7 +688,7 @@ html_content = """<!DOCTYPE html>
     </tbody>
   </table>
 
-  <h2 class="sub-title">⏱️ Cam Kết Thời Gian Phục Vụ (SLA 7 Bước Khép Kín)</h2>
+  <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Cam Kết Thời Gian Phục Vụ (SLA 7 Bước Khép Kín)</h2>
   
   <div class="step-flow">
     <div class="step-node"><div class="step-num">B1</div><div class="step-name">Tiếp nhận Đầu vào</div><div class="step-time">4 Giờ</div></div>
@@ -734,9 +735,9 @@ html_content = """<!DOCTYPE html>
     <div class="page-header-meta">Trang 6 / 7</div>
   </div>
 
-  <h1 class="sec-title">📁 5. Nền tảng Dữ liệu & Kế hoạch Dự án Mẫu</h1>
+  <h1 class="sec-title"><svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> 5. Nền tảng Dữ liệu & Kế hoạch Dự án Mẫu</h1>
 
-  <h2 class="sub-title">📚 Hệ Thống 115 Danh Mục Tài Liệu Kỹ Thuật 6 Bộ Môn</h2>
+  <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Hệ Thống 115 Danh Mục Tài Liệu Kỹ Thuật 6 Bộ Môn</h2>
   <p style="font-size:8pt; color:#475569; margin-bottom:8px;">
     Để phòng BIM vận hành không phụ thuộc vào cảm tính cá nhân, hệ thống 115 tài liệu chuẩn hóa được chia đều cho 6 bộ môn thiết kế, đóng vai trò là "khuôn mẫu sản xuất" tái sử dụng trọn đời cho doanh nghiệp:
   </p>
@@ -768,10 +769,10 @@ html_content = """<!DOCTYPE html>
     </div>
   </div>
 
-  <h2 class="sub-title">🚀 Triển Khai Thực Chiến: Duy Nhất 01 "Dự Án Mẫu" (87 Nhiệm Vụ)</h2>
+  <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg> Triển Khai Thực Chiến: Duy Nhất 01 "Dự Án Mẫu" (87 Nhiệm Vụ)</h2>
   
   <div class="box-highlight emerald">
-    <div class="box-title">🎯 Chiến Lược "Thử Lửa" Quy Trình Bằng 1 Dự Án Mẫu Tập Trung</div>
+    <div class="box-title"><svg class="box-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Chiến Lược "Thử Lửa" Quy Trình Bằng 1 Dự Án Mẫu Tập Trung</div>
     <div class="box-desc">
       Thay vì phân tán nguồn lực làm thử nghiệm dàn trải trên nhiều công trình dẫn đến mất kiểm soát, phòng BIM chọn <b>duy nhất 01 Dự án Mẫu quy mô điển hình (87 nhiệm vụ kỹ thuật)</b> để kiểm chứng toàn bộ quy trình phối hợp, đo lường chính xác định mức thời gian SLA và hoàn thiện bộ thư viện trước khi áp dụng đại trà.
     </div>
@@ -812,7 +813,7 @@ html_content = """<!DOCTYPE html>
     <div class="page-header-meta">Trang 7 / 7</div>
   </div>
 
-  <h1 class="sec-title">📅 6. Lộ trình Thực thi 4 Quý Năm 2027 (Roadmap 2027)</h1>
+  <h1 class="sec-title"><svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 6. Lộ trình Thực thi 4 Quý Năm 2027 (Roadmap 2027)</h1>
 
   <table class="data-table">
     <thead>
@@ -862,7 +863,7 @@ html_content = """<!DOCTYPE html>
     </tbody>
   </table>
 
-  <h2 class="sub-title">💼 3 Kiến Nghị Then Chốt Kính Trình Ban Tổng Giám Đốc Phê Duyệt</h2>
+  <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> 3 Kiến Nghị Then Chốt Kính Trình Ban Tổng Giám Đốc Phê Duyệt</h2>
 
   <div class="box-highlight">
     <div class="box-title">1. Phê Duyệt Cơ Chế Điều Phối Theo 4 Cụm Leader Bộ Môn</div>
