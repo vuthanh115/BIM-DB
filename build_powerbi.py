@@ -443,7 +443,7 @@ html_content = f"""<!DOCTYPE html>
     <button id="btnNavExec" class="nav-btn active" onclick="switchTab('tab-exec', this)">📊 1. Chiến lược & Tổ chức</button>
     <button id="btnNavRaci" class="nav-btn" onclick="switchTab('tab-raci', this)">🎯 2. Ma trận RACI & SLA</button>
     <button id="btnNavDocs" class="nav-btn" onclick="switchTab('tab-docs', this)">📁 3. Hệ thống 115 Tài liệu</button>
-    <button id="btnNavKpi" class="nav-btn" onclick="switchTab('tab-kpi', this)">🏆 4. Đánh giá KPI (Đã Fix)</button>
+    <button id="btnNavKpi" class="nav-btn" onclick="switchTab('tab-kpi', this)">🏆 4. Đánh giá KPI</button>
     <button id="btnNavTasks" class="nav-btn" onclick="switchTab('tab-tasks', this)">🚀 5. Tiến độ Dự án Mẫu</button>
   </div>
   <div class="slicer-box">
@@ -504,7 +504,6 @@ html_content = f"""<!DOCTYPE html>
       <a class="btn-dl" href="Bao_Cao_Chien_Luoc_Xay_Dung_Phong_BIM_2027.pdf" target="_blank" style="background: linear-gradient(135deg, #0284c7, #0369a1);">📄 Tải Báo Cáo Chiến Lược PDF 2027 (Trình Lãnh Đạo)</a>
       <span class="badge">✔ Star Schema 8 Bảng</span>
       <span class="badge info">🔒 Tên nhân sự A, B, C</span>
-      <span class="badge warn">⚡ Đã Fix #DIV/0! KPI</span>
     </div>
   </div>
 
@@ -637,7 +636,7 @@ html_content = f"""<!DOCTYPE html>
   <section id="tab-kpi" class="tab-page">
     <div class="chart-grid-2">
       <div class="panel">
-        <div class="panel-header"><h3>So sánh Điểm Đánh giá KPI Quý IV (Đã chuẩn hóa Trọng số)</h3><span>Khắc phục triệt để lỗi #DIV/0! ở Phần II của file gốc</span></div>
+        <div class="panel-header"><h3>So sánh Điểm Đánh giá KPI Quý IV (Đã chuẩn hóa Trọng số)</h3><span>Đánh giá kết quả thực hiện theo trọng số chuẩn hóa</span></div>
         <div class="chart-container"><canvas id="chartKPI"></canvas></div>
       </div>
       <div class="panel">
