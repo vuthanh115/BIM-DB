@@ -730,37 +730,68 @@ html_content = """<!DOCTYPE html>
 
   <h1 class="sec-title"><svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> 5. Nền tảng Dữ liệu & Kế hoạch Dự án Mẫu</h1>
 
-  <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Hệ Thống 115 Danh Mục Tài Liệu Kỹ Thuật 6 Bộ Môn</h2>
-  <p style="font-size:8pt; color:#475569; margin-bottom:8px;">
-    Để phòng BIM vận hành không phụ thuộc vào cảm tính cá nhân, hệ thống 115 tài liệu chuẩn hóa được chia đều cho 6 bộ môn thiết kế, đóng vai trò là "khuôn mẫu sản xuất" tái sử dụng trọn đời cho doanh nghiệp:
-  </p>
-
-  <div class="grid-3">
-    <div class="stat-card">
-      <div class="stat-title">Kết cấu (KC) — 23 Tài liệu</div>
-      <div class="stat-desc">Biểu mẫu ghi chú chung, quy chuẩn cốt thép, checklist lỗi hay gặp, công cụ tự động hóa BOQ kết cấu.</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-title">Kiến trúc (KT) — 20 Tài liệu</div>
-      <div class="stat-desc">Quy chuẩn hồ sơ thiết kế, template Revit KT, thư viện cửa & hoàn thiện, checklist kiểm soát thẩm mỹ.</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-title">Hệ thống Điện — 18 Tài liệu</div>
-      <div class="stat-desc">Sơ đồ nguyên lý tủ điện, quy chuẩn máng cáp, template MEPF điện, checklist an toàn phụ tải.</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-title">HVAC (Thông gió) — 18 Tài liệu</div>
-      <div class="stat-desc">Thuyết minh tính tải lạnh, quy chuẩn tuyến ống gió, tiêu âm, checklist phối hợp cao độ trần.</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-title">Cấp thoát nước — 18 Tài liệu</div>
-      <div class="stat-desc">Tính toán lưu lượng cấp nước, độ dốc thoát nước, template trạm bơm, checklist hộp gen kỹ thuật.</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-title">PCCC — 18 Tài liệu</div>
-      <div class="stat-desc">Thuyết minh thẩm duyệt PCCC theo QCVN 06:2022, bố trí đầu phun sprinkler, checklist van báo cháy.</div>
-    </div>
-  </div>
+  <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Danh Mục Hệ Thống Tài Liệu Thiết Kế (115 Mục Chuẩn Hóa 6 Bộ Môn)</h2>
+  
+  <table class="data-table" style="margin-bottom: 8px;">
+    <thead>
+      <tr>
+        <th style="width: 7%;">Mã</th>
+        <th style="width: 22%;">Bộ Môn Thiết Kế</th>
+        <th style="width: 17%;">Lead Phụ Trách</th>
+        <th style="width: 9%;">Số Lượng</th>
+        <th style="width: 45%;">Danh Mục Chuẩn Hóa Trọng Tâm (5 Phân Nhóm Cốt Lõi)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>KC</b></td>
+        <td><b>Thiết kế Kết Cấu</b></td>
+        <td>Nhân sự D (Lead KC)</td>
+        <td><b>23 Mục</b></td>
+        <td>Template Revit KC, Biểu mẫu ghi chú chung, Quy chuẩn cốt thép, Checklist lỗi hay gặp, Script Dynamo trích xuất BOQ bê tông/thép.</td>
+      </tr>
+      <tr>
+        <td><b>KT</b></td>
+        <td><b>Thiết kế Kiến Trúc</b></td>
+        <td>Nhân sự E (Lead KT)</td>
+        <td><b>20 Mục</b></td>
+        <td>Template Revit KT, Quy chuẩn mã cấu kiện, Thư viện cửa & hoàn thiện, Thẩm tra PCCC QCVN 06, Phối cảnh 3D/VR đấu thầu.</td>
+      </tr>
+      <tr>
+        <td><b>DIEN</b></td>
+        <td><b>Thiết kế Hệ Thống Điện</b></td>
+        <td>Nhân sự F (Lead Điện)</td>
+        <td><b>18 Mục</b></td>
+        <td>Template Revit Điện, Sơ đồ nguyên lý tủ điện, Quy chuẩn máng cáp, Bảng tính phụ tải, Checklist an toàn đóng cắt.</td>
+      </tr>
+      <tr>
+        <td><b>HVAC</b></td>
+        <td><b>Thiết kế Điều Hòa - TG</b></td>
+        <td>Nhân sự G (Lead HVAC)</td>
+        <td><b>18 Mục</b></td>
+        <td>Template Revit HVAC, Bảng tính tải lạnh, Quy chuẩn ống gió, Tiêu chuẩn tiêu âm, Checklist phối hợp cao độ trần kỹ thuật.</td>
+      </tr>
+      <tr>
+        <td><b>CTN</b></td>
+        <td><b>Thiết kế Cấp Thoát Nước</b></td>
+        <td>Nhân sự F (Lead MEP)</td>
+        <td><b>18 Mục</b></td>
+        <td>Template Revit CTN, Tính lưu lượng cấp & thoát, Quy chuẩn độ dốc, Thiết kế trạm bơm & hố ga, Checklist hộp gen trục đứng.</td>
+      </tr>
+      <tr>
+        <td><b>PCCC</b></td>
+        <td><b>Thiết kế Phòng Cháy CC</b></td>
+        <td>Nhân sự F (Lead MEP)</td>
+        <td><b>18 Mục</b></td>
+        <td>Thuyết minh thẩm duyệt PCCC QCVN 06:2022, Bố trí hệ thống Sprinkler, Màng ngăn Drencher, Trạm bơm chữa cháy, Checklist van.</td>
+      </tr>
+      <tr style="background: #f8fafc; font-weight: 700;">
+        <td colspan="3" style="text-align: right; padding-right: 8px;"><b>TỔNG CỘNG 6 BỘ MÔN CHUẨN HÓA:</b></td>
+        <td><b style="color: #2563eb;">115 Mục</b></td>
+        <td><b>Bộ "Khuôn mẫu dữ liệu" chuẩn hóa tái sử dụng 70% tài nguyên thiết kế - thi công</b></td>
+      </tr>
+    </tbody>
+  </table>
 
   <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg> Triển Khai Thực Chiến: Duy Nhất 01 "Dự Án Mẫu" (87 Nhiệm Vụ)</h2>
   
