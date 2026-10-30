@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Script tạo file PDF Báo cáo Chiến lược Xây dựng Phòng BIM Tinh gọn 2026
-Dành cho việc trình bày và diễn giải với Ban Lãnh Đạo
-Sử dụng Playwright (Chromium) để xuất PDF chất lượng cao, định dạng A4 chuẩn in ấn.
+Script tạo file PDF Báo cáo Chiến lược Xây dựng Phòng BIM Tinh gọn (2026 - 2027)
+Dành cho việc trình bày và bảo vệ phương án trước Ban Tổng Giám Đốc / HĐQT
+- Cập nhật 4 chỉ số KPI thực tế (Loại bỏ 1.200 Tỷ và >85% D&B)
+- Bổ sung Phương án Điều phối Chuyển tiếp theo Leader từng Bộ môn (4 Cụm Squads)
+- Hoạch định lại Chiến lược Năm 2027 thực chiến (Zero Clash, Tự chủ 100%, 5D BOQ, Lõi + Outsource)
+Sử dụng Playwright (Chromium) xuất PDF chuẩn in ấn A4 (7 trang màu Executive).
 """
 
 import os
@@ -16,7 +19,7 @@ html_content = """<!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Báo cáo Chiến lược Xây dựng Phòng BIM Tinh gọn 2026</title>
+<title>Báo cáo Chiến lược Xây dựng Phòng BIM Tinh gọn (2026 - 2027)</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -30,8 +33,8 @@ html_content = """<!DOCTYPE html>
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     color: #1e293b;
     background: #fff;
-    font-size: 9.5pt;
-    line-height: 1.45;
+    font-size: 9pt;
+    line-height: 1.4;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
@@ -42,7 +45,7 @@ html_content = """<!DOCTYPE html>
     position: relative;
     height: 297mm;
     max-height: 297mm;
-    padding: 14mm 14mm 14mm 14mm;
+    padding: 12mm 14mm 12mm 14mm;
     overflow: hidden;
   }
   .page:last-child {
@@ -109,7 +112,7 @@ html_content = """<!DOCTYPE html>
     text-transform: uppercase;
   }
   .cover-center {
-    margin: 40mm 0 30mm 0;
+    margin: 35mm 0 25mm 0;
   }
   .cover-tagline {
     font-size: 11pt;
@@ -120,7 +123,7 @@ html_content = """<!DOCTYPE html>
     margin-bottom: 12px;
   }
   .cover-title {
-    font-size: 26pt;
+    font-size: 25pt;
     font-weight: 900;
     line-height: 1.25;
     color: #fff;
@@ -133,10 +136,10 @@ html_content = """<!DOCTYPE html>
     -webkit-text-fill-color: transparent;
   }
   .cover-subtitle {
-    font-size: 12pt;
+    font-size: 11pt;
     color: #cbd5e1;
     line-height: 1.6;
-    max-width: 600px;
+    max-width: 620px;
     font-weight: 400;
   }
   .cover-meta {
@@ -152,17 +155,17 @@ html_content = """<!DOCTYPE html>
   .meta-label { font-size: 7.5pt; color: #94a3b8; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
   .meta-val { font-size: 10pt; color: #fff; font-weight: 700; }
 
-  /* INNER PAGES HEADER / FOOTER */
+  /* INNER PAGES HEADER */
   .page-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1.5px solid #06b6d4;
-    padding-bottom: 8px;
-    margin-bottom: 16px;
+    padding-bottom: 6px;
+    margin-bottom: 12px;
   }
   .page-header-title {
-    font-size: 9pt;
+    font-size: 8.5pt;
     font-weight: 800;
     color: #0f172a;
     text-transform: uppercase;
@@ -175,61 +178,61 @@ html_content = """<!DOCTYPE html>
     content: '';
     display: inline-block;
     width: 4px;
-    height: 14px;
+    height: 13px;
     background: #06b6d4;
     border-radius: 2px;
   }
   .page-header-meta {
-    font-size: 8pt;
+    font-size: 7.5pt;
     color: #64748b;
     font-weight: 500;
   }
 
   /* HEADINGS */
   h1.sec-title {
-    font-size: 15pt;
+    font-size: 13.5pt;
     font-weight: 800;
     color: #0f172a;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     border-bottom: 1px solid #e2e8f0;
-    padding-bottom: 6px;
+    padding-bottom: 4px;
   }
   h2.sub-title {
-    font-size: 11.5pt;
+    font-size: 10.5pt;
     font-weight: 700;
     color: #1e293b;
-    margin: 14px 0 8px 0;
+    margin: 10px 0 6px 0;
   }
 
   /* CARDS & GRIDS */
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
-  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 14px; }
-  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 14px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 10px; }
 
   .stat-card {
     background: #f8fafc;
     border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 12px 14px;
+    border-radius: 7px;
+    padding: 10px 12px;
     border-left: 4px solid #06b6d4;
   }
   .stat-card.emerald { border-left-color: #10b981; }
   .stat-card.amber { border-left-color: #f59e0b; }
   .stat-card.rose { border-left-color: #f43f5e; }
   .stat-card.blue { border-left-color: #3b82f6; }
-  .stat-num { font-size: 18pt; font-weight: 900; color: #0f172a; line-height: 1.1; margin-bottom: 4px; }
-  .stat-title { font-size: 8.5pt; font-weight: 700; color: #475569; text-transform: uppercase; margin-bottom: 2px; }
-  .stat-desc { font-size: 8pt; color: #64748b; }
+  .stat-num { font-size: 16pt; font-weight: 900; color: #0f172a; line-height: 1.1; margin-bottom: 3px; }
+  .stat-title { font-size: 7.5pt; font-weight: 700; color: #475569; text-transform: uppercase; margin-bottom: 2px; }
+  .stat-desc { font-size: 7.5pt; color: #64748b; line-height: 1.35; }
 
   .box-highlight {
     background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
     border: 1px solid #a7f3d0;
-    border-radius: 8px;
-    padding: 12px 16px;
-    margin-bottom: 14px;
+    border-radius: 7px;
+    padding: 10px 14px;
+    margin-bottom: 10px;
   }
   .box-highlight.blue {
     background: linear-gradient(135deg, #eff6ff 0%, #f0f9ff 100%);
@@ -240,47 +243,46 @@ html_content = """<!DOCTYPE html>
     border-color: #fde68a;
   }
   .box-title {
-    font-size: 10pt;
+    font-size: 9pt;
     font-weight: 800;
     color: #065f46;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
     display: flex;
     align-items: center;
     gap: 6px;
   }
   .box-highlight.blue .box-title { color: #0369a1; }
   .box-highlight.amber .box-title { color: #92400e; }
-  .box-desc { font-size: 9pt; color: #334155; line-height: 1.45; }
+  .box-desc { font-size: 8.5pt; color: #334155; line-height: 1.4; }
 
   /* TABLES */
   table.data-table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 14px;
-    font-size: 8.5pt;
+    margin-bottom: 10px;
+    font-size: 8pt;
   }
   table.data-table th {
     background: #0f172a;
     color: #fff;
-    padding: 7px 10px;
+    padding: 6px 8px;
     text-align: left;
     font-weight: 700;
     border: 1px solid #0f172a;
   }
   table.data-table td {
-    padding: 6.5px 10px;
+    padding: 5.5px 8px;
     border: 1px solid #e2e8f0;
     color: #334155;
     vertical-align: top;
   }
   table.data-table tr:nth-child(even) td { background: #f8fafc; }
-  table.data-table tr.highlight td { background: #f0fdf4; font-weight: 600; }
 
   .pill {
     display: inline-block;
-    padding: 2px 7px;
+    padding: 2px 6px;
     border-radius: 4px;
-    font-size: 7.5pt;
+    font-size: 7pt;
     font-weight: 700;
     text-transform: uppercase;
   }
@@ -290,47 +292,41 @@ html_content = """<!DOCTYPE html>
   .pill-i { background: #f1f5f9; color: #475569; }
   .pill-tag { background: #e0f2fe; color: #0369a1; }
 
-  /* LISTS */
-  ul.bullet-list { margin-left: 18px; margin-bottom: 12px; }
-  ul.bullet-list li { margin-bottom: 5px; font-size: 9pt; color: #334155; }
-  ul.bullet-list li b { color: #0f172a; }
-
   /* STEP FLOW */
   .step-flow {
     display: flex;
     justify-content: space-between;
-    gap: 6px;
-    margin: 12px 0 16px 0;
+    gap: 5px;
+    margin: 8px 0 12px 0;
   }
   .step-node {
     flex: 1;
     background: #f8fafc;
     border: 1px solid #cbd5e1;
     border-radius: 6px;
-    padding: 8px 6px;
+    padding: 6px 4px;
     text-align: center;
-    position: relative;
   }
   .step-node.active {
     background: #eff6ff;
     border-color: #3b82f6;
   }
   .step-num {
-    font-size: 7.5pt;
+    font-size: 7pt;
     font-weight: 800;
     color: #3b82f6;
     text-transform: uppercase;
-    margin-bottom: 2px;
+    margin-bottom: 1px;
   }
   .step-name {
-    font-size: 8pt;
+    font-size: 7.5pt;
     font-weight: 700;
     color: #0f172a;
-    line-height: 1.2;
-    margin-bottom: 3px;
+    line-height: 1.15;
+    margin-bottom: 2px;
   }
   .step-time {
-    font-size: 7pt;
+    font-size: 6.5pt;
     color: #64748b;
   }
 </style>
@@ -358,7 +354,7 @@ html_content = """<!DOCTYPE html>
         <span>PHÒNG BIM TINH GỌN (LEAN BIM)</span>
       </h1>
       <p class="cover-subtitle">
-        Báo cáo đề xuất mô hình cơ cấu tổ chức 12 – 14 nhân sự đa nhiệm, chuẩn hóa quy chế phân quyền RACI & cam kết SLA 7 bước, cùng kế hoạch triển khai Dự án Mẫu nhằm tiết kiệm ~5.5 tỷ VNĐ/năm chi phí nhân lực cố định.
+        Báo cáo đề xuất mô hình cơ cấu tổ chức 12 – 14 nhân sự đa nhiệm, phương án điều phối chuyển tiếp theo Leader từng bộ môn, chuẩn hóa quy chế RACI & SLA 7 bước, cùng lộ trình thực chiến 2026 - 2027 tiết kiệm ~5.5 tỷ VNĐ/năm chi phí nhân lực cố định.
       </p>
     </div>
 
@@ -379,11 +375,11 @@ html_content = """<!DOCTYPE html>
   </div>
 </div>
 
-<!-- TRANG 2: TÓM TẮT CHIẾN LƯỢC & GIÁ TRỊ CỐT LÕI (ROI) -->
+<!-- TRANG 2: TÓM TẮT CHIẾN LƯỢC & 4 THẺ KPI THỰC TẾ -->
 <div class="page">
   <div class="page-header">
     <div class="page-header-title">Phần I: Bối cảnh & Giá trị Cốt lõi Doanh nghiệp</div>
-    <div class="page-header-meta">Báo cáo Chiến lược BIM 2026</div>
+    <div class="page-header-meta">Trang 2 / 7</div>
   </div>
 
   <h1 class="sec-title">🎯 1. Tóm tắt Dành cho Ban Lãnh Đạo (Executive Summary)</h1>
@@ -391,30 +387,31 @@ html_content = """<!DOCTYPE html>
   <div class="box-highlight">
     <div class="box-title">💡 Thông Điệp Then Chốt Gửi Ban Lãnh Đạo</div>
     <div class="box-desc">
-      Phòng BIM không phải là một "bộ phận vẽ 3D tiêu tốn chi phí" (Cost Center), mà đang được hoạch định trở thành <b>Đòn bẩy Chiến lược (Strategic Value Driver)</b> giúp Doanh nghiệp nâng cao tỷ lệ trúng thầu Design & Build (D&B), tiết kiệm <b>70% nguồn lực thi công nhờ tái sử dụng dữ liệu</b>, và loại bỏ triệt để các rủi ro xung đột công trường gây lãng phí hàng tỷ đồng đục phá/sửa chữa.
+      Phòng BIM không phải là một "bộ phận vẽ 3D tiêu tốn chi phí" (Cost Center), mà đang được hoạch định trở thành <b>Đòn bẩy Chiến lược (Strategic Value Driver)</b> giúp Doanh nghiệp nâng cao chất lượng hồ sơ, tối ưu hóa tiến độ thi công, tiết kiệm <b>70% nguồn lực nhờ tái sử dụng dữ liệu</b>, và loại bỏ triệt để các xung đột công trường gây lãng phí hàng tỷ đồng vật tư và nhân công sửa sai.
     </div>
   </div>
 
+  <!-- BỘ 4 THẺ KPI THỰC CHIẾN MỚI -->
   <div class="grid-4">
-    <div class="stat-card emerald">
-      <div class="stat-num">1.200 Tỷ</div>
-      <div class="stat-title">Giá trị Xây lắp Tự chủ</div>
-      <div class="stat-desc">Đảm nhận thiết kế 4 dự án D&B/năm</div>
-    </div>
     <div class="stat-card blue">
       <div class="stat-num">~5.5 Tỷ</div>
       <div class="stat-title">Tiết kiệm Quỹ Lương/Năm</div>
-      <div class="stat-desc">Mô hình Lean 12-14 người vs 30 người</div>
+      <div class="stat-desc">Mô hình Lean 12-14 NS vs 30 người cồng kềnh Cty A</div>
     </div>
-    <div class="stat-card amber">
-      <div class="stat-num">>85%</div>
-      <div class="stat-title">Tỷ lệ Trúng Thầu D&B</div>
-      <div class="stat-desc">Nhờ mô phỏng 3D/4D/5D thuyết phục CĐT</div>
+    <div class="stat-card emerald">
+      <div class="stat-num">100%</div>
+      <div class="stat-title">Tự Chủ Shop Drawing</div>
+      <div class="stat-desc">Làm chủ 6 bộ môn thiết kế, xóa bỏ thuê tư vấn ngoài</div>
     </div>
     <div class="stat-card rose">
+      <div class="stat-num">&lt; 1%</div>
+      <div class="stat-title">Phát Sinh Sửa Chữa CT</div>
+      <div class="stat-desc">Xóa 100% va chạm trước khi đổ bê tông công trường</div>
+    </div>
+    <div class="stat-card amber">
       <div class="stat-num">70%</div>
       <div class="stat-title">Tái Sử Dụng Dữ Liệu</div>
-      <div class="stat-desc">Từ thiết kế sang Shop Drawing & BOQ</div>
+      <div class="stat-desc">Từ mô hình thiết kế sang Shop Drawing & bóc BOQ</div>
     </div>
   </div>
 
@@ -424,24 +421,24 @@ html_content = """<!DOCTYPE html>
       <tr>
         <th style="width: 25%;">Trụ Cột Chiến Lược</th>
         <th style="width: 45%;">Hành Động Cụ Thể Của Phòng BIM</th>
-        <th style="width: 30%;">Tác Động Tài Chính & Kinh Doanh</th>
+        <th style="width: 30%;">Tác Động Tài Chính & Quản Trị</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><b>1. Tự chủ Thiết kế & Giữ lại Lợi nhuận</b></td>
-        <td>Xây dựng đội ngũ làm chủ toàn diện 6 bộ môn: Kiến trúc, Kết cấu, Điện, HVAC, Cấp thoát nước và PCCC. Tự lực lập hồ sơ thiết kế kỹ thuật thi công.</td>
-        <td>Giữ lại trong doanh nghiệp từ <b>8 - 10 tỷ VNĐ</b> chi phí thuê tư vấn thiết kế ngoài hàng năm.</td>
+        <td><b>1. Tự chủ Kỹ thuật & Giữ lại Lợi nhuận</b></td>
+        <td>Xây dựng đội ngũ làm chủ toàn diện 6 bộ môn: Kiến trúc, Kết cấu, Điện, HVAC, Cấp thoát nước và PCCC. Tự lực lập trọn bộ hồ sơ Shop Drawing & Biện pháp thi công.</td>
+        <td>Xóa bỏ chi phí thuê tư vấn thiết kế/shop bên ngoài, bảo mật tuyệt đối bí quyết kỹ thuật của công ty.</td>
       </tr>
       <tr>
-        <td><b>2. Vũ khí Thắng thầu Design & Build</b></td>
+        <td><b>2. Tối ưu Đấu thầu & Năng lực Thuyết phục</b></td>
         <td>Áp dụng mô hình BIM 3D diễn họa kiến trúc, mô phỏng tiến độ 4D biện pháp thi công và bóc tách dự toán 5D chính xác ngay từ giai đoạn chào thầu.</td>
-        <td>Tạo sự vượt trội trước các đối thủ cạnh tranh truyền thống; nâng tỷ lệ thắng thầu từ 60% lên trên 85%.</td>
+        <td>Rút ngắn <b>35% thời gian lập thầu</b>, tạo sự vượt trội rõ rệt trước các đối thủ cạnh tranh truyền thống.</td>
       </tr>
       <tr>
         <td><b>3. Tối ưu Công trường (Zero Conflict)</b></td>
-        <td>Phát hiện và xử lý 100% các xung đột không gian (clash detection) giữa kết cấu và hệ thống cơ điện (MEP) trên mô hình số trước khi đổ bê tông.</td>
-        <td>Xóa bỏ tình trạng "thiết kế một đằng, ra công trường đục phá làm lại một nẻo", giảm phát sinh chi phí < 1%.</td>
+        <td>Phát hiện và xử lý 100% các xung đột không gian (Clash Detection) giữa kết cấu và hệ thống cơ điện (MEP) trên mô hình số trước khi ra hiện trường.</td>
+        <td>Xóa bỏ tình trạng "thiết kế một đằng, ra công trường đục phá làm lại một nẻo", kiểm soát phát sinh &lt; 1%.</td>
       </tr>
     </tbody>
   </table>
@@ -458,7 +455,7 @@ html_content = """<!DOCTYPE html>
 <div class="page">
   <div class="page-header">
     <div class="page-header-title">Phần II: Tái Cấu Trúc & Định Biên Nhân Sự Tinh Gọn</div>
-    <div class="page-header-meta">Báo cáo Chiến lược BIM 2026</div>
+    <div class="page-header-meta">Trang 3 / 7</div>
   </div>
 
   <h1 class="sec-title">👥 2. Cơ cấu Tổ chức: Bài toán 12 - 14 Người vs. 30 Người Cũ</h1>
@@ -475,8 +472,8 @@ html_content = """<!DOCTYPE html>
   <div class="grid-3">
     <div class="stat-card blue">
       <div class="stat-title" style="color:#0284c7;">Tầng 1: Quản Trị & Chiến Lược</div>
-      <div class="stat-num" style="font-size:14pt;">01 BIM Manager</div>
-      <div class="stat-desc" style="margin-top:6px;">
+      <div class="stat-num" style="font-size:13pt;">01 BIM Manager</div>
+      <div class="stat-desc" style="margin-top:4px;">
         • Quản trị CDE (Common Data Environment)<br/>
         • Lập Kế hoạch BEP/EIR dự án<br/>
         • Bảo vệ phương án kỹ thuật với Ban Lãnh Đạo & Chủ Đầu Tư
@@ -484,8 +481,8 @@ html_content = """<!DOCTYPE html>
     </div>
     <div class="stat-card emerald">
       <div class="stat-title" style="color:#059669;">Tầng 2: Điều Phối & Công Nghệ</div>
-      <div class="stat-num" style="font-size:14pt;">03 Coordinator / R&D</div>
-      <div class="stat-desc" style="margin-top:6px;">
+      <div class="stat-num" style="font-size:13pt;">03 Coordinator / R&D</div>
+      <div class="stat-desc" style="margin-top:4px;">
         • <b>1 Coord Xây dựng:</b> Kiến trúc + Kết cấu + Shop drawing<br/>
         • <b>1 Coord Cơ điện:</b> MEPF + Phối hợp va chạm (Clash)<br/>
         • <b>1 Chuyên viên R&D:</b> Viết script Dynamo, Family chuẩn
@@ -493,8 +490,8 @@ html_content = """<!DOCTYPE html>
     </div>
     <div class="stat-card amber">
       <div class="stat-title" style="color:#d97706;">Tầng 3: Sản Xuất Đa Nhiệm (T-Shaped)</div>
-      <div class="stat-num" style="font-size:14pt;">08 - 10 Kỹ Sư Thực Chiến</div>
-      <div class="stat-desc" style="margin-top:6px;">
+      <div class="stat-num" style="font-size:13pt;">08 - 10 Kỹ Sư Thực Chiến</div>
+      <div class="stat-desc" style="margin-top:4px;">
         • <b>2-3 KS Kết cấu:</b> Dựng hình 3D + Shop cốt thép<br/>
         • <b>2 KS Kiến trúc:</b> Dựng hình + Diễn họa 3D/VR<br/>
         • <b>2-3 KS Cơ điện:</b> Mô hình MEPF + BPTC cơ điện<br/>
@@ -555,14 +552,96 @@ html_content = """<!DOCTYPE html>
   </div>
 </div>
 
-<!-- TRANG 4: CHUẨN HÓA VẬN HÀNH: MA TRẬN RACI & CAM KẾT SLA -->
+<!-- TRANG 4: PHƯƠNG ÁN ĐIỀU PHỐI CHUYỂN TIẾP THEO LEADER TỪNG BỘ MÔN -->
 <div class="page">
   <div class="page-header">
-    <div class="page-header-title">Phần III: Chuẩn Hóa Vận Hành & Cam Kết Dịch Vụ</div>
-    <div class="page-header-meta">Báo cáo Chiến lược BIM 2026</div>
+    <div class="page-header-title">Phần III: Phương Án Điều Phối Chuyển Tiếp Theo Leader Bộ Môn</div>
+    <div class="page-header-meta">Trang 4 / 7</div>
   </div>
 
-  <h1 class="sec-title">📋 3. Khung Vận Hành Chuẩn: Ma trận RACI & Cam kết SLA</h1>
+  <h1 class="sec-title">🔄 3. Điều phối Tạm thời: Phát huy Hạt nhân Leader Từng Bộ môn</h1>
+
+  <div class="box-highlight blue">
+    <div class="box-title">🎯 Nguyên Tắc Vận Hành Giai Đoạn Chuyển Tiếp</div>
+    <div class="box-desc">
+      Trước mắt, để đảm bảo tính liên tục của các dự án đang thi công và không làm xáo trộn tổ chức, chúng ta <b>không tuyển dụng ồ ạt</b> mà tái cấu trúc đội ngũ hiện tại thành <b>4 Cụm Chiến Đấu Chuyên Môn (Discipline Squads)</b> do các Leader và Chủ trì từng bộ môn trực tiếp chỉ huy. Mỗi Leader bộ môn được trao quyền tự chủ kỹ thuật và cam kết tiến độ theo SLA.
+    </div>
+  </div>
+
+  <h2 class="sub-title">🛡️ Cơ Cấu 4 Cụm Chiến Đấu Do Các Leader Bộ Môn Làm Hạt Nhân</h2>
+  
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width: 20%;">Cụm Chiến Đấu</th>
+        <th style="width: 25%;">Hạt Nhân Chỉ Huy (Leaders)</th>
+        <th style="width: 20%;">Nhân Sự Thực Chiến</th>
+        <th style="width: 35%;">Phạm Vi Nhiệm Vụ & Cam Kết SLA</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>Cụm 1: Kết Cấu & Biện Pháp Thi Công</b></td>
+        <td><b>Leader BIM XD (Nhân sự B)</b><br/>& Chủ trì KC (Nhân sự D)</td>
+        <td>Nhân sự J, Nhân sự K (KS BIM Kết Cấu)</td>
+        <td>• Mô hình kết cấu BTCT, đà kiềng, móng, vách bể.<br/>• Xuất bản vẽ Shop cốt thép & ván khuôn đạt SLA <b>5.6 ngày</b>.<br/>• Bóc tách khối lượng thép & bê tông phục vụ mua hàng.</td>
+      </tr>
+      <tr>
+        <td><b>Cụm 2: Kiến Trúc & Tạo Hình 3D</b></td>
+        <td><b>Leader BIM XD (Nhân sự B)</b><br/>& Chủ trì KT (Nhân sự E)</td>
+        <td>Nhân sự H, Nhân sự I (KS BIM Kiến Trúc)</td>
+        <td>• Mô hình kiến trúc LOD 300–350, chi tiết cấu tạo.<br/>• Diễn họa 3D phối cảnh, mô phỏng video phục vụ đấu thầu.<br/>• Thẩm định tuân thủ quy chuẩn phòng cháy QCVN 06.</td>
+      </tr>
+      <tr>
+        <td><b>Cụm 3: Cơ Điện MEPF & Phối Hợp Va Chạm</b></td>
+        <td><b>Leader BIM MEPF (Nhân sự C)</b><br/>& Chủ trì Điện / HVAC (F, G)</td>
+        <td>Nhân sự L & các KS BIM MEPF</td>
+        <td>• Mô hình 4 hệ MEPF: Điện, HVAC, Cấp thoát nước, PCCC.<br/>• Chủ trì ma trận xung đột (Clash Matrix) đạt SLA <b>10.1 ngày</b>.<br/>• Tối ưu cao độ trần kỹ thuật và tuyến ống trục đứng.</td>
+      </tr>
+      <tr>
+        <td><b>Cụm 4: Hạ Tầng Kỹ Thuật & Quản Trị CDE</b></td>
+        <td><b>KS BIM Hạ Tầng (Nhân sự M)</b><br/>& Trưởng bộ phận (Nhân sự A)</td>
+        <td>Nhân sự M & Điều phối viên CDE</td>
+        <td>• Mô hình san nền, giao thông, thoát nước ngoài nhà (Civil 3D).<br/>• Quản trị phân quyền môi trường dữ liệu chung CDE.<br/>• Bóc tách khối lượng hạ tầng kỹ thuật và giải phóng mặt bằng.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="sub-title">⚡ Cơ Chế Điều Phối Linh Hoạt (Agile Swarming & Cross-Support)</h2>
+  
+  <div class="grid-2">
+    <div class="stat-card emerald">
+      <div class="stat-title" style="color:#059669;">1. Cơ Chế Xoay Vòng Hỗ Trợ Đột Xuất</div>
+      <div class="stat-desc">
+        Các Kỹ sư trong 4 Cụm không bị đóng đinh cố định. Khi dự án bước vào <b>giai đoạn móng/hầm cao điểm</b>, Leader sẽ dồn lực nhân sự hỗ trợ Cụm Kết cấu (hoàn thành Shop drawing trong SLA 5.6 ngày). Khi bước vào <b>giai đoạn hoàn thiện cơ điện</b>, nhân sự chuyển sang hỗ trợ Cụm MEPF (Combine va chạm trong SLA 10.1 ngày).
+      </div>
+    </div>
+    <div class="stat-card blue">
+      <div class="stat-title" style="color:#0284c7;">2. Vai Trò Nhạc Trưởng Của Trưởng Phòng (TBP)</div>
+      <div class="stat-desc">
+        Trưởng bộ phận (Nhân sự A) đóng vai trò là "Nhạc trưởng" điều phối phân bổ nguồn lực giữa các Cụm Leader, kiểm soát tiến độ tổng thể, bảo vệ giải pháp kỹ thuật trước Ban Giám Đốc và Chủ đầu tư, <b>không can thiệp sâu vào chi tiết kỹ thuật của từng Cụm</b> để tránh gây nghẽn luồng xử lý.
+      </div>
+    </div>
+  </div>
+
+  <div class="box-highlight">
+    <div class="box-title">✅ Lợi Ích Của Phương Án Chuyển Tiếp Cho Ban Lãnh Đạo</div>
+    <div class="box-desc">
+      • <b>Không làm tăng chi phí tuyển dụng mới ngay lập tức</b>, tối ưu hóa tối đa hiệu suất của những nhân sự chủ chốt hiện có.<br/>
+      • <b>Gắn chặt trách nhiệm vào từng Leader bộ môn</b>: Ai chỉ huy mảng nào sẽ chịu trách nhiệm trực tiếp về chất lượng và tiến độ mảng đó.<br/>
+      • <b>Đào tạo thực chiến tại chỗ</b>: Giúp các kỹ sư mở rộng kỹ năng đa nhiệm T-Shaped dưới sự hướng dẫn kèm cặp của Leader.
+    </div>
+  </div>
+</div>
+
+<!-- TRANG 5: CHUẨN HÓA VẬN HÀNH: MA TRẬN RACI & CAM KẾT SLA -->
+<div class="page">
+  <div class="page-header">
+    <div class="page-header-title">Phần IV: Chuẩn Hóa Vận Hành & Cam Kết Dịch Vụ</div>
+    <div class="page-header-meta">Trang 5 / 7</div>
+  </div>
+
+  <h1 class="sec-title">📋 4. Khung Vận Hành Chuẩn: Ma trận RACI & Cam kết SLA</h1>
 
   <div class="box-highlight blue">
     <div class="box-title">📌 Ý Nghĩa Của Chuẩn RACI: Xóa Bỏ Điểm Nghẽn & Đùn Đẩy Trách Nhiệm</div>
@@ -587,7 +666,7 @@ html_content = """<!DOCTYPE html>
       </tr>
       <tr>
         <td><span class="pill pill-r">R (Responsible)</span><br/><b>Trực tiếp thực hiện</b></td>
-        <td><b>2 Trưởng nhóm (Nhân sự B, C) & Kỹ sư</b></td>
+        <td><b>Các Leader Cụm (Nhân sự B, C, M) & Kỹ sư</b></td>
         <td>Chủ trì giải quyết kỹ thuật, điều phối va chạm đa bộ môn, hoàn thiện hồ sơ Shop Drawing và bàn giao đúng hạn SLA cam kết.</td>
       </tr>
       <tr>
@@ -637,23 +716,23 @@ html_content = """<!DOCTYPE html>
       <tr>
         <td><b>3. Quy trình BIM QS (Bóc Khối lượng)</b></td>
         <td><b>9.1 Ngày làm việc</b></td>
-        <td>Bảng tổng hợp khối lượng bóc tách từ mô hình 3D (Bê tông, thép, ván khuôn, thiết bị) sai số < 2% so với thực tế.</td>
+        <td>Bảng tổng hợp khối lượng bóc tách từ mô hình 3D (Bê tông, thép, ván khuôn, thiết bị) sai số &lt; 2% so với thực tế.</td>
       </tr>
     </tbody>
   </table>
 </div>
 
-<!-- TRANG 5: HỆ THỐNG 115 TÀI LIỆU CHUẨN HÓA & TRIỂN KHAI DỰ ÁN MẪU -->
+<!-- TRANG 6: HỆ THỐNG 115 TÀI LIỆU CHUẨN HÓA & TRIỂN KHAI DỰ ÁN MẪU -->
 <div class="page">
   <div class="page-header">
-    <div class="page-header-title">Phần IV: Nền Tảng Kỹ Thuật & Dự Án Mẫu Thực Chiến</div>
-    <div class="page-header-meta">Báo cáo Chiến lược BIM 2026</div>
+    <div class="page-header-title">Phần V: Nền Tảng Kỹ Thuật & Dự Án Mẫu Thực Chiến</div>
+    <div class="page-header-meta">Trang 6 / 7</div>
   </div>
 
-  <h1 class="sec-title">📁 4. Nền tảng Dữ liệu & Kế hoạch Dự án Mẫu</h1>
+  <h1 class="sec-title">📁 5. Nền tảng Dữ liệu & Kế hoạch Dự án Mẫu</h1>
 
   <h2 class="sub-title">📚 Hệ Thống 115 Danh Mục Tài Liệu Kỹ Thuật 6 Bộ Môn</h2>
-  <p style="font-size:8.5pt; color:#475569; margin-bottom:10px;">
+  <p style="font-size:8pt; color:#475569; margin-bottom:8px;">
     Để phòng BIM vận hành không phụ thuộc vào cảm tính cá nhân, hệ thống 115 tài liệu chuẩn hóa được chia đều cho 6 bộ môn thiết kế, đóng vai trò là "khuôn mẫu sản xuất" tái sử dụng trọn đời cho doanh nghiệp:
   </p>
 
@@ -721,58 +800,42 @@ html_content = """<!DOCTYPE html>
   </table>
 </div>
 
-<!-- TRANG 6: LỘ TRÌNH 4 QUÝ & KIẾN NGHỊ BAN LÃNH ĐẠO -->
+<!-- TRANG 7: HOẠCH ĐỊNH CHIẾN LƯỢC 2026 - 2027 & KIẾN NGHỊ BAN LÃNH ĐẠO -->
 <div class="page">
   <div class="page-header">
-    <div class="page-header-title">Phần V: Lộ Trình Triển Khai & Đề Xuất Phê Duyệt</div>
-    <div class="page-header-meta">Báo cáo Chiến lược BIM 2026</div>
+    <div class="page-header-title">Phần VI: Hoạch Định Chiến Lược 2026 - 2027 & Đề Xuất Phê Duyệt</div>
+    <div class="page-header-meta">Trang 7 / 7</div>
   </div>
 
-  <h1 class="sec-title">📅 5. Lộ trình Thực thi 4 Quý (Roadmap 2026)</h1>
+  <h1 class="sec-title">📅 6. Hoạch định Thực thi 2 Năm: 2026 (Nền tảng) & 2027 (Làm chủ)</h1>
 
   <table class="data-table">
     <thead>
       <tr>
-        <th style="width: 18%;">Thời Gian</th>
-        <th style="width: 30%;">Mục Tiêu Trọng Tâm</th>
-        <th style="width: 52%;">Kết Quả Đầu Ra Bắt Buộc (Milestones)</th>
+        <th style="width: 18%;">Giai Đoạn</th>
+        <th style="width: 30%;">Định Hướng Chiến Lược</th>
+        <th style="width: 52%;">Mục Tiêu & Kết Quả Bắt Buộc (Milestones)</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><b>Quý 1/2026</b></td>
-        <td><b>Kiện toàn Khung & Tuyển dụng</b></td>
+        <td><b>Năm 2026<br/>(Giai đoạn Nền tảng & Pilot)</b></td>
+        <td><b>Chuẩn hóa & Thử nghiệm Tinh gọn</b><br/>• Định biên lõi: 12 - 14 người<br/>• Cơ chế chuyển tiếp theo Leader</td>
         <td>
-          • Ban hành Quy chế tổ chức & Ma trận phân quyền RACI.<br/>
-          • Tuyển dụng hạt nhân: BIM Manager + 2 Coordinator Xây dựng & Cơ điện.<br/>
-          • Lựa chọn nền tảng CDE (Autodesk Docs / BIM 360).
+          • Ban hành Quy chế RACI & quy trình cam kết thời gian SLA 7 bước.<br/>
+          • Hoàn thiện gói P1 trong 115 tài liệu chuẩn hóa 6 bộ môn.<br/>
+          • Triển khai thành công trọn vẹn 87 nhiệm vụ trên <b>Dự án Mẫu</b>.<br/>
+          • Kiểm soát sai số bóc tách BOQ sơ bộ &lt; 3%.
         </td>
       </tr>
       <tr>
-        <td><b>Quý 2/2026</b></td>
-        <td><b>Chuẩn hóa Thư viện & Công nghệ</b></td>
+        <td><b>Năm 2027<br/>(Giai đoạn Làm chủ & Nhân rộng)</b></td>
+        <td><b>Tự chủ Toàn diện & Tối ưu Chi phí</b><br/>• Xóa bỏ thuê ngoài Shop drawing<br/>• Mô hình Lõi + Outsource linh hoạt</td>
         <td>
-          • Hoàn thiện gói tài liệu P1 trong hệ thống 115 tài liệu (Template Revit & Family).<br/>
-          • Xây dựng bộ script Dynamo tự động hóa xuất bản vẽ và bóc khối lượng.<br/>
-          • Đào tạo nâng cao năng lực đa nhiệm T-Shaped cho đội ngũ kỹ sư.
-        </td>
-      </tr>
-      <tr>
-        <td><b>Quý 3/2026</b></td>
-        <td><b>Thực chiến "Dự án Mẫu"</b></td>
-        <td>
-          • Triển khai trọn vẹn 87 nhiệm vụ trên Dự án Mẫu.<br/>
-          • Kiểm soát tuân thủ cam kết SLA 7 bước với Ban Chỉ huy công trường.<br/>
-          • Đánh giá hiệu chỉnh quy trình sau khi giải quyết các xung đột thực tế.
-        </td>
-      </tr>
-      <tr>
-        <td><b>Quý 4/2026</b></td>
-        <td><b>Nhân rộng & Tối ưu hóa KPI</b></td>
-        <td>
-          • Đánh giá KPI năm chuẩn hóa trọng số (khắc phục lỗi tính điểm).<br/>
-          • Nhân rộng mô hình BIM cho 100% các dự án đấu thầu và thi công mới.<br/>
-          • Tổng kết năm, báo cáo Hội đồng Quản trị kết quả tiết kiệm chi phí.
+          • <b>Tự chủ 100% hồ sơ Shop Drawing & BPTC</b> cho tất cả các dự án mới.<br/>
+          • <b>Zero Clash tại công trường</b>: Giảm phát sinh đục phá sửa chữa &lt; 1% giá trị gói thầu.<br/>
+          • <b>Tự động hóa 5D BIM</b>: Sai số khối lượng đặt hàng vật tư &lt; 2%.<br/>
+          • Giữ vững bộ máy lõi tinh gọn; chỉ mở rộng thuê ngoài gia công khi trúng dự án lớn.
         </td>
       </tr>
     </tbody>
@@ -781,34 +844,34 @@ html_content = """<!DOCTYPE html>
   <h2 class="sub-title">💼 3 Kiến Nghị Then Chốt Kính Trình Ban Tổng Giám Đốc Phê Duyệt</h2>
 
   <div class="box-highlight">
-    <div class="box-title">1. Phê Duyệt Đề Án Định Biên Tinh Gọn 12 - 14 Nhân Sự</div>
+    <div class="box-title">1. Phê Duyệt Cơ Cấu Định Biên Tinh Gọn 12 - 14 Nhân Sự & Cơ Chế Chuyển Tiếp</div>
     <div class="box-desc">
-      Chấp thuận khung tổ chức 3 tầng (1 Manager + 3 Coordinator/R&D + 8-10 Modeler đa nhiệm). Cho phép cơ chế lương thưởng cạnh tranh dựa trên hiệu quả SLA để thu hút và giữ chân các kỹ sư BIM chất lượng cao.
+      Chấp thuận khung tổ chức tinh gọn 3 tầng và cơ chế điều phối chuyển tiếp theo 4 Cụm Leader chuyên môn. Phê duyệt cơ chế đánh giá KPI gắn liền với mức độ tuân thủ thời gian cam kết dịch vụ SLA.
     </div>
   </div>
 
   <div class="box-highlight blue">
     <div class="box-title">2. Phê Duyệt Ngân Sách Đầu Tư Bản Quyền & Phần Cứng</div>
     <div class="box-desc">
-      Cấp hạn mức đầu tư khoảng <b>700 - 800 triệu VNĐ</b> cho giai đoạn đầu: (1) Bản quyền Autodesk AEC Collection & Cloud CDE, (2) Nâng cấp 14 máy trạm đồ họa cấu hình cao (CPU i7/i9, 32-64GB RAM, RTX GPU) đảm bảo hiệu suất render và xử lý mô hình nặng.
+      Cấp hạn mức đầu tư khoảng <b>700 - 800 triệu VNĐ</b> cho giai đoạn đầu: (1) Bản quyền Autodesk AEC Collection & Cloud CDE, (2) Nâng cấp máy trạm đồ họa cấu hình cao cho đội ngũ kỹ sư thực chiến.
     </div>
   </div>
 
   <div class="box-highlight amber">
     <div class="box-title">3. Ban Hành Quy Chế Phối Hợp Bắt Buộc Theo Cam Kết SLA</div>
     <div class="box-desc">
-      Ban hành văn bản pháp quy nội bộ quy định thời gian phối hợp chuẩn (BIM Shop 5.6 ngày, BIM Combine 10.1 ngày, BIM QS 9.1 ngày) giữa Phòng BIM, Ban QLDA và Ban Chỉ huy công trường, chấm dứt tình trạng chậm trễ hoặc bỏ qua kiểm soát va chạm.
+      Ban hành văn bản pháp quy nội bộ quy định thời gian phối hợp chuẩn (BIM Shop 5.6 ngày, BIM Combine 10.1 ngày, BIM QS 9.1 ngày) giữa Phòng BIM, Ban QLDA và Ban Chỉ huy công trường.
     </div>
   </div>
 
-  <div style="margin-top: 25px; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 20px;">
+  <div style="margin-top: 18px; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 20px;">
     <div style="text-align: center;">
-      <p style="font-size: 8.5pt; color: #64748b; margin-bottom: 50px;">KÍNH TRÌNH BAN TỔNG GIÁM ĐỐC PHÊ DUYỆT</p>
-      <p style="font-size: 9.5pt; font-weight: 800; color: #0f172a;">HỘI ĐỒNG QUẢN TRỊ / TỔNG GIÁM ĐỐC</p>
+      <p style="font-size: 8pt; color: #64748b; margin-bottom: 40px;">KÍNH TRÌNH BAN TỔNG GIÁM ĐỐC PHÊ DUYỆT</p>
+      <p style="font-size: 9pt; font-weight: 800; color: #0f172a;">HỘI ĐỒNG QUẢN TRỊ / TỔNG GIÁM ĐỐC</p>
     </div>
     <div style="text-align: center;">
-      <p style="font-size: 8.5pt; color: #64748b; margin-bottom: 50px;">NGƯỜI LẬP BÁO CÁO CHIẾN LƯỢC</p>
-      <p style="font-size: 9.5pt; font-weight: 800; color: #0f172a;">TRƯỞNG BỘ PHẬN BIM - THIẾT KẾ</p>
+      <p style="font-size: 8pt; color: #64748b; margin-bottom: 40px;">NGƯỜI LẬP BÁO CÁO CHIẾN LƯỢC</p>
+      <p style="font-size: 9pt; font-weight: 800; color: #0f172a;">TRƯỞNG BỘ PHẬN BIM - THIẾT KẾ</p>
     </div>
   </div>
 </div>
@@ -818,13 +881,12 @@ html_content = """<!DOCTYPE html>
 """
 
 def generate_pdf():
-    print("⏳ Đang khởi tạo Playwright để biên dịch tài liệu PDF...")
+    print("⏳ Đang khởi tạo Playwright để biên dịch tài liệu PDF 7 trang...")
     with sync_playwright() as p:
         browser = p.chromium.launch()
         page = browser.new_page()
         page.set_content(html_content, wait_until="networkidle")
         
-        # Xuất PDF khổ A4 với background đồ họa đầy đủ
         pdf_bytes = page.pdf(
             format="A4",
             print_background=True,
@@ -832,13 +894,11 @@ def generate_pdf():
         )
         browser.close()
 
-    # Ghi ra thư mục repository
     with open(OUT_PDF_REPO, "wb") as f:
         f.write(pdf_bytes)
     print(f"✅ Đã xuất file PDF tại Repo     : {OUT_PDF_REPO}")
     print(f"   Kích thước file: {len(pdf_bytes):,} bytes")
 
-    # Ghi ra thư mục artifact nếu có
     try:
         with open(OUT_PDF_ARTIFACT, "wb") as f:
             f.write(pdf_bytes)

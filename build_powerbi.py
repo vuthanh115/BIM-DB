@@ -469,10 +469,10 @@ html_content = f"""<!DOCTYPE html>
   </div>
 
   <div class="kpi-grid">
-    <div class="kpi-card"><div class="kpi-title">Mục tiêu Tự Thiết kế (1 Năm)</div><div class="kpi-val">1.200 Tỷ</div><div class="kpi-sub">4 dự án/năm (~10 tỷ DT Thiết kế)</div></div>
+    <div class="kpi-card"><div class="kpi-title">Tiết kiệm Quỹ lương/Năm</div><div class="kpi-val">~5.5 Tỷ</div><div class="kpi-sub">Mô hình Lean 12-14 NS vs 30 người</div></div>
     <div class="kpi-card emerald"><div class="kpi-title">Tiến độ Dự án Mẫu</div><div class="kpi-val">75.9%</div><div class="kpi-sub">66 / 87 việc hoàn thành (Dự án Mẫu)</div></div>
-    <div class="kpi-card blue"><div class="kpi-title">Tổng Công việc Theo dõi</div><div class="kpi-val">214 Việc</div><div class="kpi-sub">69 Hoàn thành | 143 Đang làm | 1 Quá hạn</div></div>
-    <div class="kpi-card rose"><div class="kpi-title">Định biên Nhân sự (T04/2026)</div><div class="kpi-val">24 / 30</div><div class="kpi-sub">Hiện có 26 (-2 nghỉ T04) → Thiếu 6 người</div></div>
+    <div class="kpi-card blue"><div class="kpi-title">Tự chủ Shop Drawing</div><div class="kpi-val">100%</div><div class="kpi-sub">Làm chủ 6 bộ môn, xóa bỏ thuê ngoài</div></div>
+    <div class="kpi-card rose"><div class="kpi-title">Phát sinh Sửa chữa CT</div><div class="kpi-val">&lt; 1%</div><div class="kpi-sub">Xóa 100% va chạm trước khi đổ bê tông</div></div>
     <div class="kpi-card amber"><div class="kpi-title">Tài liệu Chuẩn hóa Thiết kế</div><div class="kpi-val">115 Mục</div><div class="kpi-sub">6 Bộ môn (KC, KT, Điện, HVAC, CTN, PCCC)</div></div>
   </div>
 
@@ -522,6 +522,39 @@ html_content = f"""<!DOCTYPE html>
           <div style="font-size:11px; text-transform:uppercase; color:#34d399; font-weight:700; margin-bottom:4px;">Hiệu quả Kinh tế So với Cty A</div>
           <div style="font-size:20px; font-weight:800; color:#34d399; margin:4px 0;">Tiết kiệm ~5.5 Tỷ/Năm</div>
           <div style="font-size:11.5px; color:#cbd5e1;">• Giảm quân số: từ 30 ➔ 12-14 nhân sự<br/>• Quỹ lương: từ ~10.5 tỷ ➔ ~4.8 tỷ/năm<br/>• Năng lực: Gánh trọn vẹn 4 - 6 dự án D&B</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHƯƠNG ÁN ĐIỀU PHỐI CHUYỂN TIẾP TẠM THỜI THEO LEADER TỪNG BỘ MÔN -->
+    <div class="panel" style="border: 1px solid rgba(59, 130, 246, 0.4); background: linear-gradient(180deg, #111827, #0f172a);">
+      <div class="panel-header">
+        <div>
+          <h3 style="color:var(--accent-blue);">🔄 Phương án Điều phối Chuyển tiếp Tạm thời theo Leader Từng Bộ môn (4 Cụm Squads)</h3>
+          <span style="color:#94a3b8;">Không tuyển ồ ạt — Tận dụng tối đa nhân sự hiện hữu, phân quyền tự chủ kỹ thuật và SLA cho từng Leader</span>
+        </div>
+        <span class="badge info">Chuyển tiếp Thực chiến</span>
+      </div>
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:12px; margin-top:8px;">
+        <div style="background:rgba(255,255,255,0.03); border:1px solid #1f2937; border-radius:8px; padding:12px;">
+          <div style="font-size:11px; text-transform:uppercase; color:#60a5fa; font-weight:700; margin-bottom:4px;">Cụm 1: Kết cấu & Biện pháp (SLA 5.6d)</div>
+          <div style="font-size:12.5px; font-weight:700; color:#fff;">Lead: Leader B + Chủ trì D</div>
+          <div style="font-size:11px; color:#94a3b8; margin-top:4px;">• Nhân sự thực chiến: Nhân sự J, K<br/>• Mô hình BTCT, đà kiềng, móng, vách bể<br/>• Xuất bản vẽ Shop cốt thép & ván khuôn, bóc BOQ</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.03); border:1px solid #1f2937; border-radius:8px; padding:12px;">
+          <div style="font-size:11px; text-transform:uppercase; color:#34d399; font-weight:700; margin-bottom:4px;">Cụm 2: Kiến trúc & Tạo hình 3D</div>
+          <div style="font-size:12.5px; font-weight:700; color:#fff;">Lead: Leader B + Chủ trì E</div>
+          <div style="font-size:11px; color:#94a3b8; margin-top:4px;">• Nhân sự thực chiến: Nhân sự H, I<br/>• Mô hình kiến trúc LOD 300-350, chi tiết cấu tạo<br/>• Diễn họa 3D/VR, video tiến độ 4D hỗ trợ đấu thầu</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.03); border:1px solid #1f2937; border-radius:8px; padding:12px;">
+          <div style="font-size:11px; text-transform:uppercase; color:#fbbf24; font-weight:700; margin-bottom:4px;">Cụm 3: Cơ điện MEPF & Va chạm (SLA 10.1d)</div>
+          <div style="font-size:12.5px; font-weight:700; color:#fff;">Lead: Leader C + Chủ trì F, G</div>
+          <div style="font-size:11px; color:#94a3b8; margin-top:4px;">• Nhân sự thực chiến: Nhân sự L & KS MEP<br/>• Mô hình 4 hệ: Điện, HVAC, Cấp thoát, PCCC<br/>• Chủ trì ma trận Clash Detection, tối ưu cao độ trần</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.03); border:1px solid #1f2937; border-radius:8px; padding:12px;">
+          <div style="font-size:11px; text-transform:uppercase; color:#f472b6; font-weight:700; margin-bottom:4px;">Cụm 4: Hạ tầng & Quản trị CDE</div>
+          <div style="font-size:12.5px; font-weight:700; color:#fff;">Lead: Nhân sự M + TBP Nhân sự A</div>
+          <div style="font-size:11px; color:#94a3b8; margin-top:4px;">• San nền, giao thông, hạ tầng ngoài nhà (Civil 3D)<br/>• Quản trị phân quyền CDE & liên kết đa bộ môn<br/>• Cơ chế xoay vòng hỗ trợ cao điểm linh hoạt</div>
         </div>
       </div>
     </div>
