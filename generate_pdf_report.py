@@ -819,11 +819,11 @@ html_content = """<!DOCTYPE html>
     <tbody>
       <tr>
         <td><b>Quý 1/2027</b></td>
-        <td><b>Kiện toàn Tổ chức & CDE</b><br/>• 4 Cụm Squads theo Leader<br/>• Ban hành RACI & SLA</td>
+        <td><b>Kiện toàn Tổ chức & CDE</b><br/>• 4 Cụm Squads theo Lead bộ môn<br/>• Ban hành RACI & SLA</td>
         <td>
           • Ban hành Quy chế phân quyền RACI & cam kết thời gian SLA 7 bước.<br/>
-          • Vận hành 4 Cụm Chiến Đấu: KC, KT, MEPF, Hạ tầng theo các Leader.<br/>
-          • Thiết lập môi trường dữ liệu chung CDE (Autodesk Docs).
+          • Vận hành 4 Cụm Chiến Đấu: KC, KT, MEPF, Hạ tầng theo các Lead bộ môn.<br/>
+          • Thiết lập và chuẩn hóa môi trường dữ liệu chung CDE.
         </td>
       </tr>
       <tr>
