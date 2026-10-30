@@ -491,7 +491,7 @@ html_content = """<!DOCTYPE html>
       </tr>
       <tr>
         <td><b>Thiết kế & BIM Kết Cấu</b></td>
-        <td>Lead Kết Cấu (Nhân sự D)<br/>& Lead BIM XD (Nhân sự B)</td>
+        <td>Lead Kết Cấu (Nhân sự D)</td>
         <td>2 KS TK + <b>3 KS BIM KC</b> (Nhân sự J, K...)</td>
         <td>8 / 7</td>
         <td><span class="pill pill-r">7 Đang làm</span></td>
@@ -505,7 +505,7 @@ html_content = """<!DOCTYPE html>
       </tr>
       <tr>
         <td><b>Thiết kế & BIM Cơ Điện (MEPF)</b></td>
-        <td>Lead Điện (Nhân sự F)<br/>& Lead BIM MEPF (Nhân sự C)</td>
+        <td>Lead BIM MEPF (Nhân sự C)</td>
         <td>1 KS TK + 1 KS MEP + <b>3 KS BIM MEP</b> (Nhân sự L...)</td>
         <td>7 / 7</td>
         <td><span class="pill pill-r">7 Đang làm</span></td>
@@ -581,25 +581,25 @@ html_content = """<!DOCTYPE html>
     <tbody>
       <tr>
         <td><b>Cụm 1: Kết Cấu & Biện Pháp Thi Công</b></td>
-        <td><b>Lead Kết Cấu (Nhân sự D)</b><br/>& Lead BIM XD (Nhân sự B)</td>
+        <td><b>Lead Kết Cấu (Nhân sự D)</b></td>
         <td>Nhân sự J, Nhân sự K (KS BIM Kết Cấu)</td>
         <td>• Mô hình kết cấu BTCT, đà kiềng, móng, vách bể.<br/>• Xuất bản vẽ Shop cốt thép & ván khuôn đạt SLA <b>Chuẩn 5 Ngày</b>.<br/>• Bóc tách khối lượng thép & bê tông phục vụ mua hàng.</td>
       </tr>
       <tr>
         <td><b>Cụm 2: Kiến Trúc & Tạo Hình 3D</b></td>
-        <td><b>Lead Kiến Trúc (Nhân sự E)</b><br/>& Lead BIM XD (Nhân sự B)</td>
+        <td><b>Lead Kiến Trúc (Nhân sự E)</b></td>
         <td>Nhân sự H, Nhân sự I (KS BIM Kiến Trúc)</td>
         <td>• Mô hình kiến trúc LOD 300–350, chi tiết cấu tạo.<br/>• Diễn họa 3D phối cảnh, mô phỏng video phục vụ đấu thầu.<br/>• Thẩm định tuân thủ quy chuẩn phòng cháy QCVN 06.</td>
       </tr>
       <tr>
         <td><b>Cụm 3: Cơ Điện MEPF & Phối Hợp Va Chạm</b></td>
-        <td><b>Lead Điện (Nhân sự F) & Lead HVAC (Nhân sự G)</b><br/>& Lead BIM MEPF (Nhân sự C)</td>
+        <td><b>Lead BIM MEPF (Nhân sự C)</b></td>
         <td>Nhân sự L & các KS BIM MEPF</td>
         <td>• Mô hình 4 hệ MEPF: Điện, HVAC, Cấp thoát nước, PCCC.<br/>• Đầu mối kiểm soát ma trận xung đột (Clash Matrix) đạt SLA <b>Chuẩn 10 Ngày</b>.<br/>• Tối ưu cao độ trần kỹ thuật và tuyến ống trục đứng.</td>
       </tr>
       <tr>
         <td><b>Cụm 4: Hạ Tầng Kỹ Thuật & Quản Trị CDE</b></td>
-        <td><b>Lead BIM Hạ Tầng (Nhân sự M)</b><br/>& Trưởng bộ phận (Nhân sự A)</td>
+        <td><b>Lead BIM Hạ Tầng (Nhân sự M)</b></td>
         <td>Nhân sự M & Điều phối viên CDE</td>
         <td>• Mô hình san nền, giao thông, thoát nước ngoài nhà (Civil 3D).<br/>• Quản trị phân quyền môi trường dữ liệu chung CDE.<br/>• Bóc tách khối lượng hạ tầng kỹ thuật và giải phóng mặt bằng.</td>
       </tr>
