@@ -244,16 +244,7 @@ if os.path.exists(SRC_FILE_TASKS):
             if hm and str(hm).strip():
                 p_text = clean_text(hm)
                 if p_text.startswith("Dự án"):
-                    project_mapping = {
-                        "Dự án Mega": "Dự án Mẫu 01 (Mega)",
-                        "Dự án Kim Tín giai đoạn 3": "Dự án Mẫu 02 (Kim Tín GĐ3)",
-                        "Dự án APF": "Dự án Mẫu 03 (APF)",
-                        "Dự án CasaFlora2": "Dự án Mẫu 04 (CasaFlora2)",
-                        "Dự án Suncasa": "Dự án Mẫu 05 (Suncasa)",
-                        "Dự án các trạm Phú Quốc": "Dự án Mẫu 06 (Phú Quốc)",
-                        "Dự án BB052": "Dự án Mẫu 07 (BB052)"
-                    }
-                    cur_project = project_mapping.get(p_text, p_text.replace("Dự án ", "Dự án Mẫu - "))
+                    cur_project = "Dự án Mẫu"
                 else:
                     cur_project = p_text
             if cv and str(cv).strip():
@@ -268,7 +259,8 @@ if os.path.exists(SRC_FILE_TASKS):
                 opt = clean_text(ws_t.cell(r, 11).value)
                 note = clean_text(ws_t.cell(r, 13).value)
 
-                if cur_project.startswith("Dự án Mẫu"):
+                if cur_project == "Dự án Mẫu" or cur_project.startswith("Dự án"):
+                    cur_project = "Dự án Mẫu"
                     group_type = "Dự án Mẫu (Thi công & Triển khai)"
                 elif any(cur_project.startswith(x) for x in ["Kiến Trúc", "Kết cấu", "Hệ thống điện", "Điều hoà", "Cấp thoát", "Phòng cháy"]):
                     group_type = "Chuẩn hóa Bộ môn Thiết kế"
@@ -437,18 +429,12 @@ html_content = f"""<!DOCTYPE html>
     </div>
 
     <div>
-      <label>🚀 Lọc Dự án Mẫu (Tab 5: Tiến độ)</label>
+      <label>🚀 Lọc Dự án / Hạng mục (Tab 5: Tiến độ)</label>
       <select id="slicerTaskProject" class="slicer-select" onchange="updateTasksFilter(true)">
-        <option value="ALL">-- Tất cả Dự án Mẫu (214 Việc) --</option>
-        <option value="Dự án Mẫu 01 (Mega)">Dự án Mẫu 01 - Mega (24)</option>
-        <option value="Dự án Mẫu 02 (Kim Tín GĐ3)">Dự án Mẫu 02 - Kim Tín GĐ3 (18)</option>
-        <option value="Dự án Mẫu 03 (APF)">Dự án Mẫu 03 - APF (15)</option>
-        <option value="Dự án Mẫu 04 (CasaFlora2)">Dự án Mẫu 04 - CasaFlora2 (12)</option>
-        <option value="Dự án Mẫu 05 (Suncasa)">Dự án Mẫu 05 - Suncasa (9)</option>
-        <option value="Dự án Mẫu 06 (Phú Quốc)">Dự án Mẫu 06 - Phú Quốc (7)</option>
-        <option value="Dự án Mẫu 07 (BB052)">Dự án Mẫu 07 - BB052 (2)</option>
-        <option value="Chuẩn hóa Bộ môn Thiết kế">Chuẩn hóa 6 Bộ môn (115)</option>
-        <option value="Quản trị & Tổ chức">Quản trị & Văn hóa (12)</option>
+        <option value="ALL">-- Tất cả Hạng mục (214 Việc) --</option>
+        <option value="Dự án Mẫu">Dự án Mẫu (87 Việc)</option>
+        <option value="Chuẩn hóa Bộ môn Thiết kế">Chuẩn hóa 6 Bộ môn (115 Việc)</option>
+        <option value="Quản trị & Tổ chức">Quản trị & Văn hóa (12 Việc)</option>
       </select>
     </div>
 
@@ -483,7 +469,7 @@ html_content = f"""<!DOCTYPE html>
 
   <div class="kpi-grid">
     <div class="kpi-card"><div class="kpi-title">Mục tiêu Tự Thiết kế (1 Năm)</div><div class="kpi-val">1.200 Tỷ</div><div class="kpi-sub">4 dự án/năm (~10 tỷ DT Thiết kế)</div></div>
-    <div class="kpi-card emerald"><div class="kpi-title">Tiến độ 7 Dự án Mẫu</div><div class="kpi-val">75.9%</div><div class="kpi-sub">66 / 87 task hoàn thành (7 Dự án Mẫu)</div></div>
+    <div class="kpi-card emerald"><div class="kpi-title">Tiến độ Dự án Mẫu</div><div class="kpi-val">75.9%</div><div class="kpi-sub">66 / 87 việc hoàn thành (Dự án Mẫu)</div></div>
     <div class="kpi-card blue"><div class="kpi-title">Tổng Công việc Theo dõi</div><div class="kpi-val">214 Việc</div><div class="kpi-sub">69 Hoàn thành | 143 Đang làm | 1 Quá hạn</div></div>
     <div class="kpi-card rose"><div class="kpi-title">Định biên Nhân sự (T04/2026)</div><div class="kpi-val">24 / 30</div><div class="kpi-sub">Hiện có 26 (-2 nghỉ T04) → Thiếu 6 người</div></div>
     <div class="kpi-card amber"><div class="kpi-title">Tài liệu Chuẩn hóa Thiết kế</div><div class="kpi-val">115 Mục</div><div class="kpi-sub">6 Bộ môn (KC, KT, Điện, HVAC, CTN, PCCC)</div></div>
@@ -624,7 +610,7 @@ html_content = f"""<!DOCTYPE html>
   <section id="tab-tasks" class="tab-page">
     <div class="chart-grid-equal">
       <div class="panel">
-        <div class="panel-header"><h3>Tiến độ Thực hiện theo Dự án Mẫu Đang Chọn</h3><span id="projChartSubtitle">So sánh Tỷ lệ Hoàn thành vs Đang thực hiện theo Dự án Mẫu</span></div>
+        <div class="panel-header"><h3>Tiến độ Thực hiện theo Hạng mục / Dự án Mẫu</h3><span id="projChartSubtitle">So sánh Tỷ lệ Hoàn thành vs Đang thực hiện</span></div>
         <div class="chart-container"><canvas id="chartProjects"></canvas></div>
       </div>
       <div class="panel">
@@ -768,7 +754,9 @@ function updateTasksFilter(autoSwitch = false) {{
   }}
   let filtered = taskData;
   if (proj !== 'ALL') {{
-    if (proj === 'Chuẩn hóa Bộ môn Thiết kế' || proj === 'Quản trị & Tổ chức') {{
+    if (proj === 'Dự án Mẫu') {{
+      filtered = filtered.filter(t => t.HangMuc_DuAn === 'Dự án Mẫu' || t.NhomCongViec === 'Dự án Mẫu (Thi công & Triển khai)');
+    }} else if (proj === 'Chuẩn hóa Bộ môn Thiết kế' || proj === 'Quản trị & Tổ chức') {{
       filtered = filtered.filter(t => t.NhomCongViec === proj);
     }} else {{
       filtered = filtered.filter(t => t.HangMuc_DuAn === proj);
@@ -811,19 +799,11 @@ function updateTasksFilter(autoSwitch = false) {{
 
   if (chartProjectsInstance) {{
     if (proj === 'ALL') {{
-      const projNames = ['Mẫu 01 (Mega)', 'Mẫu 02 (Kim Tín)', 'Mẫu 03 (APF)', 'Mẫu 04 (CasaFlora)', 'Mẫu 05 (Suncasa)', 'Mẫu 06 (Phú Quốc)', 'Mẫu 07 (BB052)'];
-      const projKeys = [
-        'Dự án Mẫu 01 (Mega)',
-        'Dự án Mẫu 02 (Kim Tín GĐ3)',
-        'Dự án Mẫu 03 (APF)',
-        'Dự án Mẫu 04 (CasaFlora2)',
-        'Dự án Mẫu 05 (Suncasa)',
-        'Dự án Mẫu 06 (Phú Quốc)',
-        'Dự án Mẫu 07 (BB052)'
-      ];
+      const projNames = ['Dự án Mẫu (87 việc)', 'Chuẩn hóa 6 Bộ môn (115 việc)', 'Quản trị & Văn hóa (12 việc)'];
+      const projGroupKeys = ['Dự án Mẫu (Thi công & Triển khai)', 'Chuẩn hóa Bộ môn Thiết kế', 'Quản trị & Tổ chức'];
       chartProjectsInstance.data.labels = projNames;
-      chartProjectsInstance.data.datasets[0].data = projKeys.map(k => taskData.filter(t => t.HangMuc_DuAn === k && t.TinhTrang === 'Đã hoàn thành').length);
-      chartProjectsInstance.data.datasets[1].data = projKeys.map(k => taskData.filter(t => t.HangMuc_DuAn === k && (t.TinhTrang === 'Đang thực hiện' || t.TinhTrang === 'Quá hạn' || t.TinhTrang === 'Chưa thực hiện')).length);
+      chartProjectsInstance.data.datasets[0].data = projGroupKeys.map(k => taskData.filter(t => t.NhomCongViec === k && t.TinhTrang === 'Đã hoàn thành').length);
+      chartProjectsInstance.data.datasets[1].data = projGroupKeys.map(k => taskData.filter(t => t.NhomCongViec === k && (t.TinhTrang === 'Đang thực hiện' || t.TinhTrang === 'Quá hạn' || t.TinhTrang === 'Chưa thực hiện')).length);
     }} else {{
       chartProjectsInstance.data.labels = [proj];
       chartProjectsInstance.data.datasets[0].data = [doneCount];
@@ -935,23 +915,15 @@ window.addEventListener('DOMContentLoaded', () => {{
   }});
 
   // 7. Chart Projects
-  const projNames = ['Mẫu 01 (Mega)', 'Mẫu 02 (Kim Tín)', 'Mẫu 03 (APF)', 'Mẫu 04 (CasaFlora)', 'Mẫu 05 (Suncasa)', 'Mẫu 06 (Phú Quốc)', 'Mẫu 07 (BB052)'];
-  const projKeys = [
-    'Dự án Mẫu 01 (Mega)',
-    'Dự án Mẫu 02 (Kim Tín GĐ3)',
-    'Dự án Mẫu 03 (APF)',
-    'Dự án Mẫu 04 (CasaFlora2)',
-    'Dự án Mẫu 05 (Suncasa)',
-    'Dự án Mẫu 06 (Phú Quốc)',
-    'Dự án Mẫu 07 (BB052)'
-  ];
+  const projNames = ['Dự án Mẫu (87 việc)', 'Chuẩn hóa 6 Bộ môn (115 việc)', 'Quản trị & Văn hóa (12 việc)'];
+  const projGroupKeys = ['Dự án Mẫu (Thi công & Triển khai)', 'Chuẩn hóa Bộ môn Thiết kế', 'Quản trị & Tổ chức'];
   chartProjectsInstance = new Chart(document.getElementById('chartProjects'), {{
     type: 'bar',
     data: {{
       labels: projNames,
       datasets: [
-        {{ label: 'Đã hoàn thành', data: projKeys.map(k => taskData.filter(t => t.HangMuc_DuAn === k && t.TinhTrang === 'Đã hoàn thành').length), backgroundColor: '#10b981', borderRadius: 4 }},
-        {{ label: 'Đang triển khai / Quá hạn', data: projKeys.map(k => taskData.filter(t => t.HangMuc_DuAn === k && (t.TinhTrang === 'Đang thực hiện' || t.TinhTrang === 'Quá hạn' || t.TinhTrang === 'Chưa thực hiện')).length), backgroundColor: '#3b82f6', borderRadius: 4 }}
+        {{ label: 'Đã hoàn thành', data: projGroupKeys.map(k => taskData.filter(t => t.NhomCongViec === k && t.TinhTrang === 'Đã hoàn thành').length), backgroundColor: '#10b981', borderRadius: 4 }},
+        {{ label: 'Đang triển khai / Quá hạn', data: projGroupKeys.map(k => taskData.filter(t => t.NhomCongViec === k && (t.TinhTrang === 'Đang thực hiện' || t.TinhTrang === 'Quá hạn' || t.TinhTrang === 'Chưa thực hiện')).length), backgroundColor: '#3b82f6', borderRadius: 4 }}
       ]
     }},
     options: {{
