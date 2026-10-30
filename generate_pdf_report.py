@@ -367,7 +367,7 @@ html_content = """<!DOCTYPE html>
         <span class="meta-val">Hội Đồng Quản Trị / Ban Tổng Giám Đốc</span>
       </div>
       <div class="meta-item">
-        <span class="meta-label">Đơn Vị Chủ Trì Đề Án</span>
+        <span class="meta-label">Đơn Vị Lập Đề Án</span>
         <span class="meta-val">Trưởng Bộ Phận BIM - Thiết Kế</span>
       </div>
       <div class="meta-item">
@@ -466,7 +466,7 @@ html_content = """<!DOCTYPE html>
   <div class="box-highlight blue">
     <div class="box-title"><svg class="box-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14l-2-7V4h1V2H6v2h1v6z"/></svg> Định Hướng Setup: Tối Ưu Hóa Nguồn Lực Hiện Hữu</div>
     <div class="box-desc">
-      Giữ vững cấu trúc định biên hiện tại của phòng, <b>không gây xáo trộn nhân sự</b>. Mục tiêu trọng tâm là <b>sắp xếp lại cách thức phối hợp</b>: phân định rõ quyền hạn, giải phóng áp lực ôm đồm cho Trưởng phòng, phát huy quyền tự chủ chuyên môn cho các Leader và ràng buộc trách nhiệm bằng chỉ số tiến độ SLA.
+      Tận dụng tối đa bộ máy hiện có <b>(tổng định biên 30, thực tế 26, đang làm việc 24 nhân sự)</b>. Đưa trực tiếp <b>các Lead bộ môn (Lead KT, Lead KC, Lead Điện, Lead HVAC)</b> vào chỉ huy chuyên môn các mảng BIM tương ứng, phối hợp chặt chẽ cùng các Lead BIM để thống nhất một đầu mối chịu trách nhiệm kỹ thuật và xóa bỏ hoàn toàn độ trễ giữa thiết kế và mô hình 3D.
     </div>
   </div>
 
@@ -474,62 +474,62 @@ html_content = """<!DOCTYPE html>
   <table class="data-table">
     <thead>
       <tr>
-        <th style="width: 20%;">Nhóm Chuyên Môn</th>
-        <th style="width: 25%;">Vị Trí Phụ Trách</th>
-        <th style="width: 25%;">Nhân Sự Chủ Chốt</th>
-        <th style="width: 12%;">Định Biên</th>
-        <th style="width: 18%;">Hiện Trạng</th>
+        <th style="width: 25%;">Mảng Chuyên Môn</th>
+        <th style="width: 25%;">Vị Trí Đảm Nhiệm</th>
+        <th style="width: 26%;">Nhân Sự Đảm Nhiệm</th>
+        <th style="width: 10%;">Định Biên</th>
+        <th style="width: 14%;">Hiện Trạng</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><b>Quản lý Chung</b></td>
+        <td><b>Quản lý Điều hành</b></td>
         <td>Trưởng bộ phận BIM - TK</td>
         <td>Nhân sự A</td>
         <td>1 / 1</td>
         <td><span class="pill pill-r">Đang làm việc</span></td>
       </tr>
       <tr>
-        <td><b>BIM Xây Dựng (KT - KC)</b></td>
-        <td>Trưởng nhóm BIM Xây dựng</td>
-        <td>Nhân sự B (Leader)</td>
-        <td>1 / 1</td>
+        <td><b>BIM & Thiết kế Kết Cấu</b></td>
+        <td>Lead Kết Cấu & Lead BIM XD</td>
+        <td>Nhân sự D (Lead KC) & B (Lead BIM)</td>
+        <td>2 / 2</td>
         <td><span class="pill pill-r">Đang làm việc</span></td>
       </tr>
       <tr>
-        <td><b>BIM Xây Dựng (KT - KC)</b></td>
-        <td>Kỹ sư BIM KT - KC</td>
+        <td><b>BIM & Thiết kế Kiến Trúc</b></td>
+        <td>Lead Kiến Trúc & KTS Triển khai</td>
+        <td>Nhân sự E (Lead KT) & Đội ngũ</td>
+        <td>2 / 2</td>
+        <td><span class="pill pill-r">Đang làm việc</span></td>
+      </tr>
+      <tr>
+        <td><b>Đội ngũ Kỹ sư BIM XD</b></td>
+        <td>Kỹ sư BIM Kiến trúc & Kết cấu</td>
         <td>Nhân sự H, I, J, K...</td>
         <td>14 / 11</td>
         <td><span class="pill pill-tag">11 người thực tế</span></td>
       </tr>
       <tr>
-        <td><b>BIM Cơ Điện (MEPF)</b></td>
-        <td>Trưởng nhóm BIM MEPF</td>
-        <td>Nhân sự C (Leader)</td>
-        <td>1 / 1</td>
+        <td><b>BIM & Thiết kế Cơ Điện</b></td>
+        <td>Lead Điện, Lead HVAC & Lead MEPF</td>
+        <td>Nhân sự F (Điện), G (HVAC), C (MEPF)</td>
+        <td>3 / 3</td>
         <td><span class="pill pill-r">Đang làm việc</span></td>
       </tr>
       <tr>
-        <td><b>BIM Cơ Điện (MEPF)</b></td>
-        <td>Kỹ sư BIM MEPF</td>
-        <td>Nhân sự L & KS MEPF</td>
-        <td>2 / 2</td>
+        <td><b>Đội ngũ Kỹ sư BIM Cơ Điện</b></td>
+        <td>Kỹ sư BIM MEPF & KS Triển khai</td>
+        <td>Nhân sự L & các Kỹ sư MEPF</td>
+        <td>4 / 4</td>
         <td><span class="pill pill-r">Đang làm việc</span></td>
       </tr>
       <tr>
-        <td><b>BIM Hạ Tầng</b></td>
-        <td>Kỹ sư BIM Hạ tầng</td>
+        <td><b>BIM Hạ Tầng & CDE</b></td>
+        <td>Lead Hạ tầng & Quản trị CDE</td>
         <td>Nhân sự M</td>
         <td>2 / 1</td>
         <td><span class="pill pill-r">Đang làm việc</span></td>
-      </tr>
-      <tr>
-        <td><b>Chủ Trì Thiết Kế 4 Mảng</b></td>
-        <td>Chủ trì KT, KC, Điện, HVAC</td>
-        <td>Nhân sự D, E, F, G</td>
-        <td>4 / 4</td>
-        <td><span class="pill pill-a">Đủ 4 Chủ trì</span></td>
       </tr>
     </tbody>
   </table>
@@ -565,12 +565,12 @@ html_content = """<!DOCTYPE html>
     <div class="page-header-meta">Trang 4 / 7</div>
   </div>
 
-  <h1 class="sec-title"><svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg> 3. Cơ chế Phối hợp: 4 Cụm Chuyên môn Do Leader Chỉ huy</h1>
+  <h1 class="sec-title"><svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg> 3. Cơ chế Phối hợp: 4 Cụm Chuyên môn Do Lead Bộ Môn Chỉ huy</h1>
 
   <div class="box-highlight blue">
-    <div class="box-title"><svg class="box-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Nguyên Tắc Phối Hợp: Trao Quyền Tự Chủ Cho Các Leader</div>
+    <div class="box-title"><svg class="box-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Nguyên Tắc Phối Hợp: Trao Quyền Tự Chủ Cho Các Lead Bộ Môn</div>
     <div class="box-desc">
-      Tổ chức toàn bộ nhân sự hiện hữu thành <b>4 Cụm Phối Hợp Chuyên Môn (Discipline Squads)</b> do các Leader và Chủ trì từng bộ môn trực tiếp chỉ huy. Mỗi Leader bộ môn được trao quyền tự chủ kỹ thuật, chịu trách nhiệm về chất lượng đầu ra và cam kết tiến độ phục vụ công trường theo chuẩn SLA.
+      Tổ chức toàn bộ nhân sự hiện hữu thành <b>4 Cụm Phối Hợp Chuyên Môn (Discipline Squads)</b> do các Lead từng bộ môn trực tiếp chỉ huy. Mỗi Lead bộ môn được trao quyền tự chủ kỹ thuật, nắm trọn vẹn từ thiết kế đến mô hình BIM, chịu trách nhiệm về chất lượng đầu ra và cam kết tiến độ phục vụ công trường theo chuẩn SLA.
     </div>
   </div>
 
@@ -580,7 +580,7 @@ html_content = """<!DOCTYPE html>
     <thead>
       <tr>
         <th style="width: 20%;">Cụm Phối Hợp</th>
-        <th style="width: 25%;">Hạt Nhân Chỉ Huy (Leaders)</th>
+        <th style="width: 25%;">Hạt Nhân Chỉ Huy (Leads)</th>
         <th style="width: 20%;">Nhân Sự Thực Chiến</th>
         <th style="width: 35%;">Phạm Vi Nhiệm Vụ & Cam Kết SLA</th>
       </tr>
@@ -588,25 +588,25 @@ html_content = """<!DOCTYPE html>
     <tbody>
       <tr>
         <td><b>Cụm 1: Kết Cấu & Biện Pháp Thi Công</b></td>
-        <td><b>Leader BIM XD (Nhân sự B)</b><br/>& Chủ trì KC (Nhân sự D)</td>
+        <td><b>Lead Kết Cấu (Nhân sự D)</b><br/>& Lead BIM XD (Nhân sự B)</td>
         <td>Nhân sự J, Nhân sự K (KS BIM Kết Cấu)</td>
         <td>• Mô hình kết cấu BTCT, đà kiềng, móng, vách bể.<br/>• Xuất bản vẽ Shop cốt thép & ván khuôn đạt SLA <b>Chuẩn 5 Ngày</b>.<br/>• Bóc tách khối lượng thép & bê tông phục vụ mua hàng.</td>
       </tr>
       <tr>
         <td><b>Cụm 2: Kiến Trúc & Tạo Hình 3D</b></td>
-        <td><b>Leader BIM XD (Nhân sự B)</b><br/>& Chủ trì KT (Nhân sự E)</td>
+        <td><b>Lead Kiến Trúc (Nhân sự E)</b><br/>& Lead BIM XD (Nhân sự B)</td>
         <td>Nhân sự H, Nhân sự I (KS BIM Kiến Trúc)</td>
         <td>• Mô hình kiến trúc LOD 300–350, chi tiết cấu tạo.<br/>• Diễn họa 3D phối cảnh, mô phỏng video phục vụ đấu thầu.<br/>• Thẩm định tuân thủ quy chuẩn phòng cháy QCVN 06.</td>
       </tr>
       <tr>
         <td><b>Cụm 3: Cơ Điện MEPF & Phối Hợp Va Chạm</b></td>
-        <td><b>Leader BIM MEPF (Nhân sự C)</b><br/>& Chủ trì Điện / HVAC (F, G)</td>
+        <td><b>Lead Điện (Nhân sự F) & Lead HVAC (Nhân sự G)</b><br/>& Lead BIM MEPF (Nhân sự C)</td>
         <td>Nhân sự L & các KS BIM MEPF</td>
-        <td>• Mô hình 4 hệ MEPF: Điện, HVAC, Cấp thoát nước, PCCC.<br/>• Chủ trì ma trận xung đột (Clash Matrix) đạt SLA <b>Chuẩn 10 Ngày</b>.<br/>• Tối ưu cao độ trần kỹ thuật và tuyến ống trục đứng.</td>
+        <td>• Mô hình 4 hệ MEPF: Điện, HVAC, Cấp thoát nước, PCCC.<br/>• Đầu mối kiểm soát ma trận xung đột (Clash Matrix) đạt SLA <b>Chuẩn 10 Ngày</b>.<br/>• Tối ưu cao độ trần kỹ thuật và tuyến ống trục đứng.</td>
       </tr>
       <tr>
         <td><b>Cụm 4: Hạ Tầng Kỹ Thuật & Quản Trị CDE</b></td>
-        <td><b>KS BIM Hạ Tầng (Nhân sự M)</b><br/>& Trưởng bộ phận (Nhân sự A)</td>
+        <td><b>Lead BIM Hạ Tầng (Nhân sự M)</b><br/>& Trưởng bộ phận (Nhân sự A)</td>
         <td>Nhân sự M & Điều phối viên CDE</td>
         <td>• Mô hình san nền, giao thông, thoát nước ngoài nhà (Civil 3D).<br/>• Quản trị phân quyền môi trường dữ liệu chung CDE.<br/>• Bóc tách khối lượng hạ tầng kỹ thuật và giải phóng mặt bằng.</td>
       </tr>
@@ -672,12 +672,12 @@ html_content = """<!DOCTYPE html>
       </tr>
       <tr>
         <td><span class="pill pill-r">R (Responsible)</span><br/><b>Trực tiếp thực hiện</b></td>
-        <td><b>Các Leader Cụm (Nhân sự B, C, M) & Kỹ sư</b></td>
-        <td>Chủ trì giải quyết kỹ thuật, điều phối va chạm đa bộ môn, hoàn thiện hồ sơ Shop Drawing và bàn giao đúng hạn SLA cam kết.</td>
+        <td><b>Các Lead Bộ Môn (B, C, D, E, F, G, M) & Kỹ sư</b></td>
+        <td>Trực tiếp giải quyết kỹ thuật, điều phối va chạm đa bộ môn, kiểm soát mô hình, hoàn thiện hồ sơ Shop Drawing và bàn giao đúng hạn SLA cam kết.</td>
       </tr>
       <tr>
         <td><span class="pill pill-c">C (Consulted)</span><br/><b>Tham vấn chuyên môn</b></td>
-        <td><b>Các Chủ trì Thiết kế (KT, KC, MEPF)</b></td>
+        <td><b>Chuyên gia Cố vấn / Ban Kỹ thuật</b></td>
         <td>Đóng góp ý kiến chuyên môn sâu, thẩm định tính tuân thủ tiêu chuẩn quy phạm nhà nước (QCVN, TCVN) trước khi phát hành hồ sơ.</td>
       </tr>
       <tr>
@@ -866,9 +866,9 @@ html_content = """<!DOCTYPE html>
   <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> 3 Kiến Nghị Then Chốt Kính Trình Ban Tổng Giám Đốc Phê Duyệt</h2>
 
   <div class="box-highlight">
-    <div class="box-title">1. Phê Duyệt Cơ Chế Điều Phối Theo 4 Cụm Leader Bộ Môn</div>
+    <div class="box-title">1. Phê Duyệt Cơ Chế Điều Phối Theo 4 Cụm Lead Bộ Môn</div>
     <div class="box-desc">
-      Chấp thuận phương án setup vận hành theo 4 Cụm chuyên môn do các Leader hiện hữu làm nòng cốt. Phê duyệt cơ chế đánh giá KPI gắn liền với mức độ tuân thủ thời gian cam kết dịch vụ SLA.
+      Chấp thuận phương án setup vận hành theo 4 Cụm chuyên môn do các Lead bộ môn hiện hữu trực tiếp chỉ huy. Phê duyệt cơ chế đánh giá KPI gắn liền với mức độ tuân thủ thời gian cam kết dịch vụ SLA.
     </div>
   </div>
 
@@ -882,7 +882,7 @@ html_content = """<!DOCTYPE html>
   <div class="box-highlight amber">
     <div class="box-title">3. Ban Hành Quy Chế Phối Hợp Bắt Buộc Theo Cam Kết SLA</div>
     <div class="box-desc">
-      Ban hành văn bản quy định thời gian phối hợp chuẩn (BIM Shop 5 ngày, BIM Combine 10 ngày, BIM QS 7 ngày) giữa Phòng BIM, Ban QLDA và Ban Chỉ huy công trường.
+      Ban hành văn bản quy định thời gian phối hợp chuẩn (BIM Shop 5 ngày, BIM Combine 10 ngày, BIM QS 7 ngày) giữa các Lead Bộ Môn BIM, Ban QLDA và Ban Chỉ huy công trường.
     </div>
   </div>
 
