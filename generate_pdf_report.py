@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Script tạo file PDF Báo cáo Chiến lược Xây dựng Phòng BIM Tinh gọn (2026 - 2027)
+Script tạo file PDF Báo cáo Chiến lược Xây dựng Phòng BIM Tinh gọn Năm 2027
 Dành cho việc trình bày và bảo vệ phương án trước Ban Tổng Giám Đốc / HĐQT
-- Cập nhật 4 chỉ số KPI thực tế (Loại bỏ 1.200 Tỷ và >85% D&B)
-- Bổ sung Phương án Điều phối Chuyển tiếp theo Leader từng Bộ môn (4 Cụm Squads)
-- Hoạch định lại Chiến lược Năm 2027 thực chiến (Zero Clash, Tự chủ 100%, 5D BOQ, Lõi + Outsource)
+- Cập nhật toàn diện sang Niên độ 2027 (Roadmap 4 Quý năm 2027)
+- Bộ 4 chỉ số KPI thực tế (~5.5 Tỷ, 100% Tự chủ Shop, <1% Sửa chữa, 70% Tái sử dụng)
+- Phương án Điều phối Chuyển tiếp theo Leader từng Bộ môn (4 Cụm Squads)
 Sử dụng Playwright (Chromium) xuất PDF chuẩn in ấn A4 (7 trang màu Executive).
 """
 
@@ -12,14 +12,16 @@ import os
 import sys
 from playwright.sync_api import sync_playwright
 
-OUT_PDF_REPO = os.path.abspath("Bao_Cao_Chien_Luoc_Xay_Dung_Phong_BIM_2026.pdf")
-OUT_PDF_ARTIFACT = os.path.abspath(r"C:\Users\thanhvp\.gemini\antigravity\brain\f7887f6d-20b4-485d-b51b-cdd6f48e0c12\Bao_Cao_Chien_Luoc_Xay_Dung_Phong_BIM_2026.pdf")
+OUT_PDF_2027 = os.path.abspath("Bao_Cao_Chien_Luoc_Xay_Dung_Phong_BIM_2027.pdf")
+OUT_PDF_2026 = os.path.abspath("Bao_Cao_Chien_Luoc_Xay_Dung_Phong_BIM_2026.pdf")
+OUT_PDF_ARTIFACT_2027 = os.path.abspath(r"C:\Users\thanhvp\.gemini\antigravity\brain\f7887f6d-20b4-485d-b51b-cdd6f48e0c12\Bao_Cao_Chien_Luoc_Xay_Dung_Phong_BIM_2027.pdf")
+OUT_PDF_ARTIFACT_2026 = os.path.abspath(r"C:\Users\thanhvp\.gemini\antigravity\brain\f7887f6d-20b4-485d-b51b-cdd6f48e0c12\Bao_Cao_Chien_Luoc_Xay_Dung_Phong_BIM_2026.pdf")
 
 html_content = """<!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Báo cáo Chiến lược Xây dựng Phòng BIM Tinh gọn (2026 - 2027)</title>
+<title>Báo cáo Chiến lược Xây dựng Phòng BIM Tinh gọn (2027)</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -348,13 +350,13 @@ html_content = """<!DOCTYPE html>
     </div>
 
     <div class="cover-center">
-      <div class="cover-tagline">Đề án Chiến lược Năm 2026 - 2027</div>
+      <div class="cover-tagline">Đề án Chiến lược Năm 2027</div>
       <h1 class="cover-title">
         HOẠCH ĐỊNH XÂY DỰNG<br/>
-        <span>PHÒNG BIM TINH GỌN (LEAN BIM)</span>
+        <span>PHÒNG BIM TINH GỌN (LEAN BIM 2027)</span>
       </h1>
       <p class="cover-subtitle">
-        Báo cáo đề xuất mô hình cơ cấu tổ chức 12 – 14 nhân sự đa nhiệm, phương án điều phối chuyển tiếp theo Leader từng bộ môn, chuẩn hóa quy chế RACI & SLA 7 bước, cùng lộ trình thực chiến 2026 - 2027 tiết kiệm ~5.5 tỷ VNĐ/năm chi phí nhân lực cố định.
+        Báo cáo đề xuất mô hình cơ cấu tổ chức 12 – 14 nhân sự đa nhiệm, phương án điều phối chuyển tiếp theo Leader từng bộ môn, chuẩn hóa quy chế RACI & SLA 7 bước, cùng lộ trình thực chiến Năm 2027 tiết kiệm ~5.5 tỷ VNĐ/năm chi phí nhân lực cố định.
       </p>
     </div>
 
@@ -369,7 +371,7 @@ html_content = """<!DOCTYPE html>
       </div>
       <div class="meta-item">
         <span class="meta-label">Thời Gian & Hiệu Lực</span>
-        <span class="meta-val">Q2/2026 — Niên độ 2026 - 2027</span>
+        <span class="meta-val">Kế Hoạch Niên Độ 2027</span>
       </div>
     </div>
   </div>
@@ -800,42 +802,58 @@ html_content = """<!DOCTYPE html>
   </table>
 </div>
 
-<!-- TRANG 7: HOẠCH ĐỊNH CHIẾN LƯỢC 2026 - 2027 & KIẾN NGHỊ BAN LÃNH ĐẠO -->
+<!-- TRANG 7: HOẠCH ĐỊNH CHIẾN LƯỢC NĂM 2027 & KIẾN NGHỊ BAN LÃNH ĐẠO -->
 <div class="page">
   <div class="page-header">
-    <div class="page-header-title">Phần VI: Hoạch Định Chiến Lược 2026 - 2027 & Đề Xuất Phê Duyệt</div>
+    <div class="page-header-title">Phần VI: Hoạch Định Chiến Lược Năm 2027 & Đề Xuất Phê Duyệt</div>
     <div class="page-header-meta">Trang 7 / 7</div>
   </div>
 
-  <h1 class="sec-title">📅 6. Hoạch định Thực thi 2 Năm: 2026 (Nền tảng) & 2027 (Làm chủ)</h1>
+  <h1 class="sec-title">📅 6. Lộ trình Thực thi 4 Quý Năm 2027 (Roadmap 2027)</h1>
 
   <table class="data-table">
     <thead>
       <tr>
-        <th style="width: 18%;">Giai Đoạn</th>
-        <th style="width: 30%;">Định Hướng Chiến Lược</th>
-        <th style="width: 52%;">Mục Tiêu & Kết Quả Bắt Buộc (Milestones)</th>
+        <th style="width: 16%;">Thời Gian</th>
+        <th style="width: 30%;">Mục Tiêu Trọng Tâm</th>
+        <th style="width: 54%;">Kết Quả Đầu Ra Bắt Buộc (Milestones)</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><b>Năm 2026<br/>(Giai đoạn Nền tảng & Pilot)</b></td>
-        <td><b>Chuẩn hóa & Thử nghiệm Tinh gọn</b><br/>• Định biên lõi: 12 - 14 người<br/>• Cơ chế chuyển tiếp theo Leader</td>
+        <td><b>Quý 1/2027</b></td>
+        <td><b>Kiện toàn Tổ chức & CDE</b><br/>• 4 Cụm Squads theo Leader<br/>• Ban hành RACI & SLA</td>
         <td>
-          • Ban hành Quy chế RACI & quy trình cam kết thời gian SLA 7 bước.<br/>
-          • Hoàn thiện gói P1 trong 115 tài liệu chuẩn hóa 6 bộ môn.<br/>
-          • Triển khai thành công trọn vẹn 87 nhiệm vụ trên <b>Dự án Mẫu</b>.<br/>
-          • Kiểm soát sai số bóc tách BOQ sơ bộ &lt; 3%.
+          • Ban hành Quy chế phân quyền RACI & cam kết thời gian SLA 7 bước.<br/>
+          • Vận hành 4 Cụm Chiến Đấu: KC, KT, MEPF, Hạ tầng theo các Leader.<br/>
+          • Thiết lập môi trường dữ liệu chung CDE (Autodesk Docs).
         </td>
       </tr>
       <tr>
-        <td><b>Năm 2027<br/>(Giai đoạn Làm chủ & Nhân rộng)</b></td>
-        <td><b>Tự chủ Toàn diện & Tối ưu Chi phí</b><br/>• Xóa bỏ thuê ngoài Shop drawing<br/>• Mô hình Lõi + Outsource linh hoạt</td>
+        <td><b>Quý 2/2027</b></td>
+        <td><b>Chuẩn hóa 115 Tài liệu</b><br/>• Hoàn thành nhóm P1 & P2<br/>• Tự động hóa với Dynamo</td>
         <td>
-          • <b>Tự chủ 100% hồ sơ Shop Drawing & BPTC</b> cho tất cả các dự án mới.<br/>
-          • <b>Zero Clash tại công trường</b>: Giảm phát sinh đục phá sửa chữa &lt; 1% giá trị gói thầu.<br/>
-          • <b>Tự động hóa 5D BIM</b>: Sai số khối lượng đặt hàng vật tư &lt; 2%.<br/>
-          • Giữ vững bộ máy lõi tinh gọn; chỉ mở rộng thuê ngoài gia công khi trúng dự án lớn.
+          • Chuẩn hóa toàn bộ Template Revit, mã hóa cấu kiện cho 6 bộ môn.<br/>
+          • Ứng dụng script Dynamo tự động xuất bản vẽ & trích xuất BOQ.<br/>
+          • Đào tạo kỹ năng đa nhiệm T-Shaped cho đội ngũ kỹ sư thực chiến.
+        </td>
+      </tr>
+      <tr>
+        <td><b>Quý 3/2027</b></td>
+        <td><b>Thực chiến "Dự án Mẫu"</b><br/>• 87 nhiệm vụ kỹ thuật<br/>• Kiểm chứng cam kết SLA</td>
+        <td>
+          • Triển khai trọn vẹn 87 nhiệm vụ thực chiến trên Dự án Mẫu.<br/>
+          • Xóa bỏ 100% va chạm (Zero Clash) kết cấu - cơ điện trước khi thi công.<br/>
+          • Kiểm soát tuân thủ SLA: Shop 5.6 ngày, Combine 10.1 ngày, QS 9.1 ngày.
+        </td>
+      </tr>
+      <tr>
+        <td><b>Quý 4/2027</b></td>
+        <td><b>Tự chủ 100% & Nhân rộng</b><br/>• Đánh giá KPI chuẩn hóa<br/>• Mô hình Lõi + Outsource</td>
+        <td>
+          • <b>Tự chủ 100% hồ sơ Shop Drawing & BPTC</b> cho các dự án mới.<br/>
+          • Tự động hóa bóc tách khối lượng 5D BIM: Sai số vật tư &lt; 2%.<br/>
+          • Giữ vững bộ máy lõi 12-14 NS; mở rộng thuê ngoài vệ tinh khi dự án tăng.
         </td>
       </tr>
     </tbody>
@@ -881,7 +899,7 @@ html_content = """<!DOCTYPE html>
 """
 
 def generate_pdf():
-    print("⏳ Đang khởi tạo Playwright để biên dịch tài liệu PDF 7 trang...")
+    print("⏳ Đang khởi tạo Playwright để biên dịch tài liệu PDF 7 trang Năm 2027...")
     with sync_playwright() as p:
         browser = p.chromium.launch()
         page = browser.new_page()
@@ -894,17 +912,19 @@ def generate_pdf():
         )
         browser.close()
 
-    with open(OUT_PDF_REPO, "wb") as f:
-        f.write(pdf_bytes)
-    print(f"✅ Đã xuất file PDF tại Repo     : {OUT_PDF_REPO}")
+    for path in [OUT_PDF_2027, OUT_PDF_2026]:
+        with open(path, "wb") as f:
+            f.write(pdf_bytes)
+        print(f"✅ Đã xuất file PDF tại Repo     : {path}")
     print(f"   Kích thước file: {len(pdf_bytes):,} bytes")
 
-    try:
-        with open(OUT_PDF_ARTIFACT, "wb") as f:
-            f.write(pdf_bytes)
-        print(f"✅ Đã sao chép vào Artifact Dir  : {OUT_PDF_ARTIFACT}")
-    except Exception as e:
-        print(f"⚠️ Lưu vào artifact: {e}")
+    for path in [OUT_PDF_ARTIFACT_2027, OUT_PDF_ARTIFACT_2026]:
+        try:
+            with open(path, "wb") as f:
+                f.write(pdf_bytes)
+            print(f"✅ Đã sao chép vào Artifact Dir  : {path}")
+        except Exception as e:
+            print(f"⚠️ Lưu vào artifact: {e}")
 
 if __name__ == "__main__":
     generate_pdf()

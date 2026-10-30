@@ -456,12 +456,12 @@ html_content = f"""<!DOCTYPE html>
 <main class="main">
   <div class="topbar">
     <div class="topbar-title">
-      <h2>Power BI Executive Dashboard — Chiến lược, Tổ chức & Tiến độ Dự án Mẫu BP BIM - TK</h2>
-      <span>Dữ liệu chuẩn hóa 2026 | Danh tính nhân sự & doanh nghiệp đã được bảo mật</span>
+      <h2>Power BI Executive Dashboard — Chiến lược, Tổ chức & Tiến độ Dự án Mẫu BP BIM - TK (2027)</h2>
+      <span>Kế hoạch Chiến lược Niên độ 2027 | Danh tính nhân sự & doanh nghiệp đã được bảo mật</span>
     </div>
     <div class="badge-bar">
       <a class="btn-dl" download="BIM_TK_PowerBI_DataModel_2026.xlsx" href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64_xlsx}">📥 Tải File Excel 8 Sheet Chuẩn Power BI (.xlsx)</a>
-      <a class="btn-dl" href="Bao_Cao_Chien_Luoc_Xay_Dung_Phong_BIM_2026.pdf" target="_blank" style="background: linear-gradient(135deg, #0284c7, #0369a1);">📄 Tải Báo Cáo Chiến Lược PDF (Trình Lãnh Đạo)</a>
+      <a class="btn-dl" href="Bao_Cao_Chien_Luoc_Xay_Dung_Phong_BIM_2027.pdf" target="_blank" style="background: linear-gradient(135deg, #0284c7, #0369a1);">📄 Tải Báo Cáo Chiến Lược PDF 2027 (Trình Lãnh Đạo)</a>
       <span class="badge">✔ Star Schema 8 Bảng</span>
       <span class="badge info">🔒 Tên nhân sự A, B, C</span>
       <span class="badge warn">⚡ Đã Fix #DIV/0! KPI</span>
