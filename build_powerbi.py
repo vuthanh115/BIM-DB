@@ -38,20 +38,17 @@ wb_src = openpyxl.load_workbook(SRC_FILE_STRATEGY, data_only=True)
 
 # 1. Bảng Định biên Nhân sự (02_Fact_NhanSu)
 nhan_su_nhom = [
-    ("GRP_MGT", "Quản lý chung", "TBP BIM - Thiết kế", "Nhân sự A", "Quản lý", 1, 1, 0, "Đang làm việc"),
-    ("GRP_BIM_XD", "BIM Xây dựng (KT - KC)", "Trưởng nhóm BIM XD", "Nhân sự B", "Leader", 1, 1, 0, "Đang làm việc"),
-    ("GRP_BIM_XD", "BIM Xây dựng (KT - KC)", "Kỹ sư BIM KT - KC", "Nhân sự H, Nhân sự I, Nhân sự J, Nhân sự K...", "Nhân viên", 14, 11, 1, "Biến động T04/2026 & Cần tuyển thêm"),
-    ("GRP_BIM_MEPF", "BIM MEPF", "Trưởng nhóm BIM MEPF", "Nhân sự C", "Leader", 1, 1, 0, "Đang làm việc"),
-    ("GRP_BIM_MEPF", "BIM MEPF", "Kỹ sư BIM MEPF", "Nhân sự L & KS BIM MEPF", "Nhân viên", 2, 2, 0, "Đang làm việc"),
-    ("GRP_BIM_HT", "BIM Hạ tầng", "Kỹ sư BIM Hạ tầng", "Nhân sự M", "Nhân viên", 2, 1, 1, "Đang làm việc"),
-    ("GRP_TK_KT", "Thiết kế Kiến trúc", "Chủ trì TK Kiến trúc", "Nhân sự E", "Chủ trì", 1, 1, 0, "Đã đủ chủ trì"),
-    ("GRP_TK_KT", "Thiết kế Kiến trúc", "Kiến trúc sư triển khai", "KTS Triển khai", "Nhân viên", 1, 1, 0, "Đang làm việc"),
-    ("GRP_TK_KC", "Thiết kế Kết cấu", "Chủ trì TK Kết cấu", "Nhân sự D", "Chủ trì", 1, 1, 0, "Đã đủ chủ trì"),
-    ("GRP_TK_KC", "Thiết kế Kết cấu", "Kỹ sư TK Kết cấu", "KS Triển khai KC", "Nhân viên", 2, 2, 0, "Đang làm việc"),
-    ("GRP_TK_ME", "Thiết kế Điện - Cơ (CTN, PCCC)", "Chủ trì TK Điện - Cơ", "Nhân sự F", "Chủ trì", 1, 1, 0, "Đã đủ chủ trì"),
-    ("GRP_TK_ME", "Thiết kế Điện - Cơ (CTN, PCCC)", "Kỹ sư TK Cơ - Điện", "KS Triển khai Cơ - Điện", "Nhân viên", 1, 1, 0, "Đang làm việc"),
-    ("GRP_TK_HVAC", "Thiết kế HVAC", "Chủ trì TK HVAC", "Nhân sự G", "Chủ trì", 1, 1, 0, "Đã đủ chủ trì"),
-    ("GRP_TK_HVAC", "Thiết kế HVAC", "Kỹ sư TK HVAC", "KS Triển khai HVAC", "Nhân viên", 1, 1, 0, "Đang làm việc"),
+    ("GRP_MGT", "Quản lý điều hành", "Trưởng bộ phận BIM - Thiết kế", "Nhân sự A", "Quản lý", 1, 1, 0, "Đang làm việc"),
+    ("GRP_TK_BIM_KC", "Thiết kế & BIM Kết cấu", "Lead Bộ môn Kết cấu", "Nhân sự D (Lead Kết Cấu)", "Lead Bộ Môn", 2, 2, 0, "Đang làm việc"),
+    ("GRP_TK_BIM_KC", "Thiết kế & BIM Kết cấu", "Kỹ sư TK Kết cấu & Kỹ sư BIM KC", "KS Triển khai KC & 3 KS BIM KC (Nhân sự J, K...)", "Nhân viên", 6, 5, 0, "Đã chia đều 3 KS BIM về bộ môn"),
+    ("GRP_TK_BIM_KT", "Thiết kế & BIM Kiến trúc", "Lead Bộ môn Kiến trúc", "Nhân sự E", "Lead Bộ Môn", 1, 1, 0, "Đang làm việc"),
+    ("GRP_TK_BIM_KT", "Thiết kế & BIM Kiến trúc", "KTS Triển khai & Kỹ sư BIM Kiến trúc", "KTS Triển khai & 3 KS BIM KT (Nhân sự H, I...)", "Nhân viên", 5, 4, 1, "Đã chia đều 3 KS BIM về bộ môn"),
+    ("GRP_TK_BIM_MEP", "Thiết kế & BIM Cơ điện (MEPF)", "Lead BIM MEPF", "Nhân sự C (Lead BIM MEPF)", "Lead Bộ Môn", 2, 2, 0, "Đang làm việc"),
+    ("GRP_TK_BIM_MEP", "Thiết kế & BIM Cơ điện (MEPF)", "Kỹ sư TK Cơ Điện & Kỹ sư BIM MEP", "KS Cơ Điện & 3 KS BIM MEP (Nhân sự L & KS MEP)", "Nhân viên", 5, 5, 0, "Đã chia đều 3 KS BIM về bộ môn"),
+    ("GRP_TK_BIM_HVAC", "Thiết kế & BIM HVAC", "Lead Bộ môn HVAC", "Nhân sự G", "Lead Bộ Môn", 1, 1, 0, "Đang làm việc"),
+    ("GRP_TK_BIM_HVAC", "Thiết kế & BIM HVAC", "Kỹ sư TK HVAC & Triển khai", "KS Triển khai HVAC", "Nhân viên", 2, 1, 0, "Đang làm việc"),
+    ("GRP_BIM_HT", "BIM Hạ tầng & CDE", "Lead BIM Hạ tầng & Quản trị CDE", "Nhân sự M", "Lead Bộ Môn", 2, 1, 0, "Đang làm việc"),
+    ("GRP_BIM_HT", "BIM Hạ tầng & CDE", "Kỹ sư BIM Hạ tầng & CDE", "2 KS BIM Hạ tầng & CDE (Điều phối chia đều sang)", "Nhân viên", 3, 3, 1, "Đã chia đều 2 KS BIM về bộ môn")
 ]
 df_hr = pd.DataFrame(nhan_su_nhom, columns=[
     "MaNhom", "TenNhom", "ViTri", "NhanSuChuChot", "CapBac",
@@ -135,7 +132,7 @@ for sh_name, (bm_code, bm_name, chu_tri) in ht_sheets.items():
             doc_rows.append((f"{bm_code}_{stt_int:02d}", bm_code, bm_name, chu_tri, stt_int, doc_str, doc_type, prio, status, pct, req_str_clean, purp_str, audit_note))
 
 df_docs = pd.DataFrame(doc_rows, columns=[
-    "MaTaiLieu", "MaBoMon", "TenBoMon", "ChuTriPhuTrach", "STT", "TenTaiLieu",
+    "MaTaiLieu", "MaBoMon", "TenBoMon", "LeadPhuTrach", "STT", "TenTaiLieu",
     "NhomTaiLieu", "MucDoUuTien", "TrangThaiTrienKhai", "TiLeHoanThanh_UocTinh",
     "MoTaYeuCau", "MucDichChienLuoc", "GhiChuRasoát"
 ])
@@ -232,6 +229,49 @@ df_cl = pd.DataFrame(cl_rows, columns=[
 ])
 
 # 7. Bảng Báo cáo Công việc Thực tế (07_Fact_BaoCaoCongViec)
+def clean_task_desc(text):
+    if not text:
+        return ""
+    import re
+    t = str(text)
+    # Subcontractors
+    t = re.sub(r'cùng nhà thầu Fuji', 'cùng Đơn vị gia công kết cấu thép', t, flags=re.IGNORECASE)
+    t = re.sub(r'cùng nhà thầu CPT', 'cùng Đơn vị gia công kết cấu thép', t, flags=re.IGNORECASE)
+    t = re.sub(r'cùng nhà thầu Đại Dũng', 'cùng Đơn vị gia công kết cấu thép', t, flags=re.IGNORECASE)
+    
+    # Specific codes and packages
+    t = re.sub(r'trạm nước thải2\.1a-BP16\.1a', 'trạm xử lý nước thải (Dự Án Mẫu)', t)
+    t = re.sub(r'trạm nước thải\s+2\.1a-BP16\.1a', 'trạm xử lý nước thải (Dự Án Mẫu)', t)
+    t = re.sub(r'vách bể\s+2\.1a-BP16\.1a', 'vách bể trạm xử lý nước thải (Dự Án Mẫu)', t)
+    t = re.sub(r'vách bể BP15\.2', 'vách bể kỹ thuật (Dự Án Mẫu)', t)
+    t = re.sub(r'trạm nước thải BP15\.1', 'trạm xử lý nước thải (Dự Án Mẫu)', t)
+    t = re.sub(r'nhà xỉ than BP12', 'nhà phụ trợ kỹ thuật (Dự Án Mẫu)', t)
+    t = re.sub(r'nhà nồi hơi BP12', 'nhà nồi hơi kỹ thuật (Dự Án Mẫu)', t)
+    t = re.sub(r'hạng mục\s+BP3, BP12', 'các hạng mục kết cấu thép Dự Án Mẫu', t)
+    t = re.sub(r'hạng mục\s+BP3', 'hạng mục mái xưởng A (Dự Án Mẫu)', t)
+    t = re.sub(r'hạng mục\s+MS1', 'hạng mục xưởng sản xuất (Dự Án Mẫu)', t)
+    t = re.sub(r'NP42', 'khu nhà điều hành (Dự Án Mẫu)', t)
+    t = re.sub(r'TH2', 'khu nhà xưởng B (Dự Án Mẫu)', t)
+    t = re.sub(r'TH1', 'khu nhà xưởng A (Dự Án Mẫu)', t)
+    t = re.sub(r'nhà văn phòng các xưởng', 'khu văn phòng (Dự Án Mẫu)', t)
+    t = re.sub(r'văn phòng các xưởng', 'khu văn phòng (Dự Án Mẫu)', t)
+    t = re.sub(r'nhà phụ trợ 1', 'nhà phụ trợ kỹ thuật (Dự Án Mẫu)', t)
+    t = re.sub(r'nhà xưởng E, G, H', 'cụm nhà xưởng mở rộng (Dự Án Mẫu)', t)
+    t = re.sub(r'các xưởng A, B, C, D, F', 'cụm nhà xưởng sản xuất chính (Dự Án Mẫu)', t)
+    t = re.sub(r'2 gói 3\.2B và 3\.2C', 'các phân đoạn móng (Dự Án Mẫu)', t)
+    t = re.sub(r'3\.2B và 3\.2C', 'các phân đoạn móng (Dự Án Mẫu)', t)
+    t = re.sub(r'(?:nhà\s+trạm|(?<!n)hà\s+trạm)\s*1,2,3,4', 'nhà trạm kỹ thuật (Dự Án Mẫu)', t)
+    t = re.sub(r'(?:nhà\s+trạm\s+nguồn|trạm\s+nguồn)\s*1,2,3,4', 'trạm nguồn điện kỹ thuật (Dự Án Mẫu)', t)
+    t = re.sub(r'trạm nguồn(?!\s+điện)', 'trạm nguồn điện kỹ thuật (Dự Án Mẫu)', t)
+    t = re.sub(r'nhà vệ sinh\s*1,2', 'khu vệ sinh (Dự Án Mẫu)', t)
+    t = re.sub(r'nhà\s+bảo vệ\s*1,2', 'nhà bảo vệ (Dự Án Mẫu)', t)
+    t = re.sub(r'thay đổi thiết kế dự án', 'thay đổi thiết kế Dự Án Mẫu', t)
+    t = re.sub(r'phục vụ triển khai IPC1', 'phục vụ hồ sơ nghiệm thu IPC (Dự Án Mẫu)', t)
+    t = re.sub(r'phục vụ IPC', 'phục vụ hồ sơ nghiệm thu IPC (Dự Án Mẫu)', t)
+    
+    t = re.sub(r'\s+', ' ', t).strip()
+    return t
+
 task_rows = []
 if os.path.exists(SRC_FILE_TASKS):
     wb_tasks = openpyxl.load_workbook(SRC_FILE_TASKS, data_only=True)
@@ -244,7 +284,7 @@ if os.path.exists(SRC_FILE_TASKS):
             if hm and str(hm).strip():
                 p_text = clean_text(hm)
                 if p_text.startswith("Dự án"):
-                    cur_project = "Dự án Mẫu"
+                    cur_project = "Dự Án Mẫu"
                 else:
                     cur_project = p_text
             if cv and str(cv).strip():
@@ -260,8 +300,8 @@ if os.path.exists(SRC_FILE_TASKS):
                 note = clean_text(ws_t.cell(r, 13).value)
 
                 if cur_project == "Dự án Mẫu" or cur_project.startswith("Dự án"):
-                    cur_project = "Dự án Mẫu"
-                    group_type = "Dự án Mẫu (Thi công & Triển khai)"
+                    cur_project = "Dự Án Mẫu"
+                    group_type = "Dự Án Mẫu (Thi công & Triển khai)"
                 elif any(cur_project.startswith(x) for x in ["Kiến Trúc", "Kết cấu", "Hệ thống điện", "Điều hoà", "Cấp thoát", "Phòng cháy"]):
                     group_type = "Chuẩn hóa Bộ môn Thiết kế"
                 else:
@@ -271,17 +311,17 @@ if os.path.exists(SRC_FILE_TASKS):
                     "MaCongViec": f"TSK_{len(task_rows)+1:03d}",
                     "NhomCongViec": group_type,
                     "HangMuc_DuAn": cur_project,
-                    "NoiDungCongViec": clean_text(cv),
+                    "NoiDungCongViec": clean_task_desc(clean_text(cv)),
                     "TinhTrang": st,
                     "PIC": pic,
                     "NgayBatDau": str(d_start)[:10] if d_start else "",
                     "NgayKetThuc": str(d_end)[:10] if d_end else "",
                     "HanHoanThanh": str(d_due)[:10] if d_due else "",
-                    "TienDoChiTiet": progress,
-                    "KetQuaChatLuong": quality,
-                    "RuiRo_KhoKhan": risk,
-                    "ToiUu_GiaiPhap": opt,
-                    "GhiChu": note
+                    "TienDoChiTiet": clean_task_desc(progress),
+                    "KetQuaChatLuong": clean_task_desc(quality),
+                    "RuiRo_KhoKhan": clean_task_desc(risk),
+                    "ToiUu_GiaiPhap": clean_task_desc(opt),
+                    "GhiChu": clean_task_desc(note)
                 })
 
 df_tasks = pd.DataFrame(task_rows)
@@ -298,7 +338,7 @@ dax_rows = [
     ("Diem KPI Quy Doi Q4", "06_Fact_KPI_Fixed", "Diem KPI Quy Doi = SUM('06_Fact_KPI_Fixed'[DiemQuyDoi_Q4_CapTren])", "Clustered Bar so sánh các vị trí"),
     ("Chu Ky Quy Trinh TB", "04_Fact_QuyTrinhSLA", "Chu Ky Quy Trinh TB = SUM('04_Fact_QuyTrinhSLA'[ThoiGian_TrungBinh_Ngay])", "Stacked Bar Chart (SLA 7 bước)"),
     ("Tong Cong Viec Thuc Te", "07_Fact_BaoCaoCongViec", "Tong Cong Viec Thuc Te = COUNTROWS('07_Fact_BaoCaoCongViec')", "Card tổng số 214 nhiệm vụ"),
-    ("Ty Le Hoan Thanh Du An", "07_Fact_BaoCaoCongViec", "Ty Le Hoan Thanh Du An = DIVIDE(CALCULATE(COUNTROWS('07_Fact_BaoCaoCongViec'), '07_Fact_BaoCaoCongViec'[TinhTrang] = \"Đã hoàn thành\", '07_Fact_BaoCaoCongViec'[NhomCongViec] = \"Dự án Mẫu (Thi công & Triển khai)\"), CALCULATE(COUNTROWS('07_Fact_BaoCaoCongViec'), '07_Fact_BaoCaoCongViec'[NhomCongViec] = \"Dự án Mẫu (Thi công & Triển khai)\"), 0)", "Gauge Chart tiến độ 7 dự án mẫu"),
+    ("Ty Le Hoan Thanh Du An", "07_Fact_BaoCaoCongViec", "Ty Le Hoan Thanh Du An = DIVIDE(CALCULATE(COUNTROWS('07_Fact_BaoCaoCongViec'), '07_Fact_BaoCaoCongViec'[TinhTrang] = \"Đã hoàn thành\", '07_Fact_BaoCaoCongViec'[NhomCongViec] = \"Dự án Mẫu (Thi công & Triển khai)\"), CALCULATE(COUNTROWS('07_Fact_BaoCaoCongViec'), '07_Fact_BaoCaoCongViec'[NhomCongViec] = \"Dự án Mẫu (Thi công & Triển khai)\"), 0)", "Gauge Chart tiến độ Dự Án Mẫu"),
     ("Cong Viec Qua Han", "07_Fact_BaoCaoCongViec", "Cong Viec Qua Han = CALCULATE(COUNTROWS('07_Fact_BaoCaoCongViec'), '07_Fact_BaoCaoCongViec'[TinhTrang] = \"Quá hạn\")", "Card cảnh báo sự cố rủi ro"),
 ]
 df_dax = pd.DataFrame(dax_rows, columns=["Ten_Measure_PowerBI", "Bang_Chua", "Cong_Thuc_DAX", "Ung_Dung_Visual"])
@@ -432,7 +472,7 @@ html_content = f"""<!DOCTYPE html>
       <label>🚀 Lọc Dự án / Hạng mục (Tab 5: Tiến độ)</label>
       <select id="slicerTaskProject" class="slicer-select" onchange="updateTasksFilter(true)">
         <option value="ALL">-- Tất cả Hạng mục (214 Việc) --</option>
-        <option value="Dự án Mẫu">Dự án Mẫu (87 Việc)</option>
+        <option value="Dự Án Mẫu">Dự Án Mẫu (87 Việc)</option>
         <option value="Chuẩn hóa Bộ môn Thiết kế">Chuẩn hóa 6 Bộ môn (115 Việc)</option>
         <option value="Quản trị & Tổ chức">Quản trị & Văn hóa (12 Việc)</option>
       </select>
@@ -505,22 +545,22 @@ html_content = f"""<!DOCTYPE html>
       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:12px; margin-top:8px;">
         <div style="background:rgba(255,255,255,0.03); border:1px solid #1f2937; border-radius:8px; padding:12px;">
           <div style="font-size:11px; text-transform:uppercase; color:#60a5fa; font-weight:700; margin-bottom:4px;">Cụm 1: Kết cấu & Biện pháp (SLA Shop: 5 Ngày)</div>
-          <div style="font-size:12.5px; font-weight:700; color:#fff;">Lead: Leader B + Chủ trì D</div>
+          <div style="font-size:12.5px; font-weight:700; color:#fff;">Lead: Lead Kết Cấu (Nhân sự D)</div>
           <div style="font-size:11px; color:#94a3b8; margin-top:4px;">• Nhân sự thực chiến: Nhân sự J, K<br/>• Mô hình BTCT, đà kiềng, móng, vách bể<br/>• Xuất bản vẽ Shop cốt thép & ván khuôn, bóc BOQ</div>
         </div>
         <div style="background:rgba(255,255,255,0.03); border:1px solid #1f2937; border-radius:8px; padding:12px;">
           <div style="font-size:11px; text-transform:uppercase; color:#34d399; font-weight:700; margin-bottom:4px;">Cụm 2: Kiến trúc & Tạo hình 3D</div>
-          <div style="font-size:12.5px; font-weight:700; color:#fff;">Lead: Leader B + Chủ trì E</div>
+          <div style="font-size:12.5px; font-weight:700; color:#fff;">Lead: Lead Kiến Trúc (Nhân sự E)</div>
           <div style="font-size:11px; color:#94a3b8; margin-top:4px;">• Nhân sự thực chiến: Nhân sự H, I<br/>• Mô hình kiến trúc LOD 300-350, chi tiết cấu tạo<br/>• Diễn họa 3D/VR, video tiến độ 4D hỗ trợ đấu thầu</div>
         </div>
         <div style="background:rgba(255,255,255,0.03); border:1px solid #1f2937; border-radius:8px; padding:12px;">
           <div style="font-size:11px; text-transform:uppercase; color:#fbbf24; font-weight:700; margin-bottom:4px;">Cụm 3: Cơ điện MEPF & Va chạm (SLA Combine: 10 Ngày)</div>
-          <div style="font-size:12.5px; font-weight:700; color:#fff;">Lead: Leader C + Chủ trì F, G</div>
-          <div style="font-size:11px; color:#94a3b8; margin-top:4px;">• Nhân sự thực chiến: Nhân sự L & KS MEP<br/>• Mô hình 4 hệ: Điện, HVAC, Cấp thoát, PCCC<br/>• Chủ trì ma trận Clash Detection, tối ưu cao độ trần</div>
+          <div style="font-size:12.5px; font-weight:700; color:#fff;">Lead: Lead BIM MEPF (Nhân sự C)</div>
+          <div style="font-size:11px; color:#94a3b8; margin-top:4px;">• Nhân sự thực chiến: Nhân sự L & KS MEP<br/>• Mô hình 4 hệ: Điện, HVAC, Cấp thoát, PCCC<br/>• Đầu mối kiểm soát ma trận Clash Detection, tối ưu cao độ trần</div>
         </div>
         <div style="background:rgba(255,255,255,0.03); border:1px solid #1f2937; border-radius:8px; padding:12px;">
           <div style="font-size:11px; text-transform:uppercase; color:#f472b6; font-weight:700; margin-bottom:4px;">Cụm 4: Hạ tầng & Quản trị CDE</div>
-          <div style="font-size:12.5px; font-weight:700; color:#fff;">Lead: Nhân sự M + TBP Nhân sự A</div>
+          <div style="font-size:12.5px; font-weight:700; color:#fff;">Lead: Lead BIM Hạ Tầng (Nhân sự M)</div>
           <div style="font-size:11px; color:#94a3b8; margin-top:4px;">• San nền, giao thông, hạ tầng ngoài nhà (Civil 3D)<br/>• Quản trị phân quyền CDE & liên kết đa bộ môn<br/>• Cơ chế xoay vòng hỗ trợ cao điểm linh hoạt</div>
         </div>
       </div>
@@ -620,8 +660,8 @@ html_content = f"""<!DOCTYPE html>
       </div>
     </div>
     <div class="panel">
-      <div class="panel-header"><h3>Chi tiết Tiến độ Công việc (Dự án Mẫu & Hệ thống)</h3><span id="tasksCountLabel" style="color:var(--accent-cyan); font-weight:700;"></span></div>
-      <div class="table-wrap"><table><thead><tr><th>Mã</th><th>Nhóm</th><th>Dự án Mẫu / Hạng mục</th><th>Nội dung Công việc</th><th>Tình trạng</th><th>Bắt đầu</th><th>Kết thúc</th><th>Hạn</th><th>Tiến độ & Kết quả</th><th>Rủi ro / Ghi chú</th></tr></thead><tbody id="tblTasksBody"></tbody></table></div>
+      <div class="panel-header"><h3>Chi tiết Tiến độ Công việc (Dự Án Mẫu & Hệ thống)</h3><span id="tasksCountLabel" style="color:var(--accent-cyan); font-weight:700;"></span></div>
+      <div class="table-wrap"><table><thead><tr><th>Mã</th><th>Nhóm</th><th>Dự Án Mẫu / Hạng mục</th><th>Nội dung Công việc</th><th>Tình trạng</th><th>Bắt đầu</th><th>Kết thúc</th><th>Hạn</th><th>Tiến độ & Kết quả</th><th>Rủi ro / Ghi chú</th></tr></thead><tbody id="tblTasksBody"></tbody></table></div>
     </div>
   </section>
 </main>
@@ -663,7 +703,7 @@ function initTables() {{
   document.getElementById('tblHRBody').innerHTML = hrData.map(r => `
     <tr>
       <td><b>${{r.TenNhom}}</b></td><td>${{r.ViTri}}</td><td>${{r.NhanSuChuChot}}</td>
-      <td><span class="pill ${{r.CapBac==='Chủ trì'?'pill-a':(r.CapBac==='Quản lý'?'pill-p1':'pill-p2')}}">${{r.CapBac}}</span></td>
+      <td><span class="pill ${{r.CapBac==='Lead Bộ Môn'?'pill-a':(r.CapBac==='Quản lý'?'pill-p1':'pill-p2')}}">${{r.CapBac}}</span></td>
       <td><b>${{r.DinhBienKeHoach}}</b></td><td>${{r.NhanSuHienTai_T04_2026}}</td>
       <td style="color:${{r.NghiViec_T04_2026>0?'#fb7185':'#94a3b8'}}">${{r.NghiViec_T04_2026}}</td>
       <td><b>${{r.NhanSuConLai}}</b></td>
@@ -696,12 +736,12 @@ function updateDocsFilter(autoSwitch = false) {{
   if (labelEl) {{
     labelEl.innerText = bm === 'ALL'
       ? `Đang hiển thị toàn bộ 115 tài liệu chuẩn hóa 6 bộ môn`
-      : `Đang lọc Bộ môn: ${{bm}} (${{filtered.length}} tài liệu) | Chủ trì phụ trách: ${{leadMap[bm] || 'Chưa định danh'}}`;
+      : `Đang lọc Bộ môn: ${{bm}} (${{filtered.length}} tài liệu) | Lead phụ trách: ${{leadMap[bm] || 'Chưa định danh'}}`;
   }}
 
   document.getElementById('tblDocsBody').innerHTML = filtered.map(r => `
     <tr>
-      <td><b>${{r.MaTaiLieu}}</b></td><td>${{r.TenBoMon}}</td><td><b>${{r.ChuTriPhuTrach}}</b></td><td>${{r.TenTaiLieu}}</td>
+      <td><b>${{r.MaTaiLieu}}</b></td><td>${{r.TenBoMon}}</td><td><b>${{r.LeadPhuTrach}}</b></td><td>${{r.TenTaiLieu}}</td>
       <td>${{r.NhomTaiLieu}}</td><td><span class="pill ${{r.MucDoUuTien.startsWith('P1')?'pill-p1':'pill-p2'}}">${{r.MucDoUuTien}}</span></td>
       <td>${{r.TrangThaiTrienKhai}}</td><td style="color:${{r.GhiChuRasoát.includes('Lưu ý')?'#fbbf24':'#94a3b8'}}">${{r.GhiChuRasoát}}</td>
     </tr>
@@ -755,8 +795,8 @@ function updateTasksFilter(autoSwitch = false) {{
   }}
   let filtered = taskData;
   if (proj !== 'ALL') {{
-    if (proj === 'Dự án Mẫu') {{
-      filtered = filtered.filter(t => t.HangMuc_DuAn === 'Dự án Mẫu' || t.NhomCongViec === 'Dự án Mẫu (Thi công & Triển khai)');
+    if (proj === 'Dự Án Mẫu') {{
+      filtered = filtered.filter(t => t.HangMuc_DuAn === 'Dự Án Mẫu' || t.NhomCongViec === 'Dự Án Mẫu (Thi công & Triển khai)');
     }} else if (proj === 'Chuẩn hóa Bộ môn Thiết kế' || proj === 'Quản trị & Tổ chức') {{
       filtered = filtered.filter(t => t.NhomCongViec === proj);
     }} else {{
@@ -773,7 +813,7 @@ function updateTasksFilter(autoSwitch = false) {{
   const labelEl = document.getElementById('tasksCountLabel');
   if (labelEl) {{
     labelEl.innerHTML = proj === 'ALL'
-      ? `Đang hiển thị toàn bộ 214 công việc (Dự án Mẫu & Hệ thống) | Hoàn thành: ${{doneCount}} | Đang làm: ${{inProgCount}} | Quá hạn: ${{overdueCount}}`
+      ? `Đang hiển thị toàn bộ 214 công việc (Dự Án Mẫu & Hệ thống) | Hoàn thành: ${{doneCount}} | Đang làm: ${{inProgCount}} | Quá hạn: ${{overdueCount}}`
       : `<b style="color:var(--accent-cyan); font-size:13px;">${{proj}}</b>: ${{filtered.length}} việc | Hoàn thành: <b style="color:#34d399">${{doneCount}} (${{pct}}%)</b> | Đang làm: ${{inProgCount}}${{overdueCount > 0 ? ` | Quá hạn: <b style="color:#f87171">${{overdueCount}}</b>` : ''}}`;
   }}
 
@@ -800,8 +840,8 @@ function updateTasksFilter(autoSwitch = false) {{
 
   if (chartProjectsInstance) {{
     if (proj === 'ALL') {{
-      const projNames = ['Dự án Mẫu (87 việc)', 'Chuẩn hóa 6 Bộ môn (115 việc)', 'Quản trị & Văn hóa (12 việc)'];
-      const projGroupKeys = ['Dự án Mẫu (Thi công & Triển khai)', 'Chuẩn hóa Bộ môn Thiết kế', 'Quản trị & Tổ chức'];
+      const projNames = ['Dự Án Mẫu (87 việc)', 'Chuẩn hóa 6 Bộ môn (115 việc)', 'Quản trị & Văn hóa (12 việc)'];
+      const projGroupKeys = ['Dự Án Mẫu (Thi công & Triển khai)', 'Chuẩn hóa Bộ môn Thiết kế', 'Quản trị & Tổ chức'];
       chartProjectsInstance.data.labels = projNames;
       chartProjectsInstance.data.datasets[0].data = projGroupKeys.map(k => taskData.filter(t => t.NhomCongViec === k && t.TinhTrang === 'Đã hoàn thành').length);
       chartProjectsInstance.data.datasets[1].data = projGroupKeys.map(k => taskData.filter(t => t.NhomCongViec === k && (t.TinhTrang === 'Đang thực hiện' || t.TinhTrang === 'Quá hạn' || t.TinhTrang === 'Chưa thực hiện')).length);
@@ -916,8 +956,8 @@ window.addEventListener('DOMContentLoaded', () => {{
   }});
 
   // 7. Chart Projects
-  const projNames = ['Dự án Mẫu (87 việc)', 'Chuẩn hóa 6 Bộ môn (115 việc)', 'Quản trị & Văn hóa (12 việc)'];
-  const projGroupKeys = ['Dự án Mẫu (Thi công & Triển khai)', 'Chuẩn hóa Bộ môn Thiết kế', 'Quản trị & Tổ chức'];
+  const projNames = ['Dự Án Mẫu (87 việc)', 'Chuẩn hóa 6 Bộ môn (115 việc)', 'Quản trị & Văn hóa (12 việc)'];
+  const projGroupKeys = ['Dự Án Mẫu (Thi công & Triển khai)', 'Chuẩn hóa Bộ môn Thiết kế', 'Quản trị & Tổ chức'];
   chartProjectsInstance = new Chart(document.getElementById('chartProjects'), {{
     type: 'bar',
     data: {{
