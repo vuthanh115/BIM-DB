@@ -586,7 +586,7 @@ html_content = """<!DOCTYPE html>
         <td><b>Cụm 1: Kết Cấu & Biện Pháp Thi Công</b></td>
         <td><b>Leader BIM XD (Nhân sự B)</b><br/>& Chủ trì KC (Nhân sự D)</td>
         <td>Nhân sự J, Nhân sự K (KS BIM Kết Cấu)</td>
-        <td>• Mô hình kết cấu BTCT, đà kiềng, móng, vách bể.<br/>• Xuất bản vẽ Shop cốt thép & ván khuôn đạt SLA <b>5.6 ngày</b>.<br/>• Bóc tách khối lượng thép & bê tông phục vụ mua hàng.</td>
+        <td>• Mô hình kết cấu BTCT, đà kiềng, móng, vách bể.<br/>• Xuất bản vẽ Shop cốt thép & ván khuôn đạt SLA <b>Chuẩn 5 Ngày</b>.<br/>• Bóc tách khối lượng thép & bê tông phục vụ mua hàng.</td>
       </tr>
       <tr>
         <td><b>Cụm 2: Kiến Trúc & Tạo Hình 3D</b></td>
@@ -598,7 +598,7 @@ html_content = """<!DOCTYPE html>
         <td><b>Cụm 3: Cơ Điện MEPF & Phối Hợp Va Chạm</b></td>
         <td><b>Leader BIM MEPF (Nhân sự C)</b><br/>& Chủ trì Điện / HVAC (F, G)</td>
         <td>Nhân sự L & các KS BIM MEPF</td>
-        <td>• Mô hình 4 hệ MEPF: Điện, HVAC, Cấp thoát nước, PCCC.<br/>• Chủ trì ma trận xung đột (Clash Matrix) đạt SLA <b>10.1 ngày</b>.<br/>• Tối ưu cao độ trần kỹ thuật và tuyến ống trục đứng.</td>
+        <td>• Mô hình 4 hệ MEPF: Điện, HVAC, Cấp thoát nước, PCCC.<br/>• Chủ trì ma trận xung đột (Clash Matrix) đạt SLA <b>Chuẩn 10 Ngày</b>.<br/>• Tối ưu cao độ trần kỹ thuật và tuyến ống trục đứng.</td>
       </tr>
       <tr>
         <td><b>Cụm 4: Hạ Tầng Kỹ Thuật & Quản Trị CDE</b></td>
@@ -615,7 +615,7 @@ html_content = """<!DOCTYPE html>
     <div class="stat-card emerald">
       <div class="stat-title" style="color:#059669;">1. Cơ Chế Xoay Vòng Hỗ Trợ Đột Xuất</div>
       <div class="stat-desc">
-        Các Kỹ sư trong 4 Cụm không bị đóng đinh cố định. Khi dự án bước vào <b>giai đoạn móng/hầm cao điểm</b>, Leader sẽ dồn lực nhân sự hỗ trợ Cụm Kết cấu (hoàn thành Shop drawing trong SLA 5.6 ngày). Khi bước vào <b>giai đoạn hoàn thiện cơ điện</b>, nhân sự chuyển sang hỗ trợ Cụm MEPF (Combine va chạm trong SLA 10.1 ngày).
+        Các Kỹ sư trong 4 Cụm không bị đóng đinh cố định. Khi dự án bước vào <b>giai đoạn móng/hầm cao điểm</b>, Leader sẽ dồn lực nhân sự hỗ trợ Cụm Kết cấu (hoàn thành Shop drawing trong SLA Chuẩn 5 Ngày). Khi bước vào <b>giai đoạn hoàn thiện cơ điện</b>, nhân sự chuyển sang hỗ trợ Cụm MEPF (Combine va chạm trong SLA Chuẩn 10 Ngày).
       </div>
     </div>
     <div class="stat-card blue">
@@ -687,37 +687,37 @@ html_content = """<!DOCTYPE html>
   <h2 class="sub-title">⏱️ Cam Kết Thời Gian Phục Vụ (SLA 7 Bước Khép Kín)</h2>
   
   <div class="step-flow">
-    <div class="step-node"><div class="step-num">B1</div><div class="step-name">Tiếp nhận Đầu vào</div><div class="step-time">0.5 Ngày</div></div>
-    <div class="step-node"><div class="step-num">B2</div><div class="step-name">Hoạch định BEP</div><div class="step-time">0.5 Ngày</div></div>
-    <div class="step-node"><div class="step-num">B3</div><div class="step-name">Phân công Chi tiết</div><div class="step-time">0.5 Ngày</div></div>
-    <div class="step-node active"><div class="step-num">B4</div><div class="step-name">Thực thi Mô hình</div><div class="step-time">3 - 6 Ngày</div></div>
-    <div class="step-node"><div class="step-num">B5</div><div class="step-name">Kiểm tra QA/QC</div><div class="step-time">0.5 - 1 Ngày</div></div>
-    <div class="step-node"><div class="step-num">B6</div><div class="step-name">Bàn giao & Ký duyệt</div><div class="step-time">0.5 Ngày</div></div>
-    <div class="step-node"><div class="step-num">B7</div><div class="step-name">Đóng & Lưu CDE</div><div class="step-time">0.2 Ngày</div></div>
+    <div class="step-node"><div class="step-num">B1</div><div class="step-name">Tiếp nhận Đầu vào</div><div class="step-time">4 Giờ</div></div>
+    <div class="step-node"><div class="step-num">B2</div><div class="step-name">Hoạch định BEP</div><div class="step-time">4 Giờ</div></div>
+    <div class="step-node"><div class="step-num">B3</div><div class="step-name">Phân công Chi tiết</div><div class="step-time">4 Giờ</div></div>
+    <div class="step-node active"><div class="step-num">B4</div><div class="step-name">Thực thi Mô hình</div><div class="step-time">3 - 5 Ngày</div></div>
+    <div class="step-node"><div class="step-num">B5</div><div class="step-name">Kiểm tra QA/QC</div><div class="step-time">1 Ngày (8h)</div></div>
+    <div class="step-node"><div class="step-num">B6</div><div class="step-name">Bàn giao & Ký duyệt</div><div class="step-time">4 Giờ</div></div>
+    <div class="step-node"><div class="step-num">B7</div><div class="step-name">Đóng & Lưu CDE</div><div class="step-time">2 Giờ</div></div>
   </div>
 
   <table class="data-table">
     <thead>
       <tr>
         <th style="width: 25%;">Quy Trình Dịch Vụ</th>
-        <th style="width: 20%;">Thời Gian SLA Chuẩn</th>
-        <th style="width: 55%;">Cam Kết Đầu Ra (Deliverables) Cho Công Trường</th>
+        <th style="width: 25%;">Thời Gian SLA Cam Kết</th>
+        <th style="width: 50%;">Cam Kết Đầu Ra (Deliverables) Cho Công Trường</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td><b>1. Quy trình BIM Shop Drawing</b></td>
-        <td><b>5.6 Ngày làm việc</b></td>
+        <td><b style="color:#0284c7; font-size:9pt;">Chuẩn 5 Ngày làm việc</b><br/><span style="color:#64748b; font-size:7pt;">(Chuẩn bị 1d + Dựng Shop 3d + Duyệt 1d)</span></td>
         <td>Bản vẽ Shop kết cấu, đà kiềng, cốt thép chi tiết, ván khuôn đạt chuẩn thi công, không còn sai lệch kích thước hình học.</td>
       </tr>
       <tr>
         <td><b>2. Quy trình BIM Combine MEPF</b></td>
-        <td><b>10.1 Ngày làm việc</b></td>
+        <td><b style="color:#059669; font-size:9pt;">Chuẩn 10 Ngày làm việc</b><br/><span style="color:#64748b; font-size:7pt;">(Ma trận 2d + Clash 5d + Họp xử lý 3d)</span></td>
         <td>Báo cáo va chạm (Clash Detection Report), giải quyết 100% xung đột ống gió, thang máng cáp, ống nước trước khi thi công.</td>
       </tr>
       <tr>
         <td><b>3. Quy trình BIM QS (Bóc Khối lượng)</b></td>
-        <td><b>9.1 Ngày làm việc</b></td>
+        <td><b style="color:#d97706; font-size:9pt;">Chuẩn 7 Ngày làm việc</b><br/><span style="color:#64748b; font-size:7pt;">(Rà soát 1d + Bóc 5D 5d + Đối soát 1d)</span></td>
         <td>Bảng tổng hợp khối lượng bóc tách từ mô hình 3D (Bê tông, thép, ván khuôn, thiết bị) sai số &lt; 2% so với thực tế.</td>
       </tr>
     </tbody>
@@ -844,7 +844,7 @@ html_content = """<!DOCTYPE html>
         <td>
           • Triển khai trọn vẹn 87 nhiệm vụ thực chiến trên Dự án Mẫu.<br/>
           • Xóa bỏ 100% va chạm (Zero Clash) kết cấu - cơ điện trước khi thi công.<br/>
-          • Kiểm soát tuân thủ SLA: Shop 5.6 ngày, Combine 10.1 ngày, QS 9.1 ngày.
+          • Kiểm soát tuân thủ SLA: Shop 5 ngày, Combine 10 ngày, QS 7 ngày.
         </td>
       </tr>
       <tr>
@@ -878,7 +878,7 @@ html_content = """<!DOCTYPE html>
   <div class="box-highlight amber">
     <div class="box-title">3. Ban Hành Quy Chế Phối Hợp Bắt Buộc Theo Cam Kết SLA</div>
     <div class="box-desc">
-      Ban hành văn bản pháp quy nội bộ quy định thời gian phối hợp chuẩn (BIM Shop 5.6 ngày, BIM Combine 10.1 ngày, BIM QS 9.1 ngày) giữa Phòng BIM, Ban QLDA và Ban Chỉ huy công trường.
+      Ban hành văn bản pháp quy nội bộ quy định thời gian phối hợp chuẩn (BIM Shop 5 ngày, BIM Combine 10 ngày, BIM QS 7 ngày) giữa Phòng BIM, Ban QLDA và Ban Chỉ huy công trường.
     </div>
   </div>
 

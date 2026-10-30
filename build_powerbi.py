@@ -537,7 +537,7 @@ html_content = f"""<!DOCTYPE html>
       </div>
       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:12px; margin-top:8px;">
         <div style="background:rgba(255,255,255,0.03); border:1px solid #1f2937; border-radius:8px; padding:12px;">
-          <div style="font-size:11px; text-transform:uppercase; color:#60a5fa; font-weight:700; margin-bottom:4px;">Cụm 1: Kết cấu & Biện pháp (SLA 5.6d)</div>
+          <div style="font-size:11px; text-transform:uppercase; color:#60a5fa; font-weight:700; margin-bottom:4px;">Cụm 1: Kết cấu & Biện pháp (SLA Shop: 5 Ngày)</div>
           <div style="font-size:12.5px; font-weight:700; color:#fff;">Lead: Leader B + Chủ trì D</div>
           <div style="font-size:11px; color:#94a3b8; margin-top:4px;">• Nhân sự thực chiến: Nhân sự J, K<br/>• Mô hình BTCT, đà kiềng, móng, vách bể<br/>• Xuất bản vẽ Shop cốt thép & ván khuôn, bóc BOQ</div>
         </div>
@@ -547,7 +547,7 @@ html_content = f"""<!DOCTYPE html>
           <div style="font-size:11px; color:#94a3b8; margin-top:4px;">• Nhân sự thực chiến: Nhân sự H, I<br/>• Mô hình kiến trúc LOD 300-350, chi tiết cấu tạo<br/>• Diễn họa 3D/VR, video tiến độ 4D hỗ trợ đấu thầu</div>
         </div>
         <div style="background:rgba(255,255,255,0.03); border:1px solid #1f2937; border-radius:8px; padding:12px;">
-          <div style="font-size:11px; text-transform:uppercase; color:#fbbf24; font-weight:700; margin-bottom:4px;">Cụm 3: Cơ điện MEPF & Va chạm (SLA 10.1d)</div>
+          <div style="font-size:11px; text-transform:uppercase; color:#fbbf24; font-weight:700; margin-bottom:4px;">Cụm 3: Cơ điện MEPF & Va chạm (SLA Combine: 10 Ngày)</div>
           <div style="font-size:12.5px; font-weight:700; color:#fff;">Lead: Leader C + Chủ trì F, G</div>
           <div style="font-size:11px; color:#94a3b8; margin-top:4px;">• Nhân sự thực chiến: Nhân sự L & KS MEP<br/>• Mô hình 4 hệ: Điện, HVAC, Cấp thoát, PCCC<br/>• Chủ trì ma trận Clash Detection, tối ưu cao độ trần</div>
         </div>
@@ -585,9 +585,9 @@ html_content = f"""<!DOCTYPE html>
           <div style="font-size:12px; font-weight:700; color:#e2e8f0; margin-bottom:8px;">⏱️ Ý NGHĨA CAM KẾT MỨC DỊCH VỤ SLA 7 BƯỚC</div>
           <div style="font-size:11.5px; line-height:1.6; color:#cbd5e1;">
             • <b>SLA (Service Level Agreement):</b> Hợp đồng cam kết tiến độ và chất lượng nghiệm thu giữa Phòng BIM với Công trường.<br/>
-            • <b>Quy trình Shop Drawing (5.6 Ngày):</b> Chuẩn bị (0.5d) ➔ Lập KH (0.5d) ➔ Dựng Model & Shop (3.0d) ➔ QC (0.5d) ➔ Phát hành (1.0d).<br/>
-            • <b>Quy trình Combine (10.1 Ngày):</b> Liên kết 3D ➔ Báo cáo va chạm ➔ Họp chốt phương án ➔ Phát hành hồ sơ phối hợp.<br/>
-            • <b>Quy trình QS (9.1 Ngày):</b> Link tham biến BOQ ➔ Trích xuất khối lượng dầm, cột, thép, bê tông chuẩn xác.
+            • <b>Quy trình Shop Drawing (Chuẩn 5 Ngày):</b> Rà soát & BEP (4h+4h) ➔ Dựng Model & Shop (3 ngày) ➔ QC & Ký duyệt (8h+4h).<br/>
+            • <b>Quy trình Combine MEPF (Chuẩn 10 Ngày):</b> Ma trận va chạm (2 ngày) ➔ Dựng đa hệ & Clash (5 ngày) ➔ Họp xử lý & Phát hành (3 ngày).<br/>
+            • <b>Quy trình QS Bóc Khối Lượng (Chuẩn 7 Ngày):</b> Mapping cấu kiện (1 ngày) ➔ Bóc 5D tự động (5 ngày) ➔ Đối soát sai số & Bàn giao (1 ngày).
           </div>
         </div>
       </div>
@@ -903,11 +903,11 @@ window.addEventListener('DOMContentLoaded', () => {{
   chartSLAInstance = new Chart(document.getElementById('chartSLA'), {{
     type: 'bar',
     data: {{
-      labels: ['1. Chuẩn bị', '2. Hoạch định', '3. KH Chi tiết', '4. Thực thi', '5. Kiểm soát CL', '6. Phát hành', '7. Kết thúc'],
+      labels: ['1. Đầu vào (4h)', '2. BEP (4h)', '3. Giao việc (4h)', '4. Thực thi (3-5d)', '5. QA/QC (8h)', '6. Bàn giao (4h)', '7. Đóng CDE (2h)'],
       datasets: [
-        {{ label: 'QT BIM Shop (TB 5.6 ngày)', data: [0.5, 0.5, 0.5, 3.0, 0.5, 1.0, 0.1], backgroundColor: '#06b6d4' }},
-        {{ label: 'QT BIM Combine (TB 10.1 ngày)', data: [0.5, 0.5, 0.5, 5.0, 0.5, 3.0, 0.1], backgroundColor: '#8b5cf6' }},
-        {{ label: 'QT BIM QS (TB 9.1 ngày)', data: [0.5, 0.5, 0.5, 6.0, 0.5, 1.0, 0.1], backgroundColor: '#f59e0b' }}
+        {{ label: 'QT BIM Shop (Chuẩn 5 Ngày)', data: [0.5, 0.5, 0.5, 2.5, 0.5, 0.4, 0.1], backgroundColor: '#06b6d4' }},
+        {{ label: 'QT BIM Combine (Chuẩn 10 Ngày)', data: [0.5, 0.5, 0.5, 5.0, 1.0, 2.4, 0.1], backgroundColor: '#8b5cf6' }},
+        {{ label: 'QT BIM QS (Chuẩn 7 Ngày)', data: [0.5, 0.5, 0.5, 4.0, 0.5, 0.9, 0.1], backgroundColor: '#f59e0b' }}
       ]
     }},
     options: {{ responsive: true, maintainAspectRatio: false }}
