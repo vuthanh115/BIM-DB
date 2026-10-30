@@ -2,7 +2,7 @@
 """
 Script tạo file PDF Báo cáo Phương Án Kiện Toàn Tổ Chức & Tối Ưu Hóa Vận Hành Phòng BIM (Năm 2027)
 Dành cho việc trình bày và bảo vệ phương án trước Ban Tổng Giám Đốc / HĐQT
-- Giữ nguyên quy mô định biên hiện tại (Tổng 30, hiện có 26, đang làm việc 24)
+- Giữ nguyên quy mô định biên hiện tại (24 nhân sự đang làm việc)
 - Setup lại cơ chế vận hành theo 4 Cụm Chiến Đấu Squads do các Leader bộ môn làm hạt nhân
 - Bộ 4 chỉ số KPI thực tế (Tiết kiệm chi phí ngoài, 100% Tự chủ Shop, <1% Sửa chữa, 70% Tái sử dụng)
 Sử dụng Playwright (Chromium) xuất PDF chuẩn in ấn A4 (7 trang màu Executive).
@@ -466,7 +466,7 @@ html_content = """<!DOCTYPE html>
   <div class="box-highlight blue">
     <div class="box-title"><svg class="box-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14l-2-7V4h1V2H6v2h1v6z"/></svg> Định Hướng Setup: Tối Ưu Hóa Nguồn Lực Hiện Hữu</div>
     <div class="box-desc">
-      Tận dụng tối đa bộ máy hiện có <b>(tổng định biên 30, thực tế 26, đang làm việc 24 nhân sự)</b>. Là <b>công ty thiết kế chuyển đổi số toàn diện lên BIM</b>, <b>11 kỹ sư BIM chuyên trách được điều phối chia đều về các bộ môn thiết kế</b> (3 KS Kết cấu, 3 KS Kiến trúc, 3 KS Cơ điện MEPF, 2 KS Hạ tầng & CDE) cùng làm việc trực tiếp với các Lead bộ môn để triển khai mô hình 3D ngay từ đầu, xóa bỏ hoàn toàn độ trễ giữa thiết kế và BIM.
+      Tận dụng tối đa bộ máy hiện có <b>(24 nhân sự đang làm việc)</b>. Là <b>công ty thiết kế chuyển đổi số toàn diện lên BIM</b>, <b>11 kỹ sư BIM chuyên trách được điều phối chia đều về các bộ môn thiết kế</b> (3 KS Kết cấu, 3 KS Kiến trúc, 3 KS Cơ điện MEPF, 2 KS Hạ tầng & CDE) cùng làm việc trực tiếp với các Lead bộ môn để triển khai mô hình 3D ngay từ đầu, xóa bỏ hoàn toàn độ trễ giữa thiết kế và BIM.
     </div>
   </div>
 
