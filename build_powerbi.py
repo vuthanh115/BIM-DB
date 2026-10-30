@@ -242,7 +242,20 @@ if os.path.exists(SRC_FILE_TASKS):
             hm = ws_t.cell(r, 2).value
             cv = ws_t.cell(r, 3).value
             if hm and str(hm).strip():
-                cur_project = clean_text(hm)
+                p_text = clean_text(hm)
+                if p_text.startswith("Dự án"):
+                    project_mapping = {
+                        "Dự án Mega": "Dự án Mẫu 01 (Mega)",
+                        "Dự án Kim Tín giai đoạn 3": "Dự án Mẫu 02 (Kim Tín GĐ3)",
+                        "Dự án APF": "Dự án Mẫu 03 (APF)",
+                        "Dự án CasaFlora2": "Dự án Mẫu 04 (CasaFlora2)",
+                        "Dự án Suncasa": "Dự án Mẫu 05 (Suncasa)",
+                        "Dự án các trạm Phú Quốc": "Dự án Mẫu 06 (Phú Quốc)",
+                        "Dự án BB052": "Dự án Mẫu 07 (BB052)"
+                    }
+                    cur_project = project_mapping.get(p_text, p_text.replace("Dự án ", "Dự án Mẫu - "))
+                else:
+                    cur_project = p_text
             if cv and str(cv).strip():
                 pic = clean_text(ws_t.cell(r, 1).value or "P. BIM")
                 st = str(ws_t.cell(r, 4).value or "Chưa thực hiện").strip()
@@ -255,8 +268,8 @@ if os.path.exists(SRC_FILE_TASKS):
                 opt = clean_text(ws_t.cell(r, 11).value)
                 note = clean_text(ws_t.cell(r, 13).value)
 
-                if cur_project.startswith("Dự án"):
-                    group_type = "Dự án Thi công"
+                if cur_project.startswith("Dự án Mẫu"):
+                    group_type = "Dự án Mẫu (Thi công & Triển khai)"
                 elif any(cur_project.startswith(x) for x in ["Kiến Trúc", "Kết cấu", "Hệ thống điện", "Điều hoà", "Cấp thoát", "Phòng cháy"]):
                     group_type = "Chuẩn hóa Bộ môn Thiết kế"
                 else:
@@ -293,7 +306,7 @@ dax_rows = [
     ("Diem KPI Quy Doi Q4", "06_Fact_KPI_Fixed", "Diem KPI Quy Doi = SUM('06_Fact_KPI_Fixed'[DiemQuyDoi_Q4_CapTren])", "Clustered Bar so sánh các vị trí"),
     ("Chu Ky Quy Trinh TB", "04_Fact_QuyTrinhSLA", "Chu Ky Quy Trinh TB = SUM('04_Fact_QuyTrinhSLA'[ThoiGian_TrungBinh_Ngay])", "Stacked Bar Chart (SLA 7 bước)"),
     ("Tong Cong Viec Thuc Te", "07_Fact_BaoCaoCongViec", "Tong Cong Viec Thuc Te = COUNTROWS('07_Fact_BaoCaoCongViec')", "Card tổng số 214 nhiệm vụ"),
-    ("Ty Le Hoan Thanh Du An", "07_Fact_BaoCaoCongViec", "Ty Le Hoan Thanh Du An = DIVIDE(CALCULATE(COUNTROWS('07_Fact_BaoCaoCongViec'), '07_Fact_BaoCaoCongViec'[TinhTrang] = \"Đã hoàn thành\", '07_Fact_BaoCaoCongViec'[NhomCongViec] = \"Dự án Thi công\"), CALCULATE(COUNTROWS('07_Fact_BaoCaoCongViec'), '07_Fact_BaoCaoCongViec'[NhomCongViec] = \"Dự án Thi công\"), 0)", "Gauge Chart tiến độ 7 dự án"),
+    ("Ty Le Hoan Thanh Du An", "07_Fact_BaoCaoCongViec", "Ty Le Hoan Thanh Du An = DIVIDE(CALCULATE(COUNTROWS('07_Fact_BaoCaoCongViec'), '07_Fact_BaoCaoCongViec'[TinhTrang] = \"Đã hoàn thành\", '07_Fact_BaoCaoCongViec'[NhomCongViec] = \"Dự án Mẫu (Thi công & Triển khai)\"), CALCULATE(COUNTROWS('07_Fact_BaoCaoCongViec'), '07_Fact_BaoCaoCongViec'[NhomCongViec] = \"Dự án Mẫu (Thi công & Triển khai)\"), 0)", "Gauge Chart tiến độ 7 dự án mẫu"),
     ("Cong Viec Qua Han", "07_Fact_BaoCaoCongViec", "Cong Viec Qua Han = CALCULATE(COUNTROWS('07_Fact_BaoCaoCongViec'), '07_Fact_BaoCaoCongViec'[TinhTrang] = \"Quá hạn\")", "Card cảnh báo sự cố rủi ro"),
 ]
 df_dax = pd.DataFrame(dax_rows, columns=["Ten_Measure_PowerBI", "Bang_Chua", "Cong_Thuc_DAX", "Ung_Dung_Visual"])
@@ -399,7 +412,7 @@ html_content = f"""<!DOCTYPE html>
     <button id="btnNavRaci" class="nav-btn" onclick="switchTab('tab-raci', this)">🎯 2. Ma trận RACI & SLA</button>
     <button id="btnNavDocs" class="nav-btn" onclick="switchTab('tab-docs', this)">📁 3. Hệ thống 115 Tài liệu</button>
     <button id="btnNavKpi" class="nav-btn" onclick="switchTab('tab-kpi', this)">🏆 4. Đánh giá KPI (Đã Fix)</button>
-    <button id="btnNavTasks" class="nav-btn" onclick="switchTab('tab-tasks', this)">🚀 5. Tiến độ Dự án Thực tế</button>
+    <button id="btnNavTasks" class="nav-btn" onclick="switchTab('tab-tasks', this)">🚀 5. Tiến độ Dự án Mẫu</button>
   </div>
   <div class="slicer-box">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
@@ -424,16 +437,16 @@ html_content = f"""<!DOCTYPE html>
     </div>
 
     <div>
-      <label>🚀 Lọc Dự án (Tab 5: Tiến độ)</label>
+      <label>🚀 Lọc Dự án Mẫu (Tab 5: Tiến độ)</label>
       <select id="slicerTaskProject" class="slicer-select" onchange="updateTasksFilter(true)">
-        <option value="ALL">-- Tất cả Dự án (214 Việc) --</option>
-        <option value="Dự án Mega">Dự án Mega (24)</option>
-        <option value="Dự án Kim Tín giai đoạn 3">Dự án Kim Tín GĐ3 (18)</option>
-        <option value="Dự án APF">Dự án APF (15)</option>
-        <option value="Dự án CasaFlora2">Dự án CasaFlora2 (12)</option>
-        <option value="Dự án Suncasa">Dự án Suncasa (9)</option>
-        <option value="Dự án các trạm Phú Quốc">Dự án các trạm Phú Quốc (7)</option>
-        <option value="Dự án BB052">Dự án BB052 (2)</option>
+        <option value="ALL">-- Tất cả Dự án Mẫu (214 Việc) --</option>
+        <option value="Dự án Mẫu 01 (Mega)">Dự án Mẫu 01 - Mega (24)</option>
+        <option value="Dự án Mẫu 02 (Kim Tín GĐ3)">Dự án Mẫu 02 - Kim Tín GĐ3 (18)</option>
+        <option value="Dự án Mẫu 03 (APF)">Dự án Mẫu 03 - APF (15)</option>
+        <option value="Dự án Mẫu 04 (CasaFlora2)">Dự án Mẫu 04 - CasaFlora2 (12)</option>
+        <option value="Dự án Mẫu 05 (Suncasa)">Dự án Mẫu 05 - Suncasa (9)</option>
+        <option value="Dự án Mẫu 06 (Phú Quốc)">Dự án Mẫu 06 - Phú Quốc (7)</option>
+        <option value="Dự án Mẫu 07 (BB052)">Dự án Mẫu 07 - BB052 (2)</option>
         <option value="Chuẩn hóa Bộ môn Thiết kế">Chuẩn hóa 6 Bộ môn (115)</option>
         <option value="Quản trị & Tổ chức">Quản trị & Văn hóa (12)</option>
       </select>
@@ -457,7 +470,7 @@ html_content = f"""<!DOCTYPE html>
 <main class="main">
   <div class="topbar">
     <div class="topbar-title">
-      <h2>Power BI Executive Dashboard — Chiến lược, Tổ chức & Tiến độ Dự án BP BIM - TK</h2>
+      <h2>Power BI Executive Dashboard — Chiến lược, Tổ chức & Tiến độ Dự án Mẫu BP BIM - TK</h2>
       <span>Dữ liệu chuẩn hóa 2026 | Danh tính nhân sự & doanh nghiệp đã được bảo mật</span>
     </div>
     <div class="badge-bar">
@@ -470,7 +483,7 @@ html_content = f"""<!DOCTYPE html>
 
   <div class="kpi-grid">
     <div class="kpi-card"><div class="kpi-title">Mục tiêu Tự Thiết kế (1 Năm)</div><div class="kpi-val">1.200 Tỷ</div><div class="kpi-sub">4 dự án/năm (~10 tỷ DT Thiết kế)</div></div>
-    <div class="kpi-card emerald"><div class="kpi-title">Tiến độ 7 Dự án Thực tế</div><div class="kpi-val">75.9%</div><div class="kpi-sub">66 / 87 task hoàn thành (Mega, KT, CF, APF...)</div></div>
+    <div class="kpi-card emerald"><div class="kpi-title">Tiến độ 7 Dự án Mẫu</div><div class="kpi-val">75.9%</div><div class="kpi-sub">66 / 87 task hoàn thành (7 Dự án Mẫu)</div></div>
     <div class="kpi-card blue"><div class="kpi-title">Tổng Công việc Theo dõi</div><div class="kpi-val">214 Việc</div><div class="kpi-sub">69 Hoàn thành | 143 Đang làm | 1 Quá hạn</div></div>
     <div class="kpi-card rose"><div class="kpi-title">Định biên Nhân sự (T04/2026)</div><div class="kpi-val">24 / 30</div><div class="kpi-sub">Hiện có 26 (-2 nghỉ T04) → Thiếu 6 người</div></div>
     <div class="kpi-card amber"><div class="kpi-title">Tài liệu Chuẩn hóa Thiết kế</div><div class="kpi-val">115 Mục</div><div class="kpi-sub">6 Bộ môn (KC, KT, Điện, HVAC, CTN, PCCC)</div></div>
@@ -607,11 +620,11 @@ html_content = f"""<!DOCTYPE html>
     </div>
   </section>
 
-  <!-- TAB 5: TIEN DO DU AN & THUC THI -->
+  <!-- TAB 5: TIEN DO DU AN MAU & THUC THI -->
   <section id="tab-tasks" class="tab-page">
     <div class="chart-grid-equal">
       <div class="panel">
-        <div class="panel-header"><h3>Tiến độ Thực hiện theo Dự án Đang Chọn</h3><span id="projChartSubtitle">So sánh Tỷ lệ Hoàn thành vs Đang thực hiện</span></div>
+        <div class="panel-header"><h3>Tiến độ Thực hiện theo Dự án Mẫu Đang Chọn</h3><span id="projChartSubtitle">So sánh Tỷ lệ Hoàn thành vs Đang thực hiện theo Dự án Mẫu</span></div>
         <div class="chart-container"><canvas id="chartProjects"></canvas></div>
       </div>
       <div class="panel">
@@ -620,8 +633,8 @@ html_content = f"""<!DOCTYPE html>
       </div>
     </div>
     <div class="panel">
-      <div class="panel-header"><h3>Chi tiết Tiến độ Công việc Phòng BIM (Dự án & Hệ thống)</h3><span id="tasksCountLabel" style="color:var(--accent-cyan); font-weight:700;"></span></div>
-      <div class="table-wrap"><table><thead><tr><th>Mã</th><th>Nhóm</th><th>Dự án / Hạng mục</th><th>Nội dung Công việc</th><th>Tình trạng</th><th>Bắt đầu</th><th>Kết thúc</th><th>Hạn</th><th>Tiến độ & Kết quả</th><th>Rủi ro / Ghi chú</th></tr></thead><tbody id="tblTasksBody"></tbody></table></div>
+      <div class="panel-header"><h3>Chi tiết Tiến độ Công việc (Dự án Mẫu & Hệ thống)</h3><span id="tasksCountLabel" style="color:var(--accent-cyan); font-weight:700;"></span></div>
+      <div class="table-wrap"><table><thead><tr><th>Mã</th><th>Nhóm</th><th>Dự án Mẫu / Hạng mục</th><th>Nội dung Công việc</th><th>Tình trạng</th><th>Bắt đầu</th><th>Kết thúc</th><th>Hạn</th><th>Tiến độ & Kết quả</th><th>Rủi ro / Ghi chú</th></tr></thead><tbody id="tblTasksBody"></tbody></table></div>
     </div>
   </section>
 </main>
@@ -771,7 +784,7 @@ function updateTasksFilter(autoSwitch = false) {{
   const labelEl = document.getElementById('tasksCountLabel');
   if (labelEl) {{
     labelEl.innerHTML = proj === 'ALL'
-      ? `Đang hiển thị toàn bộ 214 công việc (Hoàn thành: ${{doneCount}} | Đang làm: ${{inProgCount}} | Quá hạn: ${{overdueCount}})`
+      ? `Đang hiển thị toàn bộ 214 công việc (Dự án Mẫu & Hệ thống) | Hoàn thành: ${{doneCount}} | Đang làm: ${{inProgCount}} | Quá hạn: ${{overdueCount}}`
       : `<b style="color:var(--accent-cyan); font-size:13px;">${{proj}}</b>: ${{filtered.length}} việc | Hoàn thành: <b style="color:#34d399">${{doneCount}} (${{pct}}%)</b> | Đang làm: ${{inProgCount}}${{overdueCount > 0 ? ` | Quá hạn: <b style="color:#f87171">${{overdueCount}}</b>` : ''}}`;
   }}
 
@@ -798,8 +811,16 @@ function updateTasksFilter(autoSwitch = false) {{
 
   if (chartProjectsInstance) {{
     if (proj === 'ALL') {{
-      const projNames = ['Dự án Mega', 'Kim Tín GĐ3', 'Dự án APF', 'CasaFlora2', 'Dự án Suncasa', 'Trạm Phú Quốc', 'Dự án BB052'];
-      const projKeys = ['Dự án Mega', 'Dự án Kim Tín giai đoạn 3', 'Dự án APF', 'Dự án CasaFlora2', 'Dự án Suncasa', 'Dự án các trạm Phú Quốc', 'Dự án BB052'];
+      const projNames = ['Mẫu 01 (Mega)', 'Mẫu 02 (Kim Tín)', 'Mẫu 03 (APF)', 'Mẫu 04 (CasaFlora)', 'Mẫu 05 (Suncasa)', 'Mẫu 06 (Phú Quốc)', 'Mẫu 07 (BB052)'];
+      const projKeys = [
+        'Dự án Mẫu 01 (Mega)',
+        'Dự án Mẫu 02 (Kim Tín GĐ3)',
+        'Dự án Mẫu 03 (APF)',
+        'Dự án Mẫu 04 (CasaFlora2)',
+        'Dự án Mẫu 05 (Suncasa)',
+        'Dự án Mẫu 06 (Phú Quốc)',
+        'Dự án Mẫu 07 (BB052)'
+      ];
       chartProjectsInstance.data.labels = projNames;
       chartProjectsInstance.data.datasets[0].data = projKeys.map(k => taskData.filter(t => t.HangMuc_DuAn === k && t.TinhTrang === 'Đã hoàn thành').length);
       chartProjectsInstance.data.datasets[1].data = projKeys.map(k => taskData.filter(t => t.HangMuc_DuAn === k && (t.TinhTrang === 'Đang thực hiện' || t.TinhTrang === 'Quá hạn' || t.TinhTrang === 'Chưa thực hiện')).length);
@@ -914,8 +935,16 @@ window.addEventListener('DOMContentLoaded', () => {{
   }});
 
   // 7. Chart Projects
-  const projNames = ['Dự án Mega', 'Kim Tín GĐ3', 'Dự án APF', 'CasaFlora2', 'Dự án Suncasa', 'Trạm Phú Quốc', 'Dự án BB052'];
-  const projKeys = ['Dự án Mega', 'Dự án Kim Tín giai đoạn 3', 'Dự án APF', 'Dự án CasaFlora2', 'Dự án Suncasa', 'Dự án các trạm Phú Quốc', 'Dự án BB052'];
+  const projNames = ['Mẫu 01 (Mega)', 'Mẫu 02 (Kim Tín)', 'Mẫu 03 (APF)', 'Mẫu 04 (CasaFlora)', 'Mẫu 05 (Suncasa)', 'Mẫu 06 (Phú Quốc)', 'Mẫu 07 (BB052)'];
+  const projKeys = [
+    'Dự án Mẫu 01 (Mega)',
+    'Dự án Mẫu 02 (Kim Tín GĐ3)',
+    'Dự án Mẫu 03 (APF)',
+    'Dự án Mẫu 04 (CasaFlora2)',
+    'Dự án Mẫu 05 (Suncasa)',
+    'Dự án Mẫu 06 (Phú Quốc)',
+    'Dự án Mẫu 07 (BB052)'
+  ];
   chartProjectsInstance = new Chart(document.getElementById('chartProjects'), {{
     type: 'bar',
     data: {{
