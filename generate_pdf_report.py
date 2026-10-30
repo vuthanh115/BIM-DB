@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Script tạo file PDF Báo cáo Chiến lược Xây dựng Phòng BIM Tinh gọn Năm 2027
+Script tạo file PDF Báo cáo Phương Án Kiện Toàn Tổ Chức & Tối Ưu Hóa Vận Hành Phòng BIM (Năm 2027)
 Dành cho việc trình bày và bảo vệ phương án trước Ban Tổng Giám Đốc / HĐQT
-- Cập nhật toàn diện sang Niên độ 2027 (Roadmap 4 Quý năm 2027)
-- Bộ 4 chỉ số KPI thực tế (~5.5 Tỷ, 100% Tự chủ Shop, <1% Sửa chữa, 70% Tái sử dụng)
-- Phương án Điều phối Chuyển tiếp theo Leader từng Bộ môn (4 Cụm Squads)
+- Giữ nguyên quy mô định biên hiện tại (Tổng 30, hiện có 26, đang làm việc 24)
+- Setup lại cơ chế vận hành theo 4 Cụm Chiến Đấu Squads do các Leader bộ môn làm hạt nhân
+- Bộ 4 chỉ số KPI thực tế (Tiết kiệm chi phí ngoài, 100% Tự chủ Shop, <1% Sửa chữa, 70% Tái sử dụng)
 Sử dụng Playwright (Chromium) xuất PDF chuẩn in ấn A4 (7 trang màu Executive).
 """
 
@@ -21,7 +21,7 @@ html_content = """<!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Báo cáo Chiến lược Xây dựng Phòng BIM Tinh gọn (2027)</title>
+<title>Báo cáo Phương Án Kiện Toàn Tổ Chức & Tối Ưu Hóa Vận Hành Phòng BIM (2027)</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -350,13 +350,13 @@ html_content = """<!DOCTYPE html>
     </div>
 
     <div class="cover-center">
-      <div class="cover-tagline">Đề án Chiến lược Năm 2027</div>
+      <div class="cover-tagline">Đề án Tổ chức & Vận hành Năm 2027</div>
       <h1 class="cover-title">
-        HOẠCH ĐỊNH XÂY DỰNG<br/>
-        <span>PHÒNG BIM TINH GỌN (LEAN BIM 2027)</span>
+        PHƯƠNG ÁN KIỆN TOÀN TỔ CHỨC<br/>
+        <span>& TỐI ƯU HÓA VẬN HÀNH PHÒNG BIM (2027)</span>
       </h1>
       <p class="cover-subtitle">
-        Báo cáo đề xuất mô hình cơ cấu tổ chức 12 – 14 nhân sự đa nhiệm, phương án điều phối chuyển tiếp theo Leader từng bộ môn, chuẩn hóa quy chế RACI & SLA 7 bước, cùng lộ trình thực chiến Năm 2027 tiết kiệm ~5.5 tỷ VNĐ/năm chi phí nhân lực cố định.
+        Báo cáo phương án kiện toàn tổ chức nhân sự hiện hữu, thiết lập cơ chế phân quyền điều phối theo Leader từng bộ môn, chuẩn hóa quy chế phối hợp RACI & cam kết SLA 7 bước khép kín nhằm nâng cao năng suất và chất lượng hồ sơ công trình.
       </p>
     </div>
 
@@ -393,17 +393,17 @@ html_content = """<!DOCTYPE html>
     </div>
   </div>
 
-  <!-- BỘ 4 THẺ KPI THỰC CHIẾN MỚI -->
+  <!-- BỘ 4 THẺ KPI THỰC CHIẾN -->
   <div class="grid-4">
     <div class="stat-card blue">
-      <div class="stat-num">~5.5 Tỷ</div>
-      <div class="stat-title">Tiết kiệm Quỹ Lương/Năm</div>
-      <div class="stat-desc">Mô hình Lean 12-14 NS vs 30 người cồng kềnh Cty A</div>
+      <div class="stat-num">100%</div>
+      <div class="stat-title">Tự Chủ Kỹ Thuật Nội Bộ</div>
+      <div class="stat-desc">Làm chủ 6 bộ môn thiết kế, tối ưu chi phí thuê tư vấn ngoài</div>
     </div>
     <div class="stat-card emerald">
       <div class="stat-num">100%</div>
-      <div class="stat-title">Tự Chủ Shop Drawing</div>
-      <div class="stat-desc">Làm chủ 6 bộ môn thiết kế, xóa bỏ thuê tư vấn ngoài</div>
+      <div class="stat-title">Tiến Độ Theo Chuẩn SLA</div>
+      <div class="stat-desc">Cam kết thời gian Shop 5d, Combine 10d, QS 7d</div>
     </div>
     <div class="stat-card rose">
       <div class="stat-num">&lt; 1%</div>
@@ -453,103 +453,106 @@ html_content = """<!DOCTYPE html>
   </div>
 </div>
 
-<!-- TRANG 3: BÀI TOÁN CƠ CẤU NHÂN SỰ TINH GỌN (LEAN 12 - 14 NS) -->
+<!-- TRANG 3: HIỆN TRẠNG ĐỊNH BIÊN & PHƯƠNG ÁN SETUP HỢP LÝ -->
 <div class="page">
   <div class="page-header">
-    <div class="page-header-title">Phần II: Tái Cấu Trúc & Định Biên Nhân Sự Tinh Gọn</div>
+    <div class="page-header-title">Phần II: Hiện Trạng Nhân Sự & Phương Án Setup Hợp Lý</div>
     <div class="page-header-meta">Trang 3 / 7</div>
   </div>
 
-  <h1 class="sec-title">👥 2. Cơ cấu Tổ chức: Bài toán 12 - 14 Người vs. 30 Người Cũ</h1>
+  <h1 class="sec-title">👥 2. Cơ cấu Tổ chức: Hiện trạng & Setup Vận hành Khoa học</h1>
 
-  <div class="box-highlight amber">
-    <div class="box-title">⚠️ Đánh Giá Mô Hình Cũ (30 Người - Tham Chiếu Doanh Nghiệp A)</div>
+  <div class="box-highlight blue">
+    <div class="box-title">📌 Định Hướng Setup: Tối Ưu Hóa Nguồn Lực Hiện Hữu</div>
     <div class="box-desc">
-      Mô hình định biên 30 người của Doanh nghiệp A bộc lộ nhiều điểm nghẽn nghiêm trọng: <b>(1) Quỹ lương cồng kềnh</b> (~9.6 tỷ/năm), <b>(2) Nhân sự chuyên môn hóa đơn lẻ</b> (14 kỹ sư dựng hình chỉ biết 1 phần mềm/1 bộ môn) dẫn đến lãng phí thời gian chết khi dự án vào giai đoạn thấp điểm, <b>(3) Trưởng bộ phận ôm đồm</b> trở thành nút thắt cổ chai của toàn bộ luồng phê duyệt.
+      Giữ vững cấu trúc định biên hiện tại của phòng, <b>không gây xáo trộn nhân sự</b>. Mục tiêu trọng tâm là <b>sắp xếp lại cách thức phối hợp</b>: phân định rõ quyền hạn, giải phóng áp lực ôm đồm cho Trưởng phòng, phát huy quyền tự chủ chuyên môn cho các Leader và ràng buộc trách nhiệm bằng chỉ số tiến độ SLA.
     </div>
   </div>
 
-  <h2 class="sub-title">🚀 Sơ Đồ Cơ Cấu Tổ Chức Tinh Gọn 3 Tầng (12 - 14 Nhân Sự Đa Nhiệm)</h2>
-  
-  <div class="grid-3">
-    <div class="stat-card blue">
-      <div class="stat-title" style="color:#0284c7;">Tầng 1: Quản Trị & Chiến Lược</div>
-      <div class="stat-num" style="font-size:13pt;">01 BIM Manager</div>
-      <div class="stat-desc" style="margin-top:4px;">
-        • Quản trị CDE (Common Data Environment)<br/>
-        • Lập Kế hoạch BEP/EIR dự án<br/>
-        • Bảo vệ phương án kỹ thuật với Ban Lãnh Đạo & Chủ Đầu Tư
-      </div>
-    </div>
-    <div class="stat-card emerald">
-      <div class="stat-title" style="color:#059669;">Tầng 2: Điều Phối & Công Nghệ</div>
-      <div class="stat-num" style="font-size:13pt;">03 Coordinator / R&D</div>
-      <div class="stat-desc" style="margin-top:4px;">
-        • <b>1 Coord Xây dựng:</b> Kiến trúc + Kết cấu + Shop drawing<br/>
-        • <b>1 Coord Cơ điện:</b> MEPF + Phối hợp va chạm (Clash)<br/>
-        • <b>1 Chuyên viên R&D:</b> Viết script Dynamo, Family chuẩn
-      </div>
-    </div>
-    <div class="stat-card amber">
-      <div class="stat-title" style="color:#d97706;">Tầng 3: Sản Xuất Đa Nhiệm (T-Shaped)</div>
-      <div class="stat-num" style="font-size:13pt;">08 - 10 Kỹ Sư Thực Chiến</div>
-      <div class="stat-desc" style="margin-top:4px;">
-        • <b>2-3 KS Kết cấu:</b> Dựng hình 3D + Shop cốt thép<br/>
-        • <b>2 KS Kiến trúc:</b> Dựng hình + Diễn họa 3D/VR<br/>
-        • <b>2-3 KS Cơ điện:</b> Mô hình MEPF + BPTC cơ điện<br/>
-        • <b>1-2 KS QS & Hạ tầng:</b> Bóc tách khối lượng + Civil 3D
-      </div>
-    </div>
-  </div>
-
-  <h2 class="sub-title">📊 Bảng So Sánh Hiệu Quả Kinh Tế: Tinh Gọn Tiết Kiệm ~5.5 Tỷ VNĐ/Năm</h2>
+  <h2 class="sub-title">📊 Bảng Hiện Trạng Định Biên & Bố Trí Nhân Sự Hiện Tại (24 Đang làm việc)</h2>
   <table class="data-table">
     <thead>
       <tr>
-        <th style="width: 28%;">Chỉ Số Đánh Giá</th>
-        <th style="width: 26%;">Mô Hình Cũ (Cty A - 30 Người)</th>
-        <th style="width: 26%;">Mô Hình Tinh Gọn (12 - 14 Người)</th>
-        <th style="width: 20%;">Chênh Lệch / Tối Ưu</th>
+        <th style="width: 20%;">Nhóm Chuyên Môn</th>
+        <th style="width: 25%;">Vị Trí Phụ Trách</th>
+        <th style="width: 25%;">Nhân Sự Chủ Chốt</th>
+        <th style="width: 12%;">Định Biên</th>
+        <th style="width: 18%;">Hiện Trạng</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><b>Tổng Số Lượng Định Biên</b></td>
-        <td>30 người (Phân tán nhiều vị trí)</td>
-        <td><b>12 - 14 người</b> (Đa nhiệm T-Shaped)</td>
-        <td><span class="pill pill-r">Giảm 55% nhân sự</span></td>
+        <td><b>Quản lý Chung</b></td>
+        <td>Trưởng bộ phận BIM - TK</td>
+        <td>Nhân sự A</td>
+        <td>1 / 1</td>
+        <td><span class="pill pill-r">Đang làm việc</span></td>
       </tr>
       <tr>
-        <td><b>Quỹ Lương Ước Tính/Năm</b></td>
-        <td>~9.6 Tỷ VNĐ / năm (TB 26.6 tr/người/tháng)</td>
-        <td><b>~4.1 Tỷ VNĐ / năm</b> (TB 25 - 28 tr/người/tháng)</td>
-        <td><span class="pill pill-r">Tiết kiệm ~5.5 Tỷ/năm</span></td>
+        <td><b>BIM Xây Dựng (KT - KC)</b></td>
+        <td>Trưởng nhóm BIM Xây dựng</td>
+        <td>Nhân sự B (Leader)</td>
+        <td>1 / 1</td>
+        <td><span class="pill pill-r">Đang làm việc</span></td>
       </tr>
       <tr>
-        <td><b>Chi Phí Bản Quyền & Máy Móc</b></td>
-        <td>~1.8 Tỷ VNĐ (Trang bị cho 30 máy trạm)</td>
-        <td><b>~800 Triệu VNĐ</b> (Tập trung cho 14 máy)</td>
-        <td><span class="pill pill-r">Tiết kiệm ~1.0 Tỷ</span></td>
+        <td><b>BIM Xây Dựng (KT - KC)</b></td>
+        <td>Kỹ sư BIM KT - KC</td>
+        <td>Nhân sự H, I, J, K...</td>
+        <td>14 / 11</td>
+        <td><span class="pill pill-tag">11 người thực tế</span></td>
       </tr>
       <tr>
-        <td><b>Đòn Bẩy Năng Suất</b></td>
-        <td>Thao tác thủ công, phụ thuộc cá nhân</td>
-        <td><b>Tự động hóa Dynamo</b> + Thư viện 115 tài liệu</td>
-        <td><span class="pill pill-a">Tăng năng suất 250%</span></td>
+        <td><b>BIM Cơ Điện (MEPF)</b></td>
+        <td>Trưởng nhóm BIM MEPF</td>
+        <td>Nhân sự C (Leader)</td>
+        <td>1 / 1</td>
+        <td><span class="pill pill-r">Đang làm việc</span></td>
       </tr>
       <tr>
-        <td><b>Khả Năng Thích Ứng Khối Lượng</b></td>
-        <td>Dư thừa khi ít việc, áp lực quỹ lương lớn</td>
-        <td>Lõi tinh gọn + Thuê ngoài (Outsource) linh hoạt</td>
-        <td><span class="pill pill-tag">An toàn tài chính tối đa</span></td>
+        <td><b>BIM Cơ Điện (MEPF)</b></td>
+        <td>Kỹ sư BIM MEPF</td>
+        <td>Nhân sự L & KS MEPF</td>
+        <td>2 / 2</td>
+        <td><span class="pill pill-r">Đang làm việc</span></td>
+      </tr>
+      <tr>
+        <td><b>BIM Hạ Tầng</b></td>
+        <td>Kỹ sư BIM Hạ tầng</td>
+        <td>Nhân sự M</td>
+        <td>2 / 1</td>
+        <td><span class="pill pill-r">Đang làm việc</span></td>
+      </tr>
+      <tr>
+        <td><b>Chủ Trì Thiết Kế 4 Mảng</b></td>
+        <td>Chủ trì KT, KC, Điện, HVAC</td>
+        <td>Nhân sự D, E, F, G</td>
+        <td>4 / 4</td>
+        <td><span class="pill pill-a">Đủ 4 Chủ trì</span></td>
       </tr>
     </tbody>
   </table>
 
-  <div class="box-highlight">
-    <div class="box-title">💡 Giải Pháp Khi Dự Án Tăng Đột Biến: Mô Hình "Lõi Tinh Gọn + Vệ Tinh Thuê Ngoài"</div>
-    <div class="box-desc">
-      Khi công ty trúng cùng lúc nhiều dự án lớn vượt công suất 12-14 người, bộ phận BIM sẽ <b>không tuyển ồ ạt nhân sự chính thức</b>. Thay vào đó, 3 Điều phối viên (Coordinator) sẽ đóng vai trò quản lý tiêu chuẩn và giao các gói dựng hình khối lượng lớn cho đơn vị gia công bên ngoài (Outsourcing) theo chuẩn BEP nội bộ, sau đó tự kiểm soát chất lượng (QA/QC).
+  <h2 class="sub-title">🚀 3 Trục Cải Tiến Khi Setup Lại Cơ Chế Vận Hành</h2>
+  
+  <div class="grid-3">
+    <div class="stat-card blue">
+      <div class="stat-title" style="color:#0284c7;">1. Phân Quyền Theo RACI</div>
+      <div class="stat-desc">
+        Mỗi công việc kỹ thuật được giao quyền trực tiếp (R) cho Leader bộ môn chủ động xử lý, Trưởng phòng chỉ giữ vai trò phê duyệt cuối (A), không duyệt vi mô từng chi tiết.
+      </div>
+    </div>
+    <div class="stat-card emerald">
+      <div class="stat-title" style="color:#059669;">2. Cam Kết Theo SLA</div>
+      <div class="stat-desc">
+        Mọi yêu cầu từ công trường hoặc Ban Đấu thầu đều được áp khung thời gian xử lý chuẩn (Shop 5d, Combine 10d, QS 7d), chấm dứt tình trạng trễ hẹn kéo dài.
+      </div>
+    </div>
+    <div class="stat-card amber">
+      <div class="stat-title" style="color:#d97706;">3. Chuẩn Hóa Bằng 115 Tài Liệu</div>
+      <div class="stat-desc">
+        Kỹ sư làm việc theo các Template và Checklist thống nhất cho 6 bộ môn, đảm bảo nhân sự mới vào tiếp cận công việc nhanh chóng, không phụ thuộc thói quen cá nhân.
+      </div>
     </div>
   </div>
 </div>
@@ -557,25 +560,25 @@ html_content = """<!DOCTYPE html>
 <!-- TRANG 4: PHƯƠNG ÁN ĐIỀU PHỐI CHUYỂN TIẾP THEO LEADER TỪNG BỘ MÔN -->
 <div class="page">
   <div class="page-header">
-    <div class="page-header-title">Phần III: Phương Án Điều Phối Chuyển Tiếp Theo Leader Bộ Môn</div>
+    <div class="page-header-title">Phần III: Phương Án Điều Phối Setup Theo Leader Bộ Môn</div>
     <div class="page-header-meta">Trang 4 / 7</div>
   </div>
 
-  <h1 class="sec-title">🔄 3. Điều phối Tạm thời: Phát huy Hạt nhân Leader Từng Bộ môn</h1>
+  <h1 class="sec-title">🔄 3. Cơ chế Phối hợp: 4 Cụm Chuyên môn Do Leader Chỉ huy</h1>
 
   <div class="box-highlight blue">
-    <div class="box-title">🎯 Nguyên Tắc Vận Hành Giai Đoạn Chuyển Tiếp</div>
+    <div class="box-title">🎯 Nguyên Tắc Phối Hợp: Trao Quyền Tự Chủ Cho Các Leader</div>
     <div class="box-desc">
-      Trước mắt, để đảm bảo tính liên tục của các dự án đang thi công và không làm xáo trộn tổ chức, chúng ta <b>không tuyển dụng ồ ạt</b> mà tái cấu trúc đội ngũ hiện tại thành <b>4 Cụm Chiến Đấu Chuyên Môn (Discipline Squads)</b> do các Leader và Chủ trì từng bộ môn trực tiếp chỉ huy. Mỗi Leader bộ môn được trao quyền tự chủ kỹ thuật và cam kết tiến độ theo SLA.
+      Tổ chức toàn bộ nhân sự hiện hữu thành <b>4 Cụm Phối Hợp Chuyên Môn (Discipline Squads)</b> do các Leader và Chủ trì từng bộ môn trực tiếp chỉ huy. Mỗi Leader bộ môn được trao quyền tự chủ kỹ thuật, chịu trách nhiệm về chất lượng đầu ra và cam kết tiến độ phục vụ công trường theo chuẩn SLA.
     </div>
   </div>
 
-  <h2 class="sub-title">🛡️ Cơ Cấu 4 Cụm Chiến Đấu Do Các Leader Bộ Môn Làm Hạt Nhân</h2>
+  <h2 class="sub-title">🛡️ Cơ Cấu 4 Cụm Phối Hợp Chuyên Môn</h2>
   
   <table class="data-table">
     <thead>
       <tr>
-        <th style="width: 20%;">Cụm Chiến Đấu</th>
+        <th style="width: 20%;">Cụm Phối Hợp</th>
         <th style="width: 25%;">Hạt Nhân Chỉ Huy (Leaders)</th>
         <th style="width: 20%;">Nhân Sự Thực Chiến</th>
         <th style="width: 35%;">Phạm Vi Nhiệm Vụ & Cam Kết SLA</th>
@@ -627,11 +630,11 @@ html_content = """<!DOCTYPE html>
   </div>
 
   <div class="box-highlight">
-    <div class="box-title">✅ Lợi Ích Của Phương Án Chuyển Tiếp Cho Ban Lãnh Đạo</div>
+    <div class="box-title">✅ Lợi Ích Của Phương Án Setup Này Cho Doanh Nghiệp</div>
     <div class="box-desc">
-      • <b>Không làm tăng chi phí tuyển dụng mới ngay lập tức</b>, tối ưu hóa tối đa hiệu suất của những nhân sự chủ chốt hiện có.<br/>
-      • <b>Gắn chặt trách nhiệm vào từng Leader bộ môn</b>: Ai chỉ huy mảng nào sẽ chịu trách nhiệm trực tiếp về chất lượng và tiến độ mảng đó.<br/>
-      • <b>Đào tạo thực chiến tại chỗ</b>: Giúp các kỹ sư mở rộng kỹ năng đa nhiệm T-Shaped dưới sự hướng dẫn kèm cặp của Leader.
+      • <b>Phát huy năng lực thực sự của các Leader</b>: Trao quyền đi đôi với trách nhiệm rõ ràng, khích lệ tinh thần làm chủ công việc.<br/>
+      • <b>Đảm bảo tiến độ công trường không bao giờ bị trễ</b> nhờ cơ chế xoay vòng nguồn lực kịp thời lúc cao điểm.<br/>
+      • <b>Xây dựng môi trường làm việc chuyên nghiệp</b>: Mọi đầu việc đều có người chịu trách nhiệm, có hạn mức thời gian và quy chuẩn nghiệm thu.
     </div>
   </div>
 </div>
@@ -802,10 +805,10 @@ html_content = """<!DOCTYPE html>
   </table>
 </div>
 
-<!-- TRANG 7: HOẠCH ĐỊNH CHIẾN LƯỢC NĂM 2027 & KIẾN NGHỊ BAN LÃNH ĐẠO -->
+<!-- TRANG 7: LỘ TRÌNH 4 QUÝ NĂM 2027 & KIẾN NGHỊ BAN LÃNH ĐẠO -->
 <div class="page">
   <div class="page-header">
-    <div class="page-header-title">Phần VI: Hoạch Định Chiến Lược Năm 2027 & Đề Xuất Phê Duyệt</div>
+    <div class="page-header-title">Phần VI: Kế Hoạch Triển Khai Năm 2027 & Đề Xuất Phê Duyệt</div>
     <div class="page-header-meta">Trang 7 / 7</div>
   </div>
 
@@ -835,7 +838,7 @@ html_content = """<!DOCTYPE html>
         <td>
           • Chuẩn hóa toàn bộ Template Revit, mã hóa cấu kiện cho 6 bộ môn.<br/>
           • Ứng dụng script Dynamo tự động xuất bản vẽ & trích xuất BOQ.<br/>
-          • Đào tạo kỹ năng đa nhiệm T-Shaped cho đội ngũ kỹ sư thực chiến.
+          • Đào tạo nâng cao kỹ năng phối hợp cho đội ngũ kỹ sư thực chiến.
         </td>
       </tr>
       <tr>
@@ -849,11 +852,11 @@ html_content = """<!DOCTYPE html>
       </tr>
       <tr>
         <td><b>Quý 4/2027</b></td>
-        <td><b>Tự chủ 100% & Nhân rộng</b><br/>• Đánh giá KPI chuẩn hóa<br/>• Mô hình Lõi + Outsource</td>
+        <td><b>Tự chủ 100% & Đánh giá KPI</b><br/>• Đánh giá chuẩn hóa trọng số<br/>• Tối ưu năng suất nội bộ</td>
         <td>
           • <b>Tự chủ 100% hồ sơ Shop Drawing & BPTC</b> cho các dự án mới.<br/>
           • Tự động hóa bóc tách khối lượng 5D BIM: Sai số vật tư &lt; 2%.<br/>
-          • Giữ vững bộ máy lõi 12-14 NS; mở rộng thuê ngoài vệ tinh khi dự án tăng.
+          • Vận hành ổn định nề nếp phối hợp giữa phòng BIM và các công trường.
         </td>
       </tr>
     </tbody>
@@ -862,23 +865,23 @@ html_content = """<!DOCTYPE html>
   <h2 class="sub-title">💼 3 Kiến Nghị Then Chốt Kính Trình Ban Tổng Giám Đốc Phê Duyệt</h2>
 
   <div class="box-highlight">
-    <div class="box-title">1. Phê Duyệt Cơ Cấu Định Biên Tinh Gọn 12 - 14 Nhân Sự & Cơ Chế Chuyển Tiếp</div>
+    <div class="box-title">1. Phê Duyệt Cơ Chế Điều Phối Theo 4 Cụm Leader Bộ Môn</div>
     <div class="box-desc">
-      Chấp thuận khung tổ chức tinh gọn 3 tầng và cơ chế điều phối chuyển tiếp theo 4 Cụm Leader chuyên môn. Phê duyệt cơ chế đánh giá KPI gắn liền với mức độ tuân thủ thời gian cam kết dịch vụ SLA.
+      Chấp thuận phương án setup vận hành theo 4 Cụm chuyên môn do các Leader hiện hữu làm nòng cốt. Phê duyệt cơ chế đánh giá KPI gắn liền với mức độ tuân thủ thời gian cam kết dịch vụ SLA.
     </div>
   </div>
 
   <div class="box-highlight blue">
-    <div class="box-title">2. Phê Duyệt Ngân Sách Đầu Tư Bản Quyền & Phần Cứng</div>
+    <div class="box-title">2. Phê Duyệt Đầu Tư Hạ Tầng Bản Quyền & Phần Cứng</div>
     <div class="box-desc">
-      Cấp hạn mức đầu tư khoảng <b>700 - 800 triệu VNĐ</b> cho giai đoạn đầu: (1) Bản quyền Autodesk AEC Collection & Cloud CDE, (2) Nâng cấp máy trạm đồ họa cấu hình cao cho đội ngũ kỹ sư thực chiến.
+      Trang bị đầy đủ bản quyền phần mềm thiết kế/BIM chính hãng, nền tảng lưu trữ CDE đám mây và nâng cấp máy trạm đồ họa đáp ứng yêu cầu xử lý mô hình nặng.
     </div>
   </div>
 
   <div class="box-highlight amber">
     <div class="box-title">3. Ban Hành Quy Chế Phối Hợp Bắt Buộc Theo Cam Kết SLA</div>
     <div class="box-desc">
-      Ban hành văn bản pháp quy nội bộ quy định thời gian phối hợp chuẩn (BIM Shop 5 ngày, BIM Combine 10 ngày, BIM QS 7 ngày) giữa Phòng BIM, Ban QLDA và Ban Chỉ huy công trường.
+      Ban hành văn bản quy định thời gian phối hợp chuẩn (BIM Shop 5 ngày, BIM Combine 10 ngày, BIM QS 7 ngày) giữa Phòng BIM, Ban QLDA và Ban Chỉ huy công trường.
     </div>
   </div>
 

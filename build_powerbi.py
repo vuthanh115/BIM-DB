@@ -469,18 +469,18 @@ html_content = f"""<!DOCTYPE html>
   </div>
 
   <div class="kpi-grid">
-    <div class="kpi-card"><div class="kpi-title">Tiết kiệm Quỹ lương/Năm</div><div class="kpi-val">~5.5 Tỷ</div><div class="kpi-sub">Mô hình Lean 12-14 NS vs 30 người</div></div>
     <div class="kpi-card emerald"><div class="kpi-title">Tiến độ Dự án Mẫu</div><div class="kpi-val">75.9%</div><div class="kpi-sub">66 / 87 việc hoàn thành (Dự án Mẫu)</div></div>
     <div class="kpi-card blue"><div class="kpi-title">Tự chủ Shop Drawing</div><div class="kpi-val">100%</div><div class="kpi-sub">Làm chủ 6 bộ môn, xóa bỏ thuê ngoài</div></div>
     <div class="kpi-card rose"><div class="kpi-title">Phát sinh Sửa chữa CT</div><div class="kpi-val">&lt; 1%</div><div class="kpi-sub">Xóa 100% va chạm trước khi đổ bê tông</div></div>
     <div class="kpi-card amber"><div class="kpi-title">Tài liệu Chuẩn hóa Thiết kế</div><div class="kpi-val">115 Mục</div><div class="kpi-sub">6 Bộ môn (KC, KT, Điện, HVAC, CTN, PCCC)</div></div>
+    <div class="kpi-card purple"><div class="kpi-title">Mô hình Điều phối Cụm</div><div class="kpi-val">4 Squads</div><div class="kpi-sub">Tối ưu theo Leader bộ môn hiện hữu</div></div>
   </div>
 
   <!-- TAB 1: CHIEN LUOC & TO CHUC -->
   <section id="tab-exec" class="tab-page active">
     <div class="chart-grid-2">
       <div class="panel">
-        <div class="panel-header"><h3>Phân bổ Định biên Kế hoạch vs. Nhân sự Thực tế Còn lại (T04/2026)</h3><span>Tổng Định biên: 30 | Còn lại: 24</span></div>
+        <div class="panel-header"><h3>Phân bổ Định biên Kế hoạch vs. Nhân sự Thực tế Còn lại</h3><span>Tổng Định biên: 30 | Hiện có: 26 | Còn lại: 24</span></div>
         <div class="chart-container"><canvas id="chartHR"></canvas></div>
       </div>
       <div class="panel">
@@ -489,51 +489,18 @@ html_content = f"""<!DOCTYPE html>
       </div>
     </div>
     <div class="panel">
-      <div class="panel-header"><h3>Bảng Chi tiết Định biên Tổ chức & Trạng thái Nhân sự Chủ chốt (Tham chiếu Cty A)</h3><span>Đủ 4 Chủ trì Thiết kế (KT, KC, Điện-Cơ, HVAC) & 2 Trưởng nhóm BIM</span></div>
+      <div class="panel-header"><h3>Bảng Chi tiết Định biên Tổ chức & Trạng thái Nhân sự Chủ chốt Hiện tại</h3><span>Đủ 4 Chủ trì Thiết kế (KT, KC, Điện-Cơ, HVAC) & 2 Trưởng nhóm BIM</span></div>
       <div class="table-wrap"><table><thead><tr><th>Nhóm Chuyên môn</th><th>Vị trí</th><th>Nhân sự Chủ chốt</th><th>Cấp bậc</th><th>Định biên</th><th>Hiện có</th><th>Nghỉ T04</th><th>Còn lại</th><th>Thiếu hụt</th><th>Trạng thái</th></tr></thead><tbody id="tblHRBody"></tbody></table></div>
     </div>
     
-    <!-- KHUNG ĐỊNH BIÊN TINH GỌN MỚI CHO DOANH NGHIỆP (LEAN 12 - 14 NS) -->
-    <div class="panel" style="border: 1px solid rgba(6, 182, 212, 0.4); background: linear-gradient(180deg, #111827, #0f172a);">
-      <div class="panel-header">
-        <div>
-          <h3 style="color:var(--accent-cyan);">🚀 Hoạch định Cơ cấu Nhân sự Tinh gọn cho Doanh nghiệp Mới (Mô hình Lean 12 - 14 Người)</h3>
-          <span style="color:#94a3b8;">Tối ưu hóa từ mô hình 30 người cồng kềnh của Cty A ➔ Cắt giảm 50% quỹ lương (~5.5 tỷ/năm) nhờ Đòn bẩy Tự động hóa & Kỹ sư Đa nhiệm</span>
-        </div>
-        <span class="badge" style="background:rgba(6,182,212,0.15); color:var(--accent-cyan); border-color:var(--accent-cyan);">Khuyến nghị Chiến lược Mới</span>
-      </div>
-      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:12px; margin-top:8px;">
-        <div style="background:rgba(255,255,255,0.03); border:1px solid #1f2937; border-radius:8px; padding:12px;">
-          <div style="font-size:11px; text-transform:uppercase; color:var(--accent-amber); font-weight:700; margin-bottom:4px;">Tầng 1: Quản trị & Chiến lược (1 Người)</div>
-          <div style="font-size:13px; font-weight:700; color:#fff;">Trưởng phòng BIM (BIM Manager)</div>
-          <div style="font-size:11.5px; color:#94a3b8; margin-top:4px;">• Lập Kế hoạch BEP/EIR, quản trị CDE<br/>• Làm việc với Ban Giám đốc & CĐT<br/>• Thẩm định giá trị thầu, kiểm soát ngân sách</div>
-        </div>
-        <div style="background:rgba(255,255,255,0.03); border:1px solid #1f2937; border-radius:8px; padding:12px;">
-          <div style="font-size:11px; text-transform:uppercase; color:var(--accent-cyan); font-weight:700; margin-bottom:4px;">Tầng 2: Điều phối & Công nghệ (3 Người)</div>
-          <div style="font-size:13px; font-weight:700; color:#fff;">2 Coordinator + 1 R&D Specialist</div>
-          <div style="font-size:11.5px; color:#94a3b8; margin-top:4px;">• 1 Coord Xây dựng (KT-KC, Shop, BPTC)<br/>• 1 Coord Cơ điện (MEPF, Clash Detection)<br/>• 1 Specialist R&D (Tool Dynamo, Family chuẩn)</div>
-        </div>
-        <div style="background:rgba(255,255,255,0.03); border:1px solid #1f2937; border-radius:8px; padding:12px;">
-          <div style="font-size:11px; text-transform:uppercase; color:var(--accent-emerald); font-weight:700; margin-bottom:4px;">Tầng 3: Sản xuất Thực chiến (8 - 10 Người)</div>
-          <div style="font-size:13px; font-weight:700; color:#fff;">Đội ngũ Kỹ sư T-Shaped Đa nhiệm</div>
-          <div style="font-size:11.5px; color:#94a3b8; margin-top:4px;">• 2-3 KS Kết cấu (Model + Shop cốt thép)<br/>• 2 KS Kiến trúc (Model + Diễn họa 3D/4D)<br/>• 2-3 KS Cơ điện (Model + Combine M&E)<br/>• 1-2 KS QS & Hạ tầng (Civil 3D + BOQ)</div>
-        </div>
-        <div style="background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.3); border-radius:8px; padding:12px;">
-          <div style="font-size:11px; text-transform:uppercase; color:#34d399; font-weight:700; margin-bottom:4px;">Hiệu quả Kinh tế So với Cty A</div>
-          <div style="font-size:20px; font-weight:800; color:#34d399; margin:4px 0;">Tiết kiệm ~5.5 Tỷ/Năm</div>
-          <div style="font-size:11.5px; color:#cbd5e1;">• Giảm quân số: từ 30 ➔ 12-14 nhân sự<br/>• Quỹ lương: từ ~10.5 tỷ ➔ ~4.8 tỷ/năm<br/>• Năng lực: Gánh trọn vẹn 4 - 6 dự án D&B</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- PHƯƠNG ÁN ĐIỀU PHỐI CHUYỂN TIẾP TẠM THỜI THEO LEADER TỪNG BỘ MÔN -->
+    <!-- PHƯƠNG ÁN ĐIỀU PHỐI VẬN HÀNH DỰA THEO LEADER TỪNG BỘ MÔN -->
     <div class="panel" style="border: 1px solid rgba(59, 130, 246, 0.4); background: linear-gradient(180deg, #111827, #0f172a);">
       <div class="panel-header">
         <div>
-          <h3 style="color:var(--accent-blue);">🔄 Phương án Điều phối Chuyển tiếp Tạm thời theo Leader Từng Bộ môn (4 Cụm Squads)</h3>
-          <span style="color:#94a3b8;">Không tuyển ồ ạt — Tận dụng tối đa nhân sự hiện hữu, phân quyền tự chủ kỹ thuật và SLA cho từng Leader</span>
+          <h3 style="color:var(--accent-blue);">🔄 Phương án Setup Điều phối Vận hành theo Leader Từng Bộ môn (4 Cụm Squads Hiện tại)</h3>
+          <span style="color:#94a3b8;">Giữ nguyên quy mô hiện tại — Tối ưu hóa điều phối, phân quyền tự chủ kỹ thuật và gắn kết quả cam kết SLA cho từng Leader</span>
         </div>
-        <span class="badge info">Chuyển tiếp Thực chiến</span>
+        <span class="badge info">Cơ cấu Setup Mới</span>
       </div>
       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:12px; margin-top:8px;">
         <div style="background:rgba(255,255,255,0.03); border:1px solid #1f2937; border-radius:8px; padding:12px;">
