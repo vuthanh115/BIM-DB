@@ -220,7 +220,7 @@ cl_rows = [
     ("MT_03", "Mục tiêu", "Dài hạn (>1 năm)", "Đưa Thiết kế từng bước trở thành bộ phận trực tiếp mang thêm lợi nhuận qua hợp đồng Thiết kế - BIM thương mại", "Chuyển đổi sang Profit Center", 1.0, "Có lợi nhuận độc lập", "BP Thiết kế - BIM"),
     ("NV_01", "Nhiệm vụ trọng yếu", "Thường xuyên", "Tư vấn, định hướng khách hàng theo phương án thiết kế chiến lược có ưu thế khi đấu thầu, thi công", "Tỷ lệ dự án định hướng theo chuẩn nội bộ", 1.0, "100%", "Chủ trì Thiết kế & TBP"),
     ("NV_02", "Nhiệm vụ trọng yếu", "Thường xuyên", "Tự thiết kế tối ưu các dự án D&B, Thiết kế - Đấu thầu - Thi công trên góc nhìn mang lại lợi thế cho doanh nghiệp", "Tối ưu hóa chi phí & BPTC", 1.0, "100%", "BP Thiết kế - BIM"),
-    ("NV_03", "Nhiệm vụ trọng yếu", "Thường xuyên", "Quản lý thiết kế các dự án thuê ngoài chuẩn hóa theo yêu cầu nội bộ", "Tỷ lệ dự án thuê ngoài tuân thủ chuẩn nội bộ", 1.0, "100%", "Chủ trì Thiết kế"),
+    ("NV_03", "Nhiệm vụ trọng yếu", "Thường xuyên", "Quản lý chuẩn hóa hồ sơ thiết kế chuyển đổi sang mô hình BIM nội bộ", "Tỷ lệ dự án thiết kế tuân thủ chuẩn BIM nội bộ", 1.0, "100%", "Chủ trì Thiết kế"),
     ("NV_04", "Nhiệm vụ trọng yếu", "Thường xuyên", "Thiết kế, tư vấn hỗ trợ kỹ thuật cho toàn bộ dự án đang thi công (100% dự án tự TK & các vấn đề trọng yếu dự án ngoài)", "Tỷ lệ xử lý vướng mắc dự án tự thiết kế", 1.0, "100%", "BP Thiết kế - BIM"),
     ("NV_05", "Nhiệm vụ trọng yếu", "Ngắn & Trung hạn", "Chuẩn hóa thiết kế tối ưu cho công ty (chi tiết 2D, 3D, tiêu chuẩn, quy định, số liệu) gồm 118 danh mục tài liệu", "Số lượng tài liệu chuẩn hóa hoàn thành", 118.0, "Tài liệu", "6 Bộ môn Thiết kế"),
     ("NV_06", "Nhiệm vụ trọng yếu", "Ngắn & Trung hạn", "Kết hợp BIM - Thiết kế tối ưu nguồn lực bóc khối lượng, Shop, Combine (vẽ BIM từ đầu để tái sử dụng dữ liệu giai đoạn thi công)", "Tỷ lệ tiết kiệm nguồn lực / tái sử dụng dữ liệu", 0.70, "70%", "Liên quân BIM - Thiết kế"),
@@ -470,7 +470,7 @@ html_content = f"""<!DOCTYPE html>
 
   <div class="kpi-grid">
     <div class="kpi-card emerald"><div class="kpi-title">Tiến độ Dự án Mẫu</div><div class="kpi-val">75.9%</div><div class="kpi-sub">66 / 87 việc hoàn thành (Dự án Mẫu)</div></div>
-    <div class="kpi-card blue"><div class="kpi-title">Tự chủ Shop Drawing</div><div class="kpi-val">100%</div><div class="kpi-sub">Làm chủ 6 bộ môn, xóa bỏ thuê ngoài</div></div>
+    <div class="kpi-card blue"><div class="kpi-title">Tự chủ Shop Drawing</div><div class="kpi-val">100%</div><div class="kpi-sub">Làm chủ 6 bộ môn, chuyển đổi toàn diện lên BIM</div></div>
     <div class="kpi-card rose"><div class="kpi-title">Phát sinh Sửa chữa CT</div><div class="kpi-val">&lt; 1%</div><div class="kpi-sub">Xóa 100% va chạm trước khi đổ bê tông</div></div>
     <div class="kpi-card amber"><div class="kpi-title">Tài liệu Chuẩn hóa Thiết kế</div><div class="kpi-val">115 Mục</div><div class="kpi-sub">6 Bộ môn (KC, KT, Điện, HVAC, CTN, PCCC)</div></div>
     <div class="kpi-card purple"><div class="kpi-title">Mô hình Điều phối Cụm</div><div class="kpi-val">4 Squads</div><div class="kpi-sub">Tối ưu theo Leader bộ môn hiện hữu</div></div>

@@ -399,7 +399,7 @@ html_content = """<!DOCTYPE html>
     <div class="stat-card blue">
       <div class="stat-num">100%</div>
       <div class="stat-title">Tự Chủ Kỹ Thuật Nội Bộ</div>
-      <div class="stat-desc">Làm chủ 6 bộ môn thiết kế, tối ưu chi phí thuê tư vấn ngoài</div>
+      <div class="stat-desc">Làm chủ 6 bộ môn thiết kế trên nền tảng 3D BIM</div>
     </div>
     <div class="stat-card emerald">
       <div class="stat-num">100%</div>
@@ -431,7 +431,7 @@ html_content = """<!DOCTYPE html>
       <tr>
         <td><b>1. Tự chủ Kỹ thuật & Giữ lại Lợi nhuận</b></td>
         <td>Xây dựng đội ngũ làm chủ toàn diện 6 bộ môn: Kiến trúc, Kết cấu, Điện, HVAC, Cấp thoát nước và PCCC. Tự lực lập trọn bộ hồ sơ Shop Drawing & Biện pháp thi công.</td>
-        <td>Xóa bỏ chi phí thuê tư vấn thiết kế/shop bên ngoài, bảo mật tuyệt đối bí quyết kỹ thuật của công ty.</td>
+        <td>Nâng cấp toàn bộ năng lực từ thiết kế 2D truyền thống lên mô hình BIM 3D, gia tăng năng lực cạnh tranh và bảo mật bí quyết kỹ thuật.</td>
       </tr>
       <tr>
         <td><b>2. Tối ưu Đấu thầu & Năng lực Thuyết phục</b></td>
@@ -466,7 +466,7 @@ html_content = """<!DOCTYPE html>
   <div class="box-highlight blue">
     <div class="box-title"><svg class="box-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14l-2-7V4h1V2H6v2h1v6z"/></svg> Định Hướng Setup: Tối Ưu Hóa Nguồn Lực Hiện Hữu</div>
     <div class="box-desc">
-      Tận dụng tối đa bộ máy hiện có <b>(tổng định biên 30, thực tế 26, đang làm việc 24 nhân sự)</b>. Đưa trực tiếp <b>các Lead bộ môn (Lead KT, Lead KC, Lead Điện, Lead HVAC)</b> vào chỉ huy chuyên môn các mảng BIM tương ứng, phối hợp chặt chẽ cùng các Lead BIM để thống nhất một đầu mối chịu trách nhiệm kỹ thuật và xóa bỏ hoàn toàn độ trễ giữa thiết kế và mô hình 3D.
+      Tận dụng tối đa bộ máy hiện có <b>(tổng định biên 30, thực tế 26, đang làm việc 24 nhân sự)</b>. Là <b>công ty thiết kế chuyển đổi số toàn diện lên BIM</b>, <b>11 kỹ sư BIM chuyên trách được điều phối chia đều về các bộ môn thiết kế</b> (3 KS Kết cấu, 3 KS Kiến trúc, 3 KS Cơ điện MEPF, 2 KS Hạ tầng & CDE) cùng làm việc trực tiếp với các Lead bộ môn để triển khai mô hình 3D ngay từ đầu, xóa bỏ hoàn toàn độ trễ giữa thiết kế và BIM.
     </div>
   </div>
 
@@ -474,62 +474,55 @@ html_content = """<!DOCTYPE html>
   <table class="data-table">
     <thead>
       <tr>
-        <th style="width: 25%;">Mảng Chuyên Môn</th>
-        <th style="width: 25%;">Vị Trí Đảm Nhiệm</th>
-        <th style="width: 26%;">Nhân Sự Đảm Nhiệm</th>
-        <th style="width: 10%;">Định Biên</th>
-        <th style="width: 14%;">Hiện Trạng</th>
+        <th style="width: 24%;">Bộ Môn / Khối Chuyên Môn</th>
+        <th style="width: 26%;">Hạt Nhân Chỉ Huy</th>
+        <th style="width: 30%;">Nhân Sự Thiết Kế & BIM (Chia Đều 11 KS)</th>
+        <th style="width: 8%;">Định Biên</th>
+        <th style="width: 12%;">Hiện Trạng</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td><b>Quản lý Điều hành</b></td>
         <td>Trưởng bộ phận BIM - TK</td>
-        <td>Nhân sự A</td>
+        <td>Nhân sự A (Điều hành chung & kiểm soát SLA)</td>
         <td>1 / 1</td>
-        <td><span class="pill pill-r">Đang làm việc</span></td>
+        <td><span class="pill pill-r">1 Đang làm</span></td>
       </tr>
       <tr>
-        <td><b>BIM & Thiết kế Kết Cấu</b></td>
-        <td>Lead Kết Cấu & Lead BIM XD</td>
-        <td>Nhân sự D (Lead KC) & B (Lead BIM)</td>
-        <td>2 / 2</td>
-        <td><span class="pill pill-r">Đang làm việc</span></td>
+        <td><b>Thiết kế & BIM Kết Cấu</b></td>
+        <td>Lead Kết Cấu (Nhân sự D)<br/>& Lead BIM XD (Nhân sự B)</td>
+        <td>2 KS TK + <b>3 KS BIM KC</b> (Nhân sự J, K...)</td>
+        <td>8 / 7</td>
+        <td><span class="pill pill-r">7 Đang làm</span></td>
       </tr>
       <tr>
-        <td><b>BIM & Thiết kế Kiến Trúc</b></td>
-        <td>Lead Kiến Trúc & KTS Triển khai</td>
-        <td>Nhân sự E (Lead KT) & Đội ngũ</td>
-        <td>2 / 2</td>
-        <td><span class="pill pill-r">Đang làm việc</span></td>
+        <td><b>Thiết kế & BIM Kiến Trúc</b></td>
+        <td>Lead Kiến Trúc (Nhân sự E)</td>
+        <td>1 KTS TK + <b>3 KS BIM KT</b> (Nhân sự H, I...)</td>
+        <td>6 / 5</td>
+        <td><span class="pill pill-tag">4 Đang làm</span></td>
       </tr>
       <tr>
-        <td><b>Đội ngũ Kỹ sư BIM XD</b></td>
-        <td>Kỹ sư BIM Kiến trúc & Kết cấu</td>
-        <td>Nhân sự H, I, J, K...</td>
-        <td>14 / 11</td>
-        <td><span class="pill pill-tag">11 người thực tế</span></td>
+        <td><b>Thiết kế & BIM Cơ Điện (MEPF)</b></td>
+        <td>Lead Điện (Nhân sự F)<br/>& Lead BIM MEPF (Nhân sự C)</td>
+        <td>1 KS TK + 1 KS MEP + <b>3 KS BIM MEP</b> (Nhân sự L...)</td>
+        <td>7 / 7</td>
+        <td><span class="pill pill-r">7 Đang làm</span></td>
       </tr>
       <tr>
-        <td><b>BIM & Thiết kế Cơ Điện</b></td>
-        <td>Lead Điện, Lead HVAC & Lead MEPF</td>
-        <td>Nhân sự F (Điện), G (HVAC), C (MEPF)</td>
-        <td>3 / 3</td>
-        <td><span class="pill pill-r">Đang làm việc</span></td>
+        <td><b>Thiết kế & BIM HVAC</b></td>
+        <td>Lead HVAC (Nhân sự G)</td>
+        <td>1 KS Triển khai HVAC</td>
+        <td>3 / 2</td>
+        <td><span class="pill pill-r">2 Đang làm</span></td>
       </tr>
       <tr>
-        <td><b>Đội ngũ Kỹ sư BIM Cơ Điện</b></td>
-        <td>Kỹ sư BIM MEPF & KS Triển khai</td>
-        <td>Nhân sự L & các Kỹ sư MEPF</td>
-        <td>4 / 4</td>
-        <td><span class="pill pill-r">Đang làm việc</span></td>
-      </tr>
-      <tr>
-        <td><b>BIM Hạ Tầng & CDE</b></td>
-        <td>Lead Hạ tầng & Quản trị CDE</td>
-        <td>Nhân sự M</td>
-        <td>2 / 1</td>
-        <td><span class="pill pill-r">Đang làm việc</span></td>
+        <td><b>BIM Hạ Tầng & Quản trị CDE</b></td>
+        <td>Lead Hạ tầng (Nhân sự M)</td>
+        <td>Nhân sự M + <b>2 KS BIM Hạ tầng & CDE</b></td>
+        <td>5 / 4</td>
+        <td><span class="pill pill-r">3 Đang làm</span></td>
       </tr>
     </tbody>
   </table>
