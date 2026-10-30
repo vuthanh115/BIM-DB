@@ -793,37 +793,37 @@ html_content = """<!DOCTYPE html>
     </tbody>
   </table>
 
-  <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg> Triển Khai Thực Chiến: Duy Nhất 01 "Dự Án Mẫu" (87 Nhiệm Vụ)</h2>
+  <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg> Triển Khai Thực Chiến: 7 "Dự Án Mẫu" Tiêu Biểu (87 Nhiệm Vụ)</h2>
   
   <div class="box-highlight emerald">
-    <div class="box-title"><svg class="box-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Chiến Lược "Thử Lửa" Quy Trình Bằng 1 Dự Án Mẫu Tập Trung</div>
+    <div class="box-title"><svg class="box-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Chiến Lược "Thử Lửa" Quy Trình Qua 7 Dự Án Mẫu Thực Tế</div>
     <div class="box-desc">
-      Thay vì phân tán nguồn lực làm thử nghiệm dàn trải trên nhiều công trình dẫn đến mất kiểm soát, phòng BIM chọn <b>duy nhất 01 Dự Án Mẫu quy mô điển hình (87 nhiệm vụ kỹ thuật)</b> để kiểm chứng toàn bộ quy trình phối hợp, đo lường chính xác định mức thời gian SLA và hoàn thiện bộ thư viện trước khi áp dụng đại trà.
+      Phòng BIM phân kỳ kiểm chứng quy trình trên <b>7 Dự Án Mẫu điển hình (tổng 87 nhiệm vụ kỹ thuật)</b> gồm đầy đủ các loại hình: nhà xưởng chính (Mẫu 01), trạm xử lý (Mẫu 02), kết cấu thép (Mẫu 03), kiến trúc hoàn thiện (Mẫu 04), hạ tầng ngoài nhà (Mẫu 05), trạm nguồn (Mẫu 06) và phần móng (Mẫu 07).
     </div>
   </div>
 
   <table class="data-table">
     <thead>
       <tr>
-        <th style="width: 25%;">Hạng Mục Công Việc</th>
-        <th style="width: 45%;">Nội Dung Triển Khai Thực Tế Trong Dự Án Mẫu</th>
+        <th style="width: 25%;">Hạng Mục Thực Chiến</th>
+        <th style="width: 45%;">Nội Dung Phân Khai Trên 7 Dự Án Mẫu</th>
         <th style="width: 30%;">Chỉ Số Đánh Giá Hoàn Thành</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><b>Phần Ngầm & Kết Cấu</b></td>
-        <td>Dựng mô hình 3D đà kiềng, móng, vách bể trạm xử lý. Xuất bản vẽ Shop drawing và bảng khối lượng bê tông, cốt thép, ván khuôn.</td>
+        <td><b>Phần Ngầm & Kết Cấu</b><br/><span style="font-size:7.5pt; color:#64748b;">(Dự Án Mẫu 01, 02, 07)</span></td>
+        <td>Dựng mô hình 3D đà kiềng, móng, vách bể kỹ thuật; xuất hồ sơ Shop drawing và bảng khối lượng thép/bê tông chuẩn SLA 5 Ngày.</td>
         <td>Đạt tỷ lệ hoàn thành <b>100%</b>, khớp nối hình học chính xác tuyệt đối.</td>
       </tr>
       <tr>
-        <td><b>Phối Hợp Va Chạm (MEP)</b></td>
-        <td>Import toàn bộ hệ thống đường ống cơ điện ngầm vào Navisworks/BIM Collab, quét xung đột không gian với đà kiềng và kết cấu ngầm.</td>
+        <td><b>Phối Hợp Va Chạm (MEP)</b><br/><span style="font-size:7.5pt; color:#64748b;">(Dự Án Mẫu 03, 04)</span></td>
+        <td>Import đường ống đa hệ MEPF và kết cấu thép mái vào Navisworks/BIM Collab, kiểm soát xung đột theo SLA Chuẩn 10 Ngày.</td>
         <td>Phát hiện và xử lý triệt để <b>42 điểm giao cắt</b> nguy hiểm trước ngày khởi công.</td>
       </tr>
       <tr>
-        <td><b>Bóc Tách Khối Lượng (BOQ)</b></td>
-        <td>Tự động hóa xuất bảng khối lượng vật tư từ mô hình BIM phục vụ Ban Đấu thầu và Ban Cung ứng thương thảo nhà thầu phụ.</td>
+        <td><b>Bóc Tách BOQ & Hạ Tầng</b><br/><span style="font-size:7.5pt; color:#64748b;">(Dự Án Mẫu 05, 06)</span></td>
+        <td>Tự động hóa bóc khối lượng đào đắp, thoát nước ngoài nhà, trạm nguồn và cảnh quan theo SLA Chuẩn 7 Ngày phục vụ đấu thầu.</td>
         <td>Tiết kiệm <b>6 ngày làm việc</b> so với đo bóc thủ công trên bản vẽ CAD 2D.</td>
       </tr>
     </tbody>
@@ -868,7 +868,7 @@ html_content = """<!DOCTYPE html>
       </tr>
       <tr>
         <td><b>Quý 3/2027</b></td>
-        <td><b>Thực chiến "Dự Án Mẫu"</b><br/>• 87 nhiệm vụ kỹ thuật<br/>• Kiểm chứng cam kết SLA</td>
+        <td><b>Thực chiến "7 Dự Án Mẫu"</b><br/>• 87 nhiệm vụ kỹ thuật<br/>• Kiểm chứng cam kết SLA</td>
         <td>
           • Triển khai trọn vẹn 87 nhiệm vụ thực chiến trên Dự Án Mẫu.<br/>
           • Xóa bỏ 100% va chạm (Zero Clash) kết cấu - cơ điện trước khi thi công.<br/>

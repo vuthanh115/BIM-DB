@@ -239,35 +239,35 @@ def clean_task_desc(text):
     t = re.sub(r'cùng nhà thầu CPT', 'cùng Đơn vị gia công kết cấu thép', t, flags=re.IGNORECASE)
     t = re.sub(r'cùng nhà thầu Đại Dũng', 'cùng Đơn vị gia công kết cấu thép', t, flags=re.IGNORECASE)
     
-    # Specific codes and packages
-    t = re.sub(r'trạm nước thải2\.1a-BP16\.1a', 'trạm xử lý nước thải (Dự Án Mẫu)', t)
-    t = re.sub(r'trạm nước thải\s+2\.1a-BP16\.1a', 'trạm xử lý nước thải (Dự Án Mẫu)', t)
-    t = re.sub(r'vách bể\s+2\.1a-BP16\.1a', 'vách bể trạm xử lý nước thải (Dự Án Mẫu)', t)
-    t = re.sub(r'vách bể BP15\.2', 'vách bể kỹ thuật (Dự Án Mẫu)', t)
-    t = re.sub(r'trạm nước thải BP15\.1', 'trạm xử lý nước thải (Dự Án Mẫu)', t)
-    t = re.sub(r'nhà xỉ than BP12', 'nhà phụ trợ kỹ thuật (Dự Án Mẫu)', t)
-    t = re.sub(r'nhà nồi hơi BP12', 'nhà nồi hơi kỹ thuật (Dự Án Mẫu)', t)
-    t = re.sub(r'hạng mục\s+BP3, BP12', 'các hạng mục kết cấu thép Dự Án Mẫu', t)
-    t = re.sub(r'hạng mục\s+BP3', 'hạng mục mái xưởng A (Dự Án Mẫu)', t)
-    t = re.sub(r'hạng mục\s+MS1', 'hạng mục xưởng sản xuất (Dự Án Mẫu)', t)
-    t = re.sub(r'NP42', 'khu nhà điều hành (Dự Án Mẫu)', t)
-    t = re.sub(r'TH2', 'khu nhà xưởng B (Dự Án Mẫu)', t)
-    t = re.sub(r'TH1', 'khu nhà xưởng A (Dự Án Mẫu)', t)
-    t = re.sub(r'nhà văn phòng các xưởng', 'khu văn phòng (Dự Án Mẫu)', t)
-    t = re.sub(r'văn phòng các xưởng', 'khu văn phòng (Dự Án Mẫu)', t)
-    t = re.sub(r'nhà phụ trợ 1', 'nhà phụ trợ kỹ thuật (Dự Án Mẫu)', t)
-    t = re.sub(r'nhà xưởng E, G, H', 'cụm nhà xưởng mở rộng (Dự Án Mẫu)', t)
-    t = re.sub(r'các xưởng A, B, C, D, F', 'cụm nhà xưởng sản xuất chính (Dự Án Mẫu)', t)
-    t = re.sub(r'2 gói 3\.2B và 3\.2C', 'các phân đoạn móng (Dự Án Mẫu)', t)
-    t = re.sub(r'3\.2B và 3\.2C', 'các phân đoạn móng (Dự Án Mẫu)', t)
-    t = re.sub(r'(?:nhà\s+trạm|(?<!n)hà\s+trạm)\s*1,2,3,4', 'nhà trạm kỹ thuật (Dự Án Mẫu)', t)
-    t = re.sub(r'(?:nhà\s+trạm\s+nguồn|trạm\s+nguồn)\s*1,2,3,4', 'trạm nguồn điện kỹ thuật (Dự Án Mẫu)', t)
-    t = re.sub(r'trạm nguồn(?!\s+điện)', 'trạm nguồn điện kỹ thuật (Dự Án Mẫu)', t)
-    t = re.sub(r'nhà vệ sinh\s*1,2', 'khu vệ sinh (Dự Án Mẫu)', t)
-    t = re.sub(r'nhà\s+bảo vệ\s*1,2', 'nhà bảo vệ (Dự Án Mẫu)', t)
-    t = re.sub(r'thay đổi thiết kế dự án', 'thay đổi thiết kế Dự Án Mẫu', t)
-    t = re.sub(r'phục vụ triển khai IPC1', 'phục vụ hồ sơ nghiệm thu IPC (Dự Án Mẫu)', t)
-    t = re.sub(r'phục vụ IPC', 'phục vụ hồ sơ nghiệm thu IPC (Dự Án Mẫu)', t)
+    # Specific codes and packages with assigned Du An Mau
+    t = re.sub(r'trạm nước thải2\.1a-BP16\.1a', 'trạm xử lý nước thải (Dự Án Mẫu 02)', t)
+    t = re.sub(r'trạm nước thải\s+2\.1a-BP16\.1a', 'trạm xử lý nước thải (Dự Án Mẫu 02)', t)
+    t = re.sub(r'vách bể\s+2\.1a-BP16\.1a', 'vách bể trạm xử lý nước thải (Dự Án Mẫu 02)', t)
+    t = re.sub(r'vách bể BP15\.2', 'vách bể kỹ thuật (Dự Án Mẫu 02)', t)
+    t = re.sub(r'trạm nước thải BP15\.1', 'trạm xử lý nước thải (Dự Án Mẫu 02)', t)
+    t = re.sub(r'nhà xỉ than BP12', 'nhà phụ trợ kỹ thuật (Dự Án Mẫu 02)', t)
+    t = re.sub(r'nhà nồi hơi BP12', 'nhà nồi hơi kỹ thuật (Dự Án Mẫu 02)', t)
+    t = re.sub(r'hạng mục\s+BP3, BP12', 'các hạng mục kết cấu thép (Dự Án Mẫu 03)', t)
+    t = re.sub(r'hạng mục\s+BP3', 'hạng mục mái xưởng A (Dự Án Mẫu 03)', t)
+    t = re.sub(r'hạng mục\s+MS1', 'hạng mục xưởng sản xuất (Dự Án Mẫu 03)', t)
+    t = re.sub(r'NP42', 'khu nhà điều hành (Dự Án Mẫu 03)', t)
+    t = re.sub(r'TH2', 'khu nhà xưởng B (Dự Án Mẫu 04)', t)
+    t = re.sub(r'TH1', 'khu nhà xưởng A (Dự Án Mẫu 04)', t)
+    t = re.sub(r'nhà văn phòng các xưởng', 'khu văn phòng xưởng (Dự Án Mẫu 01)', t)
+    t = re.sub(r'văn phòng các xưởng', 'khu văn phòng xưởng (Dự Án Mẫu 01)', t)
+    t = re.sub(r'nhà phụ trợ 1', 'nhà phụ trợ kỹ thuật (Dự Án Mẫu 01)', t)
+    t = re.sub(r'nhà xưởng E, G, H', 'cụm nhà xưởng mở rộng (Dự Án Mẫu 01)', t)
+    t = re.sub(r'các xưởng A, B, C, D, F', 'cụm nhà xưởng sản xuất chính (Dự Án Mẫu 01)', t)
+    t = re.sub(r'2 gói 3\.2B và 3\.2C', 'các phân đoạn móng (Dự Án Mẫu 07)', t)
+    t = re.sub(r'3\.2B và 3\.2C', 'các phân đoạn móng (Dự Án Mẫu 07)', t)
+    t = re.sub(r'(?:nhà\s+trạm|(?<!n)hà\s+trạm)\s*1,2,3,4', 'nhà trạm kỹ thuật (Dự Án Mẫu 06)', t)
+    t = re.sub(r'(?:nhà\s+trạm\s+nguồn|trạm\s+nguồn)\s*1,2,3,4', 'trạm nguồn điện kỹ thuật (Dự Án Mẫu 06)', t)
+    t = re.sub(r'trạm nguồn(?!\s+điện)', 'trạm nguồn điện kỹ thuật (Dự Án Mẫu 06)', t)
+    t = re.sub(r'nhà vệ sinh\s*1,2', 'khu vệ sinh (Dự Án Mẫu 01)', t)
+    t = re.sub(r'nhà\s+bảo vệ\s*1,2', 'nhà bảo vệ (Dự Án Mẫu 01)', t)
+    t = re.sub(r'thay đổi thiết kế dự án', 'thay đổi thiết kế dự án mẫu', t)
+    t = re.sub(r'phục vụ triển khai IPC1', 'phục vụ hồ sơ nghiệm thu IPC (Dự Án Mẫu 05)', t)
+    t = re.sub(r'phục vụ IPC', 'phục vụ hồ sơ nghiệm thu IPC (Dự Án Mẫu 05)', t)
     
     t = re.sub(r'\s+', ' ', t).strip()
     return t
@@ -284,7 +284,16 @@ if os.path.exists(SRC_FILE_TASKS):
             if hm and str(hm).strip():
                 p_text = clean_text(hm)
                 if p_text.startswith("Dự án"):
-                    cur_project = "Dự Án Mẫu"
+                    project_mapping = {
+                        "Dự án Mega": "Dự Án Mẫu 01",
+                        "Dự án Kim Tín giai đoạn 3": "Dự Án Mẫu 02",
+                        "Dự án APF": "Dự Án Mẫu 03",
+                        "Dự án CasaFlora2": "Dự Án Mẫu 04",
+                        "Dự án Suncasa": "Dự Án Mẫu 05",
+                        "Dự án các trạm Phú Quốc": "Dự Án Mẫu 06",
+                        "Dự án BB052": "Dự Án Mẫu 07"
+                    }
+                    cur_project = project_mapping.get(p_text, p_text.replace("Dự án ", "Dự Án Mẫu - "))
                 else:
                     cur_project = p_text
             if cv and str(cv).strip():
@@ -469,12 +478,22 @@ html_content = f"""<!DOCTYPE html>
     </div>
 
     <div>
-      <label>🚀 Lọc Dự án / Hạng mục (Tab 5: Tiến độ)</label>
+      <label>🚀 Lọc Dự án Mẫu / Hạng mục (Tab 5: Tiến độ)</label>
       <select id="slicerTaskProject" class="slicer-select" onchange="updateTasksFilter(true)">
-        <option value="ALL">-- Tất cả Hạng mục (214 Việc) --</option>
-        <option value="Dự Án Mẫu">Dự Án Mẫu (87 Việc)</option>
-        <option value="Chuẩn hóa Bộ môn Thiết kế">Chuẩn hóa 6 Bộ môn (115 Việc)</option>
-        <option value="Quản trị & Tổ chức">Quản trị & Văn hóa (12 Việc)</option>
+        <option value="ALL">-- Tất cả 7 Dự án Mẫu & Hạng mục (214 Việc) --</option>
+        <optgroup label="7 Dự Án Mẫu Thực Chiến (87 Việc)">
+          <option value="Dự Án Mẫu 01">Dự Án Mẫu 01 (24 Việc)</option>
+          <option value="Dự Án Mẫu 02">Dự Án Mẫu 02 (18 Việc)</option>
+          <option value="Dự Án Mẫu 03">Dự Án Mẫu 03 (15 Việc)</option>
+          <option value="Dự Án Mẫu 04">Dự Án Mẫu 04 (12 Việc)</option>
+          <option value="Dự Án Mẫu 05">Dự Án Mẫu 05 (9 Việc)</option>
+          <option value="Dự Án Mẫu 06">Dự Án Mẫu 06 (7 Việc)</option>
+          <option value="Dự Án Mẫu 07">Dự Án Mẫu 07 (2 Việc)</option>
+        </optgroup>
+        <optgroup label="Chuẩn Hóa Hệ Thống & Quản Trị (127 Việc)">
+          <option value="Chuẩn hóa Bộ môn Thiết kế">Chuẩn hóa 6 Bộ môn (115 Việc)</option>
+          <option value="Quản trị & Tổ chức">Quản trị & Văn hóa (12 Việc)</option>
+        </optgroup>
       </select>
     </div>
 
@@ -508,7 +527,7 @@ html_content = f"""<!DOCTYPE html>
   </div>
 
   <div class="kpi-grid">
-    <div class="kpi-card emerald"><div class="kpi-title">Tiến độ Dự án Mẫu</div><div class="kpi-val">75.9%</div><div class="kpi-sub">66 / 87 việc hoàn thành (Dự án Mẫu)</div></div>
+    <div class="kpi-card emerald"><div class="kpi-title">Tiến độ 7 Dự Án Mẫu</div><div class="kpi-val">75.9%</div><div class="kpi-sub">66 / 87 việc hoàn thành (7 Dự Án Mẫu)</div></div>
     <div class="kpi-card blue"><div class="kpi-title">Tự chủ Shop Drawing</div><div class="kpi-val">100%</div><div class="kpi-sub">Làm chủ 6 bộ môn, chuyển đổi toàn diện lên BIM</div></div>
     <div class="kpi-card rose"><div class="kpi-title">Phát sinh Sửa chữa CT</div><div class="kpi-val">&lt; 1%</div><div class="kpi-sub">Xóa 100% va chạm trước khi đổ bê tông</div></div>
     <div class="kpi-card amber"><div class="kpi-title">Tài liệu Chuẩn hóa Thiết kế</div><div class="kpi-val">115 Mục</div><div class="kpi-sub">6 Bộ môn (KC, KT, Điện, HVAC, CTN, PCCC)</div></div>
@@ -650,7 +669,7 @@ html_content = f"""<!DOCTYPE html>
   <section id="tab-tasks" class="tab-page">
     <div class="chart-grid-equal">
       <div class="panel">
-        <div class="panel-header"><h3>Tiến độ Thực hiện theo Hạng mục / Dự án Mẫu</h3><span id="projChartSubtitle">So sánh Tỷ lệ Hoàn thành vs Đang thực hiện</span></div>
+        <div class="panel-header"><h3>Tiến độ Thực hiện theo 7 Dự Án Mẫu Thực Tế</h3><span id="projChartSubtitle">So sánh Tỷ lệ Hoàn thành vs Đang thực hiện của 7 Dự Án Mẫu</span></div>
         <div class="chart-container"><canvas id="chartProjects"></canvas></div>
       </div>
       <div class="panel">
@@ -659,7 +678,7 @@ html_content = f"""<!DOCTYPE html>
       </div>
     </div>
     <div class="panel">
-      <div class="panel-header"><h3>Chi tiết Tiến độ Công việc (Dự Án Mẫu & Hệ thống)</h3><span id="tasksCountLabel" style="color:var(--accent-cyan); font-weight:700;"></span></div>
+      <div class="panel-header"><h3>Chi tiết Tiến độ Công việc (7 Dự Án Mẫu & Hệ thống)</h3><span id="tasksCountLabel" style="color:var(--accent-cyan); font-weight:700;"></span></div>
       <div class="table-wrap"><table><thead><tr><th>Mã</th><th>Nhóm</th><th>Dự Án Mẫu / Hạng mục</th><th>Nội dung Công việc</th><th>Tình trạng</th><th>Bắt đầu</th><th>Kết thúc</th><th>Hạn</th><th>Tiến độ & Kết quả</th><th>Rủi ro / Ghi chú</th></tr></thead><tbody id="tblTasksBody"></tbody></table></div>
     </div>
   </section>
@@ -812,7 +831,7 @@ function updateTasksFilter(autoSwitch = false) {{
   const labelEl = document.getElementById('tasksCountLabel');
   if (labelEl) {{
     labelEl.innerHTML = proj === 'ALL'
-      ? `Đang hiển thị toàn bộ 214 công việc (Dự Án Mẫu & Hệ thống) | Hoàn thành: ${{doneCount}} | Đang làm: ${{inProgCount}} | Quá hạn: ${{overdueCount}}`
+      ? `Đang hiển thị toàn bộ 214 công việc (7 Dự Án Mẫu & Hệ thống) | Hoàn thành: ${{doneCount}} | Đang làm: ${{inProgCount}} | Quá hạn: ${{overdueCount}}`
       : `<b style="color:var(--accent-cyan); font-size:13px;">${{proj}}</b>: ${{filtered.length}} việc | Hoàn thành: <b style="color:#34d399">${{doneCount}} (${{pct}}%)</b> | Đang làm: ${{inProgCount}}${{overdueCount > 0 ? ` | Quá hạn: <b style="color:#f87171">${{overdueCount}}</b>` : ''}}`;
   }}
 
