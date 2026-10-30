@@ -461,6 +461,7 @@ html_content = f"""<!DOCTYPE html>
     </div>
     <div class="badge-bar">
       <a class="btn-dl" download="BIM_TK_PowerBI_DataModel_2026.xlsx" href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64_xlsx}">📥 Tải File Excel 8 Sheet Chuẩn Power BI (.xlsx)</a>
+      <a class="btn-dl" href="Bao_Cao_Chien_Luoc_Xay_Dung_Phong_BIM_2026.pdf" target="_blank" style="background: linear-gradient(135deg, #0284c7, #0369a1);">📄 Tải Báo Cáo Chiến Lược PDF (Trình Lãnh Đạo)</a>
       <span class="badge">✔ Star Schema 8 Bảng</span>
       <span class="badge info">🔒 Tên nhân sự A, B, C</span>
       <span class="badge warn">⚡ Đã Fix #DIV/0! KPI</span>
