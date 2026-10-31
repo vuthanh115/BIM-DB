@@ -52,54 +52,150 @@ html_content = """<!DOCTYPE html>
     page-break-after: avoid;
   }
 
-  /* COVER PAGE - FULL BLEED MODERN EXECUTIVE */
+  /* COVER PAGE - LIGHT EXECUTIVE CORPORATE (CHUẨN IN ẤN TRẮNG SÁNG RÕ NÉT) */
   .page.cover-page {
-    padding: 0 !important;
+    padding: 14mm 16mm 14mm 16mm !important;
     margin: 0 !important;
     height: 297mm !important;
     max-height: 297mm !important;
-    border: none !important;
+    background: #ffffff !important;
     overflow: hidden !important;
   }
   .cover {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 297mm;
-    max-height: 297mm;
-    padding: 26mm 22mm 22mm 22mm;
-    background:
-      radial-gradient(circle at 85% 12%, rgba(6, 182, 212, 0.22) 0%, transparent 45%),
-      radial-gradient(circle at 10% 88%, rgba(37, 99, 235, 0.20) 0%, transparent 45%),
-      radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.6) 0%, transparent 100%),
-      linear-gradient(140deg, #040711 0%, #0a1122 40%, #0d1730 75%, #112042 100%);
-    color: #fff;
+    height: 100%;
+    padding: 18mm 18mm 18mm 18mm;
+    background: #ffffff;
+    border: 2px solid #0f172a;
+    border-radius: 8px;
     position: relative;
     overflow: hidden;
   }
   .cover::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-image: 
-      linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
-    background-size: 26px 26px;
-    pointer-events: none;
-    z-index: 0;
-  }
-  .cover::after {
-    content: '';
-    position: absolute;
     top: 0; left: 0; right: 0;
-    height: 5px;
-    background: linear-gradient(90deg, #06b6d4 0%, #3b82f6 50%, #8b5cf6 100%);
+    height: 6px;
+    background: linear-gradient(90deg, #0284c7 0%, #2563eb 50%, #4f46e5 100%);
     z-index: 2;
   }
-  .cover-top, .cover-center, .cover-meta {
+  .cover-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 14px;
     position: relative;
     z-index: 1;
   }
+  .cover-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .cover-logo-icon {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #0284c7, #1d4ed8);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 16pt;
+    color: #ffffff;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 6px -1px rgba(2, 132, 199, 0.2);
+  }
+  .cover-logo-text h3 {
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #0f172a;
+  }
+  .cover-logo-text p {
+    font-size: 8pt;
+    color: #475569;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .cover-badge {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    color: #1d4ed8;
+    font-size: 8pt;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 999px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .cover-center {
+    margin: 25mm 0 20mm 0;
+    position: relative;
+    z-index: 1;
+  }
+  .cover-tagline {
+    font-size: 11pt;
+    font-weight: 800;
+    color: #0284c7;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .cover-tagline::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 3px;
+    background: #0284c7;
+    border-radius: 2px;
+  }
+  .cover-title {
+    font-size: 26pt;
+    font-weight: 900;
+    line-height: 1.25;
+    color: #0f172a;
+    margin-bottom: 18px;
+    letter-spacing: -0.5px;
+  }
+  .cover-title span {
+    color: #1d4ed8;
+    display: inline-block;
+  }
+  .cover-subtitle {
+    font-size: 10.5pt;
+    color: #334155;
+    line-height: 1.65;
+    max-width: 620px;
+    font-weight: 500;
+    border-left: 3px solid #0284c7;
+    padding-left: 14px;
+    background: #f8fafc;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 0 6px 6px 0;
+  }
+  .cover-meta {
+    background: #f8fafc;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 18px 22px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    position: relative;
+    z-index: 1;
+  }
+  .meta-item { display: flex; flex-direction: column; gap: 4px; }
+  .meta-label { font-size: 7.5pt; color: #64748b; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; }
+  .meta-val { font-size: 10pt; color: #0f172a; font-weight: 800; }
   .cover-top {
     display: flex;
     justify-content: space-between;
