@@ -484,7 +484,7 @@ html_content = f"""<!DOCTYPE html>
       <label>🚀 Lọc Dự án Mẫu / Hạng mục (Tab 5: Tiến độ)</label>
       <select id="slicerTaskProject" class="slicer-select" onchange="updateTasksFilter(true)">
         <option value="ALL">-- Tất cả 7 Dự án Mẫu & Hạng mục (214 Việc) --</option>
-        <optgroup label="7 Dự Án Mẫu Thực Chiến (87 Việc)">
+        <optgroup label="Hạng Mục Dự Án Mẫu Thực Chiến (87 Việc)">
           <option value="Dự Án Mẫu 01">Dự Án Mẫu 01 (24 Việc)</option>
           <option value="Dự Án Mẫu 02">Dự Án Mẫu 02 (18 Việc)</option>
           <option value="Dự Án Mẫu 03">Dự Án Mẫu 03 (15 Việc)</option>
@@ -530,7 +530,7 @@ html_content = f"""<!DOCTYPE html>
   </div>
 
   <div class="kpi-grid">
-    <div class="kpi-card emerald"><div class="kpi-title">Tiến độ 7 Dự Án Mẫu</div><div class="kpi-val">75.9%</div><div class="kpi-sub">66 / 87 việc hoàn thành (7 Dự Án Mẫu)</div></div>
+    <div class="kpi-card emerald"><div class="kpi-title">Tiến độ Dự Án Mẫu</div><div class="kpi-val">75.9%</div><div class="kpi-sub">66 / 87 việc hoàn thành (01 Dự Án Mẫu trọng điểm)</div></div>
     <div class="kpi-card blue"><div class="kpi-title">Tự chủ Shop Drawing</div><div class="kpi-val">100%</div><div class="kpi-sub">Làm chủ 6 bộ môn, chuyển đổi toàn diện lên BIM</div></div>
     <div class="kpi-card rose"><div class="kpi-title">Phát sinh Sửa chữa CT</div><div class="kpi-val">&lt; 1%</div><div class="kpi-sub">Xóa 100% va chạm trước khi đổ bê tông</div></div>
     <div class="kpi-card amber"><div class="kpi-title">Tài liệu Chuẩn hóa Thiết kế</div><div class="kpi-val">115 Mục</div><div class="kpi-sub">6 Bộ môn (KC, KT, Điện, HVAC, CTN, PCCC)</div></div>
@@ -672,7 +672,7 @@ html_content = f"""<!DOCTYPE html>
   <section id="tab-tasks" class="tab-page">
     <div class="chart-grid-equal">
       <div class="panel">
-        <div class="panel-header"><h3>Tiến độ Thực hiện theo 7 Dự Án Mẫu Thực Tế</h3><span id="projChartSubtitle">So sánh Tỷ lệ Hoàn thành vs Đang thực hiện của 7 Dự Án Mẫu</span></div>
+        <div class="panel-header"><h3>Tiến độ Thực hiện Hạng mục Dự Án Mẫu Thực Tế</h3><span id="projChartSubtitle">So sánh Tỷ lệ Hoàn thành vs Đang thực hiện của các hạng mục Dự Án Mẫu</span></div>
         <div class="chart-container"><canvas id="chartProjects"></canvas></div>
       </div>
       <div class="panel">
@@ -681,7 +681,7 @@ html_content = f"""<!DOCTYPE html>
       </div>
     </div>
     <div class="panel">
-      <div class="panel-header"><h3>Chi tiết Tiến độ Công việc (7 Dự Án Mẫu & Hệ thống)</h3><span id="tasksCountLabel" style="color:var(--accent-cyan); font-weight:700;"></span></div>
+      <div class="panel-header"><h3>Chi tiết Tiến độ Công việc (Dự Án Mẫu & Hệ thống)</h3><span id="tasksCountLabel" style="color:var(--accent-cyan); font-weight:700;"></span></div>
       <div class="table-wrap"><table><thead><tr><th>Mã</th><th>Nhóm</th><th>Dự Án Mẫu / Hạng mục</th><th>Nội dung Công việc</th><th>Tình trạng</th><th>Bắt đầu</th><th>Kết thúc</th><th>Hạn</th><th>Tiến độ & Kết quả</th><th>Rủi ro / Ghi chú</th></tr></thead><tbody id="tblTasksBody"></tbody></table></div>
     </div>
   </section>
@@ -834,7 +834,7 @@ function updateTasksFilter(autoSwitch = false) {{
   const labelEl = document.getElementById('tasksCountLabel');
   if (labelEl) {{
     labelEl.innerHTML = proj === 'ALL'
-      ? `Đang hiển thị toàn bộ 214 công việc (7 Dự Án Mẫu & Hệ thống) | Hoàn thành: ${{doneCount}} | Đang làm: ${{inProgCount}} | Quá hạn: ${{overdueCount}}`
+      ? `Đang hiển thị toàn bộ 214 công việc (Dự Án Mẫu & Hệ thống) | Hoàn thành: ${{doneCount}} | Đang làm: ${{inProgCount}} | Quá hạn: ${{overdueCount}}`
       : `<b style="color:var(--accent-cyan); font-size:13px;">${{proj}}</b>: ${{filtered.length}} việc | Hoàn thành: <b style="color:#34d399">${{doneCount}} (${{pct}}%)</b> | Đang làm: ${{inProgCount}}${{overdueCount > 0 ? ` | Quá hạn: <b style="color:#f87171">${{overdueCount}}</b>` : ''}}`;
   }}
 

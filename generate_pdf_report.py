@@ -799,12 +799,12 @@ html_content = """<!DOCTYPE html>
     </tbody>
   </table>
 
-  <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg> Triển Khai Thực Chiến: 7 "Dự Án Mẫu" Tiêu Biểu (87 Nhiệm Vụ)</h2>
+  <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg> Triển Khai Thực Chiến: 01 "Dự Án Mẫu" Tiêu Biểu (87 Nhiệm Vụ)</h2>
   
   <div class="box-highlight emerald">
-    <div class="box-title"><svg class="box-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Chiến Lược "Thử Lửa" Quy Trình Qua 7 Dự Án Mẫu Thực Tế</div>
+    <div class="box-title"><svg class="box-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Chiến Lược "Thử Lửa" Quy Trình Qua 01 Dự Án Mẫu Thực Tế</div>
     <div class="box-desc">
-      Phòng BIM phân kỳ kiểm chứng quy trình trên <b>7 Dự Án Mẫu điển hình (tổng 87 nhiệm vụ kỹ thuật)</b> gồm đầy đủ các loại hình: nhà xưởng chính (Mẫu 01), trạm xử lý (Mẫu 02), kết cấu thép (Mẫu 03), kiến trúc hoàn thiện (Mẫu 04), hạ tầng ngoài nhà (Mẫu 05), trạm nguồn (Mẫu 06) và phần móng (Mẫu 07).
+      Phòng BIM tập trung kiểm chứng toàn diện quy trình trên <b>01 Dự Án Mẫu trọng điểm (tổng 87 nhiệm vụ kỹ thuật)</b> gồm đầy đủ các hạng mục: nhà xưởng chính, trạm xử lý kỹ thuật, kết cấu thép, kiến trúc hoàn thiện, hạ tầng ngoài nhà, trạm nguồn và phần ngầm móng.
     </div>
   </div>
 
@@ -812,23 +812,23 @@ html_content = """<!DOCTYPE html>
     <thead>
       <tr>
         <th style="width: 25%;">Hạng Mục Thực Chiến</th>
-        <th style="width: 45%;">Nội Dung Phân Khai Trên 7 Dự Án Mẫu</th>
+        <th style="width: 45%;">Nội Dung Phân Khai Trên Dự Án Mẫu</th>
         <th style="width: 30%;">Chỉ Số Đánh Giá Hoàn Thành</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><b>Phần Ngầm & Kết Cấu</b><br/><span style="font-size:7.5pt; color:#64748b;">(Dự Án Mẫu 01, 02, 07)</span></td>
+        <td><b>Phần Ngầm & Kết Cấu</b><br/><span style="font-size:7.5pt; color:#64748b;">(Hạng mục Móng & Bể ngầm)</span></td>
         <td>Dựng mô hình 3D đà kiềng, móng, vách bể kỹ thuật; xuất hồ sơ Shop drawing và bảng khối lượng thép/bê tông chuẩn SLA 5 Ngày.</td>
         <td>Đạt tỷ lệ hoàn thành <b>100%</b>, khớp nối hình học chính xác tuyệt đối.</td>
       </tr>
       <tr>
-        <td><b>Phối Hợp Va Chạm (MEP)</b><br/><span style="font-size:7.5pt; color:#64748b;">(Dự Án Mẫu 03, 04)</span></td>
+        <td><b>Phối Hợp Va Chạm (MEP)</b><br/><span style="font-size:7.5pt; color:#64748b;">(Hạng mục MEPF & Kết cấu mái)</span></td>
         <td>Import đường ống đa hệ MEPF và kết cấu thép mái vào Navisworks/BIM Collab, ứng dụng AI Agent phân loại và kiểm soát xung đột theo SLA Chuẩn 3 Ngày.</td>
         <td>Phát hiện và xử lý triệt để <b>42 điểm giao cắt</b> nguy hiểm trước ngày khởi công.</td>
       </tr>
       <tr>
-        <td><b>Bóc Tách BOQ & Hạ Tầng</b><br/><span style="font-size:7.5pt; color:#64748b;">(Dự Án Mẫu 05, 06)</span></td>
+        <td><b>Bóc Tách BOQ & Hạ Tầng</b><br/><span style="font-size:7.5pt; color:#64748b;">(Hạ tầng ngoài nhà & Trạm nguồn)</span></td>
         <td>Tự động hóa bóc khối lượng đào đắp, thoát nước ngoài nhà, trạm nguồn và cảnh quan theo SLA Chuẩn 3 Ngày nhờ AI Agent tự động bóc tách BOQ phục vụ đấu thầu.</td>
         <td>Tiết kiệm <b>6 ngày làm việc</b> so với đo bóc thủ công trên bản vẽ CAD 2D.</td>
       </tr>
