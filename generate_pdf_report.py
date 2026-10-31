@@ -10,12 +10,12 @@ Sử dụng Playwright (Chromium) xuất PDF chuẩn in ấn A4 (7 trang màu Ex
 
 import os
 import sys
-from playwright.sync_api import sync_playwright
+# from playwright.sync_api import sync_playwright (optional)
 
 OUT_PDF_2027 = os.path.abspath("Bao_Cao_Chien_Luoc_Xay_Dung_Phong_BIM_2027.pdf")
 OUT_PDF_2026 = os.path.abspath("Bao_Cao_Chien_Luoc_Xay_Dung_Phong_BIM_2026.pdf")
-OUT_PDF_ARTIFACT_2027 = os.path.abspath(r"C:\Users\thanhvp\.gemini\antigravity\brain\f7887f6d-20b4-485d-b51b-cdd6f48e0c12\Bao_Cao_Chien_Luoc_Xay_Dung_Phong_BIM_2027.pdf")
-OUT_PDF_ARTIFACT_2026 = os.path.abspath(r"C:\Users\thanhvp\.gemini\antigravity\brain\f7887f6d-20b4-485d-b51b-cdd6f48e0c12\Bao_Cao_Chien_Luoc_Xay_Dung_Phong_BIM_2026.pdf")
+OUT_PDF_ARTIFACT_2027 = os.path.abspath(r"C:\Users\vophi\.gemini\antigravity\brain\1112d6b2-e52a-494a-9fe7-3e83ca48e8e4\Bao_Cao_Chien_Luoc_Xay_Dung_Phong_BIM_2027.pdf")
+OUT_PDF_ARTIFACT_2026 = os.path.abspath(r"C:\Users\vophi\.gemini\antigravity\brain\1112d6b2-e52a-494a-9fe7-3e83ca48e8e4\Bao_Cao_Chien_Luoc_Xay_Dung_Phong_BIM_2026.pdf")
 
 html_content = """<!DOCTYPE html>
 <html lang="vi">
@@ -357,7 +357,7 @@ html_content = """<!DOCTYPE html>
         <span>& TỐI ƯU HÓA VẬN HÀNH PHÒNG BIM (2027)</span>
       </h1>
       <p class="cover-subtitle">
-        Báo cáo phương án kiện toàn tổ chức nhân sự hiện hữu, thiết lập cơ chế phân quyền điều phối theo Leader từng bộ môn, chuẩn hóa quy chế phối hợp RACI & cam kết SLA 7 bước khép kín nhằm nâng cao năng suất và chất lượng hồ sơ công trình.
+        Báo cáo phương án kiện toàn tổ chức nhân sự hiện hữu, thiết lập cơ chế phân quyền điều phối theo 4 Cụm Lead bộ môn, tự động hóa bằng AI Agent, triển khai song song dự án mẫu thực chiến và cam kết chuẩn dịch vụ SLA tinh gọn (Shop 5d, Combine 3d, QS 3d) nhằm nâng cao năng suất và chất lượng hồ sơ công trình.
       </p>
     </div>
 
@@ -404,7 +404,7 @@ html_content = """<!DOCTYPE html>
     <div class="stat-card emerald">
       <div class="stat-num">100%</div>
       <div class="stat-title">Tiến Độ Theo Chuẩn SLA</div>
-      <div class="stat-desc">Cam kết thời gian Shop 5d, Combine 10d, QS 7d</div>
+      <div class="stat-desc">Cam kết thời gian Shop 5d, Combine 3d, QS 3d</div>
     </div>
     <div class="stat-card rose">
       <div class="stat-num">&lt; 1%</div>
@@ -485,42 +485,42 @@ html_content = """<!DOCTYPE html>
       <tr>
         <td><b>Quản lý Điều hành</b></td>
         <td>Trưởng bộ phận BIM - TK</td>
-        <td>Nhân sự A (Điều hành chung & kiểm soát SLA)</td>
+        <td>Điều hành chung, hoạch định chiến lược & kiểm soát SLA</td>
         <td>1 / 1</td>
         <td><span class="pill pill-r">1 Đang làm</span></td>
       </tr>
       <tr>
         <td><b>Thiết kế & BIM Kết Cấu</b></td>
-        <td>Lead Kết Cấu (Nhân sự D)</td>
-        <td>2 KS TK + <b>3 KS BIM KC</b> (Nhân sự J, K...)</td>
+        <td>Lead Bộ Môn Kết Cấu</td>
+        <td>2 KS Thiết kế TK + <b>3 KS BIM Kết Cấu</b></td>
         <td>8 / 7</td>
         <td><span class="pill pill-r">7 Đang làm</span></td>
       </tr>
       <tr>
         <td><b>Thiết kế & BIM Kiến Trúc</b></td>
-        <td>Lead Kiến Trúc (Nhân sự E)</td>
-        <td>1 KTS TK + <b>3 KS BIM KT</b> (Nhân sự H, I...)</td>
+        <td>Lead Bộ Môn Kiến Trúc</td>
+        <td>1 KTS Thiết kế + <b>3 KS BIM Kiến Trúc</b></td>
         <td>6 / 5</td>
         <td><span class="pill pill-tag">4 Đang làm</span></td>
       </tr>
       <tr>
         <td><b>Thiết kế & BIM Cơ Điện (MEPF)</b></td>
-        <td>Lead BIM MEPF (Nhân sự C)</td>
-        <td>1 KS TK + 1 KS MEP + <b>3 KS BIM MEP</b> (Nhân sự L...)</td>
+        <td>Lead Bộ Môn BIM MEPF</td>
+        <td>1 KS Thiết kế TK + 1 KS MEP + <b>3 KS BIM MEP</b></td>
         <td>7 / 7</td>
         <td><span class="pill pill-r">7 Đang làm</span></td>
       </tr>
       <tr>
         <td><b>Thiết kế & BIM HVAC</b></td>
-        <td>Lead HVAC (Nhân sự G)</td>
-        <td>1 KS Triển khai HVAC</td>
+        <td>Lead Bộ Môn HVAC</td>
+        <td>1 KS Triển khai HVAC chuyên trách</td>
         <td>3 / 2</td>
         <td><span class="pill pill-r">2 Đang làm</span></td>
       </tr>
       <tr>
         <td><b>BIM Hạ Tầng & Quản trị CDE</b></td>
-        <td>Lead Hạ tầng (Nhân sự M)</td>
-        <td>Nhân sự M + <b>2 KS BIM Hạ tầng & CDE</b></td>
+        <td>Lead Kỹ Thuật Hạ Tầng & CDE</td>
+        <td>2 KS BIM Hạ tầng & Quản trị dữ liệu CDE</td>
         <td>5 / 4</td>
         <td><span class="pill pill-r">3 Đang làm</span></td>
       </tr>
@@ -581,27 +581,27 @@ html_content = """<!DOCTYPE html>
     <tbody>
       <tr>
         <td><b>Cụm 1: Kết Cấu & Biện Pháp Thi Công</b></td>
-        <td><b>Lead Kết Cấu (Nhân sự D)</b></td>
-        <td>Nhân sự J, Nhân sự K (KS BIM Kết Cấu)</td>
-        <td>• Mô hình kết cấu BTCT, đà kiềng, móng, vách bể.<br/>• Xuất bản vẽ Shop cốt thép & ván khuôn đạt SLA <b>Chuẩn 5 Ngày</b>.<br/>• Bóc tách khối lượng thép & bê tông phục vụ mua hàng.</td>
+        <td><b>Lead Bộ Môn Kết Cấu</b></td>
+        <td>Đội ngũ KS BIM Kết Cấu thực chiến</td>
+        <td>• Mô hình kết cấu BTCT, đà kiềng, móng, vách bể.<br/>• Xuất bản vẽ Shop cốt thép & ván khuôn đạt SLA <b>Chuẩn 5 Ngày</b>.<br/>• AI Agent trích xuất BOQ thép & bê tông phục vụ mua hàng.</td>
       </tr>
       <tr>
         <td><b>Cụm 2: Kiến Trúc & Tạo Hình 3D</b></td>
-        <td><b>Lead Kiến Trúc (Nhân sự E)</b></td>
-        <td>Nhân sự H, Nhân sự I (KS BIM Kiến Trúc)</td>
+        <td><b>Lead Bộ Môn Kiến Trúc</b></td>
+        <td>Đội ngũ KTS & KS BIM Kiến Trúc thực chiến</td>
         <td>• Mô hình kiến trúc LOD 300–350, chi tiết cấu tạo.<br/>• Diễn họa 3D phối cảnh, mô phỏng video phục vụ đấu thầu.<br/>• Thẩm định tuân thủ quy chuẩn phòng cháy QCVN 06.</td>
       </tr>
       <tr>
         <td><b>Cụm 3: Cơ Điện MEPF & Phối Hợp Va Chạm</b></td>
-        <td><b>Lead BIM MEPF (Nhân sự C)</b></td>
-        <td>Nhân sự L & các KS BIM MEPF</td>
-        <td>• Mô hình 4 hệ MEPF: Điện, HVAC, Cấp thoát nước, PCCC.<br/>• Đầu mối kiểm soát ma trận xung đột (Clash Matrix) đạt SLA <b>Chuẩn 10 Ngày</b>.<br/>• Tối ưu cao độ trần kỹ thuật và tuyến ống trục đứng.</td>
+        <td><b>Lead Bộ Môn BIM Cơ Điện (MEPF)</b></td>
+        <td>Đội ngũ KS BIM MEPF thực chiến</td>
+        <td>• Mô hình 4 hệ MEPF: Điện, HVAC, Cấp thoát nước, PCCC.<br/>• Ứng dụng AI Agent phân loại và xử lý xung đột đạt SLA <b>Chuẩn 3 Ngày</b>.<br/>• Tối ưu cao độ trần kỹ thuật và tuyến ống trục đứng.</td>
       </tr>
       <tr>
         <td><b>Cụm 4: Hạ Tầng Kỹ Thuật & Quản Trị CDE</b></td>
-        <td><b>Lead BIM Hạ Tầng (Nhân sự M)</b></td>
-        <td>Nhân sự M & Điều phối viên CDE</td>
-        <td>• Mô hình san nền, giao thông, thoát nước ngoài nhà (Civil 3D).<br/>• Quản trị phân quyền môi trường dữ liệu chung CDE.<br/>• Bóc tách khối lượng hạ tầng kỹ thuật và giải phóng mặt bằng.</td>
+        <td><b>Lead Kỹ Thuật Hạ Tầng & CDE</b></td>
+        <td>Đội ngũ KS BIM Hạ tầng & Quản trị CDE</td>
+        <td>• Mô hình san nền, giao thông, thoát nước ngoài nhà (Civil 3D).<br/>• Quản trị phân quyền môi trường dữ liệu chung CDE.<br/>• AI Agent bóc tách khối lượng hạ tầng kỹ thuật đạt SLA <b>Chuẩn 3 Ngày</b>.</td>
       </tr>
     </tbody>
   </table>
@@ -612,13 +612,13 @@ html_content = """<!DOCTYPE html>
     <div class="stat-card emerald">
       <div class="stat-title" style="color:#059669;">1. Cơ Chế Xoay Vòng Hỗ Trợ Đột Xuất</div>
       <div class="stat-desc">
-        Các Kỹ sư trong 4 Cụm không bị đóng đinh cố định. Khi dự án bước vào <b>giai đoạn móng/hầm cao điểm</b>, Leader sẽ dồn lực nhân sự hỗ trợ Cụm Kết cấu (hoàn thành Shop drawing trong SLA Chuẩn 5 Ngày). Khi bước vào <b>giai đoạn hoàn thiện cơ điện</b>, nhân sự chuyển sang hỗ trợ Cụm MEPF (Combine va chạm trong SLA Chuẩn 10 Ngày).
+        Các Kỹ sư trong 4 Cụm không bị đóng đinh cố định. Khi dự án bước vào <b>giai đoạn móng/hầm cao điểm</b>, Leader sẽ dồn lực nhân sự hỗ trợ Cụm Kết cấu (hoàn thành Shop drawing trong SLA Chuẩn 5 Ngày). Khi bước vào <b>giai đoạn hoàn thiện cơ điện</b>, nhân sự chuyển sang hỗ trợ Cụm MEPF (Combine va chạm với AI Agent trong SLA Chuẩn 3 Ngày).
       </div>
     </div>
     <div class="stat-card blue">
       <div class="stat-title" style="color:#0284c7;">2. Vai Trò Nhạc Trưởng Của Trưởng Phòng (TBP)</div>
       <div class="stat-desc">
-        Trưởng bộ phận (Nhân sự A) đóng vai trò là "Nhạc trưởng" điều phối phân bổ nguồn lực giữa các Cụm Leader, kiểm soát tiến độ tổng thể, bảo vệ giải pháp kỹ thuật trước Ban Giám Đốc và Chủ đầu tư, <b>không can thiệp sâu vào chi tiết kỹ thuật của từng Cụm</b> để tránh gây nghẽn luồng xử lý.
+        Trưởng bộ phận BIM - TK đóng vai trò là "Nhạc trưởng" điều phối phân bổ nguồn lực giữa các Cụm Leader, kiểm soát tiến độ tổng thể, bảo vệ giải pháp kỹ thuật trước Ban Giám Đốc và Chủ đầu tư, <b>không can thiệp sâu vào chi tiết kỹ thuật của từng Cụm</b> để tránh gây nghẽn luồng xử lý.
       </div>
     </div>
   </div>
@@ -660,12 +660,12 @@ html_content = """<!DOCTYPE html>
     <tbody>
       <tr>
         <td><span class="pill pill-r">R (Responsible)</span><br/><b>Trực tiếp thực hiện</b></td>
-        <td><b>Các Lead Bộ Môn (B, C, D, E, F, G, M) & Kỹ sư</b></td>
-        <td>Trực tiếp giải quyết kỹ thuật, điều phối va chạm đa bộ môn, kiểm soát mô hình, hoàn thiện hồ sơ Shop Drawing và bàn giao đúng hạn SLA cam kết.</td>
+        <td><b>Các Lead Bộ Môn & Đội ngũ Kỹ sư Chuyên môn</b></td>
+        <td>Trực tiếp giải quyết kỹ thuật, ứng dụng AI Agent xử lý va chạm đa bộ môn, kiểm soát mô hình, hoàn thiện hồ sơ Shop Drawing và bàn giao đúng hạn SLA cam kết.</td>
       </tr>
       <tr>
         <td><span class="pill pill-a">A (Accountable)</span><br/><b>Chịu trách nhiệm cuối</b></td>
-        <td><b>Trưởng bộ phận (Nhân sự A)</b></td>
+        <td><b>Trưởng bộ phận BIM - TK</b></td>
         <td>Chịu trách nhiệm toàn diện trước Ban Giám Đốc về tiến độ, ngân sách, nhân sự và chất lượng hồ sơ thầu. Duyệt phát hành hồ sơ và quản trị chiến lược.</td>
       </tr>
       <tr>
@@ -709,16 +709,22 @@ html_content = """<!DOCTYPE html>
       </tr>
       <tr>
         <td><b>2. Quy trình BIM Combine MEPF</b></td>
-        <td><b style="color:#059669; font-size:9pt;">Chuẩn 10 Ngày làm việc</b><br/><span style="color:#64748b; font-size:7pt;">(Ma trận 2d + Clash 5d + Họp xử lý 3d)</span></td>
-        <td>Báo cáo va chạm (Clash Detection Report), giải quyết 100% xung đột ống gió, thang máng cáp, ống nước trước khi thi công.</td>
+        <td><b style="color:#059669; font-size:9pt;">Chuẩn 3 Ngày làm việc</b><br/><span style="color:#64748b; font-size:7pt;">(AI Agent quét xung đột 1d + Họp xử lý tuyến 1d + Khóa mô hình 1d)</span></td>
+        <td>Báo cáo va chạm (Clash Detection Report), giải quyết 100% xung đột ống gió, thang máng cáp, ống nước trước khi thi công nhờ trợ lực từ AI Agent.</td>
       </tr>
       <tr>
         <td><b>3. Quy trình BIM QS (Bóc Khối lượng)</b></td>
-        <td><b style="color:#d97706; font-size:9pt;">Chuẩn 7 Ngày làm việc</b><br/><span style="color:#64748b; font-size:7pt;">(Rà soát 1d + Bóc 5D 5d + Đối soát 1d)</span></td>
-        <td>Bảng tổng hợp khối lượng bóc tách từ mô hình 3D (Bê tông, thép, ván khuôn, thiết bị) sai số &lt; 2% so với thực tế.</td>
+        <td><b style="color:#d97706; font-size:9pt;">Chuẩn 3 Ngày làm việc</b><br/><span style="color:#64748b; font-size:7pt;">(AI Agent rà soát model 1d + Tự động bóc 5D 1d + Đối soát BOQ 1d)</span></td>
+        <td>Bảng tổng hợp khối lượng bóc tách tự động từ mô hình 3D (Bê tông, thép, ván khuôn, thiết bị) sai số &lt; 2% so với thực tế.</td>
       </tr>
     </tbody>
   </table>
+  <div class="box-highlight emerald" style="margin-top: 6px;">
+    <div class="box-title"><svg class="box-icon" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/></svg> Đột Phá Năng Suất Nhờ Tự Động Hóa Bằng AI Agent</div>
+    <div class="box-desc">
+      Ứng dụng <b>AI Agent chuyên trách</b> tự động gom nhóm và lọc va chạm (giảm 70% thời gian họp xử lý clash), tự động rà soát Model Health, và mapping bóc tách khối lượng 5D BOQ tức thì — giúp rút ngắn kỷ lục thời gian bàn giao <b>Combine MEPF còn 3 ngày</b> và <b>QS bóc khối lượng còn 3 ngày</b>.
+    </div>
+  </div>
 </div>
 
 <!-- TRANG 6: HỆ THỐNG 115 TÀI LIỆU CHUẨN HÓA & TRIỂN KHAI DỰ ÁN MẪU -->
@@ -746,42 +752,42 @@ html_content = """<!DOCTYPE html>
       <tr>
         <td><b>KC</b></td>
         <td><b>Thiết kế Kết Cấu</b></td>
-        <td>Nhân sự D (Lead KC)</td>
+        <td>Lead Kết Cấu</td>
         <td><b>23 Mục</b></td>
         <td>Template Revit KC, Biểu mẫu ghi chú chung, Quy chuẩn cốt thép, Checklist lỗi hay gặp, Script Dynamo trích xuất BOQ bê tông/thép.</td>
       </tr>
       <tr>
         <td><b>KT</b></td>
         <td><b>Thiết kế Kiến Trúc</b></td>
-        <td>Nhân sự E (Lead KT)</td>
+        <td>Lead Kiến Trúc</td>
         <td><b>20 Mục</b></td>
         <td>Template Revit KT, Quy chuẩn mã cấu kiện, Thư viện cửa & hoàn thiện, Thẩm tra PCCC QCVN 06, Phối cảnh 3D/VR đấu thầu.</td>
       </tr>
       <tr>
         <td><b>DIEN</b></td>
         <td><b>Thiết kế Hệ Thống Điện</b></td>
-        <td>Nhân sự F (Lead Điện)</td>
+        <td>Lead Hệ Thống Điện</td>
         <td><b>18 Mục</b></td>
         <td>Template Revit Điện, Sơ đồ nguyên lý tủ điện, Quy chuẩn máng cáp, Bảng tính phụ tải, Checklist an toàn đóng cắt.</td>
       </tr>
       <tr>
         <td><b>HVAC</b></td>
         <td><b>Thiết kế Điều Hòa - TG</b></td>
-        <td>Nhân sự G (Lead HVAC)</td>
+        <td>Lead Điều Hòa - TG</td>
         <td><b>18 Mục</b></td>
         <td>Template Revit HVAC, Bảng tính tải lạnh, Quy chuẩn ống gió, Tiêu chuẩn tiêu âm, Checklist phối hợp cao độ trần kỹ thuật.</td>
       </tr>
       <tr>
         <td><b>CTN</b></td>
         <td><b>Thiết kế Cấp Thoát Nước</b></td>
-        <td>Nhân sự F (Lead MEP)</td>
+        <td>Lead Cấp Thoát Nước</td>
         <td><b>18 Mục</b></td>
         <td>Template Revit CTN, Tính lưu lượng cấp & thoát, Quy chuẩn độ dốc, Thiết kế trạm bơm & hố ga, Checklist hộp gen trục đứng.</td>
       </tr>
       <tr>
         <td><b>PCCC</b></td>
         <td><b>Thiết kế Phòng Cháy CC</b></td>
-        <td>Nhân sự F (Lead MEP)</td>
+        <td>Lead Phòng Cháy CC</td>
         <td><b>18 Mục</b></td>
         <td>Thuyết minh thẩm duyệt PCCC QCVN 06:2022, Bố trí hệ thống Sprinkler, Màng ngăn Drencher, Trạm bơm chữa cháy, Checklist van.</td>
       </tr>
@@ -818,12 +824,12 @@ html_content = """<!DOCTYPE html>
       </tr>
       <tr>
         <td><b>Phối Hợp Va Chạm (MEP)</b><br/><span style="font-size:7.5pt; color:#64748b;">(Dự Án Mẫu 03, 04)</span></td>
-        <td>Import đường ống đa hệ MEPF và kết cấu thép mái vào Navisworks/BIM Collab, kiểm soát xung đột theo SLA Chuẩn 10 Ngày.</td>
+        <td>Import đường ống đa hệ MEPF và kết cấu thép mái vào Navisworks/BIM Collab, ứng dụng AI Agent phân loại và kiểm soát xung đột theo SLA Chuẩn 3 Ngày.</td>
         <td>Phát hiện và xử lý triệt để <b>42 điểm giao cắt</b> nguy hiểm trước ngày khởi công.</td>
       </tr>
       <tr>
         <td><b>Bóc Tách BOQ & Hạ Tầng</b><br/><span style="font-size:7.5pt; color:#64748b;">(Dự Án Mẫu 05, 06)</span></td>
-        <td>Tự động hóa bóc khối lượng đào đắp, thoát nước ngoài nhà, trạm nguồn và cảnh quan theo SLA Chuẩn 7 Ngày phục vụ đấu thầu.</td>
+        <td>Tự động hóa bóc khối lượng đào đắp, thoát nước ngoài nhà, trạm nguồn và cảnh quan theo SLA Chuẩn 3 Ngày nhờ AI Agent tự động bóc tách BOQ phục vụ đấu thầu.</td>
         <td>Tiết kiệm <b>6 ngày làm việc</b> so với đo bóc thủ công trên bản vẽ CAD 2D.</td>
       </tr>
     </tbody>
@@ -850,38 +856,39 @@ html_content = """<!DOCTYPE html>
     <tbody>
       <tr>
         <td><b>Quý 1/2027</b></td>
-        <td><b>Kiện toàn Tổ chức & CDE</b><br/>• 4 Cụm Squads theo Lead bộ môn<br/>• Ban hành RACI & SLA</td>
+        <td><b>Kiện toàn Tổ chức, CDE & Triển khai Song Song Dự Án Mẫu</b><br/>• 4 Cụm Squads theo Lead bộ môn & CDE<br/>• Triển khai song song 01 Dự Án Mẫu<br/>• Ban hành khung RACI & Cam kết SLA</td>
         <td>
-          • Ban hành Quy chế phân quyền RACI & cam kết thời gian SLA 7 bước.<br/>
-          • Vận hành 4 Cụm Chiến Đấu: KC, KT, MEPF, Hạ tầng theo các Lead bộ môn.<br/>
+          • Ban hành Quy chế phân quyền RACI & cam kết thời gian SLA tinh gọn (Shop 5d, Combine 3d, QS 3d).<br/>
+          • Vận hành 4 Cụm Chiến Đấu: KC, KT, MEPF, Hạ tầng theo các Lead bộ môn trên 24 nhân sự hiện hữu.<br/>
+          • <b>Triển khai SONG SONG 01 Dự Án Mẫu (Pilot Project) ngay trong quá trình setup</b> để kiểm chứng quy trình, huấn luyện AI Agent và đo lường SLA thực tế.<br/>
           • Thiết lập và chuẩn hóa môi trường dữ liệu chung CDE.
         </td>
       </tr>
       <tr>
         <td><b>Quý 2/2027</b></td>
-        <td><b>Chuẩn hóa 115 Tài liệu</b><br/>• Hoàn thành nhóm P1 & P2<br/>• Tự động hóa với Dynamo</td>
+        <td><b>Chuẩn hóa 115 Tài liệu & Tự động hóa bằng AI Agent</b><br/>• Hoàn thành nhóm P1 & P2 quy chuẩn<br/>• Tự động hóa với AI Agent & Tooling</td>
         <td>
-          • Chuẩn hóa toàn bộ Template Revit, mã hóa cấu kiện cho 6 bộ môn.<br/>
-          • Ứng dụng script Dynamo tự động xuất bản vẽ & trích xuất BOQ.<br/>
-          • Đào tạo nâng cao kỹ năng phối hợp cho đội ngũ kỹ sư thực chiến.
+          • Chuẩn hóa toàn bộ Template Revit, mã hóa cấu kiện cho 6 bộ môn đúc kết từ Dự Án Mẫu.<br/>
+          • Ứng dụng AI Agent tự động hóa rà soát model, phân loại va chạm và trích xuất dữ liệu BOQ.<br/>
+          • Đào tạo nâng cao kỹ năng phối hợp cho đội ngũ kỹ sư thực chiến 4 cụm.
         </td>
       </tr>
       <tr>
         <td><b>Quý 3/2027</b></td>
-        <td><b>Thực chiến "7 Dự Án Mẫu"</b><br/>• 87 nhiệm vụ kỹ thuật<br/>• Kiểm chứng cam kết SLA</td>
+        <td><b>Nhân rộng Thực chiến 7 Dự Án Mẫu</b><br/>• 87 nhiệm vụ kỹ thuật toàn diện<br/>• Kiểm chứng cam kết SLA tinh gọn</td>
         <td>
-          • Triển khai trọn vẹn 87 nhiệm vụ thực chiến trên Dự Án Mẫu.<br/>
+          • Nhân rộng triển khai trọn vẹn 87 nhiệm vụ thực chiến trên 7 Dự Án Mẫu.<br/>
           • Xóa bỏ 100% va chạm (Zero Clash) kết cấu - cơ điện trước khi thi công.<br/>
-          • Kiểm soát tuân thủ SLA: Shop 5 ngày, Combine 10 ngày, QS 7 ngày.
+          • Kiểm soát nghiêm ngặt tuân thủ SLA: <b>Shop 5 ngày, Combine 3 ngày, QS 3 ngày</b>.
         </td>
       </tr>
       <tr>
         <td><b>Quý 4/2027</b></td>
-        <td><b>Tự chủ 100% & Đánh giá KPI</b><br/>• Đánh giá chuẩn hóa trọng số<br/>• Tối ưu năng suất nội bộ</td>
+        <td><b>Tự chủ 100%, Hoàn thiện AI Agent & Đánh giá KPI</b><br/>• Tự chủ 100% Shop & BPTC<br/>• Vận hành AI Agent quy chuẩn & Đánh giá KPI</td>
         <td>
-          • <b>Tự chủ 100% hồ sơ Shop Drawing & BPTC</b> cho các dự án mới.<br/>
-          • Tự động hóa bóc tách khối lượng 5D BIM: Sai số vật tư &lt; 2%.<br/>
-          • Vận hành ổn định nề nếp phối hợp giữa phòng BIM và các công trường.
+          • <b>Tự chủ 100% hồ sơ Shop Drawing & BPTC</b> cho các dự án mới của công ty.<br/>
+          • AI Agent bóc tách khối lượng 5D BIM tự động: Sai số vật tư &lt; 2%.<br/>
+          • Vận hành ổn định nề nếp phối hợp giữa phòng BIM và các công trường, chứng minh ROI rõ rệt.
         </td>
       </tr>
     </tbody>
@@ -890,23 +897,23 @@ html_content = """<!DOCTYPE html>
   <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> 3 Kiến Nghị Then Chốt Kính Trình Ban Tổng Giám Đốc Phê Duyệt</h2>
 
   <div class="box-highlight">
-    <div class="box-title">1. Phê Duyệt Cơ Chế Điều Phối Theo 4 Cụm Lead Bộ Môn</div>
+    <div class="box-title">1. Phê Duyệt Cơ Chế Điều Phối Theo 4 Cụm Lead Bộ Môn & Triển Khai Song Song Dự Án Mẫu</div>
     <div class="box-desc">
-      Chấp thuận phương án setup vận hành theo 4 Cụm chuyên môn do các Lead bộ môn hiện hữu trực tiếp chỉ huy. Phê duyệt cơ chế đánh giá KPI gắn liền với mức độ tuân thủ thời gian cam kết dịch vụ SLA.
+      Chấp thuận phương án setup vận hành theo 4 Cụm chuyên môn do các Lead bộ môn hiện hữu trực tiếp chỉ huy trên 24 nhân sự. Phê duyệt việc <b>triển khai song song 01 Dự Án Mẫu (Pilot Project)</b> ngay trong giai đoạn setup để thử nghiệm quy trình thực chiến.
     </div>
   </div>
 
   <div class="box-highlight blue">
-    <div class="box-title">2. Phê Duyệt Đầu Tư Hạ Tầng Bản Quyền & Phần Cứng</div>
+    <div class="box-title">2. Phê Duyệt Đầu Tư Hạ Tầng Bản Quyền, CDE & Tự Động Hóa Bằng AI Agent</div>
     <div class="box-desc">
-      Trang bị đầy đủ bản quyền phần mềm thiết kế/BIM chính hãng, nền tảng lưu trữ CDE đám mây và nâng cấp máy trạm đồ họa đáp ứng yêu cầu xử lý mô hình nặng.
+      Trang bị đầy đủ bản quyền phần mềm thiết kế/BIM chính hãng, nền tảng lưu trữ CDE đám mây và triển khai công nghệ <b>AI Agent tự động hóa</b> rà soát model, phân loại va chạm và trích xuất khối lượng BOQ.
     </div>
   </div>
 
   <div class="box-highlight amber">
     <div class="box-title">3. Ban Hành Quy Chế Phối Hợp Bắt Buộc Theo Cam Kết SLA</div>
     <div class="box-desc">
-      Ban hành văn bản quy định thời gian phối hợp chuẩn (BIM Shop 5 ngày, BIM Combine 10 ngày, BIM QS 7 ngày) giữa các Lead Bộ Môn BIM, Ban QLDA và Ban Chỉ huy công trường.
+      Ban hành văn bản quy định thời gian phối hợp chuẩn (BIM Shop 5 ngày, BIM Combine 3 ngày, BIM QS 3 ngày với trợ lực từ AI Agent) giữa các Lead Bộ Môn BIM, Ban QLDA và Ban Chỉ huy công trường.
     </div>
   </div>
 
@@ -927,32 +934,72 @@ html_content = """<!DOCTYPE html>
 """
 
 def generate_pdf():
-    print("⏳ Đang khởi tạo Playwright để biên dịch tài liệu PDF 7 trang Năm 2027...")
-    with sync_playwright() as p:
-        browser = p.chromium.launch()
-        page = browser.new_page()
-        page.set_content(html_content, wait_until="networkidle")
-        
-        pdf_bytes = page.pdf(
-            format="A4",
-            print_background=True,
-            margin={"top": "0mm", "right": "0mm", "bottom": "0mm", "left": "0mm"}
-        )
-        browser.close()
+    print("Dang khoi tao bien dich tai lieu PDF 7 trang Executive...")
+    import subprocess
+    
+    temp_html = os.path.abspath("_temp_report.html")
+    with open(temp_html, "w", encoding="utf-8") as f:
+        f.write(html_content)
+    
+    edge_paths = [
+        r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
+        r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+    ]
+    browser_exe = next((p for p in edge_paths if os.path.exists(p)), None)
+    
+    temp_pdf = os.path.abspath("_temp_out.pdf")
+    if browser_exe:
+        print(f"Su dung trinh duyet headless: {browser_exe}")
+        cmd = [
+            browser_exe,
+            "--headless=new",
+            "--disable-gpu",
+            "--no-pdf-header-footer",
+            f"--print-to-pdf={temp_pdf}",
+            temp_html
+        ]
+        res = subprocess.run(cmd, capture_output=True, text=True)
+        if not os.path.exists(temp_pdf) or os.path.getsize(temp_pdf) == 0:
+            raise RuntimeError(f"Loi render PDF: {res.stderr}")
+        with open(temp_pdf, "rb") as f:
+            pdf_bytes = f.read()
+        try:
+            os.remove(temp_pdf)
+        except:
+            pass
+    else:
+        from playwright.sync_api import sync_playwright
+        with sync_playwright() as p:
+            browser = p.chromium.launch()
+            page = browser.new_page()
+            page.set_content(html_content, wait_until="networkidle")
+            pdf_bytes = page.pdf(
+                format="A4",
+                print_background=True,
+                margin={"top": "0mm", "right": "0mm", "bottom": "0mm", "left": "0mm"}
+            )
+            browser.close()
+    
+    if os.path.exists(temp_html):
+        try:
+            os.remove(temp_html)
+        except:
+            pass
 
     for path in [OUT_PDF_2027, OUT_PDF_2026]:
         with open(path, "wb") as f:
             f.write(pdf_bytes)
-        print(f"✅ Đã xuất file PDF tại Repo     : {path}")
-    print(f"   Kích thước file: {len(pdf_bytes):,} bytes")
+        print(f"Da xuat file PDF tai Repo     : {path}")
+    print(f"Kich thuoc file: {len(pdf_bytes):,} bytes")
 
     for path in [OUT_PDF_ARTIFACT_2027, OUT_PDF_ARTIFACT_2026]:
         try:
+            os.makedirs(os.path.dirname(path), exist_ok=True)
             with open(path, "wb") as f:
                 f.write(pdf_bytes)
-            print(f"✅ Đã sao chép vào Artifact Dir  : {path}")
+            print(f"Da sao chep vao Artifact Dir  : {path}")
         except Exception as e:
-            print(f"⚠️ Lưu vào artifact: {e}")
+            print(f"Luu vao artifact: {e}")
 
 if __name__ == "__main__":
     generate_pdf()

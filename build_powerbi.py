@@ -1,3 +1,6 @@
+import sys
+if sys.stdout.encoding.lower() != 'utf-8':
+    sys.stdout.reconfigure(encoding='utf-8')
 # -*- coding: utf-8 -*-
 # Build Power BI DataModel & Dashboard 2026
 # Tự động quét và tổng hợp dữ liệu toàn bộ Folder:
@@ -38,17 +41,17 @@ wb_src = openpyxl.load_workbook(SRC_FILE_STRATEGY, data_only=True)
 
 # 1. Bảng Định biên Nhân sự (02_Fact_NhanSu)
 nhan_su_nhom = [
-    ("GRP_MGT", "Quản lý điều hành", "Trưởng bộ phận BIM - Thiết kế", "Nhân sự A", "Quản lý", 1, 1, 0, "Đang làm việc"),
-    ("GRP_TK_BIM_KC", "Thiết kế & BIM Kết cấu", "Lead Bộ môn Kết cấu", "Nhân sự D (Lead Kết Cấu)", "Lead Bộ Môn", 2, 2, 0, "Đang làm việc"),
-    ("GRP_TK_BIM_KC", "Thiết kế & BIM Kết cấu", "Kỹ sư TK Kết cấu & Kỹ sư BIM KC", "KS Triển khai KC & 3 KS BIM KC (Nhân sự J, K...)", "Nhân viên", 6, 5, 0, "Đã chia đều 3 KS BIM về bộ môn"),
-    ("GRP_TK_BIM_KT", "Thiết kế & BIM Kiến trúc", "Lead Bộ môn Kiến trúc", "Nhân sự E", "Lead Bộ Môn", 1, 1, 0, "Đang làm việc"),
-    ("GRP_TK_BIM_KT", "Thiết kế & BIM Kiến trúc", "KTS Triển khai & Kỹ sư BIM Kiến trúc", "KTS Triển khai & 3 KS BIM KT (Nhân sự H, I...)", "Nhân viên", 5, 4, 1, "Đã chia đều 3 KS BIM về bộ môn"),
-    ("GRP_TK_BIM_MEP", "Thiết kế & BIM Cơ điện (MEPF)", "Lead BIM MEPF", "Nhân sự C (Lead BIM MEPF)", "Lead Bộ Môn", 2, 2, 0, "Đang làm việc"),
-    ("GRP_TK_BIM_MEP", "Thiết kế & BIM Cơ điện (MEPF)", "Kỹ sư TK Cơ Điện & Kỹ sư BIM MEP", "KS Cơ Điện & 3 KS BIM MEP (Nhân sự L & KS MEP)", "Nhân viên", 5, 5, 0, "Đã chia đều 3 KS BIM về bộ môn"),
-    ("GRP_TK_BIM_HVAC", "Thiết kế & BIM HVAC", "Lead Bộ môn HVAC", "Nhân sự G", "Lead Bộ Môn", 1, 1, 0, "Đang làm việc"),
-    ("GRP_TK_BIM_HVAC", "Thiết kế & BIM HVAC", "Kỹ sư TK HVAC & Triển khai", "KS Triển khai HVAC", "Nhân viên", 2, 1, 0, "Đang làm việc"),
-    ("GRP_BIM_HT", "BIM Hạ tầng & CDE", "Lead BIM Hạ tầng & Quản trị CDE", "Nhân sự M", "Lead Bộ Môn", 2, 1, 0, "Đang làm việc"),
-    ("GRP_BIM_HT", "BIM Hạ tầng & CDE", "Kỹ sư BIM Hạ tầng & CDE", "2 KS BIM Hạ tầng & CDE (Điều phối chia đều sang)", "Nhân viên", 3, 3, 1, "Đã chia đều 2 KS BIM về bộ môn")
+    ("GRP_MGT", "Quản lý điều hành", "Trưởng bộ phận BIM - Thiết kế", "Trưởng bộ phận BIM - TK", "Quản lý", 1, 1, 0, "Đang làm việc"),
+    ("GRP_TK_BIM_KC", "Thiết kế & BIM Kết cấu", "Lead Bộ môn Kết cấu", "Lead Bộ môn Kết cấu", "Lead Bộ Môn", 2, 2, 0, "Đang làm việc"),
+    ("GRP_TK_BIM_KC", "Thiết kế & BIM Kết cấu", "Kỹ sư TK Kết cấu & Kỹ sư BIM KC", "2 KS Thiết kế & 3 KS BIM Kết cấu", "Nhân viên", 6, 5, 0, "Đã chia đều 3 KS BIM về bộ môn"),
+    ("GRP_TK_BIM_KT", "Thiết kế & BIM Kiến trúc", "Lead Bộ môn Kiến trúc", "Lead Bộ môn Kiến trúc", "Lead Bộ Môn", 1, 1, 0, "Đang làm việc"),
+    ("GRP_TK_BIM_KT", "Thiết kế & BIM Kiến trúc", "KTS Triển khai & Kỹ sư BIM Kiến trúc", "1 KTS Thiết kế & 3 KS BIM Kiến trúc", "Nhân viên", 5, 4, 1, "Đã chia đều 3 KS BIM về bộ môn"),
+    ("GRP_TK_BIM_MEP", "Thiết kế & BIM Cơ điện (MEPF)", "Lead BIM MEPF", "Lead Bộ môn BIM MEPF", "Lead Bộ Môn", 2, 2, 0, "Đang làm việc"),
+    ("GRP_TK_BIM_MEP", "Thiết kế & BIM Cơ điện (MEPF)", "Kỹ sư TK Cơ Điện & Kỹ sư BIM MEP", "1 KS TK + 1 KS MEP + 3 KS BIM MEP", "Nhân viên", 5, 5, 0, "Đã chia đều 3 KS BIM về bộ môn"),
+    ("GRP_TK_BIM_HVAC", "Thiết kế & BIM HVAC", "Lead Bộ môn HVAC", "Lead Bộ môn HVAC", "Lead Bộ Môn", 1, 1, 0, "Đang làm việc"),
+    ("GRP_TK_BIM_HVAC", "Thiết kế & BIM HVAC", "Kỹ sư TK HVAC & Triển khai", "1 KS Triển khai HVAC", "Nhân viên", 2, 1, 0, "Đang làm việc"),
+    ("GRP_BIM_HT", "BIM Hạ tầng & CDE", "Lead BIM Hạ tầng & Quản trị CDE", "Lead Kỹ thuật Hạ tầng & CDE", "Lead Bộ Môn", 2, 1, 0, "Đang làm việc"),
+    ("GRP_BIM_HT", "BIM Hạ tầng & CDE", "Kỹ sư BIM Hạ tầng & CDE", "2 KS BIM Hạ tầng & CDE", "Nhân viên", 3, 3, 1, "Đã chia đều 2 KS BIM về bộ môn")
 ]
 df_hr = pd.DataFrame(nhan_su_nhom, columns=[
     "MaNhom", "TenNhom", "ViTri", "NhanSuChuChot", "CapBac",
@@ -61,15 +64,15 @@ df_hr["TiLeLapDay"] = (df_hr["NhanSuConLai"] / df_hr["DinhBienKeHoach"]).round(4
 # 2. Bảng Ma trận RACI Unpivot (03_Fact_RACI)
 ws_raci = wb_src['Ma Tran BP BIM']
 people_cols = {
-    4: ("Nhân sự A", "TBP BIM-TK", "Quản lý"),
-    5: ("Nhân sự B", "BIM Kiến Trúc", "Leader"),
-    6: ("Nhân sự H", "BIM Kiến Trúc", "Nhân viên"),
-    7: ("Nhân sự I", "BIM Kiến Trúc", "Nhân viên"),
-    8: ("Nhân sự J", "BIM Kết Cấu", "Nhân viên"),
-    9: ("Nhân sự K", "BIM Kết Cấu", "Nhân viên"),
-    10: ("Nhân sự C", "BIM MEPF", "Leader"),
-    11: ("Nhân sự L", "BIM MEPF", "Nhân viên"),
-    12: ("Nhân sự M", "BIM Hạ Tầng", "Nhân viên"),
+    4: ("Trưởng bộ phận BIM - TK", "Ban Quản lý", "Quản lý"),
+    5: ("Lead BIM Kiến Trúc", "BIM Kiến Trúc", "Leader"),
+    6: ("Kỹ sư BIM Kiến Trúc 1", "BIM Kiến Trúc", "Nhân viên"),
+    7: ("Kỹ sư BIM Kiến Trúc 2", "BIM Kiến Trúc", "Nhân viên"),
+    8: ("Kỹ sư BIM Kết Cấu 1", "BIM Kết Cấu", "Nhân viên"),
+    9: ("Kỹ sư BIM Kết Cấu 2", "BIM Kết Cấu", "Nhân viên"),
+    10: ("Lead BIM MEPF", "BIM MEPF", "Leader"),
+    11: ("Kỹ sư BIM MEPF", "BIM MEPF", "Nhân viên"),
+    12: ("Kỹ sư BIM Hạ Tầng & CDE", "BIM Hạ Tầng", "Nhân viên"),
 }
 raci_rows, current_cat_id, current_cat_name = [], "", ""
 for r in range(4, 44):
@@ -99,12 +102,12 @@ df_raci = pd.DataFrame(raci_rows, columns=[
 
 # 3. Bảng 115 Tài liệu Chuẩn hóa Thiết kế (05_Fact_TaiLieuTK)
 ht_sheets = {
-    "HT_ThietKe_KC": ("KC", "Thiết kế Kết cấu", "Nhân sự D"),
-    "HT_ThietKe_KT": ("KT", "Thiết kế Kiến trúc", "Nhân sự E"),
-    "HT_ThietKe_Dien": ("DIEN", "Thiết kế Điện", "Nhân sự F"),
-    "HT_ThietKe_HVAC": ("HVAC", "Thiết kế HVAC", "Nhân sự G"),
-    "HT_ThietKe_CTN": ("CTN", "Thiết kế Cấp thoát nước", "Nhân sự F"),
-    "HT_ThietKe_PCCC": ("PCCC", "Thiết kế PCCC", "Nhân sự F"),
+    "HT_ThietKe_KC": ("KC", "Thiết kế Kết cấu", "Lead Kết Cấu"),
+    "HT_ThietKe_KT": ("KT", "Thiết kế Kiến trúc", "Lead Kiến Trúc"),
+    "HT_ThietKe_Dien": ("DIEN", "Thiết kế Điện", "Lead Điện"),
+    "HT_ThietKe_HVAC": ("HVAC", "Thiết kế HVAC", "Lead HVAC"),
+    "HT_ThietKe_CTN": ("CTN", "Thiết kế Cấp thoát nước", "Lead Cấp Thoát Nước"),
+    "HT_ThietKe_PCCC": ("PCCC", "Thiết kế PCCC", "Lead PCCC"),
 }
 doc_rows = []
 for sh_name, (bm_code, bm_name, chu_tri) in ht_sheets.items():
@@ -464,16 +467,16 @@ html_content = f"""<!DOCTYPE html>
     <div>
       <label>🎯 Lọc Nhân sự (Tab 2: RACI)</label>
       <select id="slicerPerson" class="slicer-select" onchange="updateRaciFilter(true)">
-        <option value="ALL">-- Tất cả Nhân sự --</option>
-        <option value="Nhân sự A">Nhân sự A (TBP BIM-TK)</option>
-        <option value="Nhân sự B">Nhân sự B (Leader BIM XD)</option>
-        <option value="Nhân sự C">Nhân sự C (Leader BIM MEPF)</option>
-        <option value="Nhân sự H">Nhân sự H (BIM Kiến Trúc)</option>
-        <option value="Nhân sự I">Nhân sự I (BIM Kiến Trúc)</option>
-        <option value="Nhân sự J">Nhân sự J (BIM Kết Cấu)</option>
-        <option value="Nhân sự K">Nhân sự K (BIM Kết Cấu)</option>
-        <option value="Nhân sự L">Nhân sự L (BIM MEPF)</option>
-        <option value="Nhân sự M">Nhân sự M (BIM Hạ Tầng)</option>
+        <option value="ALL">-- Tất cả Vai trò / Nhân sự --</option>
+        <option value="Trưởng bộ phận BIM - TK">Trưởng bộ phận BIM - TK</option>
+        <option value="Lead BIM Kiến Trúc">Lead BIM Kiến Trúc</option>
+        <option value="Lead BIM MEPF">Lead BIM MEPF</option>
+        <option value="Kỹ sư BIM Kiến Trúc 1">Kỹ sư BIM Kiến Trúc 1</option>
+        <option value="Kỹ sư BIM Kiến Trúc 2">Kỹ sư BIM Kiến Trúc 2</option>
+        <option value="Kỹ sư BIM Kết Cấu 1">Kỹ sư BIM Kết Cấu 1</option>
+        <option value="Kỹ sư BIM Kết Cấu 2">Kỹ sư BIM Kết Cấu 2</option>
+        <option value="Kỹ sư BIM MEPF">Kỹ sư BIM MEPF</option>
+        <option value="Kỹ sư BIM Hạ Tầng & CDE">Kỹ sư BIM Hạ Tầng & CDE</option>
       </select>
     </div>
 
@@ -522,7 +525,7 @@ html_content = f"""<!DOCTYPE html>
       <a class="btn-dl" download="BIM_TK_PowerBI_DataModel_2026.xlsx" href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64_xlsx}">📥 Tải File Excel 8 Sheet Chuẩn Power BI (.xlsx)</a>
       <a class="btn-dl" href="Bao_Cao_Chien_Luoc_Xay_Dung_Phong_BIM_2027.pdf" target="_blank" style="background: linear-gradient(135deg, #0284c7, #0369a1);">📄 Tải Báo Cáo Chiến Lược PDF 2027 (Trình Lãnh Đạo)</a>
       <span class="badge">✔ Star Schema 8 Bảng</span>
-      <span class="badge info">🔒 Tên nhân sự A, B, C</span>
+      <span class="badge info">👥 24 Nhân sự Vận hành</span>
     </div>
   </div>
 
@@ -563,23 +566,23 @@ html_content = f"""<!DOCTYPE html>
       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:12px; margin-top:8px;">
         <div style="background:rgba(255,255,255,0.03); border:1px solid #1f2937; border-radius:8px; padding:12px;">
           <div style="font-size:11px; text-transform:uppercase; color:#60a5fa; font-weight:700; margin-bottom:4px;">Cụm 1: Kết cấu & Biện pháp (SLA Shop: 5 Ngày)</div>
-          <div style="font-size:12.5px; font-weight:700; color:#fff;">Lead: Lead Kết Cấu (Nhân sự D)</div>
-          <div style="font-size:11px; color:#94a3b8; margin-top:4px;">• Nhân sự thực chiến: Nhân sự J, K<br/>• Mô hình BTCT, đà kiềng, móng, vách bể<br/>• Xuất bản vẽ Shop cốt thép & ván khuôn, bóc BOQ</div>
+          <div style="font-size:12.5px; font-weight:700; color:#fff;">Lead: Lead Bộ Môn Kết Cấu</div>
+          <div style="font-size:11px; color:#94a3b8; margin-top:4px;">• Đội ngũ KS BIM Kết Cấu thực chiến<br/>• Mô hình BTCT, đà kiềng, móng, vách bể<br/>• Xuất bản vẽ Shop cốt thép & ván khuôn, AI bóc BOQ</div>
         </div>
         <div style="background:rgba(255,255,255,0.03); border:1px solid #1f2937; border-radius:8px; padding:12px;">
           <div style="font-size:11px; text-transform:uppercase; color:#34d399; font-weight:700; margin-bottom:4px;">Cụm 2: Kiến trúc & Tạo hình 3D</div>
-          <div style="font-size:12.5px; font-weight:700; color:#fff;">Lead: Lead Kiến Trúc (Nhân sự E)</div>
-          <div style="font-size:11px; color:#94a3b8; margin-top:4px;">• Nhân sự thực chiến: Nhân sự H, I<br/>• Mô hình kiến trúc LOD 300-350, chi tiết cấu tạo<br/>• Diễn họa 3D/VR, video tiến độ 4D hỗ trợ đấu thầu</div>
+          <div style="font-size:12.5px; font-weight:700; color:#fff;">Lead: Lead Bộ Môn Kiến Trúc</div>
+          <div style="font-size:11px; color:#94a3b8; margin-top:4px;">• Đội ngũ KTS & KS BIM Kiến Trúc thực chiến<br/>• Mô hình kiến trúc LOD 300-350, chi tiết cấu tạo<br/>• Diễn họa 3D/VR, video tiến độ 4D hỗ trợ đấu thầu</div>
         </div>
         <div style="background:rgba(255,255,255,0.03); border:1px solid #1f2937; border-radius:8px; padding:12px;">
-          <div style="font-size:11px; text-transform:uppercase; color:#fbbf24; font-weight:700; margin-bottom:4px;">Cụm 3: Cơ điện MEPF & Va chạm (SLA Combine: 10 Ngày)</div>
-          <div style="font-size:12.5px; font-weight:700; color:#fff;">Lead: Lead BIM MEPF (Nhân sự C)</div>
-          <div style="font-size:11px; color:#94a3b8; margin-top:4px;">• Nhân sự thực chiến: Nhân sự L & KS MEP<br/>• Mô hình 4 hệ: Điện, HVAC, Cấp thoát, PCCC<br/>• Đầu mối kiểm soát ma trận Clash Detection, tối ưu cao độ trần</div>
+          <div style="font-size:11px; text-transform:uppercase; color:#fbbf24; font-weight:700; margin-bottom:4px;">Cụm 3: Cơ điện MEPF & Va chạm (SLA Combine: 3 Ngày - AI Agent)</div>
+          <div style="font-size:12.5px; font-weight:700; color:#fff;">Lead: Lead Bộ Môn BIM MEPF</div>
+          <div style="font-size:11px; color:#94a3b8; margin-top:4px;">• Đội ngũ KS BIM MEPF thực chiến<br/>• Mô hình 4 hệ: Điện, HVAC, Cấp thoát, PCCC<br/>• AI Agent gom nhóm & lọc va chạm, giải quyết xung đột 3 ngày</div>
         </div>
         <div style="background:rgba(255,255,255,0.03); border:1px solid #1f2937; border-radius:8px; padding:12px;">
-          <div style="font-size:11px; text-transform:uppercase; color:#f472b6; font-weight:700; margin-bottom:4px;">Cụm 4: Hạ tầng & Quản trị CDE</div>
-          <div style="font-size:12.5px; font-weight:700; color:#fff;">Lead: Lead BIM Hạ Tầng (Nhân sự M)</div>
-          <div style="font-size:11px; color:#94a3b8; margin-top:4px;">• San nền, giao thông, hạ tầng ngoài nhà (Civil 3D)<br/>• Quản trị phân quyền CDE & liên kết đa bộ môn<br/>• Cơ chế xoay vòng hỗ trợ cao điểm linh hoạt</div>
+          <div style="font-size:11px; text-transform:uppercase; color:#f472b6; font-weight:700; margin-bottom:4px;">Cụm 4: Hạ tầng & CDE (SLA QS: 3 Ngày - AI Agent)</div>
+          <div style="font-size:12.5px; font-weight:700; color:#fff;">Lead: Lead Kỹ Thuật Hạ Tầng & CDE</div>
+          <div style="font-size:11px; color:#94a3b8; margin-top:4px;">• San nền, giao thông, hạ tầng ngoài nhà (Civil 3D)<br/>• Quản trị phân quyền CDE & liên kết đa bộ môn<br/>• AI Agent bóc tách khối lượng 5D BOQ tự động trong 3 ngày</div>
         </div>
       </div>
     </div>
@@ -611,8 +614,8 @@ html_content = f"""<!DOCTYPE html>
           <div style="font-size:11.5px; line-height:1.6; color:#cbd5e1;">
             • <b>SLA (Service Level Agreement):</b> Hợp đồng cam kết tiến độ và chất lượng nghiệm thu giữa Phòng BIM với Công trường.<br/>
             • <b>Quy trình Shop Drawing (Chuẩn 5 Ngày):</b> Rà soát & BEP (4h+4h) ➔ Dựng Model & Shop (3 ngày) ➔ QC & Ký duyệt (8h+4h).<br/>
-            • <b>Quy trình Combine MEPF (Chuẩn 10 Ngày):</b> Ma trận va chạm (2 ngày) ➔ Dựng đa hệ & Clash (5 ngày) ➔ Họp xử lý & Phát hành (3 ngày).<br/>
-            • <b>Quy trình QS Bóc Khối Lượng (Chuẩn 7 Ngày):</b> Mapping cấu kiện (1 ngày) ➔ Bóc 5D tự động (5 ngày) ➔ Đối soát sai số & Bàn giao (1 ngày).
+            • <b>Quy trình Combine MEPF (Chuẩn 3 Ngày - AI Agent):</b> AI Agent quét & ma trận va chạm (1 ngày) ➔ Họp xử lý & tối ưu tuyến (1 ngày) ➔ Khóa mô hình & phát hành (1 ngày).<br/>
+            • <b>Quy trình QS Bóc Khối Lượng (Chuẩn 3 Ngày - AI Agent):</b> AI Agent rà soát model & mapping (1 ngày) ➔ Tự động bóc 5D BOQ bằng AI Agent (1 ngày) ➔ Đối soát sai số & Bàn giao (1 ngày).
           </div>
         </div>
       </div>
@@ -928,11 +931,11 @@ window.addEventListener('DOMContentLoaded', () => {{
   chartSLAInstance = new Chart(document.getElementById('chartSLA'), {{
     type: 'bar',
     data: {{
-      labels: ['1. Đầu vào (4h)', '2. BEP (4h)', '3. Giao việc (4h)', '4. Thực thi (3-5d)', '5. QA/QC (8h)', '6. Bàn giao (4h)', '7. Đóng CDE (2h)'],
+      labels: ['1. Tiếp nhận (2h)', '2. Hoạch định (2h)', '3. Phân công (2h)', '4. Thực thi & AI (1-2d)', '5. QA/QC & Model Health (4h)', '6. Nghiệm thu & Duyệt (2h)', '7. Đóng CDE (1h)'],
       datasets: [
         {{ label: 'QT BIM Shop (Chuẩn 5 Ngày)', data: [0.5, 0.5, 0.5, 2.5, 0.5, 0.4, 0.1], backgroundColor: '#06b6d4' }},
-        {{ label: 'QT BIM Combine (Chuẩn 10 Ngày)', data: [0.5, 0.5, 0.5, 5.0, 1.0, 2.4, 0.1], backgroundColor: '#8b5cf6' }},
-        {{ label: 'QT BIM QS (Chuẩn 7 Ngày)', data: [0.5, 0.5, 0.5, 4.0, 0.5, 0.9, 0.1], backgroundColor: '#f59e0b' }}
+        {{ label: 'QT BIM Combine (Chuẩn 3 Ngày - AI Agent)', data: [0.25, 0.25, 0.25, 1.5, 0.4, 0.25, 0.1], backgroundColor: '#8b5cf6' }},
+        {{ label: 'QT BIM QS (Chuẩn 3 Ngày - AI Agent)', data: [0.25, 0.25, 0.25, 1.5, 0.4, 0.25, 0.1], backgroundColor: '#f59e0b' }}
       ]
     }},
     options: {{ responsive: true, maintainAspectRatio: false }}
