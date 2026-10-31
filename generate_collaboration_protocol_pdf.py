@@ -1,0 +1,722 @@
+import os
+import subprocess
+import fitz
+
+html_content = """<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Quy Chế & Sơ Đồ Phối Hợp Tác Nghiệp Liên Phòng Ban - Bộ Phận Thiết Kế & BIM</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+    background: #ffffff;
+    color: #0f172a;
+    font-size: 8.5pt;
+    line-height: 1.35;
+  }
+  .page {
+    width: 210mm;
+    height: 297mm;
+    max-height: 297mm;
+    padding: 11mm 14mm 10mm 14mm;
+    position: relative;
+    background: #ffffff;
+    page-break-after: always;
+    overflow: hidden;
+  }
+
+  /* Header */
+  .doc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 7px;
+    border-bottom: 2px solid #1e3a8a;
+    margin-bottom: 9px;
+  }
+  .org-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-box {
+    background: #1e3a8a;
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 13pt;
+    padding: 5px 11px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+  .org-title {
+    font-size: 10.5pt;
+    font-weight: 800;
+    color: #0f172a;
+    text-transform: uppercase;
+  }
+  .org-sub {
+    font-size: 7.2pt;
+    color: #475569;
+    font-weight: 600;
+  }
+  .doc-meta {
+    text-align: right;
+    font-size: 7.2pt;
+    color: #475569;
+  }
+  .doc-code {
+    font-weight: 700;
+    color: #1e3a8a;
+    font-size: 8.2pt;
+  }
+
+  /* Title Banner */
+  .title-banner {
+    text-align: center;
+    margin-bottom: 9px;
+    padding: 6px 0;
+    background: linear-gradient(90deg, #eff6ff 0%, #dbeafe 50%, #eff6ff 100%);
+    border-radius: 5px;
+    border: 1px solid #bfdbfe;
+  }
+  .title-banner h1 {
+    font-size: 12.5pt;
+    font-weight: 900;
+    color: #1e3a8a;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .title-banner p {
+    font-size: 7.8pt;
+    color: #1e40af;
+    font-weight: 600;
+    margin-top: 1px;
+  }
+
+  /* Section Title */
+  .section-title {
+    font-size: 9.2pt;
+    font-weight: 800;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    border-left: 3.5px solid #1e3a8a;
+    padding-left: 6px;
+  }
+  .section-title span.badge {
+    background: #dbeafe;
+    color: #1e40af;
+    font-size: 6.8pt;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 3px;
+    text-transform: none;
+  }
+
+  /* Visual Integration Hub Diagram */
+  .hub-container {
+    background: #f8fafc;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 8px 10px;
+    margin-bottom: 9px;
+  }
+  .hub-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr 1fr;
+    gap: 8px;
+    align-items: center;
+  }
+  .hub-side {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .hub-node {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-left: 3.5px solid #2563eb;
+    border-radius: 4px;
+    padding: 5px 7px;
+  }
+  .hub-node.green { border-left-color: #059669; }
+  .hub-node.amber { border-left-color: #d97706; }
+  .hub-node.purple { border-left-color: #7c3aed; }
+  .hub-node.rose { border-left-color: #e11d48; }
+
+  .hub-node-title {
+    font-size: 7.5pt;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 1px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .hub-node-desc {
+    font-size: 6.8pt;
+    color: #475569;
+    line-height: 1.2;
+  }
+
+  /* Center Hub */
+  .center-core {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    color: #ffffff;
+    border-radius: 6px;
+    padding: 10px 8px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(30, 58, 138, 0.25);
+  }
+  .center-badge {
+    background: rgba(255,255,255,0.2);
+    font-size: 6.5pt;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .center-title {
+    font-size: 9.5pt;
+    font-weight: 900;
+    letter-spacing: 0.3px;
+    margin-bottom: 3px;
+    line-height: 1.2;
+  }
+  .center-sub {
+    font-size: 7pt;
+    color: #bfdbfe;
+    line-height: 1.25;
+  }
+  .center-pillars {
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    margin-top: 6px;
+    padding-top: 5px;
+    font-size: 6.5pt;
+    font-weight: 700;
+  }
+
+  /* Protocol Table */
+  table.protocol-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 9px;
+    font-size: 7.2pt;
+  }
+  table.protocol-table th {
+    background: #0f172a;
+    color: #ffffff;
+    font-weight: 700;
+    text-align: left;
+    padding: 4.5px 6px;
+    border: 1px solid #0f172a;
+  }
+  table.protocol-table td {
+    padding: 4px 6px;
+    border: 1px solid #cbd5e1;
+    vertical-align: middle;
+    color: #1e293b;
+  }
+  table.protocol-table tr:nth-child(even) td {
+    background: #f8fafc;
+  }
+  .tag-dept {
+    display: inline-block;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    color: #1e40af;
+    font-weight: 800;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 6.8pt;
+    white-space: nowrap;
+  }
+  .tag-sla {
+    display: inline-block;
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    color: #065f46;
+    font-weight: 800;
+    padding: 1px 4px;
+    border-radius: 2px;
+    font-size: 6.8pt;
+    white-space: nowrap;
+  }
+
+  /* Page Footer */
+  .page-footer {
+    position: absolute;
+    bottom: 7mm;
+    left: 14mm;
+    right: 14mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #cbd5e1;
+    padding-top: 4px;
+    font-size: 6.8pt;
+    color: #64748b;
+  }
+
+  /* Page 2 Layout */
+  .rhythm-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 7px;
+    margin-bottom: 10px;
+  }
+  .rhythm-card {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-top: 3px solid #2563eb;
+    border-radius: 4px;
+    padding: 6px 7px;
+  }
+  .rhythm-card.green { border-top-color: #059669; }
+  .rhythm-card.amber { border-top-color: #d97706; }
+  .rhythm-card.purple { border-top-color: #7c3aed; }
+  
+  .rhythm-title {
+    font-size: 7.5pt;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 2px;
+  }
+  .rhythm-time {
+    font-size: 6.8pt;
+    font-weight: 700;
+    color: #2563eb;
+    margin-bottom: 3px;
+  }
+  .rhythm-card.green .rhythm-time { color: #059669; }
+  .rhythm-card.amber .rhythm-time { color: #d97706; }
+  .rhythm-card.purple .rhythm-time { color: #7c3aed; }
+  .rhythm-desc {
+    font-size: 6.8pt;
+    color: #475569;
+    line-height: 1.25;
+  }
+
+  /* Escalation Ladder */
+  .escalation-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin-bottom: 11px;
+  }
+  .ladder-step {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    padding: 6px 7px;
+    position: relative;
+  }
+  .ladder-step.active {
+    background: #fffbeb;
+    border-color: #fcd34d;
+  }
+  .ladder-level {
+    font-size: 6.5pt;
+    font-weight: 800;
+    color: #64748b;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .ladder-role {
+    font-size: 7.5pt;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 2px;
+  }
+  .ladder-limit {
+    display: inline-block;
+    background: #e2e8f0;
+    font-size: 6.2pt;
+    font-weight: 700;
+    color: #334155;
+    padding: 1px 4px;
+    border-radius: 2px;
+    margin-bottom: 3px;
+  }
+  .ladder-desc {
+    font-size: 6.8pt;
+    color: #475569;
+    line-height: 1.2;
+  }
+
+  /* Dual Signatures */
+  .sig-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1.5px dashed #cbd5e1;
+  }
+  .sig-box {
+    text-align: center;
+  }
+  .sig-role {
+    font-size: 7.8pt;
+    font-weight: 800;
+    color: #0f172a;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .sig-sub {
+    font-size: 6.8pt;
+    color: #64748b;
+    font-style: italic;
+    margin-bottom: 40px;
+  }
+  .sig-name {
+    font-size: 8.2pt;
+    font-weight: 800;
+    color: #1e3a8a;
+    border-top: 1px solid #94a3b8;
+    display: inline-block;
+    padding-top: 3px;
+    min-width: 180px;
+  }
+  .sig-org {
+    font-size: 6.8pt;
+    color: #475569;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== TRANG 1 ==================== -->
+<div class="page">
+  <!-- Header -->
+  <div class="doc-header">
+    <div class="org-info">
+      <div class="logo-box">BIM</div>
+      <div>
+        <div class="org-title">HỆ THỐNG QUẢN TRỊ DỮ LIỆU & ĐIỀU PHỐI LIÊN PHÒNG BAN</div>
+        <div class="org-sub">BAN THIẾT KẾ & BIM | QUY CHUẨN TÁC NGHIỆP TRÊN NỀN TẢNG CDE (ISO 19650)</div>
+      </div>
+    </div>
+    <div class="doc-meta">
+      <div>Mã tài liệu: <span class="doc-code">SOP-BIM-INTER-2027</span></div>
+      <div>Hiệu lực: <strong>2026 – 2027</strong> | Phân loại: <strong>Quy chế liên thông nội bộ</strong></div>
+    </div>
+  </div>
+
+  <!-- Title Banner -->
+  <div class="title-banner">
+    <h1>SƠ ĐỒ PHỐI HỢP TÁC NGHIỆP LIÊN PHÒNG BAN</h1>
+    <p>XÓA BỎ ỐC ĐẢO DỮ LIỆU (SILOS) — KẾT NỐI 5 KHỐI PHÒNG BAN TRÊN MỘT NGUỒN SỰ THẬT DUY NHẤT (SINGLE SOURCE OF TRUTH)</p>
+  </div>
+
+  <!-- Section: Sơ đồ Kiến trúc Kết nối -->
+  <div class="section-title">
+    I. MÔ HÌNH HẠT NHÂN KẾT NỐI (THE ENTERPRISE BIM INTEGRATION HUB) <span class="badge">Nền tảng CDE ISO 19650</span>
+  </div>
+
+  <div class="hub-container">
+    <div class="hub-grid">
+      <!-- Cánh trái: Đấu thầu & Thiết kế -->
+      <div class="hub-side">
+        <div class="hub-node">
+          <div class="hub-node-title"><span>💼 KHỐI ĐẤU THẦU & KINH DOANH</span> <span style="color:#2563eb;">35% Fast</span></div>
+          <div class="hub-node-desc">Nhận hồ sơ mô phỏng 4D tiến độ, phối cảnh diễn họa 3D và bóc tách BOQ 5D trong 3 ngày phục vụ chào thầu thắng dự án D&B.</div>
+        </div>
+        <div class="hub-node green">
+          <div class="hub-node-title"><span>📐 KHỐI THIẾT KẾ KỸ THUẬT</span> <span style="color:#059669;">100% 3D</span></div>
+          <div class="hub-node-desc">Tích hợp thiết kế trực tiếp trên 3D BIM từ ngày đầu; tự động hóa rà soát quy chuẩn PCCC QCVN 06 và đồng bộ đa bộ môn.</div>
+        </div>
+      </div>
+
+      <!-- Lõi trung tâm: Trưởng phòng Thiết Kế & BIM -->
+      <div class="center-core">
+        <div class="center-badge">INTEGRATION HUB</div>
+        <div class="center-title">TRƯỞNG PHÒNG THIẾT KẾ & BIM</div>
+        <div class="center-sub">Nhạc Trưởng Điều Phối Dữ Liệu Số & Giải Pháp Kỹ Thuật</div>
+        <div class="center-pillars">
+          <div>⚡ Chuẩn SLA</div>
+          <div>🛡️ Zero Clash</div>
+          <div>📊 CDE ISO 19650</div>
+          <div>🤖 AI Automation</div>
+        </div>
+      </div>
+
+      <!-- Cánh phải: Dự toán, Công trường & Ban Lãnh đạo -->
+      <div class="hub-side">
+        <div class="hub-node amber">
+          <div class="hub-node-title"><span>📊 KHỐI DỰ TOÁN & MUA HÀNG (QS)</span> <span style="color:#d97706;">SLA 3d</span></div>
+          <div class="hub-node-desc">Nhận bảng BOQ khối lượng bóc tự động sai số &lt; 2%; mapping định mức tức thì bằng AI Agent để kiểm soát chi phí & đặt hàng.</div>
+        </div>
+        <div class="hub-node purple">
+          <div class="hub-node-title"><span>🏗️ BAN CHỈ HUY CÔNG TRƯỜNG</span> <span style="color:#7c3aed;">SLA 5d</span></div>
+          <div class="hub-node-desc">Nhận hồ sơ Shop Drawing chuẩn xác trong 5 ngày; mô hình Combine đa hệ MEPF trong 3 ngày, xóa 100% va chạm trước thi công.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section: Ma trận Tác nghiệp Liên Phòng Ban -->
+  <div class="section-title">
+    II. MA TRẬN ĐIỂM CHẠM TÁC NGHIỆP 5 KHỐI PHÒNG BAN (TOUCHPOINT MATRIX)
+  </div>
+
+  <table class="protocol-table">
+    <thead>
+      <tr>
+        <th style="width: 14%;">Khối Phòng Ban</th>
+        <th style="width: 18%;">Dữ Liệu Đầu Vào Đối Tác Gửi</th>
+        <th style="width: 25%;">Hành Động Của Bộ Phận Thiết Kế & BIM</th>
+        <th style="width: 23%;">Sản Phẩm Đầu Ra Bàn Giao</th>
+        <th style="width: 10%;">Cam Kết SLA</th>
+        <th style="width: 10%;">Nền Tảng</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="tag-dept">1. Đấu Thầu / KD</span></td>
+        <td>Hồ sơ mời thầu (HSMT), bản vẽ sơ phác CĐT, mốc nộp thầu.</td>
+        <td>Dựng phối cảnh kiến trúc 3D, lập video mô phỏng 4D biện pháp thi công, trích xuất dự toán BOQ sơ bộ bằng AI.</td>
+        <td>• Video 4D biện pháp thi công<br>• Phối cảnh 3D/VR dự án<br>• Bảng BOQ thầu 5D</td>
+        <td><span class="tag-sla">Max 3 Ngày</span></td>
+        <td>CDE / Cloud Link</td>
+      </tr>
+      <tr>
+        <td><span class="tag-dept">2. Thiết Kế / Kỹ Thuật</span></td>
+        <td>Ý tưởng kiến trúc, giải pháp kết cấu, sơ đồ nguyên lý MEPF.</td>
+        <td>Mô hình hóa 3D chi tiết LOD 300, kiểm tra tính khả thi kết cấu/MEP, rà quét xung đột không gian và đối chiếu QCVN 06.</td>
+        <td>• File mô hình BIM 3D gốc<br>• Báo cáo Model Health Check<br>• Thuyết minh QCVN 06</td>
+        <td><span class="tag-sla">Theo Milestone</span></td>
+        <td>Revit Central / CDE</td>
+      </tr>
+      <tr>
+        <td><span class="tag-dept">3. Dự Toán / Mua Hàng</span></td>
+        <td>Mã hiệu định mức công ty, danh mục vật tư cần đặt hàng sớm.</td>
+        <td>Ứng dụng AI Agent bóc tách khối lượng 5D tự động từ mô hình 3D (Bê tông, thép, ván khuôn, ống MEPF) sai số &lt; 2%.</td>
+        <td>• Bảng tổng hợp BOQ Excel/ERP<br>• Bảng bóc chi tiết theo tầng/đợt</td>
+        <td><span class="tag-sla">Max 3 Ngày</span></td>
+        <td>CDE / ERP Sync</td>
+      </tr>
+      <tr>
+        <td><span class="tag-dept">4. Công Trường / BQLDA</span></td>
+        <td>Ticket yêu cầu Shop Drawing, tiến độ đổ bê tông công trường.</td>
+        <td>Triển khai bản vẽ Shop kết cấu/kiến trúc/MEP; chủ trì họp Combine xử lý 100% va chạm trước ngày khởi công.</td>
+        <td>• Hồ sơ Shop Drawing PDF/DWG<br>• Báo cáo Clash Resolution<br>• File Navisworks NWD</td>
+        <td><span class="tag-sla">Shop 5d<br>Comb 3d</span></td>
+        <td>CDE Published Folder</td>
+      </tr>
+      <tr>
+        <td><span class="tag-dept">5. Ban TGĐ / HĐQT</span></td>
+        <td>Mục tiêu chiến lược, yêu cầu báo cáo tiến độ điều hành.</td>
+        <td>Tổng hợp dữ liệu tự động từ các Cụm Lead, hiển thị trạng thái xử lý hồ sơ, tỷ lệ tuân thủ SLA và đo lường ROI.</td>
+        <td>• Real-time PowerBI Dashboard<br>• Báo cáo ngoại lệ rủi ro khẩn</td>
+        <td><span class="tag-sla">Real-time / Tuần</span></td>
+        <td>Executive Dashboard</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Page Footer -->
+  <div class="page-footer">
+    <div>Hệ Thống Quản Trị Dữ Liệu & Phối Hợp Liên Phòng Ban - Ban Thiết Kế & BIM</div>
+    <div>Trang 1 / 2 (Xem tiếp Nhịp điệu vận hành & Cơ chế leo thang trang 2)</div>
+  </div>
+</div>
+
+
+<!-- ==================== TRANG 2 ==================== -->
+<div class="page">
+  <!-- Header -->
+  <div class="doc-header">
+    <div class="org-info">
+      <div class="logo-box">BIM</div>
+      <div>
+        <div class="org-title">HỆ THỐNG QUẢN TRỊ DỮ LIỆU & ĐIỀU PHỐI LIÊN PHÒNG BAN</div>
+        <div class="org-sub">BAN THIẾT KẾ & BIM | QUY CHUẨN TÁC NGHIỆP TRÊN NỀN TẢNG CDE (ISO 19650)</div>
+      </div>
+    </div>
+    <div class="doc-meta">
+      <div>Mã tài liệu: <span class="doc-code">SOP-BIM-INTER-2027</span></div>
+      <div>Hiệu lực: <strong>2026 – 2027</strong> | Trang: <strong>2 / 2</strong></div>
+    </div>
+  </div>
+
+  <!-- Section: Nhịp điệu Vận hành -->
+  <div class="section-title">
+    III. NHỊP ĐIỆU VẬN HÀNH PHỐI HỢP TUẦN (WEEKLY COORDINATION CADENCE)
+  </div>
+
+  <div class="rhythm-grid">
+    <div class="rhythm-card">
+      <div class="rhythm-title">1. Họp Va Chạm (ICE Meeting)</div>
+      <div class="rhythm-time">Thứ 3 Hàng Tuần (30 Phút)</div>
+      <div class="rhythm-desc">
+        Họp trực tiếp trên mô hình Navisworks 3D với Chỉ huy trưởng & Lead MEP. Chỉ tập trung chốt phương án cho các va chạm nguy hiểm do AI Agent sàng lọc.
+      </div>
+    </div>
+    <div class="rhythm-card green">
+      <div class="rhythm-title">2. Bàn Giao Shop & BOQ Tuần</div>
+      <div class="rhythm-time">Thứ 5 Hàng Tuần (Theo SLA)</div>
+      <div class="rhythm-desc">
+        Phát hành gói hồ sơ Shop Drawing và bảng khối lượng vật tư đợt đổ tiếp theo lên thư mục CDE Published cho Ban Chỉ huy và Mua hàng.
+      </div>
+    </div>
+    <div class="rhythm-card amber">
+      <div class="rhythm-title">3. Kiểm Điểm SLA Nội Bộ</div>
+      <div class="rhythm-time">Thứ 6 Hàng Tuần (16h00)</div>
+      <div class="rhythm-desc">
+        Trưởng phòng BIM cùng 4 Lead bộ môn rà soát tỷ lệ tuân thủ SLA trong tuần, xử lý các ticket trễ hạn và tái phân bổ nhân sự (Agile Swarming).
+      </div>
+    </div>
+    <div class="rhythm-card purple">
+      <div class="rhythm-title">4. Dashboard Ban Giám Đốc</div>
+      <div class="rhythm-time">Thứ 7 Hàng Tuần (Tự động)</div>
+      <div class="rhythm-desc">
+        Hệ thống tự động đồng bộ số liệu lên PowerBI Dashboard: Khối lượng hồ sơ hoàn thành, tỷ lệ Zero Clash, tình trạng phục vụ công trường và chỉ số ROI.
+      </div>
+    </div>
+  </div>
+
+  <!-- Section: Cơ chế Leo thang -->
+  <div class="section-title">
+    IV. QUY TRÌNH GIẢI QUYẾT XUNG ĐỘT & LEO THANG TRÁCH NHIỆM (ESCALATION LADDER)
+  </div>
+
+  <div class="escalation-grid">
+    <div class="ladder-step">
+      <div class="ladder-level">CẤP ĐỘ 1 (LEVEL 1)</div>
+      <div class="ladder-role">Kỹ Sư & Kỹ Sư</div>
+      <div class="ladder-limit">Hạn xử lý: &le; 4 Giờ</div>
+      <div class="ladder-desc">
+        Kỹ sư BIM phát hiện va chạm &rarr; Tạo BCF/RFI trên CDE &rarr; Kỹ sư Thiết kế/Công trường trao đổi trực tiếp trên mô hình để điều chỉnh cao độ tuyến ống/cấu kiện.
+      </div>
+    </div>
+    <div class="ladder-step">
+      <div class="ladder-level">CẤP ĐỘ 2 (LEVEL 2)</div>
+      <div class="ladder-role">Lead Bộ Môn & Chỉ Huy Phó</div>
+      <div class="ladder-limit">Hạn xử lý: &le; 12 Giờ</div>
+      <div class="ladder-desc">
+        Nếu 2 bên không thống nhất được phương án do vướng không gian kỹ thuật &rarr; Lead Bộ Môn BIM và Chỉ huy phó công trường họp nhanh chốt giải pháp hiện trường.
+      </div>
+    </div>
+    <div class="ladder-step active">
+      <div class="ladder-level">CẤP ĐỘ 3 (LEVEL 3)</div>
+      <div class="ladder-role">Trưởng BP BIM & Chỉ Huy Trưởng</div>
+      <div class="ladder-limit">Hạn xử lý: &le; 24 Giờ</div>
+      <div class="ladder-desc">
+        Vướng mắc ảnh hưởng đến giải pháp kết cấu hoặc chi phí phát sinh &rarr; <strong>Trưởng phòng Thiết Kế & BIM</strong> làm việc với Giám đốc Dự án / CHT để thống nhất giải pháp tối ưu chi phí.
+      </div>
+    </div>
+    <div class="ladder-step">
+      <div class="ladder-level">CẤP ĐỘ 4 (LEVEL 4)</div>
+      <div class="ladder-role">Ban Tổng Giám Đốc</div>
+      <div class="ladder-limit">Quyết định Tối cao</div>
+      <div class="ladder-desc">
+        Các thay đổi lớn vượt thẩm quyền ảnh hưởng tiến độ tổng hoặc thay đổi thiết kế cơ sở &rarr; Trình Tổng Giám Đốc phê duyệt bằng Báo cáo Đề xuất Giải pháp Số.
+      </div>
+    </div>
+  </div>
+
+  <!-- Section: Quy tắc Vàng Liên Phòng Ban -->
+  <div class="section-title">
+    V. 3 NGUYÊN TẮC VÀNG TRONG PHỐI HỢP LIÊN THÔNG (GOLDEN RULES)
+  </div>
+
+  <table class="protocol-table" style="margin-bottom: 12px;">
+    <tbody>
+      <tr>
+        <td style="width: 25%; font-weight:800; color:#1e3a8a;">1. Nguyên Tắc "Single Truth" (Một Nguồn Sự Thật)</td>
+        <td style="width: 75%;">
+          Tuyệt đối không gửi nhận file bản vẽ qua Zalo, Email cá nhân hoặc ổ cứng rời. Toàn bộ các phòng ban <strong>bắt buộc 100% sử dụng nền tảng CDE chung</strong>. Bản vẽ hợp lệ để thi công và bóc tách khối lượng chỉ là bản vẽ nằm trong thư mục <strong>Published</strong> có chữ ký số của Trưởng phòng BIM.
+        </td>
+      </tr>
+      <tr>
+        <td style="width: 25%; font-weight:800; color:#059669;">2. Nguyên Tắc "Freeze Model" (Đóng Băng Thiết Kế)</td>
+        <td style="width: 75%;">
+          Mô hình sau khi đã được chốt và duyệt chuyển sang triển khai Shop Drawing sẽ được khóa (Model Freeze). Mọi yêu cầu thay đổi thiết kế từ CĐT hoặc Công trường phát sinh sau thời điểm này phải thông qua quy trình <strong>Change Order Ticket</strong>, tính lại mốc SLA để đảm bảo công bằng cho đội ngũ kỹ sư.
+        </td>
+      </tr>
+      <tr>
+        <td style="width: 25%; font-weight:800; color:#d97706;">3. Nguyên Tắc "No-Blame & Data-Driven"</td>
+        <td style="width: 75%;">
+          Mọi quyết định điều chỉnh kỹ thuật, đánh giá trách nhiệm trễ hạn đều dựa trên <strong>Log dữ liệu thời gian thực trên CDE</strong>. Loại bỏ hoàn toàn tranh cãi cảm tính; biến văn hóa công ty thành môi trường làm việc chuyên nghiệp, minh bạch và cùng hướng tới mục tiêu hoàn thành công trình đúng tiến độ.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Dual Signatures Block -->
+  <div class="sig-section">
+    <div class="sig-box">
+      <div class="sig-role">TRƯỞNG BỘ PHẬN THIẾT KẾ & BIM</div>
+      <div class="sig-sub">(Đơn vị điều phối hạt nhân & kiểm soát CDE)</div>
+      <div class="sig-name">VŨ THÀNH</div>
+      <div class="sig-org">Kỹ sư Trưởng Bộ Phận Thiết Kế & BIM</div>
+    </div>
+    <div class="sig-box">
+      <div class="sig-role">PHÊ DUYỆT BỞI BAN TỔNG GIÁM ĐỐC / HĐQT</div>
+      <div class="sig-sub">(Đại diện Ban Lãnh đạo chuẩn hóa liên phòng ban)</div>
+      <div class="sig-name">BAN TỔNG GIÁM ĐỐC / HĐQT</div>
+      <div class="sig-org">Chủ Quản Thẩm Quyền Phê Duyệt Toàn Diện</div>
+    </div>
+  </div>
+
+  <!-- Page Footer -->
+  <div class="page-footer">
+    <div>Hệ Thống Quản Trị Dữ Liệu & Phối Hợp Liên Phòng Ban - Ban Thiết Kế & BIM</div>
+    <div>Văn bản ban hành có giá trị áp dụng liên phòng ban | Trang 2 / 2 (Hết)</div>
+  </div>
+</div>
+
+</body>
+</html>
+"""
+
+html_path = "Quy_Che_Phoi_Hop_Lien_Phong_Ban_BIM.html"
+pdf_path = "Quy_Che_Phoi_Hop_Lien_Phong_Ban_BIM.pdf"
+
+with open(html_path, "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print(f"Written HTML to {html_path}")
+
+# Run Edge headless to render PDF
+edge_cmd = [
+    r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
+    "--headless=new",
+    "--disable-gpu",
+    "--no-pdf-header-footer",
+    f"--print-to-pdf={os.path.abspath(pdf_path)}",
+    os.path.abspath(html_path)
+]
+
+print("Running Edge to generate Collaboration Protocol PDF...")
+subprocess.run(edge_cmd, check=True)
+print(f"Generated {pdf_path}")
+
+# Check page count
+doc = fitz.open(pdf_path)
+print(f"Total pages in generated PDF: {len(doc)}")
+for i, page in enumerate(doc):
+    pix = page.get_pixmap(dpi=150)
+    img_name = f"protocol_page_{i+1}.png"
+    pix.save(img_name)
+    print(f"Saved preview: {img_name} ({pix.width}x{pix.height})")
