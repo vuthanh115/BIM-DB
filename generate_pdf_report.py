@@ -387,7 +387,7 @@ html_content = """<!DOCTYPE html>
       <div class="cover-logo">
         <div class="cover-logo-icon">BIM</div>
         <div class="cover-logo-text">
-          <h3>BAN BIM - THIẾT KẾ</h3>
+          <h3>BAN THIẾT KẾ & BIM</h3>
           <p>Tối ưu hóa Vận hành & Nâng cao Năng lực Cạnh tranh</p>
         </div>
       </div>
@@ -398,10 +398,10 @@ html_content = """<!DOCTYPE html>
       <div class="cover-tagline">Đề án Tổ chức & Vận hành Năm 2027</div>
       <h1 class="cover-title">
         PHƯƠNG ÁN KIỆN TOÀN TỔ CHỨC<br/>
-        <span>& TỐI ƯU HÓA VẬN HÀNH PHÒNG BIM (2027)</span>
+        <span>& TỐI ƯU HÓA VẬN HÀNH PHÒNG THIẾT KẾ & BIM (2027)</span>
       </h1>
       <p class="cover-subtitle">
-        Báo cáo phương án kiện toàn tổ chức nhân sự hiện hữu, thiết lập cơ chế phân quyền điều phối theo 4 Cụm Lead bộ môn, tự động hóa bằng AI Agent, triển khai song song Dự Án Mẫu thực chiến và cam kết chuẩn dịch vụ SLA tinh gọn (Shop 5d, Combine 3d, QS 3d) nhằm nâng cao năng suất và chất lượng hồ sơ công trình.
+        Báo cáo phương án kiện toàn mô hình tích hợp Thiết Kế & BIM trên một nền tảng dữ liệu số duy nhất (Single Source of Truth), phân quyền 4 Cụm Lead bộ môn, tự động hóa bằng AI Agent, tự chủ 100% thiết kế cho các dự án D&B, tái sử dụng 70% dữ liệu sang giai đoạn thi công & cam kết chuẩn SLA tinh gọn (Shop 5d, Combine 3d, QS 3d).
       </p>
     </div>
 
@@ -412,7 +412,7 @@ html_content = """<!DOCTYPE html>
       </div>
       <div class="meta-item">
         <span class="meta-label">Đơn Vị Lập Đề Án</span>
-        <span class="meta-val">Trưởng Bộ Phận BIM - Thiết Kế</span>
+        <span class="meta-val">Trưởng Bộ Phận Thiết Kế & BIM</span>
       </div>
       <div class="meta-item">
         <span class="meta-label">Thời Gian & Hiệu Lực</span>
@@ -434,7 +434,7 @@ html_content = """<!DOCTYPE html>
   <div class="box-highlight">
     <div class="box-title"><svg class="box-icon" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6m-4 3h2m-5-8.5a6 6 0 1 1 8 0c-1 1-1.5 2-1.5 3.5h-5c0-1.5-.5-2.5-1.5-3.5z"/></svg> Thông Điệp Then Chốt Gửi Ban Lãnh Đạo</div>
     <div class="box-desc">
-      Phòng BIM không phải là một "bộ phận vẽ 3D tiêu tốn chi phí" (Cost Center), mà đang được hoạch định trở thành <b>Đòn bẩy Chiến lược (Strategic Value Driver)</b> giúp Doanh nghiệp nâng cao chất lượng hồ sơ, tối ưu hóa tiến độ thi công, tiết kiệm <b>70% nguồn lực nhờ tái sử dụng dữ liệu</b>, và loại bỏ triệt để các xung đột công trường gây lãng phí hàng tỷ đồng vật tư và nhân công sửa sai.
+      Mô hình <b>"BIM kiêm luôn Thiết Kế"</b> giúp Doanh nghiệp chuyển đổi từ bộ phận vẽ thuần túy (Cost Center) thành <b>Trung tâm Giá trị & Lợi nhuận (Profit Center)</b>. Bằng việc thiết kế trực tiếp trên nền tảng 3D BIM ngay từ đầu, công ty tự chủ 100% hồ sơ thiết kế, rút ngắn 70% thời gian bóc tách khối lượng và Shop drawing (không phải dựng lại mô hình), nâng tỷ lệ thắng thầu dự án D&B từ 60% lên 90% và loại bỏ triệt để xung đột công trường.
     </div>
   </div>
 
@@ -442,23 +442,23 @@ html_content = """<!DOCTYPE html>
   <div class="grid-4">
     <div class="stat-card blue">
       <div class="stat-num">100%</div>
-      <div class="stat-title">Tự Chủ Kỹ Thuật Nội Bộ</div>
-      <div class="stat-desc">Làm chủ 6 bộ môn thiết kế trên nền tảng 3D BIM</div>
+      <div class="stat-title">Tự Chủ Thiết Kế & BIM</div>
+      <div class="stat-desc">Tự chủ trọn gói ~4 dự án/năm (~1.200 tỷ, DT thiết kế ~10 tỷ)</div>
     </div>
     <div class="stat-card emerald">
-      <div class="stat-num">100%</div>
-      <div class="stat-title">Tiến Độ Theo Chuẩn SLA</div>
-      <div class="stat-desc">Cam kết thời gian Shop 5d, Combine 3d, QS 3d</div>
+      <div class="stat-num">60% - 90%</div>
+      <div class="stat-title">Tỷ Lệ Thắng Thầu D&B</div>
+      <div class="stat-desc">Thiết kế tối ưu giá thành (Design-to-Cost) & mô phỏng 4D/5D</div>
     </div>
     <div class="stat-card rose">
       <div class="stat-num">&lt; 1%</div>
       <div class="stat-title">Phát Sinh Sửa Chữa CT</div>
-      <div class="stat-desc">Xóa 100% va chạm trước khi đổ bê tông công trường</div>
+      <div class="stat-desc">Xóa 100% vênh lệch giữa thiết kế và thi công trước hiện trường</div>
     </div>
     <div class="stat-card amber">
       <div class="stat-num">70%</div>
       <div class="stat-title">Tái Sử Dụng Dữ Liệu</div>
-      <div class="stat-desc">Từ mô hình thiết kế sang Shop Drawing & bóc BOQ</div>
+      <div class="stat-desc">Từ mô hình tính toán thiết kế chuyển thẳng sang Shop & BOQ</div>
     </div>
   </div>
 
@@ -467,25 +467,25 @@ html_content = """<!DOCTYPE html>
     <thead>
       <tr>
         <th style="width: 25%;">Trụ Cột Chiến Lược</th>
-        <th style="width: 45%;">Hành Động Cụ Thể Của Phòng BIM</th>
+        <th style="width: 45%;">Hành Động Cụ Thể Của Phòng Thiết Kế & BIM</th>
         <th style="width: 30%;">Tác Động Tài Chính & Quản Trị</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><b>1. Tự chủ Kỹ thuật & Giữ lại Lợi nhuận</b></td>
-        <td>Xây dựng đội ngũ làm chủ toàn diện 6 bộ môn: Kiến trúc, Kết cấu, Điện, HVAC, Cấp thoát nước và PCCC. Tự lực lập trọn bộ hồ sơ Shop Drawing & Biện pháp thi công.</td>
-        <td>Nâng cấp toàn bộ năng lực từ thiết kế 2D truyền thống lên mô hình BIM 3D, gia tăng năng lực cạnh tranh và bảo mật bí quyết kỹ thuật.</td>
+        <td><b>1. Tự chủ Thiết Kế & Giữ lại Lợi nhuận</b></td>
+        <td>Đội ngũ làm chủ toàn diện từ phương án thiết kế kỹ thuật đến mô hình BIM 3D của 6 bộ môn. Tự lực lập trọn bộ hồ sơ từ Thiết kế cơ sở, Bản vẽ thi công đến Shop Drawing, giữ lại 100% doanh thu thiết kế nội bộ (~10 tỷ).</td>
+        <td>Chuyển đổi thành Trung tâm tạo Lợi nhuận (Profit Center), làm chủ giải pháp và bảo mật bí quyết công nghệ.</td>
       </tr>
       <tr>
-        <td><b>2. Tối ưu Đấu thầu & Năng lực Thuyết phục</b></td>
-        <td>Áp dụng mô hình BIM 3D diễn họa kiến trúc, mô phỏng tiến độ 4D biện pháp thi công và bóc tách dự toán 5D chính xác ngay từ giai đoạn chào thầu.</td>
-        <td>Rút ngắn <b>35% thời gian lập thầu</b>, tạo sự vượt trội rõ rệt trước các đối thủ cạnh tranh truyền thống.</td>
+        <td><b>2. Đòn bẩy Thắng thầu D&B (Design & Build)</b></td>
+        <td>Tự thiết kế phương án tối ưu giá thành (Design-to-Cost), áp dụng mô phỏng tiến độ 4D và dự toán 5D chính xác ngay khi lập thầu, giúp công ty sở hữu ưu thế cạnh tranh vượt trội trước các đối thủ truyền thống.</td>
+        <td>Rút ngắn <b>35% thời gian lập thầu</b>, nâng tỷ lệ chuyển hóa thắng thầu sang thi công đạt 60% – 90%.</td>
       </tr>
       <tr>
         <td><b>3. Tối ưu Công trường (Zero Conflict)</b></td>
-        <td>Phát hiện và xử lý 100% các xung đột không gian (Clash Detection) giữa kết cấu và hệ thống cơ điện (MEP) trên mô hình số trước khi ra hiện trường.</td>
-        <td>Xóa bỏ tình trạng "thiết kế một đằng, ra công trường đục phá làm lại một nẻo", kiểm soát phát sinh &lt; 1%.</td>
+        <td>Người thiết kế am hiểu sâu biện pháp thi công, xử lý 100% xung đột không gian (MEP vs Kết cấu) trên mô hình số, chấm dứt hoàn toàn tình trạng "thiết kế một đằng, ra công trường đục phá một nẻo".</td>
+        <td>Kiểm soát phát sinh &lt; 1%, loại bỏ rủi ro tranh chấp và phát sinh chi phí sửa sai tại hiện trường.</td>
       </tr>
     </tbody>
   </table>
@@ -510,11 +510,11 @@ html_content = """<!DOCTYPE html>
   <div class="box-highlight blue">
     <div class="box-title"><svg class="box-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14l-2-7V4h1V2H6v2h1v6z"/></svg> Định Hướng Setup: Tối Ưu Hóa Nguồn Lực Hiện Hữu</div>
     <div class="box-desc">
-      Tận dụng tối đa <b>bộ máy nhân sự theo cơ cấu tổ chức hiện tại</b>. Là <b>công ty thiết kế chuyển đổi số toàn diện lên BIM</b>, đội ngũ kỹ sư BIM chuyên trách được điều phối gắn kết chặt chẽ cùng các bộ môn thiết kế (Kết cấu, Kiến trúc, Cơ điện MEPF, Hạ tầng & CDE) cùng làm việc trực tiếp với các Lead bộ môn để triển khai mô hình 3D ngay từ đầu, xóa bỏ hoàn toàn độ trễ giữa thiết kế và BIM.
+      Tận dụng tối đa <b>bộ máy nhân sự theo cơ cấu tổ chức hiện tại</b> theo mô hình <b>"Thiết Kế Kiêm BIM Tích Hợp"</b>. Xóa bỏ hoàn toàn mô hình tách rời lạc hậu (Phòng Thiết kế vẽ 2D rồi chuyển sang Phòng BIM dựng 3D gây chậm trễ và sai lệch). Tại mỗi Cụm chuyên môn, Kỹ sư Thiết kế và Kỹ sư BIM tích hợp thành một khối thống nhất dưới sự chỉ huy của Lead Bộ Môn, triển khai thiết kế trực tiếp trên nền tảng 3D BIM (Single Source of Truth) từ ngày đầu tiên.
     </div>
   </div>
 
-  <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> Bảng Cơ Cấu Định Biên & Bố Trí Nhân Sự Theo Hiện Tại</h2>
+  <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> Bảng Cơ Cấu Định Biên & Bố Trí Nhân Sự Tích Hợp Thiết Kế & BIM</h2>
   <table class="data-table">
     <thead>
       <tr>
@@ -528,7 +528,7 @@ html_content = """<!DOCTYPE html>
     <tbody>
       <tr>
         <td><b>Quản lý Điều hành</b></td>
-        <td>Trưởng bộ phận BIM - TK</td>
+        <td>Trưởng bộ phận Thiết kế & BIM</td>
         <td>Điều hành chung, hoạch định chiến lược & kiểm soát SLA</td>
         <td>1 / 1</td>
         <td><span class="pill pill-r">1 Đang làm</span></td>
@@ -583,7 +583,7 @@ html_content = """<!DOCTYPE html>
     <div class="stat-card emerald">
       <div class="stat-title" style="color:#059669;">2. Cam Kết Theo SLA</div>
       <div class="stat-desc">
-        Mọi yêu cầu từ công trường hoặc Ban Đấu thầu đều được áp khung thời gian xử lý chuẩn (Shop 5d, Combine 10d, QS 7d), chấm dứt tình trạng trễ hẹn kéo dài.
+        Mọi yêu cầu từ công trường hoặc Ban Đấu thầu đều được áp khung thời gian xử lý chuẩn (Shop 5d, Combine 3d, QS 3d), chấm dứt tình trạng trễ hẹn kéo dài.
       </div>
     </div>
     <div class="stat-card amber">
@@ -598,16 +598,16 @@ html_content = """<!DOCTYPE html>
 <!-- TRANG 4: PHƯƠNG ÁN ĐIỀU PHỐI CHUYỂN TIẾP THEO LEADER TỪNG BỘ MÔN -->
 <div class="page">
   <div class="page-header">
-    <div class="page-header-title">Phần III: Phương Án Điều Phối Setup Theo Leader Bộ Môn</div>
+    <div class="page-header-title">Phần III: Phương Án Điều Phối 4 Cụm Tích Hợp Thiết Kế & BIM</div>
     <div class="page-header-meta">Trang 4 / 7</div>
   </div>
 
-  <h1 class="sec-title"><svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg> 3. Cơ chế Phối hợp: 4 Cụm Chuyên môn Do Lead Bộ Môn Chỉ huy</h1>
+  <h1 class="sec-title"><svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg> 3. Cơ chế Phối hợp: 4 Cụm Chuyên môn Tích Hợp Thiết Kế & BIM</h1>
 
   <div class="box-highlight blue">
     <div class="box-title"><svg class="box-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Nguyên Tắc Phối Hợp: Trao Quyền Tự Chủ Cho Các Lead Bộ Môn</div>
     <div class="box-desc">
-      Tổ chức toàn bộ nhân sự hiện hữu thành <b>4 Cụm Phối Hợp Chuyên Môn (Discipline Squads)</b> do các Lead từng bộ môn trực tiếp chỉ huy. Mỗi Lead bộ môn được trao quyền tự chủ kỹ thuật, nắm trọn vẹn từ thiết kế đến mô hình BIM, chịu trách nhiệm về chất lượng đầu ra và cam kết tiến độ phục vụ công trường theo chuẩn SLA.
+      Tổ chức toàn bộ nhân sự hiện hữu thành <b>4 Cụm Phối Hợp Chuyên Môn (Design & BIM Squads)</b> do các Lead từng bộ môn trực tiếp chỉ huy. Mỗi Lead bộ môn nắm trọn vẹn từ tính toán giải pháp kỹ thuật thiết kế đến mô hình BIM 3D, chịu trách nhiệm pháp lý hồ sơ, chất lượng đầu ra và cam kết tiến độ phục vụ công trường theo chuẩn SLA.
     </div>
   </div>
 
@@ -626,26 +626,26 @@ html_content = """<!DOCTYPE html>
       <tr>
         <td><b>Cụm 1: Kết Cấu & Biện Pháp Thi Công</b></td>
         <td><b>Lead Bộ Môn Kết Cấu</b></td>
-        <td>Đội ngũ KS BIM Kết Cấu thực chiến</td>
-        <td>• Mô hình kết cấu BTCT, đà kiềng, móng, vách bể.<br/>• Xuất bản vẽ Shop cốt thép & ván khuôn đạt SLA <b>Chuẩn 5 Ngày</b>.<br/>• AI Agent trích xuất BOQ thép & bê tông phục vụ mua hàng.</td>
+        <td>Đội ngũ KS Thiết kế & BIM Kết Cấu thực chiến</td>
+        <td>• Tính toán kết cấu BTCT, đà kiềng, móng, bể ngầm, kết cấu thép.<br/>• Mô hình BIM kết cấu & xuất Shop drawing cốt thép/ván khuôn SLA <b>Chuẩn 5 Ngày</b>.<br/>• AI Agent trích xuất BOQ thép & bê tông phục vụ mua hàng.</td>
       </tr>
       <tr>
         <td><b>Cụm 2: Kiến Trúc & Tạo Hình 3D</b></td>
         <td><b>Lead Bộ Môn Kiến Trúc</b></td>
         <td>Đội ngũ KTS & KS BIM Kiến Trúc thực chiến</td>
-        <td>• Mô hình kiến trúc LOD 300–350, chi tiết cấu tạo.<br/>• Diễn họa 3D phối cảnh, mô phỏng video phục vụ đấu thầu.<br/>• Thẩm định tuân thủ quy chuẩn phòng cháy QCVN 06.</td>
+        <td>• Thiết kế phương án kiến trúc, mô hình LOD 300–350, chi tiết cấu tạo.<br/>• Diễn họa 3D phối cảnh, video VR phục vụ đấu thầu D&B.<br/>• Thẩm định phương án tuân thủ quy chuẩn an toàn cháy QCVN 06.</td>
       </tr>
       <tr>
         <td><b>Cụm 3: Cơ Điện MEPF & Phối Hợp Va Chạm</b></td>
         <td><b>Lead Bộ Môn BIM Cơ Điện (MEPF)</b></td>
-        <td>Đội ngũ KS BIM MEPF thực chiến</td>
-        <td>• Mô hình 4 hệ MEPF: Điện, HVAC, Cấp thoát nước, PCCC.<br/>• Ứng dụng AI Agent phân loại và xử lý xung đột đạt SLA <b>Chuẩn 3 Ngày</b>.<br/>• Tối ưu cao độ trần kỹ thuật và tuyến ống trục đứng.</td>
+        <td>Đội ngũ KS Thiết kế & BIM MEPF thực chiến</td>
+        <td>• Tính toán thiết kế 4 hệ MEPF: Điện, HVAC, Cấp thoát nước, PCCC.<br/>• Ứng dụng AI Agent phân loại và xử lý xung đột đạt SLA <b>Chuẩn 3 Ngày</b>.<br/>• Tối ưu cao độ trần kỹ thuật và tuyến ống trục đứng cho thi công.</td>
       </tr>
       <tr>
         <td><b>Cụm 4: Hạ Tầng Kỹ Thuật & Quản Trị CDE</b></td>
         <td><b>Lead Kỹ Thuật Hạ Tầng & CDE</b></td>
-        <td>Đội ngũ KS BIM Hạ tầng & Quản trị CDE</td>
-        <td>• Mô hình san nền, giao thông, thoát nước ngoài nhà (Civil 3D).<br/>• Quản trị phân quyền môi trường dữ liệu chung CDE.<br/>• AI Agent bóc tách khối lượng hạ tầng kỹ thuật đạt SLA <b>Chuẩn 3 Ngày</b>.</td>
+        <td>Đội ngũ KS Thiết kế & BIM Hạ tầng & CDE</td>
+        <td>• Thiết kế san nền, giao thông, thoát nước mưa/nước thải ngoài nhà (Civil 3D).<br/>• Quản trị phân quyền môi trường dữ liệu chung CDE ISO 19650.<br/>• AI Agent bóc tách khối lượng hạ tầng kỹ thuật đạt SLA <b>Chuẩn 3 Ngày</b>.</td>
       </tr>
     </tbody>
   </table>
@@ -662,7 +662,7 @@ html_content = """<!DOCTYPE html>
     <div class="stat-card blue">
       <div class="stat-title" style="color:#0284c7;">2. Vai Trò Nhạc Trưởng Của Trưởng Phòng (TBP)</div>
       <div class="stat-desc">
-        Trưởng bộ phận BIM - TK đóng vai trò là "Nhạc trưởng" điều phối phân bổ nguồn lực giữa các Cụm Leader, kiểm soát tiến độ tổng thể, bảo vệ giải pháp kỹ thuật trước Ban Giám Đốc và Chủ đầu tư, <b>không can thiệp sâu vào chi tiết kỹ thuật của từng Cụm</b> để tránh gây nghẽn luồng xử lý.
+        Trưởng bộ phận Thiết kế & BIM đóng vai trò là "Nhạc trưởng" điều phối phân bổ nguồn lực giữa các Cụm Leader, kiểm soát tiến độ tổng thể, bảo vệ giải pháp kỹ thuật trước Ban Giám Đốc và Chủ đầu tư, <b>không can thiệp sâu vào chi tiết kỹ thuật của từng Cụm</b> để tránh gây nghẽn luồng xử lý.
       </div>
     </div>
   </div>
@@ -709,7 +709,7 @@ html_content = """<!DOCTYPE html>
       </tr>
       <tr>
         <td><span class="pill pill-a">A (Accountable)</span><br/><b>Chịu trách nhiệm cuối</b></td>
-        <td><b>Trưởng bộ phận BIM - TK</b></td>
+        <td><b>Trưởng bộ phận Thiết kế & BIM</b></td>
         <td>Chịu trách nhiệm toàn diện trước Ban Giám Đốc về tiến độ, ngân sách, nhân sự và chất lượng hồ sơ thầu. Duyệt phát hành hồ sơ và quản trị chiến lược.</td>
       </tr>
       <tr>
@@ -728,13 +728,13 @@ html_content = """<!DOCTYPE html>
   <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Cam Kết Thời Gian Phục Vụ (SLA 7 Bước Khép Kín)</h2>
   
   <div class="step-flow">
-    <div class="step-node"><div class="step-num">B1</div><div class="step-name">Tiếp nhận Đầu vào</div><div class="step-time">4 Giờ</div></div>
-    <div class="step-node"><div class="step-num">B2</div><div class="step-name">Hoạch định BEP</div><div class="step-time">4 Giờ</div></div>
-    <div class="step-node"><div class="step-num">B3</div><div class="step-name">Phân công Chi tiết</div><div class="step-time">4 Giờ</div></div>
-    <div class="step-node active"><div class="step-num">B4</div><div class="step-name">Thực thi Mô hình</div><div class="step-time">3 - 5 Ngày</div></div>
-    <div class="step-node"><div class="step-num">B5</div><div class="step-name">Kiểm tra QA/QC</div><div class="step-time">1 Ngày (8h)</div></div>
-    <div class="step-node"><div class="step-num">B6</div><div class="step-name">Bàn giao & Ký duyệt</div><div class="step-time">4 Giờ</div></div>
-    <div class="step-node"><div class="step-num">B7</div><div class="step-name">Đóng & Lưu CDE</div><div class="step-time">2 Giờ</div></div>
+    <div class="step-node"><div class="step-num">B1</div><div class="step-name">Tiếp nhận Đầu vào</div><div class="step-time">2 Giờ</div></div>
+    <div class="step-node"><div class="step-num">B2</div><div class="step-name">Hoạch định BEP</div><div class="step-time">2 Giờ</div></div>
+    <div class="step-node"><div class="step-num">B3</div><div class="step-name">Phân công RACI</div><div class="step-time">2 Giờ</div></div>
+    <div class="step-node active"><div class="step-num">B4</div><div class="step-name">Thực thi & AI</div><div class="step-time">1 - 2 Ngày</div></div>
+    <div class="step-node active"><div class="step-num">B5</div><div class="step-name">Kiểm tra QA/QC</div><div class="step-time">4 Giờ</div></div>
+    <div class="step-node"><div class="step-num">B6</div><div class="step-name">Bàn giao Duyệt</div><div class="step-time">2 Giờ</div></div>
+    <div class="step-node"><div class="step-num">B7</div><div class="step-name">Lưu trữ CDE</div><div class="step-time">1 Giờ</div></div>
   </div>
 
   <table class="data-table">
@@ -780,7 +780,7 @@ html_content = """<!DOCTYPE html>
 
   <h1 class="sec-title"><svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> 5. Nền tảng Dữ liệu & Kế hoạch Dự Án Mẫu</h1>
 
-  <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Danh Mục Hệ Thống Tài Liệu Thiết Kế (115 Mục Chuẩn Hóa 6 Bộ Môn)</h2>
+  <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Hệ Thống Chuẩn Hóa Thiết Kế & BIM (115 Tài Liệu Kỹ Thuật 6 Bộ Môn)</h2>
   
   <table class="data-table" style="margin-bottom: 8px;">
     <thead>
@@ -838,7 +838,7 @@ html_content = """<!DOCTYPE html>
       <tr style="background: #f8fafc; font-weight: 700;">
         <td colspan="3" style="text-align: right; padding-right: 8px;"><b>TỔNG CỘNG 6 BỘ MÔN CHUẨN HÓA:</b></td>
         <td><b style="color: #2563eb;">115 Mục</b></td>
-        <td><b>Bộ "Khuôn mẫu dữ liệu" chuẩn hóa tái sử dụng 70% tài nguyên thiết kế - thi công</b></td>
+        <td><b>Hệ thống Bảng tính toán thiết kế kỹ thuật, Spec & Template BIM tái sử dụng 70% tài nguyên</b></td>
       </tr>
     </tbody>
   </table>
@@ -928,11 +928,11 @@ html_content = """<!DOCTYPE html>
       </tr>
       <tr>
         <td><b>Quý 4/2027</b></td>
-        <td><b>Tự chủ 100%, Hoàn thiện AI Agent & Đánh giá KPI</b><br/>• Tự chủ 100% Shop & BPTC<br/>• Vận hành AI Agent quy chuẩn & Đánh giá KPI</td>
+        <td><b>Tự chủ 100% Thiết Kế & BIM, Chuyển Đổi Profit Center</b><br/>• Tự chủ 100% Thiết kế 4 dự án (1.200 tỷ)<br/>• Vận hành AI Agent & Đo lường ROI</td>
         <td>
-          • <b>Tự chủ 100% hồ sơ Shop Drawing & BPTC</b> cho các dự án mới của công ty.<br/>
+          • <b>Tự chủ 100% hồ sơ Thiết kế & Shop Drawing</b> cho các dự án mới của công ty, giữ lại ~10 tỷ doanh thu thiết kế nội bộ.<br/>
           • AI Agent bóc tách khối lượng 5D BIM tự động: Sai số vật tư &lt; 2%.<br/>
-          • Vận hành ổn định nề nếp phối hợp giữa phòng BIM và các công trường, chứng minh ROI rõ rệt.
+          • Vận hành ổn định nề nếp phối hợp giữa phòng Thiết Kế & BIM và các công trường, chứng minh ROI rõ rệt.
         </td>
       </tr>
     </tbody>
@@ -941,9 +941,9 @@ html_content = """<!DOCTYPE html>
   <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> 3 Kiến Nghị Then Chốt Kính Trình Ban Tổng Giám Đốc Phê Duyệt</h2>
 
   <div class="box-highlight">
-    <div class="box-title">1. Phê Duyệt Cơ Chế Điều Phối Theo 4 Cụm Lead Bộ Môn & Triển Khai Song Song Dự Án Mẫu</div>
+    <div class="box-title">1. Phê Duyệt Mô Hình Tích Hợp "Thiết Kế Kiêm BIM" 4 Cụm Lead Bộ Môn & Triển Khai Dự Án Mẫu</div>
     <div class="box-desc">
-      Chấp thuận phương án setup vận hành theo 4 Cụm chuyên môn do các Lead bộ môn hiện hữu trực tiếp chỉ huy theo cơ cấu nhân sự hiện tại. Phê duyệt việc <b>triển khai song song Dự Án Mẫu (Pilot Project)</b> ngay trong giai đoạn setup để thử nghiệm quy trình thực chiến.
+      Chấp thuận phương án setup vận hành mô hình <b>Phòng Thiết Kế & BIM tích hợp</b> theo 4 Cụm chuyên môn do các Lead bộ môn hiện hữu trực tiếp chỉ huy, nắm trọn chuỗi giá trị từ giải pháp thiết kế đến mô hình 3D. Phê duyệt việc <b>triển khai song song Dự Án Mẫu (Pilot Project)</b> ngay trong giai đoạn setup để thử nghiệm quy trình thực chiến.
     </div>
   </div>
 
@@ -957,7 +957,7 @@ html_content = """<!DOCTYPE html>
   <div class="box-highlight amber">
     <div class="box-title">3. Ban Hành Quy Chế Phối Hợp Bắt Buộc Theo Cam Kết SLA</div>
     <div class="box-desc">
-      Ban hành văn bản quy định thời gian phối hợp chuẩn (BIM Shop 5 ngày, BIM Combine 3 ngày, BIM QS 3 ngày với trợ lực từ AI Agent) giữa các Lead Bộ Môn BIM, Ban QLDA và Ban Chỉ huy công trường.
+      Ban hành văn bản quy định thời gian phối hợp chuẩn (BIM Shop 5 ngày, BIM Combine 3 ngày, BIM QS 3 ngày với trợ lực từ AI Agent) giữa các Lead Bộ Môn Thiết Kế & BIM, Ban QLDA và Ban Chỉ huy công trường.
     </div>
   </div>
 
@@ -968,7 +968,7 @@ html_content = """<!DOCTYPE html>
     </div>
     <div style="text-align: center;">
       <p style="font-size: 8pt; color: #64748b; margin-bottom: 40px;">NGƯỜI LẬP BÁO CÁO CHIẾN LƯỢC</p>
-      <p style="font-size: 9pt; font-weight: 800; color: #0f172a;">TRƯỞNG BỘ PHẬN BIM - THIẾT KẾ</p>
+      <p style="font-size: 9pt; font-weight: 800; color: #0f172a;">TRƯỞNG BỘ PHẬN THIẾT KẾ & BIM</p>
     </div>
   </div>
 </div>
