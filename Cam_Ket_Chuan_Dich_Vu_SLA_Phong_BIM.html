@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Cam Kết Chuẩn Mực Dịch Vụ SLA - Bộ Phận BIM</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+    background: #ffffff;
+    color: #0f172a;
+    font-size: 8.5pt;
+    line-height: 1.35;
+  }
+  .page {
+    width: 210mm;
+    height: 297mm;
+    max-height: 297mm;
+    padding: 12mm 15mm 10mm 15mm;
+    position: relative;
+    background: #ffffff;
+    page-break-after: always;
+    overflow: hidden;
+  }
+  
+  /* Header */
+  .doc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #1e3a8a;
+    margin-bottom: 10px;
+  }
+  .org-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-box {
+    background: #1e3a8a;
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 14pt;
+    padding: 6px 12px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+  .org-title {
+    font-size: 11pt;
+    font-weight: 800;
+    color: #0f172a;
+    text-transform: uppercase;
+  }
+  .org-sub {
+    font-size: 7.5pt;
+    color: #475569;
+    font-weight: 600;
+  }
+  .doc-meta {
+    text-align: right;
+    font-size: 7.5pt;
+    color: #475569;
+  }
+  .doc-code {
+    font-weight: 700;
+    color: #1e3a8a;
+    font-size: 8.5pt;
+  }
+
+  /* Document Title */
+  .title-banner {
+    text-align: center;
+    margin-bottom: 10px;
+    padding: 6px 0;
+    background: linear-gradient(90deg, #eff6ff 0%, #dbeafe 50%, #eff6ff 100%);
+    border-radius: 6px;
+    border: 1px solid #bfdbfe;
+  }
+  .title-banner h1 {
+    font-size: 13pt;
+    font-weight: 900;
+    color: #1e3a8a;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .title-banner p {
+    font-size: 8pt;
+    color: #1e40af;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+
+  /* 3 Strategic Pillars */
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 11px;
+  }
+  .pillar-card {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-top: 3px solid #2563eb;
+    border-radius: 4px;
+    padding: 6px 8px;
+  }
+  .pillar-card.emerald {
+    border-top-color: #059669;
+  }
+  .pillar-card.amber {
+    border-top-color: #d97706;
+  }
+  .pillar-title {
+    font-size: 8pt;
+    font-weight: 800;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 2px;
+  }
+  .pillar-desc {
+    font-size: 7.2pt;
+    color: #334155;
+    line-height: 1.25;
+  }
+
+  /* Workflow Chain Visual */
+  .section-title {
+    font-size: 9.5pt;
+    font-weight: 800;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    border-left: 3.5px solid #1e3a8a;
+    padding-left: 6px;
+  }
+  .section-title span.badge {
+    background: #dbeafe;
+    color: #1e40af;
+    font-size: 7pt;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 3px;
+    text-transform: none;
+  }
+  
+  .workflow-chain {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 4px;
+    margin-bottom: 10px;
+  }
+  .wf-step {
+    flex: 1;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    padding: 5px 4px;
+    text-align: center;
+    position: relative;
+  }
+  .wf-step.active {
+    background: #eff6ff;
+    border-color: #3b82f6;
+  }
+  .wf-num {
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    line-height: 17px;
+    background: #1e3a8a;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 7pt;
+    font-weight: 800;
+    margin-bottom: 2px;
+  }
+  .wf-step.active .wf-num {
+    background: #2563eb;
+  }
+  .wf-name {
+    font-size: 7.2pt;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.15;
+    min-height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .wf-time {
+    display: inline-block;
+    margin-top: 3px;
+    background: #e2e8f0;
+    color: #0f172a;
+    font-size: 6.5pt;
+    font-weight: 700;
+    padding: 1px 4px;
+    border-radius: 2px;
+  }
+  .wf-step.active .wf-time {
+    background: #dbeafe;
+    color: #1e40af;
+  }
+
+  /* Tables */
+  table.sla-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+    font-size: 7.3pt;
+  }
+  table.sla-table th {
+    background: #1e293b;
+    color: #ffffff;
+    font-weight: 700;
+    text-align: left;
+    padding: 5px 6px;
+    border: 1px solid #1e293b;
+  }
+  table.sla-table td {
+    padding: 4px 6px;
+    border: 1px solid #cbd5e1;
+    vertical-align: middle;
+    color: #1e293b;
+  }
+  table.sla-table tr:nth-child(even) td {
+    background: #f8fafc;
+  }
+  .badge-sla {
+    display: inline-block;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    color: #1e40af;
+    font-weight: 800;
+    padding: 1.5px 5px;
+    border-radius: 3px;
+    font-size: 7pt;
+    white-space: nowrap;
+  }
+  .badge-sla.fast {
+    background: #ecfdf5;
+    border-color: #a7f3d0;
+    color: #065f46;
+  }
+  .raci-tag {
+    display: inline-block;
+    padding: 1px 4px;
+    border-radius: 2px;
+    font-weight: 800;
+    font-size: 6.5pt;
+    margin-right: 2px;
+  }
+  .raci-r { background: #fee2e2; color: #991b1b; }
+  .raci-a { background: #dbeafe; color: #1e40af; }
+  .raci-c { background: #fef3c7; color: #92400e; }
+  .raci-i { background: #e2e8f0; color: #475569; }
+
+  /* Page Footer */
+  .page-footer {
+    position: absolute;
+    bottom: 8mm;
+    left: 15mm;
+    right: 15mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #cbd5e1;
+    padding-top: 5px;
+    font-size: 7pt;
+    color: #64748b;
+  }
+
+  /* Page 2 Cards & Sections */
+  .sla-hero-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .hero-card {
+    background: #ffffff;
+    border: 1.5px solid #2563eb;
+    border-radius: 5px;
+    padding: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    position: relative;
+  }
+  .hero-card.green {
+    border-color: #059669;
+  }
+  .hero-card.purple {
+    border-color: #7c3aed;
+  }
+  .hero-badge {
+    position: absolute;
+    top: -8px;
+    right: 8px;
+    background: #2563eb;
+    color: #fff;
+    font-size: 6.5pt;
+    font-weight: 800;
+    padding: 1px 6px;
+    border-radius: 10px;
+    text-transform: uppercase;
+  }
+  .hero-card.green .hero-badge { background: #059669; }
+  .hero-card.purple .hero-badge { background: #7c3aed; }
+  .hero-name {
+    font-size: 8.5pt;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 3px;
+  }
+  .hero-metric {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-bottom: 4px;
+  }
+  .metric-val {
+    font-size: 16pt;
+    font-weight: 900;
+    color: #1e3a8a;
+    line-height: 1;
+  }
+  .hero-card.green .metric-val { color: #065f46; }
+  .hero-card.purple .metric-val { color: #5b21b6; }
+  .metric-compare {
+    font-size: 7pt;
+    color: #64748b;
+    text-decoration: line-through;
+  }
+  .metric-saving {
+    font-size: 7pt;
+    font-weight: 700;
+    color: #059669;
+  }
+  .hero-desc {
+    font-size: 7.2pt;
+    color: #334155;
+    line-height: 1.25;
+  }
+
+  /* AI Integration Box */
+  .ai-box {
+    background: #f0fdf4;
+    border: 1px solid #86efac;
+    border-radius: 5px;
+    padding: 7px 10px;
+    margin-bottom: 10px;
+  }
+  .ai-box-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 8pt;
+    font-weight: 800;
+    color: #166534;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .ai-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    font-size: 7.2pt;
+  }
+  .ai-col {
+    background: #ffffff;
+    border: 1px solid #bbf7d0;
+    border-radius: 4px;
+    padding: 5px 7px;
+  }
+  .ai-col-title {
+    font-weight: 800;
+    color: #14532d;
+    margin-bottom: 2px;
+  }
+  .ai-col-text {
+    color: #166534;
+    line-height: 1.2;
+  }
+
+  /* Governance Table */
+  .gov-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 12px;
+    font-size: 7.3pt;
+  }
+  .gov-table th {
+    background: #0f172a;
+    color: #fff;
+    padding: 4px 6px;
+    text-align: left;
+    font-weight: 700;
+    border: 1px solid #0f172a;
+  }
+  .gov-table td {
+    padding: 4px 6px;
+    border: 1px solid #cbd5e1;
+    color: #1e293b;
+  }
+  .gov-table tr:nth-child(even) td {
+    background: #f8fafc;
+  }
+
+  /* Signatures */
+  .sig-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1.5px dashed #cbd5e1;
+  }
+  .sig-box {
+    text-align: center;
+  }
+  .sig-role {
+    font-size: 8pt;
+    font-weight: 800;
+    color: #0f172a;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .sig-sub {
+    font-size: 7pt;
+    color: #64748b;
+    font-style: italic;
+    margin-bottom: 45px;
+  }
+  .sig-name {
+    font-size: 8.5pt;
+    font-weight: 800;
+    color: #1e3a8a;
+    border-top: 1px solid #94a3b8;
+    display: inline-block;
+    padding-top: 3px;
+    min-width: 180px;
+  }
+  .sig-org {
+    font-size: 7pt;
+    color: #475569;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== TRANG 1 ==================== -->
+<div class="page">
+  <!-- Header -->
+  <div class="doc-header">
+    <div class="org-info">
+      <div class="logo-box">BIM</div>
+      <div>
+        <div class="org-title">HỆ THỐNG QUẢN LÝ CHẤT LƯỢNG & VẬN HÀNH DỰ ÁN</div>
+        <div class="org-sub">BỘ PHẬN BIM - THIẾT KẾ | PHÂN HỆ CAM KẾT DỊCH VỤ NỘI BỘ (SLA)</div>
+      </div>
+    </div>
+    <div class="doc-meta">
+      <div>Mã tài liệu: <span class="doc-code">SLA-BIM-TK-2027</span></div>
+      <div>Hiệu lực: <strong>2026 – 2027</strong> | Phân loại: <strong>Quy chuẩn ban hành</strong></div>
+    </div>
+  </div>
+
+  <!-- Title Banner -->
+  <div class="title-banner">
+    <h1>QUY CHẾ CAM KẾT CHUẨN MỨC DỊCH VỤ SLA</h1>
+    <p>ÁP DỤNG TRỌN GÓI CHO BAN QUẢN LÝ DỰ ÁN, BAN CHỈ HUY CÔNG TRƯỜNG & KHỐI KINH DOANH / ĐẤU THẦU</p>
+  </div>
+
+  <!-- 3 Strategic Pillars -->
+  <div class="pillars-grid">
+    <div class="pillar-card">
+      <div class="pillar-title">⚡ 1. TỐC ĐỘ ĐỘT PHÁ (50% - 70%)</div>
+      <div class="pillar-desc">
+        Rút ngắn thời gian bàn giao hồ sơ kỹ thuật thông qua chuẩn hóa Template, tự động hóa bằng AI Agent và cơ chế điều phối ma trận 4 Cụm Lead.
+      </div>
+    </div>
+    <div class="pillar-card emerald">
+      <div class="pillar-title">🛡️ 2. CHẤT LƯỢNG ZERO CLASH</div>
+      <div class="pillar-desc">
+        100% hồ sơ Shop Drawing và mô hình phối hợp MEPF được kiểm tra tự động, phát hiện và xử lý triệt để mọi xung đột trước khi chuyển ra thi công.
+      </div>
+    </div>
+    <div class="pillar-card amber">
+      <div class="pillar-title">📊 3. MINH BẠCH & ĐỊNH LƯỢNG RACI</div>
+      <div class="pillar-desc">
+        Rõ ràng trách nhiệm từng khâu từ tiếp nhận đến bàn giao CDE. Kiểm soát đo lường tiến độ tự động qua Dashboard, chế tài KPI chuẩn xác.
+      </div>
+    </div>
+  </div>
+
+  <!-- Section: Quy trình 7 bước -->
+  <div class="section-title">
+    I. QUY TRÌNH 7 BƯỚC KHÉP KÍN BẢO ĐẢM SLA <span class="badge">Chu trình chuẩn ISO 19650</span>
+  </div>
+
+  <!-- Visual Workflow Chain -->
+  <div class="workflow-chain">
+    <div class="wf-step">
+      <span class="wf-num">1</span>
+      <div class="wf-name">Tiếp nhận Request</div>
+      <span class="wf-time">2 Giờ</span>
+    </div>
+    <div class="wf-step">
+      <span class="wf-num">2</span>
+      <div class="wf-name">Đánh giá & Kế hoạch</div>
+      <span class="wf-time">2 Giờ</span>
+    </div>
+    <div class="wf-step">
+      <span class="wf-num">3</span>
+      <div class="wf-name">Giao việc (RACI)</div>
+      <span class="wf-time">2 Giờ</span>
+    </div>
+    <div class="wf-step active">
+      <span class="wf-num">4</span>
+      <div class="wf-name">Sản xuất + AI Agent</div>
+      <span class="wf-time">1 - 2 Ngày</span>
+    </div>
+    <div class="wf-step active">
+      <span class="wf-num">5</span>
+      <div class="wf-name">QA/QC Kiểm soát</div>
+      <span class="wf-time">4 Giờ</span>
+    </div>
+    <div class="wf-step">
+      <span class="wf-num">6</span>
+      <div class="wf-name">Nghiệm thu & Duyệt</div>
+      <span class="wf-time">2 Giờ</span>
+    </div>
+    <div class="wf-step">
+      <span class="wf-num">7</span>
+      <div class="wf-name">Lưu trữ CDE</div>
+      <span class="wf-time">1 Giờ</span>
+    </div>
+  </div>
+
+  <!-- Table: Chi tiết 7 bước -->
+  <table class="sla-table">
+    <thead>
+      <tr>
+        <th style="width: 14%;">Bước Quy Trình</th>
+        <th style="width: 11%;">Thời Hạn SLA</th>
+        <th style="width: 21%;">Dữ Liệu Đầu Vào (Input)</th>
+        <th style="width: 27%;">Nội Dung Kỹ Thuật Chính</th>
+        <th style="width: 17%;">Sản Phẩm Đầu Ra (Output)</th>
+        <th style="width: 10%;">RACI</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>B1. Tiếp nhận</strong></td>
+        <td><span class="badge-sla">Max 2h</span></td>
+        <td>Ticket yêu cầu trên CDE + Hồ sơ thiết kế cơ sở/CAD.</td>
+        <td>Check tính đầy đủ của hồ sơ; xác nhận scope và thời điểm tiếp nhận.</td>
+        <td>Biên bản xác nhận tiếp nhận hợp lệ.</td>
+        <td><span class="raci-tag raci-a">A</span> Lead Bộ môn<br><span class="raci-tag raci-r">R</span> KS Tiếp nhận</td>
+      </tr>
+      <tr>
+        <td><strong>B2. Hoạch định</strong></td>
+        <td><span class="badge-sla">Max 2h</span></td>
+        <td>Mục tiêu dự án, tiến độ công trường, độ phức tạp cấu kiện.</td>
+        <td>Bóc tách khối lượng công việc con; ước tính nhân sự; gán mốc hoàn thành.</td>
+        <td>Kế hoạch triển khai (Task Matrix & Timeline).</td>
+        <td><span class="raci-tag raci-a">A</span> Trưởng BP BIM<br><span class="raci-tag raci-r">R</span> Lead Bộ môn</td>
+      </tr>
+      <tr>
+        <td><strong>B3. Giao việc</strong></td>
+        <td><span class="badge-sla">Max 2h</span></td>
+        <td>Task Matrix đã duyệt; danh sách phân bổ năng lực kỹ sư.</td>
+        <td>Phân công trực tiếp cho Kỹ sư Thiết kế & Kỹ sư BIM phụ trách cụm chuyên môn.</td>
+        <td>Ticket phân công chi tiết kèm deadline.</td>
+        <td><span class="raci-tag raci-a">A</span> Lead Bộ môn<br><span class="raci-tag raci-r">R</span> Kỹ sư chính</td>
+      </tr>
+      <tr>
+        <td><strong>B4. Sản xuất & AI</strong></td>
+        <td><span class="badge-sla fast">1 - 2 Ngày</span></td>
+        <td>Model gốc, Family chuẩn, tiêu chuẩn kỹ thuật dự án.</td>
+        <td>Dựng hình 3D, triển khai chi tiết Shop, combine hệ thống; <strong>kích hoạt AI Agent</strong> rà quét xung đột thô & xuất BOQ.</td>
+        <td>Hồ sơ bản vẽ Shop / File Combine / Bảng BOQ thô.</td>
+        <td><span class="raci-tag raci-r">R</span> Kỹ sư BIM<br><span class="raci-tag raci-c">C</span> AI Agent</td>
+      </tr>
+      <tr>
+        <td><strong>B5. QA/QC Độc lập</strong></td>
+        <td><span class="badge-sla">Max 4h</span></td>
+        <td>Sản phẩm B4 + Check-list tiêu chuẩn chất lượng nội bộ.</td>
+        <td>Kiểm tra Model Health, quy cách thể hiện bản vẽ, Zero Clash check độc lập bằng tool kiểm định.</td>
+        <td>Báo cáo QA/QC Passed (Đạt yêu cầu).</td>
+        <td><span class="raci-tag raci-a">A</span> Lead Cụm CDE<br><span class="raci-tag raci-r">R</span> QA/QC Eng</td>
+      </tr>
+      <tr>
+        <td><strong>B6. Duyệt hồ sơ</strong></td>
+        <td><span class="badge-sla">Max 2h</span></td>
+        <td>Hồ sơ đã đạt QA/QC + Báo cáo kiểm định.</td>
+        <td>Trưởng Bộ phận BIM & Thiết kế thẩm định ký duyệt phát hành chính thức.</td>
+        <td>Hồ sơ ký số / PDF phát hành sẵn sàng.</td>
+        <td><span class="raci-tag raci-a">A</span> Trưởng BP BIM<br><span class="raci-tag raci-c">C</span> GĐ Dự án</td>
+      </tr>
+      <tr>
+        <td><strong>B7. Lưu trữ CDE</strong></td>
+        <td><span class="badge-sla">Max 1h</span></td>
+        <td>Hồ sơ B6 đã duyệt.</td>
+        <td>Upload lên CDE theo chuẩn ISO 19650 (Folder WIP &rarr; Shared &rarr; Published); phát thông báo email tự động.</td>
+        <td>Link tải chính thức trên CDE cho BCH/BQLDA.</td>
+        <td><span class="raci-tag raci-r">R</span> Lead CDE<br><span class="raci-tag raci-i">I</span> Toàn dự án</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Ghi chú nguyên tắc trang 1 -->
+  <div style="background: #f1f5f9; border-left: 3px solid #64748b; padding: 5px 8px; font-size: 7.2pt; color: #334155; border-radius: 0 4px 4px 0;">
+    <strong>Ghi chú nguyên tắc khép kín:</strong> Toàn bộ 7 bước được vận hành trên hạ tầng dữ liệu tập trung (CDE). Mọi bước chuyển đổi trạng thái đều được ghi log thời gian thực. Trường hợp hồ sơ B5 không đạt QA/QC, hệ thống lập tức rollback về B4 và kích hoạt cờ ưu tiên (Priority Flag) nhằm bảo đảm không vỡ tổng tiến độ SLA đã cam kết.
+  </div>
+
+  <!-- Page Footer -->
+  <div class="page-footer">
+    <div>Hệ Thống Quản Trị Chất Lượng Dịch Vụ BIM - Ban BIM & Thiết Kế</div>
+    <div>Trang 1 / 2 (Xem tiếp Cam kết 3 Dịch vụ & Chế tài KPI trang 2)</div>
+  </div>
+</div>
+
+
+<!-- ==================== TRANG 2 ==================== -->
+<div class="page">
+  <!-- Header -->
+  <div class="doc-header">
+    <div class="org-info">
+      <div class="logo-box">BIM</div>
+      <div>
+        <div class="org-title">HỆ THỐNG QUẢN LÝ CHẤT LƯỢNG & VẬN HÀNH DỰ ÁN</div>
+        <div class="org-sub">BỘ PHẬN BIM - THIẾT KẾ | PHÂN HỆ CAM KẾT DỊCH VỤ NỘI BỘ (SLA)</div>
+      </div>
+    </div>
+    <div class="doc-meta">
+      <div>Mã tài liệu: <span class="doc-code">SLA-BIM-TK-2027</span></div>
+      <div>Hiệu lực: <strong>2026 – 2027</strong> | Trang: <strong>2 / 2</strong></div>
+    </div>
+  </div>
+
+  <!-- Section: 3 Chuẩn Mực Dịch Vụ Cốt Lõi -->
+  <div class="section-title">
+    II. CAM KẾT 3 CHUẨN MỰC DỊCH VỤ CỐT LÕI (CORE SLA SERVICES)
+  </div>
+
+  <div class="sla-hero-grid">
+    <!-- Hero 1: Shop Drawing -->
+    <div class="hero-card">
+      <div class="hero-badge">TIẾT KIỆM 60%</div>
+      <div class="hero-name">1. BIM SHOP DRAWING</div>
+      <div class="hero-metric">
+        <span class="metric-val">5 NGÀY</span>
+        <span class="metric-compare">12 - 15 ngày</span>
+      </div>
+      <div class="metric-saving">&bull; Rút ngắn 7 - 10 ngày làm việc</div>
+      <div class="hero-desc" style="margin-top: 4px;">
+        Áp dụng cho cấu kiện kết cấu, kiến trúc hoàn thiện, chi tiết cơ điện. Hồ sơ xuất trực tiếp từ mô hình 3D chuẩn LOD 350-400, đồng bộ 100% hình học và thông số kỹ thuật.
+      </div>
+    </div>
+
+    <!-- Hero 2: Combine MEPF -->
+    <div class="hero-card green">
+      <div class="hero-badge">TIẾT KIỆM 65%</div>
+      <div class="hero-name">2. COMBINE ĐA HỆ MEPF</div>
+      <div class="hero-metric">
+        <span class="metric-val">3 NGÀY</span>
+        <span class="metric-compare">7 - 10 ngày</span>
+      </div>
+      <div class="metric-saving">&bull; Xử lý 100% xung đột trước thi công</div>
+      <div class="hero-desc" style="margin-top: 4px;">
+        Phối hợp không gian giữa Kết cấu, HVAC, Cấp thoát nước, PCCC, Điện. Ứng dụng AI Agent tự động phát hiện va chạm, phân loại nguy cơ và đề xuất cao độ giải tỏa xung đột.
+      </div>
+    </div>
+
+    <!-- Hero 3: QS 5D -->
+    <div class="hero-card purple">
+      <div class="hero-badge">TIẾT KIỆM 65%</div>
+      <div class="hero-name">3. BÓC KHỐI LƯỢNG 5D (QS)</div>
+      <div class="hero-metric">
+        <span class="metric-val">3 NGÀY</span>
+        <span class="metric-compare">8 - 10 ngày</span>
+      </div>
+      <div class="metric-saving">&bull; Bóc tách tự động chính xác &plusmn;2%</div>
+      <div class="hero-desc" style="margin-top: 4px;">
+        Trích xuất trực tiếp bảng khối lượng đào đắp, bê tông, ván khuôn, cốt thép, chiều dài ống và thiết bị MEPF. Tự động liên kết mã định mức phục vụ đấu thầu và nghiệm thu.
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Integration Showcase -->
+  <div class="ai-box">
+    <div class="ai-box-header">
+      <span>🤖 ĐỘT PHÁ CÔNG NGHỆ: ỨNG DỤNG AI AGENT ĐẨY NHANH TỐC ĐỘ SLA</span>
+    </div>
+    <div class="ai-grid">
+      <div class="ai-col">
+        <div class="ai-col-title">1. AI Clash Detection & Sorting</div>
+        <div class="ai-col-text">
+          Tự động lọc bỏ 80% xung đột giả (soft-clash ảo), gom nhóm va chạm theo cụm phòng kỹ thuật/trục dầm, tự động sinh biên bản cảnh báo cho kỹ sư chỉ trong 15 phút.
+        </div>
+      </div>
+      <div class="ai-col">
+        <div class="ai-col-title">2. AI 5D Quantity Extractor</div>
+        <div class="ai-col-text">
+          Đọc hiểu thông số hình học và Family parameter để tự động gán mã hiệu định mức công tác, xuất bảng BOQ chuẩn định dạng Excel/ERP không cần đo bóc thủ công.
+        </div>
+      </div>
+      <div class="ai-col">
+        <div class="ai-col-title">3. AI Model Health & QA/QC Check</div>
+        <div class="ai-col-text">
+          Rà soát 100% chuẩn đặt tên (Naming convention), cấp độ chi tiết thông tin (LOI) và tính toàn vẹn của mô hình trước khi cho phép chuyển sang bước duyệt B6.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section: Governance & KPI -->
+  <div class="section-title">
+    III. CHẾ TÀI KIỂM SOÁT KPI, XỬ LÝ NGOẠI LỆ & QUY TẮC PHỐI HỢP LIÊN PHÒNG BAN
+  </div>
+
+  <table class="gov-table">
+    <thead>
+      <tr>
+        <th style="width: 20%;">Chỉ Tiêu / Yếu Tố</th>
+        <th style="width: 25%;">Ngưỡng Tiêu Chuẩn</th>
+        <th style="width: 55%;">Chế Tài Chế Định & Quy Tắc Xử Lý Ngoại Lệ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Tỷ lệ tuân thủ SLA</strong></td>
+        <td><strong>&ge; 95%</strong> tổng số Ticket</td>
+        <td>Đạt &ge; 98%: Thưởng hiệu quả quý khối kỹ thuật; Dưới 95%: Trừ điểm KPI Lead bộ môn; Dưới 90%: Họp kiểm điểm nguyên nhân trực tiếp trước Ban Lãnh đạo.</td>
+      </tr>
+      <tr>
+        <td><strong>Chất lượng hồ sơ</strong></td>
+        <td><strong>100% Zero Clash</strong> nguy hiểm</td>
+        <td>Nếu phát sinh lỗi va chạm trên công trường do mô hình BIM bỏ sót, Bộ phận BIM cử kỹ sư xử lý hiện trường trong vòng <strong>2 Giờ</strong>; chịu trách nhiệm kỹ thuật liên đới.</td>
+      </tr>
+      <tr>
+        <td><strong>Quy tắc đóng băng dữ liệu (Model Freeze)</strong></td>
+        <td>Cố định trước ngày phát hành</td>
+        <td>Các yêu cầu thay đổi thiết kế từ BQLDA/CĐT sau khi đã Freeze Model sẽ được mở luồng Ticket thay đổi (Change Order), thời gian SLA tính lại từ Bước 2.</td>
+      </tr>
+      <tr>
+        <td><strong>Cơ chế Leo thang (Escalation)</strong></td>
+        <td>Khi trễ hạn &gt; 4 Giờ làm việc</td>
+        <td>Hệ thống CDE tự động gửi cảnh báo khẩn cấp (High Priority Alert) tới Trưởng Bộ phận BIM và Giám đốc Dự án để bổ sung nguồn lực hoặc tái phân bổ task ngay.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Dual Signatures Block -->
+  <div class="sig-section">
+    <div class="sig-box">
+      <div class="sig-role">TRƯỞNG BỘ PHẬN BIM - THIẾT KẾ</div>
+      <div class="sig-sub">(Đơn vị lập cam kết & chịu trách nhiệm thực thi)</div>
+      <div class="sig-name">VŨ THÀNH</div>
+      <div class="sig-org">Kỹ sư Trưởng Bộ Phận BIM & Thiết Kế</div>
+    </div>
+    <div class="sig-box">
+      <div class="sig-role">PHÊ DUYỆT BỞI BAN LÃNH ĐẠO / TỔNG GIÁM ĐỐC</div>
+      <div class="sig-sub">(Đơn vị phê chuẩn hiệu lực & phân bổ nguồn lực)</div>
+      <div class="sig-name">BAN TỔNG GIÁM ĐỐC / HĐQT</div>
+      <div class="sig-org">Chủ Quản Thẩm Quyền Ban Hành Quy Chế</div>
+    </div>
+  </div>
+
+  <!-- Page Footer -->
+  <div class="page-footer">
+    <div>Hệ Thống Quản Trị Chất Lượng Dịch Vụ BIM - Ban BIM & Thiết Kế</div>
+    <div>Văn bản cam kết có giá trị pháp lý nội bộ | Trang 2 / 2 (Hết)</div>
+  </div>
+</div>
+
+</body>
+</html>
