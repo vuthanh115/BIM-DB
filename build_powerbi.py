@@ -288,7 +288,7 @@ if os.path.exists(SRC_FILE_TASKS):
                 p_text = clean_text(hm)
                 if p_text.startswith("Dự án"):
                     if p_text == "Dự án Mega":
-                        cur_project = "Dự Án Mẫu MEGA"
+                        cur_project = "Dự Án Mẫu"
                     else:
                         cur_project = "SKIP_OTHER_PROJ"
                 else:
@@ -307,8 +307,8 @@ if os.path.exists(SRC_FILE_TASKS):
                 opt = clean_text(ws_t.cell(r, 11).value)
                 note = clean_text(ws_t.cell(r, 13).value)
 
-                if cur_project == "Dự Án Mẫu MEGA":
-                    group_type = "Dự Án Mẫu MEGA (Thực chiến triển khai)"
+                if cur_project == "Dự Án Mẫu":
+                    group_type = "Dự Án Mẫu (Thực chiến triển khai)"
                 elif any(cur_project.startswith(x) for x in ["Kiến Trúc", "Kết cấu", "Hệ thống điện", "Điều hoà", "Cấp thoát", "Phòng cháy"]):
                     group_type = "Chuẩn hóa Bộ môn Thiết kế"
                 else:
@@ -525,7 +525,7 @@ html_content = f"""<!DOCTYPE html>
   </div>
 
   <div class="kpi-grid">
-    <div class="kpi-card emerald"><div class="kpi-title">Tiến độ Dự Án Mẫu MEGA</div><div class="kpi-val">91.7%</div><div class="kpi-sub">22 / 24 việc hoàn thành (Dự Án Mẫu MEGA)</div></div>
+    <div class="kpi-card emerald"><div class="kpi-title">Tiến độ Dự Án Mẫu</div><div class="kpi-val">91.7%</div><div class="kpi-sub">22 / 24 việc hoàn thành (Dự Án Mẫu)</div></div>
     <div class="kpi-card blue"><div class="kpi-title">Tự chủ Shop Drawing</div><div class="kpi-val">100%</div><div class="kpi-sub">Làm chủ 6 bộ môn, chuyển đổi toàn diện lên BIM</div></div>
     <div class="kpi-card rose"><div class="kpi-title">Phát sinh Sửa chữa CT</div><div class="kpi-val">&lt; 1%</div><div class="kpi-sub">Xóa 100% va chạm trước khi đổ bê tông</div></div>
     <div class="kpi-card amber"><div class="kpi-title">Tài liệu Chuẩn hóa Thiết kế</div><div class="kpi-val">115 Mục</div><div class="kpi-sub">6 Bộ môn (KC, KT, Điện, HVAC, CTN, PCCC)</div></div>
@@ -667,7 +667,7 @@ html_content = f"""<!DOCTYPE html>
   <section id="tab-tasks" class="tab-page">
     <div class="chart-grid-equal">
       <div class="panel">
-        <div class="panel-header"><h3>Tiến độ Thực hiện Dự Án Mẫu MEGA & Hệ Thống</h3><span id="projChartSubtitle">So sánh Tỷ lệ Hoàn thành vs Đang thực hiện</span></div>
+        <div class="panel-header"><h3>Tiến độ Thực hiện Dự Án Mẫu & Hệ Thống</h3><span id="projChartSubtitle">So sánh Tỷ lệ Hoàn thành vs Đang thực hiện</span></div>
         <div class="chart-container"><canvas id="chartProjects"></canvas></div>
       </div>
       <div class="panel">
@@ -829,7 +829,7 @@ function updateTasksFilter(autoSwitch = false) {{
   const labelEl = document.getElementById('tasksCountLabel');
   if (labelEl) {{
     labelEl.innerHTML = proj === 'ALL'
-      ? `Đang hiển thị toàn bộ 151 công việc (Dự Án Mẫu MEGA & Hệ thống) | Hoàn thành: ${{doneCount}} | Đang làm: ${{inProgCount}} | Quá hạn: ${{overdueCount}}`
+      ? `Đang hiển thị toàn bộ 151 công việc (Dự Án Mẫu & Hệ thống) | Hoàn thành: ${{doneCount}} | Đang làm: ${{inProgCount}} | Quá hạn: ${{overdueCount}}`
       : `<b style="color:var(--accent-cyan); font-size:13px;">${{proj}}</b>: ${{filtered.length}} việc | Hoàn thành: <b style="color:#34d399">${{doneCount}} (${{pct}}%)</b> | Đang làm: ${{inProgCount}}${{overdueCount > 0 ? ` | Quá hạn: <b style="color:#f87171">${{overdueCount}}</b>` : ''}}`;
   }}
 
@@ -856,8 +856,8 @@ function updateTasksFilter(autoSwitch = false) {{
 
   if (chartProjectsInstance) {{
     if (proj === 'ALL') {{
-      const projNames = ['Dự Án Mẫu MEGA (24 việc)', 'Chuẩn hóa 6 Bộ môn (115 việc)', 'Quản trị & Văn hóa (12 việc)'];
-      const projGroupKeys = ['Dự Án Mẫu MEGA (Thực chiến triển khai)', 'Chuẩn hóa Bộ môn Thiết kế', 'Quản trị & Tổ chức'];
+      const projNames = ['Dự Án Mẫu (24 việc)', 'Chuẩn hóa 6 Bộ môn (115 việc)', 'Quản trị & Văn hóa (12 việc)'];
+      const projGroupKeys = ['Dự Án Mẫu (Thực chiến triển khai)', 'Chuẩn hóa Bộ môn Thiết kế', 'Quản trị & Tổ chức'];
       chartProjectsInstance.data.labels = projNames;
       chartProjectsInstance.data.datasets[0].data = projGroupKeys.map(k => taskData.filter(t => t.NhomCongViec === k && t.TinhTrang === 'Đã hoàn thành').length);
       chartProjectsInstance.data.datasets[1].data = projGroupKeys.map(k => taskData.filter(t => t.NhomCongViec === k && (t.TinhTrang === 'Đang thực hiện' || t.TinhTrang === 'Quá hạn' || t.TinhTrang === 'Chưa thực hiện')).length);
@@ -972,8 +972,8 @@ window.addEventListener('DOMContentLoaded', () => {{
   }});
 
   // 7. Chart Projects
-  const projNames = ['Dự Án Mẫu MEGA (24 việc)', 'Chuẩn hóa 6 Bộ môn (115 việc)', 'Quản trị & Văn hóa (12 việc)'];
-  const projGroupKeys = ['Dự Án Mẫu MEGA (Thực chiến triển khai)', 'Chuẩn hóa Bộ môn Thiết kế', 'Quản trị & Tổ chức'];
+  const projNames = ['Dự Án Mẫu (24 việc)', 'Chuẩn hóa 6 Bộ môn (115 việc)', 'Quản trị & Văn hóa (12 việc)'];
+  const projGroupKeys = ['Dự Án Mẫu (Thực chiến triển khai)', 'Chuẩn hóa Bộ môn Thiết kế', 'Quản trị & Tổ chức'];
   chartProjectsInstance = new Chart(document.getElementById('chartProjects'), {{
     type: 'bar',
     data: {{
