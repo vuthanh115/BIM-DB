@@ -875,9 +875,9 @@ html_content = """<!DOCTYPE html>
       </tr>
       <tr>
         <td><b>Quý 3/2027</b></td>
-        <td><b>Nhân rộng Thực chiến 7 Dự Án Mẫu</b><br/>• 87 nhiệm vụ kỹ thuật toàn diện<br/>• Kiểm chứng cam kết SLA tinh gọn</td>
+        <td><b>Thực chiến 01 Dự Án Mẫu</b><br/>• Triển khai trọn vẹn đa bộ môn<br/>• Kiểm chứng cam kết SLA tinh gọn</td>
         <td>
-          • Nhân rộng triển khai trọn vẹn 87 nhiệm vụ thực chiến trên 7 Dự Án Mẫu.<br/>
+          • Triển khai thực chiến trọn vẹn trên 01 Dự Án Mẫu (từ Thiết kế 3D, Combine MEPF, Shop Drawing đến bóc tách BOQ).<br/>
           • Xóa bỏ 100% va chạm (Zero Clash) kết cấu - cơ điện trước khi thi công.<br/>
           • Kiểm soát nghiêm ngặt tuân thủ SLA: <b>Shop 5 ngày, Combine 3 ngày, QS 3 ngày</b>.
         </td>
