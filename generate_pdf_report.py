@@ -113,11 +113,11 @@ html_content = """<!DOCTYPE html>
     font-size: 13pt;
     font-weight: 800;
     letter-spacing: 1.5px;
-    color: #0f172a;
+    color: #0f172a !important;
   }
   .cover-logo-text p {
     font-size: 8pt;
-    color: #475569;
+    color: #475569 !important;
     letter-spacing: 1px;
     text-transform: uppercase;
     font-weight: 600;
@@ -141,7 +141,7 @@ html_content = """<!DOCTYPE html>
   .cover-tagline {
     font-size: 11pt;
     font-weight: 800;
-    color: #0284c7;
+    color: #0284c7 !important;
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 12px;
@@ -161,30 +161,32 @@ html_content = """<!DOCTYPE html>
     font-size: 26pt;
     font-weight: 900;
     line-height: 1.25;
-    color: #0f172a;
+    color: #0f172a !important;
     margin-bottom: 18px;
     letter-spacing: -0.5px;
   }
   .cover-title span {
-    color: #1d4ed8;
+    color: #1d4ed8 !important;
     display: inline-block;
+    background: none !important;
+    -webkit-text-fill-color: #1d4ed8 !important;
   }
   .cover-subtitle {
     font-size: 10.5pt;
-    color: #334155;
+    color: #1e293b !important;
     line-height: 1.65;
     max-width: 620px;
     font-weight: 500;
     border-left: 3px solid #0284c7;
     padding-left: 14px;
-    background: #f8fafc;
+    background: #f1f5f9;
     padding-top: 10px;
     padding-bottom: 10px;
     border-radius: 0 6px 6px 0;
   }
   .cover-meta {
     background: #f8fafc;
-    border: 1.5px solid #e2e8f0;
+    border: 1.5px solid #cbd5e1;
     border-radius: 8px;
     padding: 18px 22px;
     display: grid;
@@ -194,99 +196,8 @@ html_content = """<!DOCTYPE html>
     z-index: 1;
   }
   .meta-item { display: flex; flex-direction: column; gap: 4px; }
-  .meta-label { font-size: 7.5pt; color: #64748b; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; }
-  .meta-val { font-size: 10pt; color: #0f172a; font-weight: 800; }
-  .cover-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid rgba(6, 182, 212, 0.4);
-    padding-bottom: 15px;
-  }
-  .cover-logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .cover-logo-icon {
-    width: 44px;
-    height: 44px;
-    background: linear-gradient(135deg, #06b6d4, #3b82f6);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 900;
-    font-size: 16pt;
-    color: #fff;
-    letter-spacing: 1px;
-  }
-  .cover-logo-text h3 {
-    font-size: 12pt;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    color: #f8fafc;
-  }
-  .cover-logo-text p {
-    font-size: 8pt;
-    color: #94a3b8;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-  .cover-badge {
-    background: rgba(244, 63, 94, 0.2);
-    border: 1px solid #f43f5e;
-    color: #fda4af;
-    font-size: 8pt;
-    font-weight: 700;
-    padding: 4px 12px;
-    border-radius: 999px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-  .cover-center {
-    margin: 35mm 0 25mm 0;
-  }
-  .cover-tagline {
-    font-size: 11pt;
-    font-weight: 700;
-    color: #06b6d4;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 12px;
-  }
-  .cover-title {
-    font-size: 25pt;
-    font-weight: 900;
-    line-height: 1.25;
-    color: #fff;
-    margin-bottom: 16px;
-    letter-spacing: -0.5px;
-  }
-  .cover-title span {
-    background: linear-gradient(135deg, #38bdf8, #818cf8);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  .cover-subtitle {
-    font-size: 11pt;
-    color: #cbd5e1;
-    line-height: 1.6;
-    max-width: 620px;
-    font-weight: 400;
-  }
-  .cover-meta {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    padding: 16px 20px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-  }
-  .meta-item { display: flex; flex-direction: column; gap: 3px; }
-  .meta-label { font-size: 7.5pt; color: #94a3b8; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
-  .meta-val { font-size: 10pt; color: #fff; font-weight: 700; }
+  .meta-label { font-size: 7.5pt; color: #475569 !important; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; }
+  .meta-val { font-size: 10pt; color: #0f172a !important; font-weight: 800; }
 
   /* INNER PAGES HEADER */
   .page-header {
