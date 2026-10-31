@@ -2,7 +2,7 @@
 """
 Script tạo file PDF Báo cáo Phương Án Kiện Toàn Tổ Chức & Tối Ưu Hóa Vận Hành Phòng BIM (Năm 2027)
 Dành cho việc trình bày và bảo vệ phương án trước Ban Tổng Giám Đốc / HĐQT
-- Giữ nguyên quy mô định biên hiện tại (24 nhân sự đang làm việc)
+- Cơ cấu nhân sự theo hiện tại, tối ưu hóa điều phối đa bộ môn
 - Setup lại cơ chế vận hành theo 4 Cụm Chiến Đấu Squads do các Leader bộ môn làm hạt nhân
 - Bộ 4 chỉ số KPI thực tế (Tiết kiệm chi phí ngoài, 100% Tự chủ Shop, <1% Sửa chữa, 70% Tái sử dụng)
 Sử dụng Playwright (Chromium) xuất PDF chuẩn in ấn A4 (7 trang màu Executive).
@@ -466,17 +466,17 @@ html_content = """<!DOCTYPE html>
   <div class="box-highlight blue">
     <div class="box-title"><svg class="box-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14l-2-7V4h1V2H6v2h1v6z"/></svg> Định Hướng Setup: Tối Ưu Hóa Nguồn Lực Hiện Hữu</div>
     <div class="box-desc">
-      Tận dụng tối đa bộ máy hiện có <b>(24 nhân sự đang làm việc)</b>. Là <b>công ty thiết kế chuyển đổi số toàn diện lên BIM</b>, <b>11 kỹ sư BIM chuyên trách được điều phối chia đều về các bộ môn thiết kế</b> (3 KS Kết cấu, 3 KS Kiến trúc, 3 KS Cơ điện MEPF, 2 KS Hạ tầng & CDE) cùng làm việc trực tiếp với các Lead bộ môn để triển khai mô hình 3D ngay từ đầu, xóa bỏ hoàn toàn độ trễ giữa thiết kế và BIM.
+      Tận dụng tối đa <b>bộ máy nhân sự theo cơ cấu tổ chức hiện tại</b>. Là <b>công ty thiết kế chuyển đổi số toàn diện lên BIM</b>, đội ngũ kỹ sư BIM chuyên trách được điều phối gắn kết chặt chẽ cùng các bộ môn thiết kế (Kết cấu, Kiến trúc, Cơ điện MEPF, Hạ tầng & CDE) cùng làm việc trực tiếp với các Lead bộ môn để triển khai mô hình 3D ngay từ đầu, xóa bỏ hoàn toàn độ trễ giữa thiết kế và BIM.
     </div>
   </div>
 
-  <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> Bảng Hiện Trạng Định Biên & Bố Trí Nhân Sự Hiện Tại (24 Đang làm việc)</h2>
+  <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> Bảng Cơ Cấu Định Biên & Bố Trí Nhân Sự Theo Hiện Tại</h2>
   <table class="data-table">
     <thead>
       <tr>
         <th style="width: 24%;">Bộ Môn / Khối Chuyên Môn</th>
         <th style="width: 26%;">Hạt Nhân Chỉ Huy</th>
-        <th style="width: 30%;">Nhân Sự Thiết Kế & BIM (Chia Đều 11 KS)</th>
+        <th style="width: 30%;">Nhân Sự Thiết Kế & Kỹ Sư BIM Phối Hợp</th>
         <th style="width: 8%;">Định Biên</th>
         <th style="width: 12%;">Hiện Trạng</th>
       </tr>
@@ -859,7 +859,7 @@ html_content = """<!DOCTYPE html>
         <td><b>Kiện toàn Tổ chức, CDE & Triển khai Song Song Dự Án Mẫu</b><br/>• 4 Cụm Squads theo Lead bộ môn & CDE<br/>• Triển khai song song 01 Dự Án Mẫu<br/>• Ban hành khung RACI & Cam kết SLA</td>
         <td>
           • Ban hành Quy chế phân quyền RACI & cam kết thời gian SLA tinh gọn (Shop 5d, Combine 3d, QS 3d).<br/>
-          • Vận hành 4 Cụm Chiến Đấu: KC, KT, MEPF, Hạ tầng theo các Lead bộ môn trên 24 nhân sự hiện hữu.<br/>
+          • Vận hành 4 Cụm Chiến Đấu: KC, KT, MEPF, Hạ tầng theo các Lead bộ môn theo cơ cấu nhân sự hiện hữu.<br/>
           • <b>Triển khai SONG SONG 01 Dự Án Mẫu (Pilot Project) ngay trong quá trình setup</b> để kiểm chứng quy trình, huấn luyện AI Agent và đo lường SLA thực tế.<br/>
           • Thiết lập và chuẩn hóa môi trường dữ liệu chung CDE.
         </td>
@@ -899,7 +899,7 @@ html_content = """<!DOCTYPE html>
   <div class="box-highlight">
     <div class="box-title">1. Phê Duyệt Cơ Chế Điều Phối Theo 4 Cụm Lead Bộ Môn & Triển Khai Song Song Dự Án Mẫu</div>
     <div class="box-desc">
-      Chấp thuận phương án setup vận hành theo 4 Cụm chuyên môn do các Lead bộ môn hiện hữu trực tiếp chỉ huy trên 24 nhân sự. Phê duyệt việc <b>triển khai song song 01 Dự Án Mẫu (Pilot Project)</b> ngay trong giai đoạn setup để thử nghiệm quy trình thực chiến.
+      Chấp thuận phương án setup vận hành theo 4 Cụm chuyên môn do các Lead bộ môn hiện hữu trực tiếp chỉ huy theo cơ cấu nhân sự hiện tại. Phê duyệt việc <b>triển khai song song 01 Dự Án Mẫu (Pilot Project)</b> ngay trong giai đoạn setup để thử nghiệm quy trình thực chiến.
     </div>
   </div>
 

@@ -525,7 +525,7 @@ html_content = f"""<!DOCTYPE html>
       <a class="btn-dl" download="BIM_TK_PowerBI_DataModel_2026.xlsx" href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64_xlsx}">📥 Tải File Excel 8 Sheet Chuẩn Power BI (.xlsx)</a>
       <a class="btn-dl" href="Bao_Cao_Chien_Luoc_Xay_Dung_Phong_BIM_2027.pdf" target="_blank" style="background: linear-gradient(135deg, #0284c7, #0369a1);">📄 Tải Báo Cáo Chiến Lược PDF 2027 (Trình Lãnh Đạo)</a>
       <span class="badge">✔ Star Schema 8 Bảng</span>
-      <span class="badge info">👥 24 Nhân sự Vận hành</span>
+      <span class="badge info">👥 Cơ cấu Nhân sự Hiện tại</span>
     </div>
   </div>
 
@@ -541,7 +541,7 @@ html_content = f"""<!DOCTYPE html>
   <section id="tab-exec" class="tab-page active">
     <div class="chart-grid-2">
       <div class="panel">
-        <div class="panel-header"><h3>Phân bổ Định biên Kế hoạch vs. Nhân sự Thực tế Còn lại</h3><span>Tổng Định biên: 30 | Hiện có: 26 | Còn lại: 24</span></div>
+        <div class="panel-header"><h3>Phân bổ Định biên Kế hoạch vs. Nhân sự Thực tế Còn lại</h3><span>Cơ cấu Nhân sự Bộ phận theo Hiện tại</span></div>
         <div class="chart-container"><canvas id="chartHR"></canvas></div>
       </div>
       <div class="panel">
@@ -904,7 +904,7 @@ window.addEventListener('DOMContentLoaded', () => {{
       labels: hrLabels,
       datasets: [
         {{ label: 'Định biên Kế hoạch (30)', data: hrLabels.map(k => hrGroups[k].plan), backgroundColor: '#3b82f6', borderRadius: 5 }},
-        {{ label: 'Nhân sự Còn lại T04/2026 (24)', data: hrLabels.map(k => hrGroups[k].rem), backgroundColor: '#10b981', borderRadius: 5 }}
+        {{ label: 'Nhân sự Hiện tại', data: hrLabels.map(k => hrGroups[k].rem), backgroundColor: '#10b981', borderRadius: 5 }}
       ]
     }},
     options: {{ responsive: true, maintainAspectRatio: false }}
