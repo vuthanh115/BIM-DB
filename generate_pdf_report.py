@@ -357,7 +357,7 @@ html_content = """<!DOCTYPE html>
         <span>& TỐI ƯU HÓA VẬN HÀNH PHÒNG BIM (2027)</span>
       </h1>
       <p class="cover-subtitle">
-        Báo cáo phương án kiện toàn tổ chức nhân sự hiện hữu, thiết lập cơ chế phân quyền điều phối theo 4 Cụm Lead bộ môn, tự động hóa bằng AI Agent, triển khai song song dự án mẫu thực chiến và cam kết chuẩn dịch vụ SLA tinh gọn (Shop 5d, Combine 3d, QS 3d) nhằm nâng cao năng suất và chất lượng hồ sơ công trình.
+        Báo cáo phương án kiện toàn tổ chức nhân sự hiện hữu, thiết lập cơ chế phân quyền điều phối theo 4 Cụm Lead bộ môn, tự động hóa bằng AI Agent, triển khai song song Dự Án Mẫu MEGA thực chiến và cam kết chuẩn dịch vụ SLA tinh gọn (Shop 5d, Combine 3d, QS 3d) nhằm nâng cao năng suất và chất lượng hồ sơ công trình.
       </p>
     </div>
 
@@ -730,11 +730,11 @@ html_content = """<!DOCTYPE html>
 <!-- TRANG 6: HỆ THỐNG 115 TÀI LIỆU CHUẨN HÓA & TRIỂN KHAI DỰ ÁN MẪU -->
 <div class="page">
   <div class="page-header">
-    <div class="page-header-title">Phần V: Nền Tảng Kỹ Thuật & Dự Án Mẫu Thực Chiến</div>
+    <div class="page-header-title">Phần V: Nền Tảng Kỹ Thuật & Dự Án Mẫu MEGA Thực Chiến</div>
     <div class="page-header-meta">Trang 6 / 7</div>
   </div>
 
-  <h1 class="sec-title"><svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> 5. Nền tảng Dữ liệu & Kế hoạch Dự Án Mẫu</h1>
+  <h1 class="sec-title"><svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> 5. Nền tảng Dữ liệu & Kế hoạch Dự Án Mẫu MEGA</h1>
 
   <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Danh Mục Hệ Thống Tài Liệu Thiết Kế (115 Mục Chuẩn Hóa 6 Bộ Môn)</h2>
   
@@ -799,12 +799,12 @@ html_content = """<!DOCTYPE html>
     </tbody>
   </table>
 
-  <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg> Triển Khai Thực Chiến: 01 "Dự Án Mẫu" Tiêu Biểu (87 Nhiệm Vụ)</h2>
+  <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg> Triển Khai Thực Chiến: Dự Án Mẫu MEGA (24 Nhiệm Vụ Kỹ Thuật Trọng Điểm)</h2>
   
   <div class="box-highlight emerald">
-    <div class="box-title"><svg class="box-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Chiến Lược "Thử Lửa" Quy Trình Qua 01 Dự Án Mẫu Thực Tế</div>
+    <div class="box-title"><svg class="box-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Chiến Lược "Thử Lửa" Quy Trình Qua Dự Án Mẫu MEGA</div>
     <div class="box-desc">
-      Phòng BIM tập trung kiểm chứng toàn diện quy trình trên <b>01 Dự Án Mẫu trọng điểm (tổng 87 nhiệm vụ kỹ thuật)</b> gồm đầy đủ các hạng mục: nhà xưởng chính, trạm xử lý kỹ thuật, kết cấu thép, kiến trúc hoàn thiện, hạ tầng ngoài nhà, trạm nguồn và phần ngầm móng.
+      Phòng BIM tập trung kiểm chứng toàn diện quy trình trên <b>Dự Án Mẫu MEGA (24 nhiệm vụ kỹ thuật thực chiến)</b> gồm các hạng mục trọng điểm: mô hình 3D phần ngầm & trạm xử lý nước thải, bản vẽ Shop drawing đà kiềng & vách bể kỹ thuật, bóc tách khối lượng BOQ 5D bê tông/cốt thép/ván khuôn, phối hợp va chạm đa hệ (MEP) nhà nồi hơi & trạm kỹ thuật, và kiểm soát thiết kế kết cấu thép mái xưởng.
     </div>
   </div>
 
@@ -812,25 +812,25 @@ html_content = """<!DOCTYPE html>
     <thead>
       <tr>
         <th style="width: 25%;">Hạng Mục Thực Chiến</th>
-        <th style="width: 45%;">Nội Dung Phân Khai Trên Dự Án Mẫu</th>
+        <th style="width: 45%;">Nội Dung Phân Khai Trên Dự Án Mẫu MEGA</th>
         <th style="width: 30%;">Chỉ Số Đánh Giá Hoàn Thành</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><b>Phần Ngầm & Kết Cấu</b><br/><span style="font-size:7.5pt; color:#64748b;">(Hạng mục Móng & Bể ngầm)</span></td>
-        <td>Dựng mô hình 3D đà kiềng, móng, vách bể kỹ thuật; xuất hồ sơ Shop drawing và bảng khối lượng thép/bê tông chuẩn SLA 5 Ngày.</td>
-        <td>Đạt tỷ lệ hoàn thành <b>100%</b>, khớp nối hình học chính xác tuyệt đối.</td>
+        <td><b>Phần Ngầm & Kết Cấu</b><br/><span style="font-size:7.5pt; color:#64748b;">(Dự Án MEGA - Móng & Bể ngầm)</span></td>
+        <td>Dựng mô hình 3D đà kiềng, móng, vách bể trạm xử lý nước thải; xuất hồ sơ Shop drawing và bảng khối lượng thép/bê tông chuẩn SLA 5 Ngày.</td>
+        <td>Đạt tỷ lệ hoàn thành <b>100%</b>, xuất toàn bộ bản vẽ đà kiềng & vách bể chuẩn xác.</td>
       </tr>
       <tr>
-        <td><b>Phối Hợp Va Chạm (MEP)</b><br/><span style="font-size:7.5pt; color:#64748b;">(Hạng mục MEPF & Kết cấu mái)</span></td>
-        <td>Import đường ống đa hệ MEPF và kết cấu thép mái vào Navisworks/BIM Collab, ứng dụng AI Agent phân loại và kiểm soát xung đột theo SLA Chuẩn 3 Ngày.</td>
-        <td>Phát hiện và xử lý triệt để <b>42 điểm giao cắt</b> nguy hiểm trước ngày khởi công.</td>
+        <td><b>Phối Hợp Va Chạm (MEP)</b><br/><span style="font-size:7.5pt; color:#64748b;">(Dự Án MEGA - MEP & Thoát nước mái)</span></td>
+        <td>Import mô hình 3D trạm nước thải, nhà nồi hơi và thoát nước mưa mái vào Navisworks/CDE, ứng dụng AI Agent phân loại và kiểm soát xung đột theo SLA Chuẩn 3 Ngày.</td>
+        <td>Phát hiện và xử lý triệt để <b>toàn bộ điểm giao cắt</b> nguy hiểm trước ngày khởi công.</td>
       </tr>
       <tr>
-        <td><b>Bóc Tách BOQ & Hạ Tầng</b><br/><span style="font-size:7.5pt; color:#64748b;">(Hạ tầng ngoài nhà & Trạm nguồn)</span></td>
-        <td>Tự động hóa bóc khối lượng đào đắp, thoát nước ngoài nhà, trạm nguồn và cảnh quan theo SLA Chuẩn 3 Ngày nhờ AI Agent tự động bóc tách BOQ phục vụ đấu thầu.</td>
-        <td>Tiết kiệm <b>6 ngày làm việc</b> so với đo bóc thủ công trên bản vẽ CAD 2D.</td>
+        <td><b>Bóc Tách BOQ & Kết Cấu Thép</b><br/><span style="font-size:7.5pt; color:#64748b;">(Dự Án MEGA - BOQ 5D & Thép xưởng)</span></td>
+        <td>Tự động hóa bóc tách khối lượng bê tông, cốt thép, ván khuôn đà kiềng/vách bể và kiểm soát thiết kế kết cấu thép theo SLA Chuẩn 3 Ngày nhờ AI Agent.</td>
+        <td>Tiết kiệm <b>70% thời gian bóc khối lượng</b> so với đo bóc thủ công trên bản vẽ CAD 2D.</td>
       </tr>
     </tbody>
   </table>
@@ -868,16 +868,16 @@ html_content = """<!DOCTYPE html>
         <td><b>Quý 2/2027</b></td>
         <td><b>Chuẩn hóa 115 Tài liệu & Tự động hóa bằng AI Agent</b><br/>• Hoàn thành nhóm P1 & P2 quy chuẩn<br/>• Tự động hóa với AI Agent & Tooling</td>
         <td>
-          • Chuẩn hóa toàn bộ Template Revit, mã hóa cấu kiện cho 6 bộ môn đúc kết từ Dự Án Mẫu.<br/>
+          • Chuẩn hóa toàn bộ Template Revit, mã hóa cấu kiện cho 6 bộ môn đúc kết từ Dự Án Mẫu MEGA.<br/>
           • Ứng dụng AI Agent tự động hóa rà soát model, phân loại va chạm và trích xuất dữ liệu BOQ.<br/>
           • Đào tạo nâng cao kỹ năng phối hợp cho đội ngũ kỹ sư thực chiến 4 cụm.
         </td>
       </tr>
       <tr>
         <td><b>Quý 3/2027</b></td>
-        <td><b>Thực chiến 01 Dự Án Mẫu</b><br/>• Triển khai trọn vẹn đa bộ môn<br/>• Kiểm chứng cam kết SLA tinh gọn</td>
+        <td><b>Thực chiến Dự Án Mẫu MEGA</b><br/>• 24 nhiệm vụ kỹ thuật trọng điểm<br/>• Kiểm chứng cam kết SLA tinh gọn</td>
         <td>
-          • Triển khai thực chiến trọn vẹn trên 01 Dự Án Mẫu (từ Thiết kế 3D, Combine MEPF, Shop Drawing đến bóc tách BOQ).<br/>
+          • Triển khai thực chiến trọn vẹn trên Dự Án Mẫu MEGA (từ Thiết kế 3D, Combine MEPF, Shop Drawing đến bóc tách BOQ).<br/>
           • Xóa bỏ 100% va chạm (Zero Clash) kết cấu - cơ điện trước khi thi công.<br/>
           • Kiểm soát nghiêm ngặt tuân thủ SLA: <b>Shop 5 ngày, Combine 3 ngày, QS 3 ngày</b>.
         </td>
@@ -897,9 +897,9 @@ html_content = """<!DOCTYPE html>
   <h2 class="sub-title"><svg class="sub-icon" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> 3 Kiến Nghị Then Chốt Kính Trình Ban Tổng Giám Đốc Phê Duyệt</h2>
 
   <div class="box-highlight">
-    <div class="box-title">1. Phê Duyệt Cơ Chế Điều Phối Theo 4 Cụm Lead Bộ Môn & Triển Khai Song Song Dự Án Mẫu</div>
+    <div class="box-title">1. Phê Duyệt Cơ Chế Điều Phối Theo 4 Cụm Lead Bộ Môn & Triển Khai Song Song Dự Án Mẫu MEGA</div>
     <div class="box-desc">
-      Chấp thuận phương án setup vận hành theo 4 Cụm chuyên môn do các Lead bộ môn hiện hữu trực tiếp chỉ huy theo cơ cấu nhân sự hiện tại. Phê duyệt việc <b>triển khai song song 01 Dự Án Mẫu (Pilot Project)</b> ngay trong giai đoạn setup để thử nghiệm quy trình thực chiến.
+      Chấp thuận phương án setup vận hành theo 4 Cụm chuyên môn do các Lead bộ môn hiện hữu trực tiếp chỉ huy theo cơ cấu nhân sự hiện tại. Phê duyệt việc <b>triển khai song song Dự Án Mẫu MEGA (Pilot Project)</b> ngay trong giai đoạn setup để thử nghiệm quy trình thực chiến.
     </div>
   </div>
 
